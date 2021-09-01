@@ -5,7 +5,7 @@ Add a class method to your MyCar class that calculates the gas mileage of any ca
 class MyCar
 
   def self.gas_mileage(gallons, miles)
-    puts "This car gets #{gallons/miles} mpg!" 
+    puts "This car gets #{miles / gallons} mpg!" 
   end
 
   attr_accessor :color
@@ -44,7 +44,7 @@ class MyCar
 end
 
 lumina = MyCar.new(1997, 'chevy lumina', 'white')
-MyCar.gas_mileage(15, 1)
+MyCar.gas_mileage(1, 15)
 
 # LS Solution
 
