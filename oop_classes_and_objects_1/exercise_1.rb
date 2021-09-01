@@ -14,7 +14,11 @@ class MyCar
   end
 
   def current_speed
-    puts "#{@car_name} is driving #{@current_speed} mph"
+    if @current_speed == false
+      puts "#{@car_name} is off"
+    else
+      puts "#{@car_name} is driving #{@current_speed} mph"
+    end
   end
 
   def speed_up
@@ -40,4 +44,6 @@ puts wednesday.current_speed
 wednesday.speed_up
 puts wednesday.current_speed
 wednesday.brake
+puts wednesday.current_speed
+wednesday.shut_off
 puts wednesday.current_speed
