@@ -52,7 +52,7 @@ lumina.view_year
 
 #LS Solution
 class MyCar
-  
+
   attr_accessor :color
   attr_reader :year
   
@@ -84,6 +84,8 @@ class MyCar
 
 end
 
+lumina = MyCar.new(1997, 'chevy lumina', 'white')
+lumina.color
 lumina.color = 'black'
 puts lumina.color
 puts lumina.year
