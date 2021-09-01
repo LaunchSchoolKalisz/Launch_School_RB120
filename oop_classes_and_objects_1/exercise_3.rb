@@ -81,7 +81,7 @@ class MyCar
   end
 
   def spray_paint(color)
-    self.color = color
+    self.color = color # can use self.color because we defined the setter method above
     puts "Your new #{color} paint job looks great!"
   end
 end
