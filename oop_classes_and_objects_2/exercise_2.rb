@@ -57,7 +57,7 @@ class MyCar
   # code omitted for brevity...
 
   def to_s
-    "My car is a #{color}, #{year}, #{@model}!"
+    "My car is a #{color}, #{year}, #{@model}!" #Instead of @model could also add a attr_reader :model
   end
 end
 
