@@ -34,6 +34,17 @@ class MyCar
     puts "Let's park this bad boy!"
   end
 
+  def change_color(color)
+    @color = color
+  end
+
+  def spray_paint(color)
+    old_color = @color
+    new_color = change_color(color)
+    puts "You painted the car! Your #{old_color} car is now #{new_color}."
+  end
+
 end
 
 lumina = MyCar.new(1997, 'chevy lumina', 'white')
+lumina.spray_paint('red')
