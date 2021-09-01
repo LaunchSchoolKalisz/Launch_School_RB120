@@ -49,6 +49,12 @@ wednesday.shut_off
 puts wednesday.current_speed
 
 # LS Solution
+=begin
+- Create a class called MyCar
+- When you initialize a new instance of object of the class, allow the use to define some instance variables: year, model, color
+- Create an instance variable set to 0 during instantiation of the object to track the car's current speed
+- Create instance methods that allow the car to speed up, brake, and shut the car off
+=end
 
 class MyCar
 
