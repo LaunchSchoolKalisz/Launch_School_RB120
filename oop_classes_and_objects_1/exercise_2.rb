@@ -53,8 +53,8 @@ lumina.view_year
 #LS Solution
 class MyCar
 
-  attr_accessor :color
-  attr_reader :year
+  attr_accessor :color # gives access to getter and setter methods
+  attr_reader :year # gives access to getter methods only
   
   def initialize(year, model, color)
     @year = year
