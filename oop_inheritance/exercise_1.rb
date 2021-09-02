@@ -67,3 +67,19 @@ end
 
 lumina = MyCar.new(1997, 'chevy lumina', 'white')
 lumina.speed_up(25)
+
+# LS solution
+
+class Vehicle
+  def self.gas_mileage(gallons, miles)
+    puts "#{miles / gallons} miles per gallon of gas"
+  end
+end
+
+class MyCar < Vehicle
+  NUMBER_OF_DOORS = 4
+end
+
+class MyTruck < Vehicle
+  NUMBER_OF_DOORS = 2
+end
