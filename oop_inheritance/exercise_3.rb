@@ -64,7 +64,7 @@ end
 
 class MyTruck < Vehicle
   NUMBER_OF_SEATS = 8
-  
+
   include Offroadable
 end
 
@@ -73,3 +73,44 @@ lumina.speed_up(25)
 truck = MyTruck.new(2000, 'suburban', 'blue')
 puts lumina.to_s
 puts Vehicle.total_number_of_vehicles
+
+
+# LS Solution
+
+module Towable
+  def can_tow?(pounds)
+    pounds < 2000 ? true : false
+  end
+end
+
+class Vehicle
+
+  @@number_of_vehicles = 0
+
+  def self.number_of_vehicles
+    puts "This program has created #{@@number_of_vehicles} vehicles"
+  end
+
+  def initialize
+    @@number_of_vehicles += 1
+  end
+
+  def self.gas_mileage(gallons, miles)
+    puts "#{miles / gallons} miles per gallon of gas"
+  end
+end
+
+class MyCar < Vehicle
+  NUMBER_OF_DOORS = 4
+  #code omitted for brevity...
+end
+
+class MyTruck < Vehicle
+  include Towable
+
+  NUMBER_OF_DOORS = 2
+end
+
+puts MyCar.can_tow?(300) #==> false
+puts MyTruck.can_tow?(300) #==> true
+puts MyTruck.can_tow?(4000) #==> false
