@@ -71,3 +71,11 @@ end
 puts MyTruck.ancestors
 puts MyCar.ancestors
 puts Vehicle.ancestors
+
+# LS solution
+
+# code omitted for brevity...
+
+puts MyCar.ancestors
+puts MyTruck.ancestors
+puts Vehicle.ancestors
