@@ -59,13 +59,16 @@ class Vehicle
     puts "Your new #{color} paint job looks great!"
   end
 
-  private
   def age
+    "This car is #{years_old} years old."
+  end
+  
+  private
+  def years_old
     current_time = Time::now
     current_year = current_time.year
     car_year = @year
     car_age = current_year - car_year
-    "This car is #{car_age} years old."
   end
 end
 
