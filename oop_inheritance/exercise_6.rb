@@ -68,7 +68,7 @@ class Vehicle
     current_time = Time::now
     current_year = current_time.year
     car_year = @year
-    car_age = current_year - car_year
+    car_age = current_year - car_year.to_i
   end
 end
 
@@ -96,7 +96,7 @@ class Vehicle
   private
 
   def years_old
-    Time.now.year - self.year
+    Time.now.year - self.year.to_i
   end
 end
 
