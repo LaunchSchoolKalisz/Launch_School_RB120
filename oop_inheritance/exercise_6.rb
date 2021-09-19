@@ -60,9 +60,9 @@ class Vehicle
   end
 
   def age
-    "This car is #{years_old} years old."
+    "This vehicle is #{years_old} years old."
   end
-  
+
   private
   def years_old
     current_time = Time::now
@@ -84,3 +84,22 @@ end
 
 car = MyCar.new(2011, 'subaru forester', 'white')
 p car.age
+
+# LS Solution
+
+class Vehicle
+  # code omitted for brevity...
+  def age
+    "Your #{self.model} is #{years_old} years old."
+  end
+
+  private
+
+  def years_old
+    Time.now.year - self.year
+  end
+end
+
+# code omitted for brevity...
+
+puts lumina.age   #=> "Your chevy lumina is 17 years old"
