@@ -17,6 +17,25 @@ We can move the method so that it is no longer private
 
 #LS Solution
 The problem is that the method hi is a private method, therefore it is unavailable to the 
-object. I would fix this problem by moving the hi method above the private method call in the class.
+object. I would fix this problem by moving the hi method above the private method call in the 
+class.
+
+Can also use a public method to call the private method
+
+class Person
+
+  def public_hi
+    hi
+  end
+
+  private
+
+  def hi
+    puts 'hi'
+  end
+end
+
+bob = Person.new
+bob.public_hi
 =end
 
