@@ -1,3 +1,7 @@
+=begin
+Given the below usage of the Person class, code the class definition.
+=end
+
 class Person
   attr_accessor :name 
 
