@@ -16,3 +16,11 @@ Expected output:
 
 Hello! My name is Sophie!
 =end
+
+class Cat
+  def initialize(name)
+    puts "Hello! My name is #{name}!"
+  end
+end
+
+kitty = Cat.new('Sophie')
