@@ -15,3 +15,17 @@ Array
 puts "Hello".class
 puts 5.class
 puts [1, 2, 3].class
+
+=begin
+LS Solution
+
+puts "Hello".class
+puts 5.class
+puts [1, 2, 3].class
+
+Discussion
+All values in the example are objects. Each object is an instance of a class: 
+"Hello is a String, 5 is an Integer, and [1, 2, 3] is an Array.
+
+To find the class an object belongs to, we invoke the #class method.
+=end
