@@ -42,3 +42,23 @@ def same_name?(person_1, person_2)
 end
 
 p same_name?(rob, bob)
+
+=begin
+LS Solution
+
+We would not be able to do bob == rob because that compares whether the two Person objects are 
+the same, and right now there's no way to do that. We have to be more precise and compare strings:
+
+bob.name == rob.name
+
+The above code compares a string with a string. But aren't strings also just objects of String class? If we 
+can't compare two Person objects with each other with ==, why can we compare two different String objects 
+with ==?
+
+str1 = 'hello world'
+str2 = 'hello world'
+
+str1 == str2          # => true
+What about arrays, hashes, integers? It seems like Ruby treats some core library objects differently. For 
+now, memorize this behavior. We'll explain the underpinning reason in a future lesson.
+=end
