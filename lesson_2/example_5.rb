@@ -55,3 +55,40 @@ end
 
 bob = Person.new("Robert Smith")
 puts "The person's name is: #{bob}"
+
+=begin
+LS solution
+
+The person's name is: #<Person:0x007fb873252640>
+
+This is because when we use string interpolation (as opposed to string concatenation), Ruby automatically 
+calls the to_s instance method on the expression between the #{}. Every object in Ruby comes with a to_s 
+inherited from the Object class. By default, it prints out some gibberish, which represents its place in 
+memory.
+
+If we do not have a to_s method that we can use, we must construct the string in some other way. For instance, 
+we can use:
+
+puts "The person's name is: " + bob.name        # => The person's name is: Robert Smith
+or
+
+puts "The person's name is: #{bob.name}"        # => The person's name is: Robert Smith
+
+Let's add a to_s method to the class:
+
+class Person
+  # ... rest of class omitted for brevity
+
+  def to_s
+    name
+  end
+end
+Now, what does the below output?
+
+bob = Person.new("Robert Smith")
+puts "The person's name is: #{bob}"
+
+This time it works as expected, due to the to_s method!
+
+The person's name is: Robert Smith
+=end
