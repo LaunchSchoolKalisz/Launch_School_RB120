@@ -5,3 +5,8 @@ Code:
 class Cat
 end
 =end
+
+class Cat
+end
+
+kitty = Cat.new
