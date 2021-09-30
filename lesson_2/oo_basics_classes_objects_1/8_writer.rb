@@ -39,5 +39,10 @@ end
 
 kitty = Cat.new('Sophie')
 kitty.greet
-kitty.name=('Luna')
+kitty.name=('Luna') # or kitty.name = 'Luna' 
 kitty.greet
+
+=begin
+LS Solution
+
+=end
