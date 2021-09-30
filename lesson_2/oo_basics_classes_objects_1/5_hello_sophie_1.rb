@@ -19,7 +19,8 @@ Hello! My name is Sophie!
 
 class Cat
   def initialize(name)
-    puts "Hello! My name is #{name}!"
+    @name = name
+    puts "Hello! My name is #{@name}!"
   end
 end
 
