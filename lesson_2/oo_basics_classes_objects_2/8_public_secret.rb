@@ -14,13 +14,13 @@ Shh.. this is a secret!
 class Person
   attr_accessor :secret
 
-  def initialize
-    @secret = secret
-  end
+  #def initialize
+    #@secret = secret
+  #end
 
-  def to_s 
-    'Shh.. this is a secret!'
-  end
+  #def to_s 
+    #'Shh.. this is a secret!'
+  #end
 end
 
 person1 = Person.new
