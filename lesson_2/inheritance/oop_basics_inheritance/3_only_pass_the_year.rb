@@ -45,3 +45,48 @@ end
 truck1 = Truck.new(1994, 'Short')
 puts truck1.year
 puts truck1.bed_type
+car1 = Car.new(1993)
+puts car1.year
+puts car1.bed_type
+
+=begin
+
+class Vehicle
+  attr_reader :year
+
+  def initialize(year)
+    @year = year
+  end
+end
+
+class Truck < Vehicle
+  attr_reader :bed_type
+
+  def initialize(year, bed_type)
+    super(year)
+    @bed_type = bed_type
+  end
+end
+
+class Car < Vehicle
+end
+
+truck1 = Truck.new(1994, 'Short')
+puts truck1.year
+puts truck1.bed_type
+
+Discussion
+Knowing that all vehicles don't have beds, it makes sense for only Truck to accept a bed_type argument. 
+However, we still want to keep the @year instance variable in Vehicle. To accomplish this, we need to use 
+#super. Unlike the previous exercise, though, we only want to pass one argument - year - instead of all of 
+them.
+
+To pass specific arguments with #super, we need to list the arguments within parentheses, like this:
+
+def a_method(one, two, three)
+  super(one, three)
+end
+
+In the solution, we added #initialize to Truck instead of modifying #initialize in Vehicle because we didn't 
+want Car to accept the bed_type parameter.
+=end
