@@ -27,3 +27,31 @@ Create a new class called Cat, which can do everything a dog can, except swim or
 do the exact same thing. Hint: don't just copy and paste all methods in Dog into Cat; try to come up 
 with some class hierarchy.
 =end
+
+class Animal
+  def speak
+    'bark!'
+  end
+
+  def run
+    'running!'
+  end
+
+  def jump
+    'jumping!'
+  end
+
+end
+
+class Dog < Animal
+  def swim
+    'swimming!'
+  end
+
+  def fetch
+    'fetching!'
+  end
+end
+
+class Cat < Animal
+end
