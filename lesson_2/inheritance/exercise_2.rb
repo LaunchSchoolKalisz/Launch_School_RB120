@@ -29,9 +29,6 @@ with some class hierarchy.
 =end
 
 class Animal
-  def speak
-    'bark!'
-  end
 
   def run
     'running!'
@@ -44,6 +41,10 @@ class Animal
 end
 
 class Dog < Animal
+  def speak
+    'bark!'
+  end
+  
   def swim
     'swimming!'
   end
@@ -54,4 +55,7 @@ class Dog < Animal
 end
 
 class Cat < Animal
+  def speak
+    'meow!'
+  end
 end
