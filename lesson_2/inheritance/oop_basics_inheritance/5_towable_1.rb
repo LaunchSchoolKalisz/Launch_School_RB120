@@ -31,3 +31,31 @@ end
 
 truck1 = Truck.new
 truck1.tow
+
+=begin
+LS Solution
+
+module Towable
+  def tow
+    puts 'I can tow a trailer!'
+  end
+end
+
+class Truck
+  include Towable
+end
+
+class Car
+end
+
+truck1 = Truck.new
+truck1.tow
+
+Discussion
+Modules are useful for organizing similar methods that may be relevant to multiple classes. For instance, the 
+module Towable contains the method #tow. Typically, you use a Truck for towing, not a Car, which means #tow 
+is only relevant to Truck objects.
+
+With modules, we have the ability to include them in specific classes. In the solution, we use the include 
+method to give Truck access to the #tow method in Towable.
+=end
