@@ -42,3 +42,25 @@ end
 teddy = Dog.new
 puts teddy.speak           # => "bark!"
 puts teddy.swim           # => "swimming!"
+
+max = Bulldog.new
+puts max.speak
+puts max.swim
+
+=begin
+LS Solution
+
+class Bulldog < Dog
+  def swim
+    "can't swim!"
+  end
+end
+
+karl = Bulldog.new
+puts karl.speak           # => "bark!"
+puts karl.swim            # => "can't swim!"
+
+Note that since Bulldog objects are sub-classes of Dog objects, they can both override and inherit methods. 
+That is why karl can speak.
+
+=end
