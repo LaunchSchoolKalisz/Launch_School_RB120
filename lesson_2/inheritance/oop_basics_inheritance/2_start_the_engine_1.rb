@@ -23,3 +23,21 @@ Expected output:
 Ready to go!
 1994
 =end
+
+class Vehicle
+  attr_reader :year
+
+  def initialize(year)
+    @year = year
+    self.start_engine
+  end
+end
+
+class Truck < Vehicle
+  def start_engine
+    puts 'Ready to go!'
+  end
+end
+
+truck1 = Truck.new(1994)
+puts truck1.year
