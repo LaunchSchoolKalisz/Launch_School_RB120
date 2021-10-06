@@ -44,7 +44,7 @@ class Dog < Animal
   def speak
     'bark!'
   end
-  
+
   def swim
     'swimming!'
   end
@@ -59,3 +59,70 @@ class Cat < Animal
     'meow!'
   end
 end
+
+=begin
+LS Solution
+
+We could just duplicate the methods in the Cat class. But that wouldn't be DRY, and this is exactly why we 
+OOP -- to allow us to organize behaviors into classes, and set up a hierarchical structure that takes 
+advantage of inheritance. Inheriting behaviors is a way to re-use common behaviors.
+
+class Pet
+  def run
+    'running!'
+  end
+
+  def jump
+    'jumping!'
+  end
+end
+
+class Dog < Pet
+  def speak
+    'bark!'
+  end
+
+  def fetch
+    'fetching!'
+  end
+
+  def swim
+    'swimming!'
+  end
+end
+
+class Cat < Pet
+  def speak
+    'meow!'
+  end
+end
+
+It's getting slightly more complicated, but we've shuffled the methods (behaviors) around a bit into their 
+appropriate classes. All pets (that we know of so far) can run and jump, so those two methods are in the Pet 
+class. On top of those two behaviors, dogs can further fetch and swim, so those two methods are added to the 
+Dog class. Cats don't have any additional behaviors (we'll talk about speak below).
+
+Both dogs and cats can speak, so why not have that behavior in the Pet class? The reason is because we do not 
+have a good default for speak for all pets, so we don't want to jump to conclusions and allow specific pets 
+(ie, the sub-classes) to implement that method.
+
+Let's make sure everything works as expected.
+
+pete = Pet.new
+kitty = Cat.new
+dave = Dog.new
+bud = Bulldog.new
+
+pete.run                # => "running!"
+pete.speak              # => NoMethodError
+
+kitty.run               # => "running!"
+kitty.speak             # => "meow!"
+kitty.fetch             # => NoMethodError
+
+dave.speak              # => "bark!"
+
+bud.run                 # => "running!"
+bud.swim                # => "can't swim!"
+
+=end
