@@ -31,10 +31,11 @@ class Dog
     'swimming!'
   end
 
-  class Bulldog
-    def swim
-      "can't swim!"
-    end
+end
+
+class Bulldog < Dog
+  def swim
+    "can't swim!"
   end
 end
 
