@@ -26,3 +26,22 @@ Expected output:
 Short
 
 =end
+
+class Vehicle
+  attr_reader :year, :bed_type
+
+  def initialize(year, bed_type = nil)
+    @year = year
+    @bed_type = bed_type
+  end
+end
+
+class Truck < Vehicle
+end
+
+class Car < Vehicle
+end
+
+truck1 = Truck.new(1994, 'Short')
+puts truck1.year
+puts truck1.bed_type
