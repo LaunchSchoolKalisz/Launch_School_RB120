@@ -20,4 +20,17 @@ cat1 = Cat.new('Black')
 cat1.color
 
 Cat --> Animal
+
+LS Solution
+
+Cat
+Animal
+
+Discussion
+When a method is invoked, Ruby searches the method's class for the specified method. If no method is found, 
+then Ruby inspects the class's superclass. This process is repeated until the method is found or there are no 
+more classes.
+
+To find the lookup path for a class, simply invoke #ancestors on the class. This method returns an array 
+containing the names of the classes in the lookup path, based on the order in which they're checked.
 =end
