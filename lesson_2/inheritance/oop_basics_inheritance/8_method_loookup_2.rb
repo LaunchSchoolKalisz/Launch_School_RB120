@@ -13,4 +13,6 @@ end
 
 cat1 = Cat.new
 cat1.color
+
+Cat --> Animal --> Object --> Kernel 
 =end
