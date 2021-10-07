@@ -19,4 +19,5 @@ end
 cat1 = Cat.new('Black')
 cat1.color
 
+Cat --> Animal
 =end
