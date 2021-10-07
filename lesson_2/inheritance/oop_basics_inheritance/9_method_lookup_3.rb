@@ -27,4 +27,16 @@ bird1 = Bird.new('Red')
 bird1.color
 
 Bird --> Flyable --> Animal
+
+LS Solution
+
+Bird
+Flyable
+Animal
+
+Discussion
+This exercise is similar to the previous one, however, now the module Flyable has been mixed-in. How does that
+affect the lookup path? When a module is included in a class, the class is searched before the module. But, 
+the module is searched before the superclass. This order of precedence applies to all modules and classes in 
+the inheritance hierarchy.
 =end
