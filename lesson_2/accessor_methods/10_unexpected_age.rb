@@ -14,3 +14,22 @@ Expected output:
 
 John Doe
 =end
+
+class Person
+  attr_accessor :name
+
+  def name=(name)
+    full_name = name.split
+    @first_name = full_name[0]
+    @last_name = full_name[-1]
+  end
+
+  def name
+    @name = "#{@first_name} #{@last_name}"
+  end
+
+end
+
+person1 = Person.new
+person1.name = 'John Doe'
+puts person1.name
