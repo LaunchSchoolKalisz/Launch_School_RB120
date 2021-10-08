@@ -47,3 +47,23 @@ betty = Customer.new
 bob = Employee.new
 betty.print_address
 bob.print_address
+
+=begin
+LS Solution
+
+class Customer
+  include Mailable
+
+  attr_reader :name, :address, :city, :state, :zipcode
+end
+
+class Employee
+  include Mailable
+
+  attr_reader :name, :address, :city, :state, :zipcode
+end
+
+Discussion
+Methods inside a module can be added to a class by simply including the module into the class. 
+Such modules are called mixin modules.
+=end
