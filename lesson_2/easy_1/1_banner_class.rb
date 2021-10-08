@@ -98,3 +98,41 @@ puts banner
 |  |
 +--+
 =end
+
+=begin
+LS Solution
+
+class Banner
+  def initialize(message)
+    @message = message
+  end
+
+  def to_s
+    [horizontal_rule, empty_line, message_line, empty_line, horizontal_rule].join("\n")
+  end
+
+  private
+
+  def empty_line
+    "| #{' ' * (@message.size)} |"
+  end
+
+  def horizontal_rule
+    "+-#{'-' * (@message.size)}-+"
+  end
+
+  def message_line
+    "| #{@message} |"
+  end
+end
+Discussion
+Our solution simply adds an instance variable where we store the message that will be bannerized, and then 
+fills out the empty_line and horizontal_rule methods for constructing the first, second, fourth, and fifth 
+lines of the banner. The only tricky part in these two methods is remembering to allow for extra characters to 
+the left and right so everything is aligned.
+
+Further Exploration
+Modify this class so new will optionally let you specify a fixed banner width at the time the Banner object 
+is created. The message in the banner should be centered within the banner of that width. Decide for yourself 
+how you want to handle widths that are either too narrow or too wide.
+=end
