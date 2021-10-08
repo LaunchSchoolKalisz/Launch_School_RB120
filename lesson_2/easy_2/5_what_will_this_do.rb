@@ -26,4 +26,18 @@ This will print:
 Because we are first calling the class method (self.dupdata) then using the instance variable
 on that is initialized on line 18
 
+LS Solution
+
+ByeBye
+HelloHello
+
+Discussion
+Here we see two methods named dupdata in the Something class. However, one is defined as 
+dupdata, and is thus an instance method. The other is defined as self.dupdata, and is a class 
+method. The two methods are different, and are completely independent of each other.
+
+Our code first creates a Something object, and then prints the result of Something.dupdata, and 
+then thing.dupdata. The former invocation calls the class method (self.dupdata), and so prints 
+"ByeBye". The latter invocation calls the instance method, and so prints "HelloHello".
+
 =end
