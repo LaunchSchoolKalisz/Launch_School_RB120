@@ -10,5 +10,10 @@ class Flight
   end
 end
 
+There is nothing technically incorrect about this class, but the definition may lead to problems in the future. 
+How can this class be fixed to be resistant to future problems?
+
+Right now anyoone can set the database handle, which may lead to mistakes down the road. We can separate 
+the gettter and setter methods and then make the setter method private or protected
 =end
 
