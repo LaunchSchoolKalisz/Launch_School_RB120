@@ -53,3 +53,29 @@ elsif bills_wallet < pennys_wallet
 else
   puts 'Bill and Penny have the same amount of money.'
 end
+
+=begin
+LS Solution
+
+class Wallet
+  ...
+
+  protected
+
+  attr_reader :amount
+end
+
+Discussion
+From the definition of the <=> method, we can see that the current wallet object must be able to call the 
+amount getter both in its own context, and in the context of other_wallet. The easiest way to do this is to simply 
+provide a public getter method for :amount.
+
+However, the problem description prevents this; nobody should be able to look at the amount except another wallet. To do 
+this, we use the Module#protected method. A protected method is similar to a private method, except that methods of the 
+class can call the protected method of any other object of the same class. Thus, bills_wallet can look at pennys_wallet 
+to find the amount.
+
+Further Exploration
+This example is rather contrived and unrealistic, but this type of situation occurs frequently in applications. Can you 
+think of any applications where protected methods would be desirable?
+=end
