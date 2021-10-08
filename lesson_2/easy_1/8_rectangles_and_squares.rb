@@ -32,6 +32,9 @@ class Rectangle
 end
 
 class Square < Rectangle
+  def initialize(height, width = height)
+    super
+  end
 end
 
 square = Square.new(5)
