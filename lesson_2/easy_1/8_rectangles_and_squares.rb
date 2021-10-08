@@ -39,3 +39,17 @@ end
 
 square = Square.new(5)
 puts "area of square = #{square.area}"
+
+=begin
+LS Solution
+
+class Square < Rectangle
+  def initialize(length_of_side)
+    super(length_of_side, length_of_side)
+  end
+end
+
+Discussion
+The key thing to note for this problem is that we must call super in Square#initialize, and that Square 
+inherits the area method from Rectangle.
+=end
