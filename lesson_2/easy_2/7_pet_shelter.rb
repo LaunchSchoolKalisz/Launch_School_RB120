@@ -78,8 +78,15 @@ class Shelter
   end
 
   def print_adoptions
-    puts @adoption_list
+    @adoption_list.each do |name, pets|
+      puts "#{name} has adopted the following pets:"
+      pets.each do |pet|
+        puts "a #{pet.animal_type} named #{pet.name}"
+      end
+      puts "\n"
+    end
   end
+
 end
 
 butterscotch = Pet.new('cat', 'Butterscotch')
