@@ -48,32 +48,19 @@ The order of the output does not matter, so long as all of the information is pr
 class Pet
   attr_accessor :animal_type, :name
 
-  # @@number_of_pets = 0
-
   def initialize(animal_type, name)
     @animal_type = animal_type
     @name = name
-    # @@number_of_pets += 1
   end
 
-  # def self.count
-  #   @@number_of_pets
-  # end
 end
 
 class Owner
   attr_accessor :name, :number_of_pets
 
-  # @@number_of_pets = 0
-
   def initialize(name)
     @name = name
-    # @@number_of_pets += 1
   end
-
-  # def number_of_pets
-  #   @@number_of_pets
-  # end
 end
 
 class Shelter
@@ -100,6 +87,12 @@ class Shelter
       puts "\n"
     end
   end
+
+  def number_of_pets
+    @adoption_list.each do |name, pets|
+      pets.size
+    end
+  end
 end
 
 butterscotch = Pet.new('cat', 'Butterscotch')
@@ -122,6 +115,114 @@ shelter.adopt(bholmes, sweetie)
 shelter.adopt(bholmes, molly)
 shelter.adopt(bholmes, chester)
 shelter.print_adoptions
-p phanson.number_of_pets
+
+p shelter.number_of_pets
 puts "#{phanson.name} has #{phanson.number_of_pets} adopted pets."
 puts "#{bholmes.name} has #{bholmes.number_of_pets} adopted pets."
+
+=begin
+LS Solution
+
+class Pet
+  attr_reader :animal, :name
+
+  def initialize(animal, name)
+    @animal = animal
+    @name = name
+  end
+
+  def to_s
+    "a #{animal} named #{name}"
+  end
+end
+
+class Owner
+  attr_reader :name, :pets
+
+  def initialize(name)
+    @name = name
+    @pets = []
+  end
+
+  def add_pet(pet)
+    @pets << pet
+  end
+
+  def number_of_pets
+    pets.size
+  end
+
+  def print_pets
+    puts pets
+  end
+end
+
+class Shelter
+  def initialize
+    @owners = {}
+  end
+
+  def adopt(owner, pet)
+    owner.add_pet(pet)
+    @owners[owner.name] ||= owner
+  end
+
+  def print_adoptions
+    @owners.each_pair do |name, owner|
+      puts "#{name} has adopted the following pets:"
+      owner.print_pets
+      puts
+    end
+  end
+end
+
+Discussion
+This is a somewhat contrived example of an animal shelter's adoption records. Our solution isn't the only solution, nor 
+is it necessarily the best solution; it is simply a possible solution that isn't too difficult to comprehend in one 
+sitting.
+
+Our example code provides most of the details we need, such as class and (most) method names, and what the output is 
+supposed to look like. Some details are left to your imagination.
+
+We start by defining our Pet class, which is extremely simple. All we need is an initialize method that sets the pet's 
+type and name, and a couple of getter methods so we can retrieve these names. We also provide a to_s method override so 
+we can convert Pet objects into meaningful strings; this will be useful from Owner#print_pets.
+
+Next comes the Owner class, which, based on the example code, only needs to support 2 methods: initialize and 
+number_of_pets. Since number_of_pets is going to be an Owner instance method, we decide that we will also store a list of 
+each owner's adopted pets in the Owner object. So, we initialize @pets, add a getter method for @pets, and a method 
+add_pet to add a newly adopted pet to the owner record. Finally, we will also need a print_pets method so we can print 
+the list of the owner's pets.
+
+The Shelter class needs initialize, adopt and print_adoptions methods to match the example code. The adopt method adds a 
+new pet to the owner record, and then adds the owner record to our @owners instance hash, but only if the owner is not 
+already listed. (We assume here that there are no owners with matching names, and that we will never create multiple 
+Owner objects for the same owner.) Finally, print_adoptions iterates through our owner list, printing their name and a 
+list of the pets the owner has adopted.
+
+This exercise is about collaborator objects; instance variables don't have to be simple variables like numbers and 
+strings, but can contain any object that might be needed. In our solution, the Pet class has two String collaborator 
+objects, Owner has a String and an Array of Pet objects, and Shelter has a Hash of Owner objects.
+
+Further Exploration
+Add your own name and pets to this project.
+
+Suppose the shelter has a number of not-yet-adopted pets, and wants to manage them through this same system. Thus, you 
+should be able to add the following output to the example output shown above:
+
+The Animal Shelter has the following unadopted pets:
+a dog named Asta
+a dog named Laddie
+a cat named Fluffy
+a cat named Kat
+a cat named Ben
+a parakeet named Chatterbox
+a parakeet named Bluebell
+   ...
+
+P Hanson has 3 adopted pets.
+B Holmes has 4 adopted pets.
+The Animal shelter has 7 unadopted pets.
+Can you make these updates to your solution? Did you need to change your class system at all? Were you able to make all 
+of your changes without modifying the existing interface?
+=end
