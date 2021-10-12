@@ -17,22 +17,22 @@ class RPSGame
   end
 
   def display_winner
-    puts "You chose #{human.move}"
-    puts "The computer chose #{computer.move}"
+    puts "#{human.name} chose #{human.move}"
+    puts "The computer, #{computer.name}, chose #{computer.move}"
 
     case human.move
     when 'rock'
       puts "It's a tie!" if computer.move == 'rock'
-      puts "You won!" if computer.move == 'scissors'
-      puts "Computer won!" if computer.move == 'paper'
+      puts "#{human.name} won!" if computer.move == 'scissors'
+      puts "#{computer.name} won!" if computer.move == 'paper'
     when 'paper'
       puts "It's a tie!" if computer.move == 'paper'
-      puts "You won!" if computer.move == 'rock'
-      puts "Computer won!" if computer.move == 'scissors'
+      puts "#{human.name} won!" if computer.move == 'rock'
+      puts "#{computer.name} won!" if computer.move == 'scissors'
     when 'scissors'
       puts "It's a tie!" if computer.move == 'scissors'
-      puts "You won!" if computer.move == 'paaper'
-      puts "Computer won!" if computer.move == 'rock'
+      puts "#{human.name} won!" if computer.move == 'paaper'
+      puts "#{computer.name} won!" if computer.move == 'rock'
     end
   end
 
@@ -62,11 +62,27 @@ class RPSGame
 end
 
 class Player
-  attr_accessor :move
+  attr_accessor :move, :name
 
   def initialize(player_type = :human)
     @player_type = player_type
     @move = nil
+    set_name
+  end
+
+  def set_name
+    if human?
+      n = ""
+      loop do
+        puts "What's your name?"
+        n = gets.chomp
+        break unless n.empty?
+        puts "Sorry, you must enter a value"
+      end
+      self.name = n
+    else
+      self.name = ['R2D2', 'Hal', 'Chappie', 'Sonny'].sample
+    end
   end
 
   def choose
