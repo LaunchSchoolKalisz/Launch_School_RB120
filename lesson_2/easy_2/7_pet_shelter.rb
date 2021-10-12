@@ -48,18 +48,32 @@ The order of the output does not matter, so long as all of the information is pr
 class Pet
   attr_accessor :animal_type, :name
 
+  # @@number_of_pets = 0
+
   def initialize(animal_type, name)
     @animal_type = animal_type
     @name = name
+    # @@number_of_pets += 1
   end
+
+  # def self.count
+  #   @@number_of_pets
+  # end
 end
 
 class Owner
-  attr_accessor :name
+  attr_accessor :name, :number_of_pets
+
+  # @@number_of_pets = 0
 
   def initialize(name)
     @name = name
+    # @@number_of_pets += 1
   end
+
+  # def number_of_pets
+  #   @@number_of_pets
+  # end
 end
 
 class Shelter
@@ -86,7 +100,6 @@ class Shelter
       puts "\n"
     end
   end
-
 end
 
 butterscotch = Pet.new('cat', 'Butterscotch')
@@ -109,5 +122,6 @@ shelter.adopt(bholmes, sweetie)
 shelter.adopt(bholmes, molly)
 shelter.adopt(bholmes, chester)
 shelter.print_adoptions
-# puts "#{phanson.name} has #{phanson.number_of_pets} adopted pets."
-# puts "#{bholmes.name} has #{bholmes.number_of_pets} adopted pets."
+p phanson.number_of_pets
+puts "#{phanson.name} has #{phanson.number_of_pets} adopted pets."
+puts "#{bholmes.name} has #{bholmes.number_of_pets} adopted pets."
