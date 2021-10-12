@@ -1,9 +1,19 @@
+# Game Orschestration Engine
+
 class RPSGame
   attr_accessor :human, :computer
 
   def initialize
     @human = Player.new
     @computer = Player.new
+  end
+
+  def display_welcome_message
+    puts "Welcome to Rock, Paper, Scissors!"
+  end
+
+  def display_goodbye_message
+    puts "Thanks for playing Rock, Paper, Scissors. Good bye!"
   end
 
   def play
