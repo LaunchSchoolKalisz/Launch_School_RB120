@@ -20,21 +20,29 @@ class RPSGame
     puts "#{human.name} chose #{human.move}"
     puts "The computer, #{computer.name}, chose #{computer.move}"
 
-    case human.move
-    when 'rock'
-      puts "It's a tie!" if computer.move == 'rock'
-      puts "#{human.name} won!" if computer.move == 'scissors'
-      puts "#{computer.name} won!" if computer.move == 'paper'
-    when 'paper'
-      puts "It's a tie!" if computer.move == 'paper'
-      puts "#{human.name} won!" if computer.move == 'rock'
-      puts "#{computer.name} won!" if computer.move == 'scissors'
-    when 'scissors'
-      puts "It's a tie!" if computer.move == 'scissors'
-      puts "#{human.name} won!" if computer.move == 'paaper'
-      puts "#{computer.name} won!" if computer.move == 'rock'
+    if human.move > computer.move
+       puts "#{human.name} won!"
+    elsif human.move < computer.move
+      puts "#{computer.name} won!"
+    else
+      puts "It's a tie!"
     end
   end
+
+  #   case human.move
+  #   when 'rock'
+  #     puts "It's a tie!" if computer.move == 'rock'
+  #     puts "#{human.name} won!" if computer.move == 'scissors'
+  #     puts "#{computer.name} won!" if computer.move == 'paper'
+  #   when 'paper'
+  #     puts "It's a tie!" if computer.move == 'paper'
+  #     puts "#{human.name} won!" if computer.move == 'rock'
+  #     puts "#{computer.name} won!" if computer.move == 'scissors'
+  #   when 'scissors'
+  #     puts "It's a tie!" if computer.move == 'scissors'
+  #     puts "#{human.name} won!" if computer.move == 'paaper'
+  #     puts "#{computer.name} won!" if computer.move == 'rock'
+  #   end
 
   def play_again?
     answer = nil
@@ -59,6 +67,58 @@ class RPSGame
     end
     display_goodbye_message
   end
+end
+
+class Move
+  VALUES = ['rock', 'paper', 'scissors']
+
+  def initialize(value)
+    @value = value
+  end
+
+  def scissors?
+    @value == 'scissors'
+  end
+
+  def rock?
+    @value == 'rock'
+  end
+
+  def paper?
+    @value == 'paper'
+  end
+
+  def >(other_move)
+    if rock?
+      return true if other_move.scissors?
+      return false
+    elsif paper?
+      return true if other_move.rock?
+      return false
+    elsif scissors?
+      return true if other_move.paper?
+      return false
+    end
+  end
+
+
+  def <(other_move)
+    if rock?
+      return true if other_move.paper?
+      return false
+    elsif paper?
+      return true if other_move.scissors?
+      return false
+    elsif scissors?
+      return true if other_move.rock?
+      return false
+    end
+  end
+
+  def to_s
+    @value
+  end
+
 end
 
 class Player
@@ -86,12 +146,12 @@ class Human < Player
     loop do
       puts "Please choose rock, paper, or scissors"
       choice = gets.chomp
-      break if ['rock', 'paper', 'scissors'].include? choice
+      break if Move::VALUES.include? choice
       puts "Sorry, invalid choice. Choose again."
     end
-    self.move = choice
+    self.move = Move.new(choice)
   end
-end
+end 
 
 class Computer < Player
   def set_name
@@ -99,7 +159,7 @@ class Computer < Player
   end
 
   def choose
-    self.move = ['rock', 'paper', 'scissors'].sample
+    self.move = Move.new(Move::VALUES.sample)
   end
 end
 
