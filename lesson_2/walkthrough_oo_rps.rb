@@ -38,7 +38,7 @@ class RPSGame
       puts "Sorry, must by y or n"
     end
 
-    true if answer == 'y'
+    return true if answer == 'y'
     false
   end
 
@@ -73,30 +73,16 @@ class Move
     @value == 'paper'
   end
 
-  def >(other_move)
-    if rock?
-      true if other_move.scissors?
-      false
-    elsif paper?
-      true if other_move.rock?
-      false
-    elsif scissors?
-      true if other_move.paper?
-      false
-    end
+  def>(other_move)
+    (rock? && other_move.scissors?) ||
+      (paper? && other_move.rock?) ||
+      (scissors? && other_move.paper?)
   end
 
   def<(other_move)
-    if rock?
-      true if other_move.paper?
-      false
-    elsif paper?
-      true if other_move.scissors?
-      false
-    elsif scissors?
-      true if other_move.rock?
-      false
-    end
+    (rock? && other_move.paper?) ||
+      (paper? && other_move.scissors?) ||
+      (scissors? && other_move.rock?)
   end
 
   def to_s
