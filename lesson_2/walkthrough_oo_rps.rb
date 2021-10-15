@@ -21,28 +21,13 @@ class RPSGame
     puts "The computer, #{computer.name}, chose #{computer.move}"
 
     if human.move > computer.move
-       puts "#{human.name} won!"
+      puts "#{human.name} won!"
     elsif human.move < computer.move
       puts "#{computer.name} won!"
     else
       puts "It's a tie!"
     end
   end
-
-  #   case human.move
-  #   when 'rock'
-  #     puts "It's a tie!" if computer.move == 'rock'
-  #     puts "#{human.name} won!" if computer.move == 'scissors'
-  #     puts "#{computer.name} won!" if computer.move == 'paper'
-  #   when 'paper'
-  #     puts "It's a tie!" if computer.move == 'paper'
-  #     puts "#{human.name} won!" if computer.move == 'rock'
-  #     puts "#{computer.name} won!" if computer.move == 'scissors'
-  #   when 'scissors'
-  #     puts "It's a tie!" if computer.move == 'scissors'
-  #     puts "#{human.name} won!" if computer.move == 'paaper'
-  #     puts "#{computer.name} won!" if computer.move == 'rock'
-  #   end
 
   def play_again?
     answer = nil
@@ -53,8 +38,8 @@ class RPSGame
       puts "Sorry, must by y or n"
     end
 
-    return true if answer == 'y'
-    return false
+    true if answer == 'y'
+    false
   end
 
   def play
@@ -90,35 +75,33 @@ class Move
 
   def >(other_move)
     if rock?
-      return true if other_move.scissors?
-      return false
+      true if other_move.scissors?
+      false
     elsif paper?
-      return true if other_move.rock?
-      return false
+      true if other_move.rock?
+      false
     elsif scissors?
-      return true if other_move.paper?
-      return false
+      true if other_move.paper?
+      false
     end
   end
 
-
-  def <(other_move)
+  def<(other_move)
     if rock?
-      return true if other_move.paper?
-      return false
+      true if other_move.paper?
+      false
     elsif paper?
-      return true if other_move.scissors?
-      return false
+      true if other_move.scissors?
+      false
     elsif scissors?
-      return true if other_move.rock?
-      return false
+      true if other_move.rock?
+      false
     end
   end
 
   def to_s
     @value
   end
-
 end
 
 class Player
@@ -151,7 +134,7 @@ class Human < Player
     end
     self.move = Move.new(choice)
   end
-end 
+end
 
 class Computer < Player
   def set_name
