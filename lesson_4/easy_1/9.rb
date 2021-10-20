@@ -18,4 +18,7 @@ end
 In the name of the cats_count method we have used self. What does self refer to in this context?
 This is referring to the Class cats @@cats_count is a class method
 
+LS Solution
+Because this is a class method it represents the class itself, in this case Cat. 
+So you can call Cat.cats_count.
 =end
