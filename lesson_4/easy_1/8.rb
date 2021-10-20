@@ -16,4 +16,9 @@ end
 
 You can see in the make_one_year_older method we have used self. What does self refer to here?
 Cat Class
+
+LS Solution
+Firstly it is important to note that make_one_year_older is an instance method and can only be 
+called on instances of the class Cat. Keeping this in mind the use of self here is referencing the 
+instance (object) that called the method - the calling object.
 =end
