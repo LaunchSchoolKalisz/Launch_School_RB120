@@ -23,4 +23,7 @@ are using. How is this done?
 >> small_car.go_fast
 I am a Car and going super fast!
 
+The string printed calls the class method, the string interpolation calls the to_s method behind
+the scenes to print
+
 =end
