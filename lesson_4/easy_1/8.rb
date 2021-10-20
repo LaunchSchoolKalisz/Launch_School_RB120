@@ -15,4 +15,5 @@ class Cat
 end
 
 You can see in the make_one_year_older method we have used self. What does self refer to here?
+Cat Class
 =end
