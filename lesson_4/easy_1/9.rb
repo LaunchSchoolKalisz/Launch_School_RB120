@@ -16,6 +16,6 @@ class Cat
 end
 
 In the name of the cats_count method we have used self. What does self refer to in this context?
-
+This is referring to the Class cats @@cats_count is a class method
 
 =end
