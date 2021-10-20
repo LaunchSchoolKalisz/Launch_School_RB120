@@ -9,3 +9,11 @@ class AngryCat
   end
 end
 =end
+
+class AngryCat
+  def hiss
+    puts "Hisssss!!!"
+  end
+end
+
+otis = AngryCat.new
