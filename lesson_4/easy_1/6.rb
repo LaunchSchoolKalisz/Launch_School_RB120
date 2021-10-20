@@ -6,4 +6,6 @@ class Cube
     @volume = volume
   end
 end
+
+Can add a getter method
 =end
