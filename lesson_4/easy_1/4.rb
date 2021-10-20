@@ -17,3 +17,11 @@ class AngryCat
 end
 
 otis = AngryCat.new
+
+=begin
+LS Solution
+You can define a new instance of the AngryCat class like this:
+
+AngryCat.new
+Using the .new after the class name will tell Ruby this new object is an instance of AngryCat.
+=end
