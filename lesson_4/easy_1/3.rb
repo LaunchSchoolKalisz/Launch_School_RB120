@@ -26,4 +26,11 @@ I am a Car and going super fast!
 The string printed calls the class method, the string interpolation calls the to_s method behind
 the scenes to print
 
+LS Solution
+We use self.class in the method and this works the following way:
+
+self refers to the object itself, in this case either a Car or Truck object.
+We ask self to tell us its class with .class. It tells us.
+We don't need to use to_s here because it is inside of a string and is interpolated which means it 
+will take care of the to_s for us.
 =end
