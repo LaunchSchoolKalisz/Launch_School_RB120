@@ -16,4 +16,6 @@ What is the result of executing the following code:
 oracle = Oracle.new
 oracle.predict_the_future
 
+An error will occur because an object is never initialized
+
 =end
