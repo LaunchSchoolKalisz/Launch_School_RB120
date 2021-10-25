@@ -17,4 +17,22 @@ class HotSauce
 end
 
 What is the lookup chain for Orange and HotSauce?
+Orange << Taste << Object << Kernel << BasicObject
+HotSauce << Taste << Object << Kernel << BasicObject
 =end
+
+module Taste
+  def flavor(flavor)
+    puts "#{flavor}"
+  end
+end
+
+class Orange
+  include Taste
+end
+
+class HotSauce
+  include Taste
+end
+
+p Orange.ancestors
