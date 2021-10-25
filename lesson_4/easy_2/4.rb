@@ -20,4 +20,6 @@ class BeesWax
   end
 end
 
+attr_accessor @type
+
 =end
