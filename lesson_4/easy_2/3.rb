@@ -36,3 +36,26 @@ class HotSauce
 end
 
 p Orange.ancestors
+
+=begin
+LS Solution
+
+To get the ancestors of a particular class you can ask the class itself and it will tell you 
+directly if you call ancestors on it.
+
+For example:
+
+>> HotSauce.ancestors
+=> [HotSauce, Taste, Object, Kernel, BasicObject]
+
+The list of ancestor classes is also called a lookup chain, because Ruby will look for a method 
+starting in the first class in the chain (in this case HotSauce) and eventually lookup BasicObject 
+if the method is found nowhere in the lookup chain.
+
+If the method appears nowhere in the chain then Ruby will raise a NoMethodError which will tell 
+you a matching method can not be found anywhere in the chain.
+
+Keep in mind this is a class method and it will not work if you call this method on an instance of 
+a class (unless of course that instance has a method called ancestors).
+
+=end
