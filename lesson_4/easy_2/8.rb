@@ -14,6 +14,12 @@ class Bingo
     #rules of play
   end
 end
-s
+
 What can we add to the Bingo class to allow it to inherit the play method from the Game class?
+
+class Bingo < Game
+  def rules_of_play
+    #rules of play
+  end
+end
 =end
