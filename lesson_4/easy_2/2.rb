@@ -25,4 +25,17 @@ trip.predict_the_future
 The code will print "You will" and then be completed by one of the "road trip" options:
 "visit Vegas", "fly to Fiji", "romp in Rome" becaause the choices method in RoadTrip will be used
 prior to the choices in Oracle, overriding it
+
+LS Solution
+Now the string returned will be of the form "You will <some trip>" where the trip is taken from 
+the choices defined by the choices method of RoadTrip.
+
+Why does this happen? Doesn't the choices called in the implementation of Oracle's 
+predict_the_future look in the Oracle class for a choices method? The answer is that since we're 
+calling predict_the_future on an instance of RoadTrip, every time Ruby tries to resolve a method 
+name, it will start with the methods defined on the class you are calling. So even though the 
+call to choices happens in a method defined in Oracle, Ruby will first look for a definition of 
+choices in RoadTrip before falling back to Oracle if it does not find choices defined in RoadTrip. 
+To see this in action, change the name of the choices method in RoadTrip (call it chooses) and see 
+what happens.
 =end
