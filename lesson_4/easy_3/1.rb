@@ -64,7 +64,8 @@ class Goodbye < Greeting
   end
 end
 
-Hello.hi
+hello = Hello.new
+hello.hi
 
 =begin
 Case 1
