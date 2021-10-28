@@ -65,7 +65,7 @@ class Goodbye < Greeting
 end
 
 hello = Hello.new
-hello.bye
+hello.greet
 
 =begin
 Case 1
@@ -79,4 +79,17 @@ hello = Hello.new
 hello.bye
 
 This code will print an error stating that there is no 'bye' method for that object
+
+Case 3
+hello = Hello.new
+hello.greet
+
+This code will also print an error because we need to pass an onbject to the greet method
+
+Case 4
+hello = Hello.new
+hello.greet("Goodbye")
+
+case 5:
+Hello.hi
 =end
