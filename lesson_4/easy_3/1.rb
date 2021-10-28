@@ -65,14 +65,18 @@ class Goodbye < Greeting
 end
 
 hello = Hello.new
-hello.hi
+hello.bye
 
 =begin
 Case 1
-
 hello = Hello.new
 hello.hi
 
 This code will print "Hello" to the console
 
+Case 2
+hello = Hello.new
+hello.bye
+
+This code will print an error stating that there is no 'bye' method for that object
 =end
