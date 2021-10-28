@@ -65,7 +65,7 @@ class Goodbye < Greeting
 end
 
 hello = Hello.new
-hello.greet
+hello.greet("Goodbye")
 
 =begin
 Case 1
@@ -84,11 +84,13 @@ Case 3
 hello = Hello.new
 hello.greet
 
-This code will also print an error because we need to pass an onbject to the greet method
+This code will also produce an error because we need to pass an onbject to the greet method
 
 Case 4
 hello = Hello.new
 hello.greet("Goodbye")
+
+This code will print "Goodbye"
 
 case 5:
 Hello.hi
