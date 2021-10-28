@@ -18,6 +18,7 @@ class Goodbye < Greeting
     greet("Goodbye")
   end
 end
+
 What happens in each of the following cases:
 
 case 1:
@@ -43,4 +44,35 @@ hello.greet("Goodbye")
 case 5:
 
 Hello.hi
+=end
+
+class Greeting
+  def greet(message)
+    puts message
+  end
+end
+
+class Hello < Greeting
+  def hi
+    greet("Hello")
+  end
+end
+
+class Goodbye < Greeting
+  def bye
+    greet("Goodbye")
+  end
+end
+
+hello = Hello.new
+hello.hi
+
+=begin
+Case 1
+
+hello = Hello.new
+hello.hi
+
+This code will print "Hello" to the console
+
 =end
