@@ -98,3 +98,27 @@ Hello.hi
 This code will print "Hello"
 WRONG: undefined method for Hello class
 =end
+
+=begin
+LS Solution
+
+case 1
+"Hello" is printed to the terminal.
+
+case 2
+An undefined method error occurs. Neither the Hello class nor its parent class Greeting have a bye 
+method defined.
+
+case 3
+An ArgumentError reporting a wrong number of arguments is returned. The Hello class can access its 
+parent class's greet method, but greet takes an argument which is not being supplied if we just call 
+greet by itself.
+
+case 4
+"Goodbye" is printed to the terminal.
+
+case 5
+An undefined method hi is reported for the Hello class. This is because the hi method is defined for 
+instances of the Hello class, rather than on the class itself. Since we are attempting to call hi on the 
+Hello class rather than an instance of the class, Ruby cannot find the method on the class definition.
+=end
