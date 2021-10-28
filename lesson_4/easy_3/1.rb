@@ -64,8 +64,7 @@ class Goodbye < Greeting
   end
 end
 
-hello = Hello.new
-hello.greet("Goodbye")
+Hello.hi
 
 =begin
 Case 1
@@ -94,4 +93,7 @@ This code will print "Goodbye"
 
 case 5:
 Hello.hi
+
+This code will print "Hello"
+WRONG: undefined method for Hello class
 =end
