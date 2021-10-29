@@ -19,4 +19,19 @@ Alyssa looked at the code and spotted a mistake. "This will fail when update_qua
 she says.
 
 Can you spot the mistake and how to address it?
+Quantity only has a getter method, not a setter method. Can update :quantity to be an attr_accessor
 =end
+
+class InvoiceEntry
+  attr_reader :quantity, :product_name
+
+  def initialize(product_name, number_purchased)
+    @quantity = number_purchased
+    @product_name = product_name
+  end
+
+  def update_quantity(updated_count)
+    # prevent negative quantities from being set
+    quantity = updated_count if updated_count >= 0
+  end
+end
