@@ -20,4 +20,8 @@ method."
 "Not so fast", Ben replied. "What I'm doing here is valid - I'm not missing an @!"
 
 Who is right, Ben or Alyssa, and why?
+
+@balance would be referring to the instance variable, whereas balance would call the setter method
+Both are valid
 =end
+
