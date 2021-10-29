@@ -35,3 +35,17 @@ class InvoiceEntry
     quantity = updated_count if updated_count >= 0
   end
 end
+
+=begin
+LS Solution
+The problem is that since quantity is an instance variable, it must be accessed with the @quantity 
+notation when setting it. Even though attr_reader is defined for quantity, the fact that it's a reader 
+means that there is implicitly a method for retrieving the value (a "getter") but the setter is 
+undefined. So there are two possible solutions:
+
+1. change attr_reader to attr_accessor, and then use the "setter" method like this: 
+  self.quantity = updated_count if updated_count >= 0
+
+2. reference the instance variable directly within the update_quantity method, like this 
+  @quantity = updated_count if updated_count >= 0
+=end
