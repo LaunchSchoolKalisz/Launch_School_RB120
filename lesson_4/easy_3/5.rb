@@ -13,10 +13,12 @@ end
 
 What would happen if I called the methods like shown below?
 
-tv = Television.new
-tv.manufacturer
-tv.model
+tv = Television.new 
+tv.manufacturer #Error 
+tv.model  #Run
 
-Television.manufacturer
-Television.model
+Television.manufacturer # Run 
+Television.model # Error
+
+This is because manufacturer is a class method and model is an instance method
 =end
