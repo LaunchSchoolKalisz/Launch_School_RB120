@@ -14,4 +14,7 @@ class Light
   end
 
 end
+
+We don't need the setter or getter methods at this point because we aren't getting or setting 
+the brightness or color
 =end
