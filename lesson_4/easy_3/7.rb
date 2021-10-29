@@ -17,4 +17,12 @@ end
 
 We don't need the setter or getter methods at this point because we aren't getting or setting 
 the brightness or color
+
+LS Solution
+
+The answer here is the return in the information method. Ruby automatically returns the result of the 
+last line of any method, so adding return to this line in the method does not add any value and so 
+therefore should be avoided. We also never use the attr_accessor for brightness and color. 
+Though, these methods do add potential value, as they give us the option to alter brightness and color 
+outside the Light class.
 =end
