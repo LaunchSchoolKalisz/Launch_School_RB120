@@ -20,4 +20,8 @@ variable, it must be accessed with the @quantity notation when setting it. One w
 change attr_reader to attr_accessor and change quantity to self.quantity.
 
 Is there anything wrong with fixing it this way?
+
+Not necessarily wrong, but it depends on if you want to call the instance variable itself. You wouldn't
+want to use self.quantity, though because that is calling the the class and if you have a setter method
+you don't need self.
 =end
