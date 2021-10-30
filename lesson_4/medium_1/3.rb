@@ -24,4 +24,11 @@ Is there anything wrong with fixing it this way?
 Not necessarily wrong, but it depends on if you want to call the instance variable itself. You wouldn't
 want to use self.quantity, though because that is calling the the class and if you have a setter method
 you don't need self.
+
+LS Solution
+Nothing incorrect syntactically. However, you are altering the public interfaces of the class. In other 
+words, you are now allowing clients of the class to change the quantity directly (calling the accessor 
+with the instance.quantity = <new value> notation) rather than by going through the update_quantity 
+method. It means that the protections built into the update_quantity method can be circumvented and 
+potentially pose problems down the line.
 =end
