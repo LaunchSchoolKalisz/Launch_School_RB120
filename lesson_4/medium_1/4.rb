@@ -9,3 +9,10 @@ The Hello class should have a hi method that takes no arguments and prints "Hell
 should have a bye method to say "Goodbye". Make use of the Greeting class greet method when implementing 
 the Hello and Goodbye classes - do not use any puts in the Hello or Goodbye classes.
 =end
+
+class Greeting 
+  def greet(message = "Here's a message for you!")
+    puts "#{message}"
+  end
+end
+
