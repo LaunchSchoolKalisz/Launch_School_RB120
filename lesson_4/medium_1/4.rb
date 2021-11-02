@@ -16,3 +16,14 @@ class Greeting
   end
 end
 
+class Hello < Greeting
+  def hi
+    greet("Hello")
+  end
+end
+
+hello = Hello.new
+hello.hi
+hello.greet
+hello.greet("Hi")
+
