@@ -47,7 +47,6 @@ class KrispyKreme
       "#{@filling_type} with #{@glazing}"
     end
   end
-
 end
 
 donut1 = KrispyKreme.new(nil, nil)
