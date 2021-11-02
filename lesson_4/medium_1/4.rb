@@ -22,8 +22,17 @@ class Hello < Greeting
   end
 end
 
+class Goodbye < Greeting
+  def bye
+    greet("Goodbye")
+  end
+end
+
 hello = Hello.new
 hello.hi
 hello.greet
 hello.greet("Hi")
+
+bye = Goodbye.new
+bye.bye
 
