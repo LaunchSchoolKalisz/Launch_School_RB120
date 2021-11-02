@@ -35,12 +35,13 @@ Write additional code for KrispyKreme such that the puts statements will work as
 
 class KrispyKreme
   def initialize(filling_type, glazing)
+    filling_type = "Plain" if filling_type.nil? 
     @filling_type = filling_type
     @glazing = glazing
   end
 
   def to_s
-    elsif @glazing == nil
+    if @glazing.nil?
       "#{@filling_type}"
     else
       "#{@filling_type} with #{@glazing}"
