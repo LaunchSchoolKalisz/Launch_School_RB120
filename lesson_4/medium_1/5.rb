@@ -69,3 +69,20 @@ puts donut4
 
 puts donut5
   #=> "Custard with icing"
+
+=begin
+We need to define the to_s method for the class, and then have logic that can synthesize the name 
+based on the combinations of filling and glazing.
+
+class KrispyKreme
+  # ... keep existing code in place and add the below...
+  def to_s
+    filling_string = @filling_type ? @filling_type : "Plain"
+    glazing_string = @glazing ? " with #{@glazing}" : ''
+    filling_string + glazing_string
+  end
+end
+
+Note that we can choose to create attr_reader directives for the filling and glazing instance variables 
+if we want to avoid use of the @ for accessing those instance variables and make the to_s easier to read.
+=end
