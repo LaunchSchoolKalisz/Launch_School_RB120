@@ -29,6 +29,20 @@ puts donut4
 
 puts donut5
   => "Custard with icing"
-  
+
 Write additional code for KrispyKreme such that the puts statements will work as specified above.
 =end
+
+class KrispyKreme
+  def initialize(filling_type, glazing)
+    @filling_type = filling_type
+    @glazing = glazing
+  end
+
+end
+
+donut1 = KrispyKreme.new(nil, nil)
+donut2 = KrispyKreme.new("Vanilla", nil)
+donut3 = KrispyKreme.new(nil, "sugar")
+donut4 = KrispyKreme.new(nil, "chocolate sprinkles")
+donut5 = KrispyKreme.new("Custard", "icing")
