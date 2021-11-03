@@ -28,4 +28,6 @@ class Computer
 end
 
 What is the difference in the way the code works?
+the self is referring back to the instance variable
+the @ is the instance variable
 =end
