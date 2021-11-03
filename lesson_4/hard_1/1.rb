@@ -54,3 +54,36 @@ class SecurityLogger
 end
 
 SecretFile.new("Some data")
+
+=begin
+LS Solution
+
+First modify the initialize method to take a SecurityLogger object as an argument and assign it to 
+another instance variable.
+
+class SecretFile
+  attr_reader :data
+
+  def initialize(secret_data, logger)
+    @data = secret_data
+    @logger = logger
+  end
+end
+
+Second, Alyssa needs to remove the attr_reader and replace it with an explicit implementation of a 
+method that returns the data instance variable. In that new method, she can add a call to the security 
+logger.
+
+class SecretFile
+  def initialize(secret_data, logger)
+    @data = secret_data
+    @logger = logger
+  end
+
+  def data
+    @logger.create_log_entry
+    @data
+  end
+end
+
+=end
