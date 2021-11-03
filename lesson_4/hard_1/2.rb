@@ -69,6 +69,9 @@ end
 class WheeledVehicle
   attr_accessor :speed, :heading
 
+  include Fuelable
+  include Rangable
+
   def initialize(tire_array, km_traveled_per_liter, liters_of_fuel_capacity)
     @tires = tire_array
     @fuel_efficiency = km_traveled_per_liter
