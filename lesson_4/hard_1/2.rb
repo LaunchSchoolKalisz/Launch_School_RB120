@@ -105,6 +105,9 @@ class Catamaran
   attr_reader :propeller_count, :hull_count
   attr_accessor :speed, :heading
 
+  include Fuelable
+  include Rangable
+
   def initialize(num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity)
     # ... code omitted ...
   end
