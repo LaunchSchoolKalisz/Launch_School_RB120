@@ -30,4 +30,13 @@ end
 What is the difference in the way the code works?
 the self is referring back to the instance variable
 the @ is the instance variable
+
+LS Solution
+There's actually no difference in the result, only in the way each example accomplishes the task. 
+Compare both show_template methods. We can see in the first example that it works fine without self, 
+therefore, self isn't needed in the second example. This is because show_template invokes the getter 
+method template, which doesn't require self, unlike the setter method.
+
+Both examples are technically fine, however, the general rule from the Ruby style guide is to "Avoid 
+self where not required."
 =end
