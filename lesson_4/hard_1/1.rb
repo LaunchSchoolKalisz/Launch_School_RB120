@@ -24,4 +24,33 @@ end
 Hint: Assume that you can modify the initialize method in SecretFile to have an instance of 
 SecurityLogger be passed in as an additional argument. It may be helpful to review the lecture on 
 collaborator objects for this practice problem.
+
+# Problem
+If the SecretFile class is accessed, a log entry mist be created
+
+# Example
+
+#Data
+- Any data passed in as secret data
+
+#Algo
+- 
+
 =end
+
+class SecretFile
+  attr_reader :data
+
+  def initialize(secret_data)
+    @data = secret_data
+    SecurityLogger.new.create_log_entry(data)
+  end
+end
+
+class SecurityLogger
+  def create_log_entry(data)
+    puts "This data was accessed: #{data}"
+  end
+end
+
+SecretFile.new("Some data")
