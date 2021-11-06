@@ -46,7 +46,9 @@ end
 
 class Catamaran < Seacraft
 end
-
+ 
+class Motorboat < Seacraft
+end
 
 =begin
 We can create a new class to present the common elements of motorboats and catamarans. We can call it, for example, Seacraft. We 
