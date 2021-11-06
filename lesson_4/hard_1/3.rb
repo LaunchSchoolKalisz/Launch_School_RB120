@@ -43,3 +43,15 @@ class Catamaran
     # ... other code to track catamaran-specific data omitted ...
   end
 end
+
+class Motorboat
+  include Moveable
+
+
+  def initialize(km_traveled_per_liter, liters_of_fuel_capacity)
+    self.fuel_efficiency = km_traveled_per_liter
+    self.fuel_capacity = liters_of_fuel_capacity
+
+    # ... other code to track motorboat-specific data omitted ...
+  end
+end
