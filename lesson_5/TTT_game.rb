@@ -11,4 +11,9 @@ marking a square. The first player to mark 3 squares in a row wins.
 Nouns: board, player, grid, square, marker
 Verbs: play, mark
 
+Board
+Square
+Player
+  - Mark
+  - Play
 =end
