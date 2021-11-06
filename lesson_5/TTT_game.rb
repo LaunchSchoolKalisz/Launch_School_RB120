@@ -7,4 +7,8 @@ with their marker, an o. The players take turns, tryng to mark 3 consecutive squ
 LS Description
 Tic Tac Toe is a 2-player board game played on a 3x3 grid. Players take turns
 marking a square. The first player to mark 3 squares in a row wins.
+
+Nouns: board, player, grid, square, marker
+Verbs: play, mark
+
 =end
