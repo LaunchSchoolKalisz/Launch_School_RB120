@@ -61,3 +61,22 @@ class Motorboat < Seacraft
     super(1, 1, km_traveled_per_liter, liters_of_fuel_capacity)
   end
 end
+
+=begin
+We can over-ride the range method in the Seacraft class. This means that the range method of the Moveable module will continue to be 
+effective for the autos and motorcycles, but that calling range on catamarans and motorboats will be handled by the range method defined on 
+the Seacraft class and take precedence.
+
+We can use the super keyword to get the value from the Moveable module that's included by Seacraft, and then add the additional 10km of 
+range before returning it.
+
+class Seacraft
+
+  # ... existing Seacraft code omitted ...
+
+  # the following is added to the existing Seacraft definition
+  def range
+    super + 10
+  end
+end
+=end
