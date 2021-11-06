@@ -31,30 +31,19 @@ class WheeledVehicle
   end
 end
 
-class Catamaran
+class Seacraft
   include Moveable
 
-  attr_reader :propeller_count, :hull_count
+  attr_reader :hull_count, :propeller_count
 
-  def initialize(num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity)
-    self.fuel_efficiency = km_traveled_per_liter
-    self.fuel_capacity = liters_of_fuel_capacity
-
-    # ... other code to track catamaran-specific data omitted ...
+  def initialize(num_propellers, num_hulls, fuel_efficiency, fuel_capacity)
+    @propeller_count = num_propellers
+    @hull_count = num_hulls
+    self.fuel_efficiency = fuel_efficiency
+    self.fuel_capacity = fuel_capacity
   end
 end
 
-class Motorboat
-  include Moveable
-
-
-  def initialize(km_traveled_per_liter, liters_of_fuel_capacity)
-    self.fuel_efficiency = km_traveled_per_liter
-    self.fuel_capacity = liters_of_fuel_capacity
-
-    # ... other code to track motorboat-specific data omitted ...
-  end
-end
 
 =begin
 We can create a new class to present the common elements of motorboats and catamarans. We can call it, for example, Seacraft. We 
