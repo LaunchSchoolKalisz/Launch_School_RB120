@@ -22,15 +22,25 @@ SPIKE
 
 class Board
   def initialize
+    # Need to model 9 suare (3x3) grid
+    # Dataa structure: Array vs hash for Square objects; integers/strings?
   end
 end
 
 class Square
   def initialize
+    # Status to keep track of the square's mark?
   end
 end
 
 class Player
   def initialize
+    # Marker to keep track of player's symbol?
+  end
+
+  def mark
+  end
+
+  def play
   end
 end
