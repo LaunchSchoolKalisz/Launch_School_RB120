@@ -21,6 +21,11 @@ SPIKE
 =end
 
 class TTTGame
+
+  def display_welcome_message
+    puts "Welcome to Tic Tac Toe!"
+  end
+  
   def play
     display_welcome_message
     loop do 
