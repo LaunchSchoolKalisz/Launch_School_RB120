@@ -20,6 +20,11 @@ Player
 SPIKE
 =end
 
+class TTTGame
+  def play
+  end
+end
+
 class Board
   def initialize
     # Need to model 9 suare (3x3) grid
