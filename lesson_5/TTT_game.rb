@@ -49,3 +49,6 @@ class Player
   def play
   end
 end
+
+game = TTTGame.new
+game.play
