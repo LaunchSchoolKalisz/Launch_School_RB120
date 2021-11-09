@@ -44,6 +44,7 @@ class TTTGame
     puts "     |     |"
     puts "     |     |"
     puts "     |     |"
+    puts ""
   end
 
   def play
