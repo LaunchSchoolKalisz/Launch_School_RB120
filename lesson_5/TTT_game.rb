@@ -19,7 +19,7 @@ Player
 
 SPIKE
 =end
-require pry 
+require 'pry' 
 
 class TTTGame
   attr_reader :board, :human, :computer
@@ -57,6 +57,7 @@ class TTTGame
 
   def human_moves
     puts "Choose a square:"
+    square = nil
     loop do
       square = gets.chomp.to_i
       break if (1..9).include?(square)
