@@ -21,6 +21,7 @@ SPIKE
 =end
 
 class TTTGame
+  attr_reader :board
 
   def initialize
     @board = Board.new
