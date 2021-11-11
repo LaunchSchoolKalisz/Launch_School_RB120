@@ -39,7 +39,7 @@ class TTTGame
   def display_board
     puts ""
     puts "     |     |"
-    puts " #{board.get_square_at(1)}   |     |"
+    puts "  #{board.get_square_at(1)}  |     |"
     puts "     |     |"
     puts "-----+-----+-----"
     puts "     |     |"
@@ -69,7 +69,7 @@ class TTTGame
 end
 
 class Board
-  INITIAL_MARKER = " "
+  INITIAL_MARKER = "L"
 
   def initialize
     @squares = {}
