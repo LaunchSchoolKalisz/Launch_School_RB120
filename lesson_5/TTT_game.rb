@@ -54,6 +54,17 @@ class TTTGame
     puts ""
   end
 
+  def human_moves
+    puts "Choose a square:"
+    loop do
+      square = gets.chomp.to_i
+      break if (1..9).include?(square)
+      puts "Sorry, that's not a valid choice. Try again!"
+    end
+
+    board.set_square_at(square, @human)
+  end
+
   def play
     display_welcome_message
     loop do 
