@@ -22,6 +22,10 @@ SPIKE
 
 class TTTGame
 
+  def initialize
+    @board = Board.new
+  end
+
   def display_welcome_message
     puts "Welcome to Tic Tac Toe!"
     puts ""
@@ -66,7 +70,7 @@ end
 class Board
   def initialize
     # Need to model 9 suare (3x3) grid
-    # Dataa structure: Array vs hash for Square objects; integers/strings?
+    # Data structure: Array vs hash for Square objects; integers/strings?
   end
 end
 
