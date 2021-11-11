@@ -25,6 +25,8 @@ class TTTGame
 
   def initialize
     @board = Board.new
+    @human = Player.new
+    @computer = Player.new
   end
 
   def display_welcome_message
@@ -56,11 +58,10 @@ class TTTGame
     display_welcome_message
     loop do 
       display_board
-      break
-      first_player_moves
+      human_moves
       break if someone_won? || board_full?
 
-      second_player_moves
+      computer_moves
       break if someone_won? || board_full?
     end
     # display_result
@@ -69,7 +70,6 @@ class TTTGame
 end
 
 class Board
-
   def initialize
     @squares = {}
     (1..9).each {|key| @squares[key] = Square.new(key.to_s)}
