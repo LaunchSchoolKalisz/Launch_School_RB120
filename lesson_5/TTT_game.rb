@@ -64,7 +64,7 @@ class TTTGame
       puts "Sorry, that's not a valid choice. Try again!"
     end
 
-    binding.pry
+    #binding.pry
     board.set_square_at(square, human.marker)
   end
 
@@ -73,6 +73,8 @@ class TTTGame
     loop do 
       display_board
       human_moves
+      display_board
+      break
       break if someone_won? || board_full?
 
       computer_moves
@@ -92,9 +94,15 @@ class Board
   def get_square_at(key)  
     @squares[key]         #will return a square object
   end
+
+  def set_square_at(key, marker)
+    @squares[key].marker = marker
+  end
 end
 
 class Square
+  attr_accessor :marker
+
   def initialize(marker)
     @marker = marker
   end
