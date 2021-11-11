@@ -25,8 +25,8 @@ class TTTGame
 
   def initialize
     @board = Board.new
-    @human = Player.new
-    @computer = Player.new
+    @human = Player.new("X")
+    @computer = Player.new("O")
   end
 
   def display_welcome_message
