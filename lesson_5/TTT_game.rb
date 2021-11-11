@@ -21,7 +21,7 @@ SPIKE
 =end
 
 class TTTGame
-  attr_reader :board
+  attr_reader :board, :human, :computer
 
   def initialize
     @board = Board.new
@@ -62,7 +62,7 @@ class TTTGame
       puts "Sorry, that's not a valid choice. Try again!"
     end
 
-    board.set_square_at(square, @human)
+    board.set_square_at(square, human.marker)
   end
 
   def play
@@ -102,11 +102,10 @@ class Square
 end
 
 class Player
-  def initialize
-    # Marker to keep track of player's symbol?
-  end
+  attr_reader :marker
 
-  def mark
+  def initialize(marker)
+    @marker = marker
   end
 
   def play
