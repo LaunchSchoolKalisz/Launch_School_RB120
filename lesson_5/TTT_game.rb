@@ -72,6 +72,10 @@ class Board
   def initialize
     @squares = {1 => Square.new(' '), 2 => Square.new(' ')}
   end
+
+  def get_square_at(key)  
+    @squares[key]         #will return a square object
+  end
 end
 
 class Square
