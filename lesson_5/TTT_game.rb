@@ -70,14 +70,13 @@ end
 
 class Board
   def initialize
-    @squares = {1 => Square.new(' '), 2 => Square.new(' '), 3 => Square.new(' '), 4 => Square.new(' '), 
-    5 => Square.new(' '), 6 => Square.new(' '), 7 => Square.new(' '), 8 => Square.new(' '), 9 => Square.new(' ')}
+    @squares = {1 => Square.new(' '), 2 => Square.new(' ')}
   end
 end
 
 class Square
-  def initialize
-    # Status to keep track of the square's mark?
+  def initialize(marker)
+    @marker = marker
   end
 end
 
