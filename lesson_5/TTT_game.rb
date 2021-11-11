@@ -19,6 +19,7 @@ Player
 
 SPIKE
 =end
+require pry 
 
 class TTTGame
   attr_reader :board, :human, :computer
@@ -62,6 +63,7 @@ class TTTGame
       puts "Sorry, that's not a valid choice. Try again!"
     end
 
+    binding.pry
     board.set_square_at(square, human.marker)
   end
 
