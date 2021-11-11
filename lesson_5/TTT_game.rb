@@ -70,8 +70,8 @@ end
 
 class Board
   def initialize
-    # Need to model 9 suare (3x3) grid
-    # Data structure: Array vs hash for Square objects; integers/strings?
+    @squares = {1 => Square.new(' '), 2 => Square.new(' '), 3 => Square.new(' '), 4 => Square.new(' '), 
+    5 => Square.new(' '), 6 => Square.new(' '), 7 => Square.new(' '), 8 => Square.new(' '), 9 => Square.new(' ')}
   end
 end
 
