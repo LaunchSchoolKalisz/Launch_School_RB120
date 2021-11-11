@@ -69,11 +69,10 @@ class TTTGame
 end
 
 class Board
-  INITIAL_MARKER = ' '
 
   def initialize
     @squares = {}
-    (1..9).each {|key| @squares[key] = Square.new(INITIAL_MARKER)}
+    (1..9).each {|key| @squares[key] = Square.new(key.to_s)}
   end
 
   def get_square_at(key)  
