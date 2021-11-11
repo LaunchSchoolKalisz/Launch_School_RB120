@@ -39,7 +39,7 @@ class TTTGame
   def display_board
     puts ""
     puts "     |     |"
-    puts "  board.get_square_at(1)   |     |"
+    puts "  #{board.get_square_at(1)}   |     |"
     puts "     |     |"
     puts "-----+-----+-----"
     puts "     |     |"
