@@ -23,14 +23,14 @@ require 'pry'
 
 class TTTGame
   HUMAN_MARKER = "X"
-  COMPUTER_MAKER = "O"
+  COMPUTER_MARKER = "O"
 
   attr_reader :board, :human, :computer
 
   def initialize
     @board = Board.new
     @human = Player.new(HUMAN_MARKER)
-    @computer = Player.new(COMPUTER_MAKER)
+    @computer = Player.new(COMPUTER_MARKER)
   end
 
   def display_welcome_message
@@ -59,11 +59,11 @@ class TTTGame
   end
 
   def human_moves
-    puts "Choose an empty square:"
+    puts "Choose an empty square (#{board.unmarked_keys.join(', ')}): "
     square = nil
     loop do
       square = gets.chomp.to_i
-      break if (1..9).include?(square)
+      break if board.unmarked_keys.include?(square)
       puts "Sorry, that's not a valid choice. Try again!"
     end
 
@@ -72,7 +72,7 @@ class TTTGame
   end
 
   def computer_moves
-    board.set_square_at((1..9).to_a.sample, computer.marker)
+    board.set_square_at(board.unmarked_keys.sample, computer.marker)
   end
 
   def play
@@ -81,7 +81,6 @@ class TTTGame
     loop do 
       human_moves
       #break if someone_won? || board_full?
-
       computer_moves
       #break if someone_won? || board_full?
       display_board
@@ -105,8 +104,10 @@ class Board
     @squares[key].marker = marker
   end
 
-  def empty_square_keys
-    @squares.keys.select {|key| @squares[key].unmarked?}
+  def unmarked_keys
+    human_marked_keys = @squares.keys.select {|key| @squares[key].human_marked?}
+    computer_marked_keys = @squares.keys.select {|key| @squares[key].computer_marked?}
+    unmarked_keys = @squares.keys - human_marked_keys - computer_marked_keys
   end
 end
 
@@ -119,6 +120,14 @@ class Square
 
   def to_s
     @marker
+  end
+
+  def human_marked?
+    marker == TTTGame::HUMAN_MARKER
+  end
+
+  def computer_marked?
+    marker == TTTGame::COMPUTER_MARKER
   end
 end
 
