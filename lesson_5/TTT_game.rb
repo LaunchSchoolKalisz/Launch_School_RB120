@@ -59,7 +59,7 @@ class TTTGame
   end
 
   def human_moves
-    puts "Choose a square:"
+    puts "Choose an empty square:"
     square = nil
     loop do
       square = gets.chomp.to_i
@@ -103,6 +103,10 @@ class Board
 
   def set_square_at(key, marker)
     @squares[key].marker = marker
+  end
+
+  def empty_square_keys
+    @squares.keys.select {|key| @squares[key].unmarked?}
   end
 end
 
