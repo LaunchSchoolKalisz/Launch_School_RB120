@@ -43,6 +43,7 @@ class TTTGame
   end
 
   def display_board
+    system 'clear'
     puts ""
     puts "     |     |"
     puts "  #{board.get_square_at(1)}  |  #{board.get_square_at(2)}  |  #{board.get_square_at(3)}"
