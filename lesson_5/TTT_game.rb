@@ -74,10 +74,12 @@ class TTTGame
       display_board
       human_moves
       display_board
-      break
-      break if someone_won? || board_full?
+ 
+      #break if someone_won? || board_full?
 
       computer_moves
+      display_board
+      break
       break if someone_won? || board_full?
     end
     # display_result
