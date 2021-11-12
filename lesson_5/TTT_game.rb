@@ -77,13 +77,11 @@ class TTTGame
 
   def play
     display_welcome_message
+    display_board
     loop do 
-      display_board
       human_moves
-      display_board
- 
       #break if someone_won? || board_full?
-
+      
       computer_moves
       display_board
       break
