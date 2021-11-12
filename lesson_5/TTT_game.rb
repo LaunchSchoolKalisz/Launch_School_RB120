@@ -22,12 +22,15 @@ SPIKE
 require 'pry' 
 
 class TTTGame
+  HUMAN_MARKER = "X"
+  COMPUTER_MAKER = "O"
+
   attr_reader :board, :human, :computer
 
   def initialize
     @board = Board.new
-    @human = Player.new("X")
-    @computer = Player.new("O")
+    @human = Player.new(HUMAN_MARKER)
+    @computer = Player.new(COMPUTER_MAKER)
   end
 
   def display_welcome_message
