@@ -76,6 +76,11 @@ class TTTGame
     board.set_square_at(board.unmarked_keys.sample, computer.marker)
   end
 
+  def display_result
+    display_board
+    puts "The board is full!"
+  end
+
   def play
     display_welcome_message
     display_board
