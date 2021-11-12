@@ -44,6 +44,7 @@ class TTTGame
 
   def display_board
     system 'clear'
+    puts "You are a #{human.marker}. Computer is a #{computer.marker}"
     puts ""
     puts "     |     |"
     puts "  #{board.get_square_at(1)}  |  #{board.get_square_at(2)}  |  #{board.get_square_at(3)}"
