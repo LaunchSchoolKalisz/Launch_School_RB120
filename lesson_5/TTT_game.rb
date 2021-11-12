@@ -81,11 +81,10 @@ class TTTGame
     loop do 
       human_moves
       #break if someone_won? || board_full?
-      
+
       computer_moves
+      #break if someone_won? || board_full?
       display_board
-      break
-      break if someone_won? || board_full?
     end
     # display_result
     display_goodbye_message
