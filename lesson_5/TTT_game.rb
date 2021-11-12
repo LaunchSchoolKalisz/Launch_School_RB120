@@ -80,10 +80,10 @@ class TTTGame
     display_board
     loop do 
       human_moves
-      break if board_full?
+      break if board.full?
       #break if someone_won? || board_full?
       computer_moves
-      break if board_full?
+      break if board.full?
       #break if someone_won? || board_full?
       display_board
     end
@@ -110,6 +110,10 @@ class Board
     human_marked_keys = @squares.keys.select {|key| @squares[key].human_marked?}
     computer_marked_keys = @squares.keys.select {|key| @squares[key].computer_marked?}
     unmarked_keys = @squares.keys - human_marked_keys - computer_marked_keys
+  end
+
+  def full?
+    unmarked_keys.empty?
   end
 end
 
