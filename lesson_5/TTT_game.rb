@@ -87,10 +87,10 @@ class TTTGame
     display_board
     loop do 
       human_moves
-      break if someone_won? || board_full?
+      break if board.someone_won? || board.full?
 
       computer_moves
-      break if someone_won? || board_full?
+      break if board.someone_won? || board.full?
       display_board
     end
     display_result
@@ -99,7 +99,7 @@ class TTTGame
 end
 
 class Board
-  WINNING LINES = 
+  WINNING_LINES = 
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + #rows
     [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + #columns
     [[1, 5, 9], [3, 5, 7]]             #diags
@@ -133,8 +133,20 @@ class Board
 
   #return winning marker or nil
   def detect_winner
-    
+    WINNING_LINES.each do |line|
+      if @squares[line[0]].marker == TTTGame::HUMAN_MARKER && 
+        @squares[line[1]].marker == TTTGame::HUMAN_MARKER && 
+        @squares[line[2]].marker == TTTGame::HUMAN_MARKER
+        return TTTGame::HUMAN_MARKER
+      elsif @squares[line[0]].marker == TTTGame::COMPUTER_MARKER && 
+        @squares[line[1]].marker == TTTGame::COMPUTER_MARKER && 
+        @squares[line[2]].marker == TTTGame::COMPUTER_MARKER
+        return TTTGame::COMPUTER_MARKER
+      end
+    end
+    nil
   end
+
 end
 
 class Square
