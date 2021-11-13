@@ -42,7 +42,7 @@ class TTTGame
     puts "Thanks for playing Tic Tac Toe! Goodbye!"
   end
 
-  def display_board
+  def display_board(clear = true)
     system 'clear'
     puts "You are a #{human.marker}. Computer is a #{computer.marker}"
     puts ""
