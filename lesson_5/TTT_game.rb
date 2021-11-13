@@ -122,7 +122,7 @@ class TTTGame
       board.reset
       puts "Let's play again!"
     end
-    
+
     display_goodbye_message
   end
 end
@@ -135,7 +135,7 @@ class Board
   
   def initialize
     @squares = {}
-    (1..9).each {|key| @squares[key] = Square.new("[#{key.to_s}]")}
+    reset
   end
 
   def get_square_at(key)  
@@ -178,6 +178,10 @@ class Board
       end
     end
     nil
+  end
+
+  def reset
+    (1..9).each {|key| @squares[key] = Square.new("[#{key.to_s}]")}
   end
 
 end
