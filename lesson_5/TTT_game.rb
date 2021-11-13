@@ -43,7 +43,7 @@ class TTTGame
   end
 
   def display_board(clear = true)
-    system 'clear'
+    system 'clear' if clear
     puts "You are a #{human.marker}. Computer is a #{computer.marker}"
     puts ""
     puts "       |       |"
