@@ -92,16 +92,24 @@ class TTTGame
 
   def play
     display_welcome_message
-    display_board
-    loop do 
-      human_moves
-      break if board.someone_won? || board.full?
 
-      computer_moves
-      break if board.someone_won? || board.full?
-      display_board
+    loop do
+    display_board
+
+      loop do 
+        human_moves
+        break if board.someone_won? || board.full?
+
+        computer_moves
+        break if board.someone_won? || board.full?
+
+        display_board
+      end
+      display_result
+      break unless play_again?
+      puts "Let's play again!"
+      
     end
-    display_result
     display_goodbye_message
   end
 end
