@@ -110,6 +110,16 @@ class TTTGame
     system 'clear'
   end
 
+  def reset
+    board.reset
+    system_clear
+  end
+
+  def display_play_again_message
+    puts "Let's play again!"
+    puts ""
+  end
+
   def play
     system_clear
     display_welcome_message
@@ -128,10 +138,8 @@ class TTTGame
       end
       display_result
       break unless play_again?
-      board.reset
-      system_clear
-      puts "Let's play again!"
-      puts ""
+      reset
+      display_play_again_message
     end
 
     display_goodbye_message
