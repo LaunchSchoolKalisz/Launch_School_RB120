@@ -119,9 +119,10 @@ class TTTGame
       end
       display_result
       break unless play_again?
+      board.reset
       puts "Let's play again!"
-
     end
+    
     display_goodbye_message
   end
 end
