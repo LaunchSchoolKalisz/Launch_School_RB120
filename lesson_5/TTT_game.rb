@@ -139,6 +139,10 @@ class Board
     !!detect_winner
   end
 
+  def count_human_marker(squares)
+    squares.collect(&:marker).count(TTTGame::HUMAN_MARKER)
+  end
+  
   #return winning marker or nil
   def detect_winner
     WINNING_LINES.each do |line| 
