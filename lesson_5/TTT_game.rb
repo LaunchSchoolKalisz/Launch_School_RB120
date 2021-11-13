@@ -79,7 +79,15 @@ class TTTGame
 
   def display_result
     display_board
-    puts "The board is full!"
+
+    case board.detect_winner
+    when human.marker
+      puts "You won!"
+    when computer.marker
+      puts "Computer won!"
+    else
+      puts "It's a tie!"
+    end
   end
 
   def play
