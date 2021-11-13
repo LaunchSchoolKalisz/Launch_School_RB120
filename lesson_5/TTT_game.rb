@@ -98,9 +98,8 @@ class TTTGame
       break if ['y', 'n'].include? answer
       puts "Sorry, your response must be y or n"
     end
-    
-    return false if answer == 'n'
-    return true if answer == 'y'
+
+    answer == 'y'
   end
 
   def play
