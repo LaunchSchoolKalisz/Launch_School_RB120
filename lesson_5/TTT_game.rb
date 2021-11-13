@@ -90,6 +90,19 @@ class TTTGame
     end
   end
 
+  def play_again?
+    answer = nil
+    loop do
+      puts "Would you like to play again? (y/n)"
+      answer = gets.chomp.downcase
+      break if ['y', 'n'].include? answer
+      puts "Sorry, your response must be y or n"
+    end
+    
+    return false if answer == 'n'
+    return true if answer == 'y'
+  end
+
   def play
     display_welcome_message
 
@@ -108,7 +121,7 @@ class TTTGame
       display_result
       break unless play_again?
       puts "Let's play again!"
-      
+
     end
     display_goodbye_message
   end
