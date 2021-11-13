@@ -152,7 +152,7 @@ class Board
     WINNING_LINES.each do |line| 
       if count_human_marker(@squares.select{|k,_| line.include?(k)}.values) == 3
         return TTTGame::HUMAN_MARKER
-      elsif count_computer_marker() == 3
+      elsif count_computer_marker(@squares.select{|k,_| line.include?(k)}.values) == 3
         return TTTGame::COMPUTER_MARKER
       end
     end
