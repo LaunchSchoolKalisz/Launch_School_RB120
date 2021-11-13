@@ -120,7 +120,9 @@ class TTTGame
       display_result
       break unless play_again?
       board.reset
+      system 'clear'
       puts "Let's play again!"
+      puts ""
     end
 
     display_goodbye_message
