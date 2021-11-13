@@ -87,11 +87,10 @@ class TTTGame
     display_board
     loop do 
       human_moves
-      break if board.full?
-      #break if someone_won? || board_full?
+      break if someone_won? || board_full?
+
       computer_moves
-      break if board.full?
-      #break if someone_won? || board_full?
+      break if someone_won? || board_full?
       display_board
     end
     display_result
@@ -100,6 +99,11 @@ class TTTGame
 end
 
 class Board
+  WINNING LINES = 
+    [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + #rows
+    [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + #columns
+    [[1, 5, 9], [3, 5, 7]]             #diags
+  
   def initialize
     @squares = {}
     (1..9).each {|key| @squares[key] = Square.new("[#{key.to_s}]")}
@@ -121,6 +125,15 @@ class Board
 
   def full?
     unmarked_keys.empty?
+  end
+
+  def someone_won?
+    !!detect_winner
+  end
+
+  #return winning marker or nil
+  def detect_winner
+    
   end
 end
 
