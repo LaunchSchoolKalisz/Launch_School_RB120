@@ -116,15 +116,12 @@ class TTTGame
     loop do
     display_board
 
-      loop do 
-        human_moves
+      loop do
+        current_player_moves
         break if board.someone_won? || board.full?
-
-        computer_moves
-        break if board.someone_won? || board.full?
-
-        clear_screen_and_display_board
+        clear_screen_and_display_board if human_turn?
       end
+
       display_result
       break unless play_again?
       reset
@@ -165,11 +162,11 @@ class Board
   end
 
   def count_human_marker(squares)
-    squares.collect(&:marker).count(TTTGame::HUMAN_MARKER)
+    squares.collect.count(TTTGame::HUMAN_MARKER)
   end
 
   def count_computer_marker(squares)
-    squares.collect(&:marker).count(TTTGame::COMPUTER_MARKER)
+    squares.collect.count(TTTGame::COMPUTER_MARKER)
   end
 
   #return winning marker or nil
