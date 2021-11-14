@@ -48,6 +48,7 @@ class TTTGame
   end
 
   def display_board
+    puts ""
     puts "You are#{human.marker}. Computer is#{computer.marker}."
     board.draw
     puts ""
@@ -193,7 +194,6 @@ class Board
   end
 
   def draw
-    puts ""
     puts "       |       |"
     puts "  #{get_square_at(1)}  |  #{get_square_at(2)}  |  #{get_square_at(3)}"
     puts "       |       |"
