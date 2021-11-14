@@ -49,18 +49,7 @@ class TTTGame
 
   def display_board
     puts "You are#{human.marker}. Computer is#{computer.marker}."
-    puts ""
-    puts "       |       |"
-    puts "  #{board.get_square_at(1)}  |  #{board.get_square_at(2)}  |  #{board.get_square_at(3)}"
-    puts "       |       |"
-    puts "-------+-------+-------"
-    puts "       |       |"
-    puts "  #{board.get_square_at(4)}  |  #{board.get_square_at(5)}  |  #{board.get_square_at(6)}"
-    puts "       |       |"
-    puts "-------+-------+-------"
-    puts "       |       |"
-    puts "  #{board.get_square_at(7)}  |  #{board.get_square_at(8)}  |  #{board.get_square_at(9)}"
-    puts "       |       |"
+    board.draw
     puts ""
   end
 
@@ -201,6 +190,21 @@ class Board
 
   def reset
     (1..9).each {|key| @squares[key] = Square.new("[#{key.to_s}]")}
+  end
+
+  def draw
+    puts ""
+    puts "       |       |"
+    puts "  #{get_square_at(1)}  |  #{get_square_at(2)}  |  #{get_square_at(3)}"
+    puts "       |       |"
+    puts "-------+-------+-------"
+    puts "       |       |"
+    puts "  #{get_square_at(4)}  |  #{get_square_at(5)}  |  #{get_square_at(6)}"
+    puts "       |       |"
+    puts "-------+-------+-------"
+    puts "       |       |"
+    puts "  #{get_square_at(7)}  |  #{get_square_at(8)}  |  #{get_square_at(9)}"
+    puts "       |       |"
   end
 
 end
