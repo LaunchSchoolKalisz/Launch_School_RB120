@@ -71,6 +71,11 @@ class TTTGame
     computer_moves
   end
 
+  def human_turn?
+    return true if board.count_human_marker((1..9).to_a) == board.count_computer_marker((1..9).to_a)
+    false
+  end
+
   def computer_moves
     board[board.unmarked_keys.sample] = computer.marker
   end
