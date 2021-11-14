@@ -222,6 +222,10 @@ class Square
   def computer_marked?
     marker == TTTGame::COMPUTER_MARKER
   end
+
+   def marked?
+     marker != (human_marked? && computer_marked?)
+  end
 end
 
 class Player
