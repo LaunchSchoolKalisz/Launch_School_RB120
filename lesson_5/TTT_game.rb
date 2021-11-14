@@ -147,10 +147,6 @@ class Board
     reset
   end
 
-  # def get_square_at(key)  
-  #   @squares[key]         #will return a square object
-  # end
-
   def set_square_at(key, marker)
     @squares[key].marker = marker
   end
