@@ -66,6 +66,11 @@ class TTTGame
     board[square] = human.marker
   end
 
+  def current_player_moves
+    human_moves if human_turn?
+    computer_moves
+  end
+
   def computer_moves
     board[board.unmarked_keys.sample] = computer.marker
   end
