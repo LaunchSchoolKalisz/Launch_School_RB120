@@ -62,8 +62,7 @@ class TTTGame
       break if board.unmarked_keys.include?(square)
       puts "Sorry, that's not a valid choice. Try again!"
     end
-
-    #binding.pry
+    
     board.set_square_at(square, human.marker)
   end
 
