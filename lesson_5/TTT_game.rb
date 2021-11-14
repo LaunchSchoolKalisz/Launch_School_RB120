@@ -27,6 +27,28 @@ class TTTGame
 
   attr_reader :board, :human, :computer
 
+  def play
+    system_clear
+    display_welcome_message
+
+    loop do
+    display_board
+
+      loop do
+        current_player_moves
+        break if board.someone_won? || board.full?
+        clear_screen_and_display_board if human_turn?
+      end
+
+      display_result
+      break unless play_again?
+      reset
+      display_play_again_message
+    end
+
+    display_goodbye_message
+  end
+
   def initialize
     @board = Board.new
     @human = Player.new(HUMAN_MARKER)
@@ -117,28 +139,6 @@ class TTTGame
   def display_play_again_message
     puts "Let's play again!"
     puts ""
-  end
-
-  def play
-    system_clear
-    display_welcome_message
-
-    loop do
-    display_board
-
-      loop do
-        current_player_moves
-        break if board.someone_won? || board.full?
-        clear_screen_and_display_board if human_turn?
-      end
-
-      display_result
-      break unless play_again?
-      reset
-      display_play_again_message
-    end
-
-    display_goodbye_message
   end
 end
 
