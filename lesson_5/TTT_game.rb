@@ -147,9 +147,9 @@ class Board
     reset
   end
 
-  def get_square_at(key)  
-    @squares[key]         #will return a square object
-  end
+  # def get_square_at(key)  
+  #   @squares[key]         #will return a square object
+  # end
 
   def set_square_at(key, marker)
     @squares[key].marker = marker
@@ -195,15 +195,15 @@ class Board
 
   def draw
     puts "       |       |"
-    puts "  #{get_square_at(1)}  |  #{get_square_at(2)}  |  #{get_square_at(3)}"
+    puts "  #{@squares[1]}  |  #{@squares[2]}  |  #{@squares[3]}"
     puts "       |       |"
     puts "-------+-------+-------"
     puts "       |       |"
-    puts "  #{get_square_at(4)}  |  #{get_square_at(5)}  |  #{get_square_at(6)}"
+    puts "  #{@squares[4]}  |  #{@squares[5]}  |  #{@squares[6]}"
     puts "       |       |"
     puts "-------+-------+-------"
     puts "       |       |"
-    puts "  #{get_square_at(7)}  |  #{get_square_at(8)}  |  #{get_square_at(9)}"
+    puts "  #{@squares[7]}  |  #{@squares[8]}  |  #{@squares[9]}"
     puts "       |       |"
   end
 
