@@ -254,9 +254,6 @@ class Player
   def initialize(marker)
     @marker = marker
   end
-
-  def play
-  end
 end
 
 game = TTTGame.new
