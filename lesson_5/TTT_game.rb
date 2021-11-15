@@ -49,7 +49,7 @@ class TTTGame
     display_goodbye_message
   end
 
-  private 
+  private
 
   def initialize
     @board = Board.new
