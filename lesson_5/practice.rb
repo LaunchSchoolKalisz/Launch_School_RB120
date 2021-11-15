@@ -5,8 +5,8 @@ def joinor(nums, punctuation = ", ", conjunction = "or")
     last_num = nums.pop
     nums.join("#{punctuation}") + "#{punctuation}#{conjunction} #{last_num}"
   else
-    nums.join("#{punctuation}") 
-  end
+    nums.join("#{punctuation}")
+  end 
 end
 
 p joinor([1, 2])                   # => "1 or 2"
