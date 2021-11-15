@@ -35,12 +35,7 @@ class TTTGame
 
     loop do
       display_board
-      loop do
-        current_player_moves
-        break if board.someone_won? || board.full?
-        clear_screen_and_display_board if human_turn?
-      end
-
+      player_move
       display_result
       break unless play_again?
       reset
@@ -98,6 +93,14 @@ class TTTGame
   def current_player_moves
     human_moves if human_turn?
     computer_moves unless board.someone_won? || board.full?
+  end
+
+  def player_move
+    loop do
+      current_player_moves
+      break if board.someone_won? || board.full?
+      clear_screen_and_display_board if human_turn?
+    ends
   end
 
   def human_turn?
