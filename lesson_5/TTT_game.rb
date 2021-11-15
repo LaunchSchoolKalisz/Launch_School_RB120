@@ -51,8 +51,19 @@ class TTTGame
     puts ""
   end
 
+  def joinor(nums, punctuation = ", ", conjunction = "or")
+    if nums.count == 2
+      "#{nums[0]} #{conjunction} #{nums[1]}"
+    elsif nums.count > 2
+      last_num = nums.pop
+      nums.join("#{punctuation}") + "#{punctuation}#{conjunction} #{last_num}"
+    else
+      nums.join("#{punctuation}")
+    end
+  end
+
   def human_moves
-    puts "Choose an empty square (#{board.unmarked_keys.join(', ')}): "
+    puts "Choose an empty square (#{joinor(board.unmarked_keys)}): "
     square = nil
     loop do
       square = gets.chomp.to_i
