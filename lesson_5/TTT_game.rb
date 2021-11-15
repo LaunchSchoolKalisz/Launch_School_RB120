@@ -36,7 +36,7 @@ class TTTGame
 
       loop do
         current_player_moves
-        break if board.someone_won? || board.full?
+        break if board.someone_won? || board.full? 
         clear_screen_and_display_board if human_turn?
       end
 
@@ -48,6 +48,8 @@ class TTTGame
 
     display_goodbye_message
   end
+
+  private 
 
   def initialize
     @board = Board.new
@@ -94,11 +96,11 @@ class TTTGame
 
   def current_player_moves
     human_moves if human_turn?
-    computer_moves
+    computer_moves unless board.someone_won? || board.full? 
   end
 
   def human_turn?
-    return true if board.count_human_marker((1..9).to_a) == board.count_computer_marker((1..9).to_a)
+    return true if board.count_human_marker((1..9).to_a) == board.count_computer_marker((1..9).to_a) 
     false
   end
 
@@ -155,6 +157,12 @@ class Board
 
   def []=(key, marker)
     @squares[key].marker = marker
+  end
+
+  #TTT_game.rb:159:in `[]=': undefined method `marker=' for nil:NilClass (NoMethodError)
+  
+  def []
+    @squares[key]
   end
 
   def unmarked_keys
