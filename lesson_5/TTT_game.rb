@@ -205,7 +205,7 @@ class Board
   end
 
   def reset
-    (1..9).each {|key| @squares[key] = Square.new("[#{key.to_s}]")}
+    (1..9).each { |key| @squares[key] = Square.new("[#{key}]") }
   end
 
   def draw
@@ -221,7 +221,6 @@ class Board
     puts "  #{@squares[7]}  |  #{@squares[8]}  |  #{@squares[9]}"
     puts "       |       |"
   end
-
 end
 
 class Square
@@ -243,7 +242,7 @@ class Square
     marker == TTTGame::COMPUTER_MARKER
   end
 
-   def marked?
+  def marked?
      marker != (human_marked? && computer_marked?)
   end
 end
