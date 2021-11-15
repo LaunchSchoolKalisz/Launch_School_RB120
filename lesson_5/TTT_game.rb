@@ -1,9 +1,10 @@
 =begin
 GAME DESCRIPTION
 
-Tic tac toe is a 2 player game. The game is set up with a 9-square grid. Player 1 
-marks the board with an x. Player 2 counters with their marker, an o. The players
-take turns, tryng to mark 3 consecutive squares on the grid with their markers (winner).
+Tic tac toe is a 2 player game. The game is set up with a 9-square grid.
+Player 1 marks the board with an x. Player 2 counters with their marker,
+an o. The players take turns, tryng to mark 3 consecutive squares on the
+grid with their markers (winner).
 
 LS Description
 Tic Tac Toe is a 2-player board game played on a 3x3 grid. Players take turns
@@ -100,8 +101,10 @@ class TTTGame
   end
 
   def human_turn?
-    return true if board.count_human_marker((1..9).to_a) == 
-      board.count_computer_marker((1..9).to_a)
+    ary = (1..9).to_a
+    if board.count_human_marker(ary) == board.count_computer_marker(ary)
+      return true
+    end
     false
   end
 
@@ -150,7 +153,7 @@ class Board
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
     [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # columns
     [[1, 5, 9], [3, 5, 7]] # diags
-  
+
   def initialize
     @squares = {}
     reset
@@ -165,8 +168,12 @@ class Board
   end
 
   def unmarked_keys
-    human_marked_keys = @squares.keys.select { |key| @squares[key].human_marked? }
-    computer_marked_keys = @squares.keys.select { |key| @squares[key].computer_marked? }
+    human_marked_keys = @squares.keys.select do |key|
+      @squares[key].human_marked?
+    end
+    computer_marked_keys = @squares.keys.select do |key|
+      @squares[key].computer_marked?
+    end
     @squares.keys - human_marked_keys - computer_marked_keys
   end
 
