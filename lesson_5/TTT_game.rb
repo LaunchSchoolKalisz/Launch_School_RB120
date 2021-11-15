@@ -52,7 +52,7 @@ class TTTGame
   end
 
   def joinor(nums, punctuation = ", ", conjunction = "or")
-    case nums.count 
+    case nums.count
     when 1
       nums.join(punctuation.to_s)
     when 2
