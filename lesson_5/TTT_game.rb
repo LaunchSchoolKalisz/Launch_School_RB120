@@ -1,8 +1,9 @@
-=begin 
+=begin
 GAME DESCRIPTION
 
-Tic tac toe is a 2 player game. The game is set up with a 9-square grid. Player 1 marks the board with an x. Player 2 counters
-with their marker, an o. The players take turns, tryng to mark 3 consecutive squares on the grid with their markers (winner).
+Tic tac toe is a 2 player game. The game is set up with a 9-square grid. Player 1 
+marks the board with an x. Player 2 counters with their marker, an o. The players
+take turns, tryng to mark 3 consecutive squares on the grid with their markers (winner).
 
 LS Description
 Tic Tac Toe is a 2-player board game played on a 3x3 grid. Players take turns
@@ -19,7 +20,7 @@ Player
 
 SPIKE
 =end
-require 'pry' 
+require 'pry'
 
 class TTTGame
   HUMAN_MARKER = " X "
@@ -32,11 +33,10 @@ class TTTGame
     display_welcome_message
 
     loop do
-    display_board
-
+      display_board
       loop do
         current_player_moves
-        break if board.someone_won? || board.full? 
+        break if board.someone_won? || board.full?
         clear_screen_and_display_board if human_turn?
       end
 
@@ -96,11 +96,12 @@ class TTTGame
 
   def current_player_moves
     human_moves if human_turn?
-    computer_moves unless board.someone_won? || board.full? 
+    computer_moves unless board.someone_won? || board.full?
   end
 
   def human_turn?
-    return true if board.count_human_marker((1..9).to_a) == board.count_computer_marker((1..9).to_a) 
+    return true if board.count_human_marker((1..9).to_a) == 
+      board.count_computer_marker((1..9).to_a)
     false
   end
 
@@ -145,10 +146,10 @@ class TTTGame
 end
 
 class Board
-  WINNING_LINES = 
-    [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + #rows
-    [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + #columns
-    [[1, 5, 9], [3, 5, 7]]             #diags
+  WINNING_LINES =
+    [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
+    [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # columns
+    [[1, 5, 9], [3, 5, 7]] # diags
   
   def initialize
     @squares = {}
@@ -159,16 +160,14 @@ class Board
     @squares[key].marker = marker
   end
 
-  #TTT_game.rb:159:in `[]=': undefined method `marker=' for nil:NilClass (NoMethodError)
-  
   def []
     @squares[key]
   end
 
   def unmarked_keys
-    human_marked_keys = @squares.keys.select {|key| @squares[key].human_marked?}
-    computer_marked_keys = @squares.keys.select {|key| @squares[key].computer_marked?}
-    unmarked_keys = @squares.keys - human_marked_keys - computer_marked_keys
+    human_marked_keys = @squares.keys.select { |key| @squares[key].human_marked? }
+    computer_marked_keys = @squares.keys.select { |key| @squares[key].computer_marked? }
+    @squares.keys - human_marked_keys - computer_marked_keys
   end
 
   def full?
@@ -187,9 +186,9 @@ class Board
     squares.collect.count(TTTGame::COMPUTER_MARKER)
   end
 
-  #return winning marker or nil
+  # return winning marker or nil
   def winning_marker
-    WINNING_LINES.each do |line| 
+    WINNING_LINES.each do |line|
       squares = @squares.values_at(*line)
       if three_identical_markers?(squares)
         return squares.first.marker
@@ -243,7 +242,7 @@ class Square
   end
 
   def marked?
-     marker != (human_marked? && computer_marked?)
+    marker != (human_marked? && computer_marked?)
   end
 end
 
