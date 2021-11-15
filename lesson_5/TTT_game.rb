@@ -32,7 +32,13 @@ class TTTGame
   def play
     system_clear
     display_welcome_message
+    main_game
+    display_goodbye_message
+  end
 
+  private
+
+  def main_game
     loop do
       display_board
       player_move
@@ -41,11 +47,7 @@ class TTTGame
       reset
       display_play_again_message
     end
-
-    display_goodbye_message
   end
-
-  private
 
   def initialize
     @board = Board.new
