@@ -52,13 +52,14 @@ class TTTGame
   end
 
   def joinor(nums, punctuation = ", ", conjunction = "or")
-    if nums.count == 2
+    case nums.count 
+    when 1
+      nums.join(punctuation.to_s)
+    when 2
       "#{nums[0]} #{conjunction} #{nums[1]}"
-    elsif nums.count > 2
-      last_num = nums.pop
-      nums.join("#{punctuation}") + "#{punctuation}#{conjunction} #{last_num}"
     else
-      nums.join("#{punctuation}")
+      last_num = nums.pop
+      nums.join(punctuation.to_s) + "#{punctuation}#{conjunction} #{last_num}"
     end
   end
 

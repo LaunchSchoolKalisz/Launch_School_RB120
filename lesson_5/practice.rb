@@ -1,12 +1,13 @@
 def joinor(nums, punctuation = ", ", conjunction = "or")
-  if nums.count == 2
+  case nums.count 
+  when 1
+    nums.join(punctuation.to_s)
+  when 2
     "#{nums[0]} #{conjunction} #{nums[1]}"
-  elsif nums.count > 2
-    last_num = nums.pop
-    nums.join("#{punctuation}") + "#{punctuation}#{conjunction} #{last_num}"
   else
-    nums.join("#{punctuation}")
-  end 
+    last_num = nums.pop
+    nums.join(punctuation.to_s) + "#{punctuation}#{conjunction} #{last_num}"
+  end
 end
 
 p joinor([1, 2])                   # => "1 or 2"
