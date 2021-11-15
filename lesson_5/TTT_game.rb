@@ -100,7 +100,7 @@ class TTTGame
       current_player_moves
       break if board.someone_won? || board.full?
       clear_screen_and_display_board if human_turn?
-    ends
+    end
   end
 
   def human_turn?
