@@ -25,12 +25,13 @@ class TTTGame
   end
 
   def play_sequence(game_num)
+    scores = { human: 0, computer: 0 }
     while game_num < NUMBER_OF_GAMES
       display_instructions
-      display_scoreboard
+      display_scoreboard(scores)
       display_board
       player_move
-      update(scoreboard)
+      update_scoreboard(scores)
       display_result
       reset
       game_num += 1
@@ -156,24 +157,18 @@ class TTTGame
     puts "The player winning after #{NUMBER_OF_GAMES} games wins!"
   end
 
-  def scoreboard
-    scores = {human: 0, computer: 0}
-    "You have #{scores[:human]} points. Computer has #{scores[:computer]} points."
-  end
-
-  def update_scoreboard
-
+  def update_scoreboard(scores)
     case board.winning_marker
     when human.marker
-      human_score += 1
+      scores[:human] += 1
     when computer.marker
-      computer_score += 1
+      scores[:computer] += 1
     end
-
+    scores
   end
 
-  def display_scoreboard
-    puts scoreboard
+  def display_scoreboard(scores)
+    puts "You have #{scores[:human]} points. Computer has #{scores[:computer]} points."
   end
 
 end
