@@ -1,7 +1,7 @@
 class TTTGame
   HUMAN_MARKER = " X "
   COMPUTER_MARKER = " O "
-  NUMBER_OF_GAMES = 5
+  NUMBER_OF_WINS_TO_WIN = 2
 
   attr_reader :board, :human, :computer
 
@@ -26,7 +26,7 @@ class TTTGame
 
   def play_sequence(game_num)
     scores = { human: 0, computer: 0 }
-    while game_num < NUMBER_OF_GAMES
+    loop do
       display_instructions
       display_scoreboard(scores)
       display_board
@@ -34,6 +34,7 @@ class TTTGame
       update_scoreboard(scores)
       display_result
       reset
+      break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
       game_num += 1
     end
   end
@@ -154,7 +155,7 @@ class TTTGame
   end
 
   def display_instructions
-    puts "The player winning after #{NUMBER_OF_GAMES} games wins!"
+    puts "The first player to #{NUMBER_OF_WINS_TO_WIN} wins, wins the game!"
   end
 
   def update_scoreboard(scores)
