@@ -17,16 +17,21 @@ class TTTGame
   def main_game
     game_num = 0
     loop do
-      while game_num < NUMBER_OF_GAMES
-        display_board
-        player_move
-        display_result
-        reset
-        game_num += 1
-      end
+      play_sequence
       break unless play_again?
       reset
       display_play_again_message
+    end
+  end
+
+  def play_sequence
+    while game_num < NUMBER_OF_GAMES
+      display_instructions
+      display_board
+      player_move
+      display_result
+      reset
+      game_num += 1
     end
   end
 
@@ -151,8 +156,8 @@ class TTTGame
   def display_scoreboard
   end
 
-  def display_rules
-    puts ""
+  def display_instructions
+    puts "The player winning after #{NUMBER_OF_GAMES} games wins!"
   end
 end
 
