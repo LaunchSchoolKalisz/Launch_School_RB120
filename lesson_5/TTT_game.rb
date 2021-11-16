@@ -1,6 +1,7 @@
 class TTTGame
   HUMAN_MARKER = " X "
   COMPUTER_MARKER = " O "
+  NUMBER_OF_GAMES = 5
 
   attr_reader :board, :human, :computer
 
@@ -16,7 +17,7 @@ class TTTGame
   def main_game
     game_num = 0
     loop do
-      while game_num < 5
+      while game_num < NUMBER_OF_GAMES
         display_board
         player_move
         display_result
