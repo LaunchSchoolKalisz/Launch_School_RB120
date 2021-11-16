@@ -17,19 +17,20 @@ class TTTGame
   def main_game
     game_num = 0
     loop do
-      play_sequence
+      play_sequence(game_num)
       break unless play_again?
       reset
       display_play_again_message
     end
   end
 
-  def play_sequence
+  def play_sequence(game_num)
     while game_num < NUMBER_OF_GAMES
       display_instructions
       display_scoreboard
       display_board
       player_move
+      update(scoreboard)
       display_result
       reset
       game_num += 1
@@ -151,16 +152,30 @@ class TTTGame
     puts ""
   end
 
-  def scoreboard
-    "Player has #{player.points} points. Computer has #{computer.points} points"
-  end
-
-  def display_scoreboard
-  end
-
   def display_instructions
     puts "The player winning after #{NUMBER_OF_GAMES} games wins!"
   end
+
+  def scoreboard
+    scores = {human: 0, computer: 0}
+    "You have #{scores[:human]} points. Computer has #{scores[:computer]} points."
+  end
+
+  def update_scoreboard
+
+    case board.winning_marker
+    when human.marker
+      human_score += 1
+    when computer.marker
+      computer_score += 1
+    end
+
+  end
+
+  def display_scoreboard
+    puts scoreboard
+  end
+
 end
 
 class Board
@@ -277,6 +292,10 @@ class Player
 
   def initialize(marker)
     @marker = marker
+  end
+
+  def points
+    points = 0
   end
 end
 
