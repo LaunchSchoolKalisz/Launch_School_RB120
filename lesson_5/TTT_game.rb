@@ -14,10 +14,15 @@ class TTTGame
   private
 
   def main_game
+    game_num = 0
     loop do
-      display_board
-      player_move
-      display_result
+      while game_num < 5
+        display_board
+        player_move
+        display_result
+        reset
+        game_num += 1
+      end
       break unless play_again?
       reset
       display_play_again_message
