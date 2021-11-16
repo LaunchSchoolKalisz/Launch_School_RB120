@@ -15,16 +15,15 @@ class TTTGame
   private
 
   def main_game
-    game_num = 0
     loop do
-      play_sequence(game_num)
+      match_sequence
       break unless play_again?
       reset
       display_play_again_message
     end
   end
 
-  def play_sequence(game_num)
+  def match_sequence
     scores = { human: 0, computer: 0 }
     loop do
       display_instructions
@@ -35,8 +34,8 @@ class TTTGame
       display_result
       reset
       break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
-      game_num += 1
     end
+    # display_match_winner
   end
 
   def initialize
