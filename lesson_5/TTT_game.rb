@@ -143,6 +143,16 @@ class TTTGame
     puts "Let's play again!"
     puts ""
   end
+
+  def scoreboard
+  end
+
+  def display_scoreboard
+  end
+
+  def display_rules
+    puts ""
+  end
 end
 
 class Board
