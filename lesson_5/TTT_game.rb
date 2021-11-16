@@ -27,6 +27,7 @@ class TTTGame
   def play_sequence
     while game_num < NUMBER_OF_GAMES
       display_instructions
+      display_scoreboard
       display_board
       player_move
       display_result
@@ -151,6 +152,7 @@ class TTTGame
   end
 
   def scoreboard
+    "Player has #{player.points} points. Computer has #{computer.points} points"
   end
 
   def display_scoreboard
