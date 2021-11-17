@@ -175,9 +175,13 @@ class TTTGame
 
   def display_match_winner(scores)
     if scores[:human] > scores[:computer]
+      puts ""
       puts "Congrats! You won the match!"
+      puts ""
     else
+      puts ""
       puts "Sorry, the computer won the match. Better luck next time!"
+      puts ""
     end
   end
 
