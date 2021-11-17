@@ -35,6 +35,7 @@ class TTTGame
       reset
       break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
     end
+    display_scoreboard(scores)
     # display_match_winner
   end
 
@@ -168,6 +169,7 @@ class TTTGame
   end
 
   def display_scoreboard(scores)
+    puts ""
     puts "You have #{scores[:human]} points. Computer has #{scores[:computer]} points."
   end
 
