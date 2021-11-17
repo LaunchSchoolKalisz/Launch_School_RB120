@@ -26,9 +26,7 @@ class TTTGame
   def match_sequence
     scores = { human: 0, computer: 0 }
     loop do
-      display_instructions
-      display_scoreboard(scores)
-      display_board
+      match_display
       player_move
       update_scoreboard(scores)
       display_result
@@ -37,6 +35,12 @@ class TTTGame
     end
     display_scoreboard(scores)
     display_match_winner(scores)
+  end
+
+  def match_display
+    display_instructions
+    display_scoreboard(scores)
+    display_board
   end
 
   def initialize
