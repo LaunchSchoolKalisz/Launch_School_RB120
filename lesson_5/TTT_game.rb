@@ -36,7 +36,7 @@ class TTTGame
       break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
     end
     display_scoreboard(scores)
-    # display_match_winner
+    display_match_winner(scores)
   end
 
   def initialize
@@ -171,6 +171,14 @@ class TTTGame
   def display_scoreboard(scores)
     puts ""
     puts "You have #{scores[:human]} points. Computer has #{scores[:computer]} points."
+  end
+
+  def display_match_winner(scores)
+    if scores[:human] > scores[:computer]
+      puts "Congrats! You won the match!"
+    else
+      puts "Sorry, the computer won the match. Better luck next time!"
+    end
   end
 
 end
