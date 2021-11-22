@@ -1,3 +1,5 @@
+require 'pry'
+
 class TTTGame
   HUMAN_MARKER = " X "
   COMPUTER_MARKER = " O "
@@ -99,7 +101,18 @@ class TTTGame
   end
 
   def computer_moves
-    board[board.unmarked_keys.sample] = computer.marker
+    square = nil
+    Board::WINNING_LINES.each do |line|
+      square = board.find_at_risk_square(line, board)
+      binding.pry
+      break if square
+    end
+
+    if !square
+      square = board.unmarked_keys.sample
+    end
+
+    board[square] = computer.marker
   end
 
   def current_player_moves
@@ -277,6 +290,30 @@ class Board
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+
+  def find_at_risk_square(line, board)
+    #WINNING_LINES.each do |line|
+      squares = @squares.values_at(*line)
+      markers = squares.select(&:marked?).collect(&:marker)
+      #binding.pry
+      if two_human_markers?(markers)
+        value = squares.select do |square|
+          square != TTTGame::HUMAN_MARKER && square != TTTGame::COMPUTER_MARKER
+        end
+        @squares.key(value)
+      end
+    # end
+    nil
+  end
+
+  def two_human_markers?(markers)
+    if markers.count(TTTGame::HUMAN_MARKER) == 2
+      return true
+    else
+      return false
+    end
+  end
+
 end
 
 class Square
