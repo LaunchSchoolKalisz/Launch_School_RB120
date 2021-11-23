@@ -293,15 +293,13 @@ class Board
   def find_at_risk_square(line, board)
     sqrs = @squares.values_at(*line)
     markers = sqrs.select(&:marked?).collect(&:marker)
-    if two_human_markers?(markers)
+    if two_markers?(markers)
       square_to_mark = markers.select do |square|
-        square != TTTGame::HUMAN_MARKER 
-      end
-      idx = markers.index(square_to_mark.join)
-      return @squares.key(sqrs[idx])
-    elsif two_computer_markers?(markers)
-      square_to_mark = markers.select do |square|
-        square != TTTGame::COMPUTER_MARKER 
+        if markers.count(TTTGame::HUMAN_MARKER) == 2
+          square != TTTGame::HUMAN_MARKER  
+        elsif markers.count(TTTGame::COMPUTER_MARKER) == 2
+          square != TTTGame::COMPUTER_MARKER 
+        end
       end
       idx = markers.index(square_to_mark.join)
       return @squares.key(sqrs[idx])
@@ -309,16 +307,10 @@ class Board
     nil
   end
 
-  def two_human_markers?(markers)
+  def two_markers?(markers)
     if markers.count(TTTGame::HUMAN_MARKER) == 2 && (markers.include?(TTTGame::COMPUTER_MARKER) == false)
       return true
-    else
-      return false
-    end
-  end
-
-  def two_computer_markers?(markers)
-    if markers.count(TTTGame::COMPUTER_MARKER) == 2 && (markers.include?(TTTGame::HUMAN_MARKER) == false)
+    elsif markers.count(TTTGame::COMPUTER_MARKER) == 2 && (markers.include?(TTTGame::HUMAN_MARKER) == false)
       return true
     else
       return false
