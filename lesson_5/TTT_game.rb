@@ -299,12 +299,26 @@ class Board
       end
       idx = markers.index(square_to_mark.join)
       return @squares.key(sqrs[idx])
+    elsif two_computer_markers?(markers)
+      square_to_mark = markers.select do |square|
+        square != TTTGame::COMPUTER_MARKER 
+      end
+      idx = markers.index(square_to_mark.join)
+      return @squares.key(sqrs[idx])
     end
     nil
   end
 
   def two_human_markers?(markers)
     if markers.count(TTTGame::HUMAN_MARKER) == 2 && (markers.include?(TTTGame::COMPUTER_MARKER) == false)
+      return true
+    else
+      return false
+    end
+  end
+
+  def two_computer_markers?(markers)
+    if markers.count(TTTGame::COMPUTER_MARKER) == 2 && (markers.include?(TTTGame::HUMAN_MARKER) == false)
       return true
     else
       return false
