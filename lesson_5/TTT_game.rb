@@ -291,15 +291,15 @@ class Board
   # rubocop:enable Metrics/MethodLength
 
   def find_at_risk_square(line, board)
-      sqrs = @squares.values_at(*line)
-      markers = sqrs.select(&:marked?).collect(&:marker)
-      if two_human_markers?(markers)
-        square_to_mark = markers.select do |square|
-          square != TTTGame::HUMAN_MARKER 
-        end
-        idx = markers.index(square_to_mark.join)
-        return @squares.key(sqrs[idx])
+    sqrs = @squares.values_at(*line)
+    markers = sqrs.select(&:marked?).collect(&:marker)
+    if two_human_markers?(markers)
+      square_to_mark = markers.select do |square|
+        square != TTTGame::HUMAN_MARKER 
       end
+      idx = markers.index(square_to_mark.join)
+      return @squares.key(sqrs[idx])
+    end
     nil
   end
 
