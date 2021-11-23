@@ -104,7 +104,6 @@ class TTTGame
     square = nil
     Board::WINNING_LINES.each do |line|
       square = board.find_at_risk_square(line, board)
-      binding.pry
       break if square
     end
 
@@ -292,22 +291,21 @@ class Board
   # rubocop:enable Metrics/MethodLength
 
   def find_at_risk_square(line, board)
-    #WINNING_LINES.each do |line|
       squares = @squares.values_at(*line)
       markers = squares.select(&:marked?).collect(&:marker)
-      #binding.pry
       if two_human_markers?(markers)
-        value = squares.select do |square|
-          square != TTTGame::HUMAN_MARKER && square != TTTGame::COMPUTER_MARKER
-        end
-        @squares.key(value)
+        square_to_mark = markers.select do |square|
+          square != TTTGame::HUMAN_MARKER 
+        end.join
+        idx = markers.index(square_to_mark)
+        value = squares[idx]
+        return @squares.key(value)
       end
-    # end
     nil
   end
 
   def two_human_markers?(markers)
-    if markers.count(TTTGame::HUMAN_MARKER) == 2
+    if markers.count(TTTGame::HUMAN_MARKER) == 2 && (markers.include?(TTTGame::COMPUTER_MARKER) == false)
       return true
     else
       return false
