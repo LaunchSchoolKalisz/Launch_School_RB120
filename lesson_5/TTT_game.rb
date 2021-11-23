@@ -294,17 +294,21 @@ class Board
     sqrs = @squares.values_at(*line)
     markers = sqrs.select(&:marked?).collect(&:marker)
     if two_markers?(markers)
-      square_to_mark = markers.select do |square|
-        if markers.count(TTTGame::HUMAN_MARKER) == 2
-          square != TTTGame::HUMAN_MARKER  
-        elsif markers.count(TTTGame::COMPUTER_MARKER) == 2
-          square != TTTGame::COMPUTER_MARKER 
-        end
-      end
-      idx = markers.index(square_to_mark.join)
+      sq = square_to_mark(markers)
+      idx = markers.index(sq.join)
       return @squares.key(sqrs[idx])
     end
     nil
+  end
+
+  def square_to_mark(markers)
+    markers.select do |square|
+      if markers.count(TTTGame::HUMAN_MARKER) == 2
+        square != TTTGame::HUMAN_MARKER  
+      elsif markers.count(TTTGame::COMPUTER_MARKER) == 2
+        square != TTTGame::COMPUTER_MARKER 
+      end
+    end
   end
 
   def two_markers?(markers)
