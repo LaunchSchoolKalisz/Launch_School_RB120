@@ -153,17 +153,21 @@ class TTTGame
     end
   end
 
-  def choose_player_one(chooser)      
+  def choose_player_one(chooser)
     if chooser == 'human'
-      puts "Who should go first: human or computer?"
-      player_one = nil
-      loop do
-        player_one = gets.chomp.downcase
-        break if player_one == "human" || player_one == "computer"
-        puts "Please enter a valid response: human or computer"
-      end
+      human_chooses_player
     else
-      player_one = ['human', 'computer'].sample
+      ['human', 'computer'].sample
+    end
+  end
+
+  def human_chooses_player
+    puts "Who should go first: human or computer?"
+    player_one = nil
+    loop do
+      player_one = gets.chomp.downcase
+      break if player_one == "human" || player_one == "computer"
+      puts "Please enter a valid response: human or computer"
     end
     player_one
   end
