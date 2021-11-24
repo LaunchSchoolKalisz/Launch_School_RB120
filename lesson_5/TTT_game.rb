@@ -103,13 +103,13 @@ class TTTGame
   def computer_moves
     square = nil
     Board::WINNING_LINES.each do |line|
-      square = board.find_at_risk_square(line, board, TTTGame::HUMAN_MARKER)
+      square = board.find_at_risk_square(line, board, TTTGame::COMPUTER_MARKER)
       break if square
     end
 
     if !square
       Board::WINNING_LINES.each do |line|
-        square = board.find_at_risk_square(line, board, TTTGame::COMPUTER_MARKER)
+        square = board.find_at_risk_square(line, board, TTTGame::HUMAN_MARKER)
         break if square
       end
     end
