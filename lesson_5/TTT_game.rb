@@ -103,13 +103,13 @@ class TTTGame
   def computer_moves
     square = nil
     Board::WINNING_LINES.each do |line|
-      square = board.find_at_risk_square(line, board, TTTGame::COMPUTER_MARKER)
+      square = board.find_at_risk_square(line, TTTGame::COMPUTER_MARKER)
       break if square
     end
 
     if !square
       Board::WINNING_LINES.each do |line|
-        square = board.find_at_risk_square(line, board, TTTGame::HUMAN_MARKER)
+        square = board.find_at_risk_square(line, TTTGame::HUMAN_MARKER)
         break if square
       end
     end
@@ -303,7 +303,7 @@ class Board
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 
-  def find_at_risk_square(line, board, marker)
+  def find_at_risk_square(line, marker)
     sqrs = @squares.values_at(*line)
     markers = sqrs.select(&:marked?).collect(&:marker)
     if two_markers?(markers, marker)
@@ -323,23 +323,22 @@ class Board
   end
 
   def two_markers?(markers, marker)
-    other_marker = set_other_marker(marker)
+    other_marker = other_marker(marker)
 
-    if markers.count(marker) == 2 && (markers.include?(other_marker) == false)
-      return true
+    if markers.count(marker) == 2 && markers.include?(other_marker) == false
+      true
     else
-      return false
+      false
     end
   end
 
-  def set_other_marker(marker)
+  def other_marker(marker)
     if marker == TTTGame::COMPUTER_MARKER
       TTTGame::HUMAN_MARKER
     else
       TTTGame::COMPUTER_MARKER
     end
   end
-
 end
 
 class Square
