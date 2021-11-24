@@ -29,14 +29,18 @@ class TTTGame
     scores = { human: 0, computer: 0 }
     loop do
       match_display(scores)
-      player_one = choose_player_one
-      player_move(player_one)
-      update_scoreboard(scores)
-      display_result
+      player = choose_player_one
+      move(player, scores)
       reset
       break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
     end
     match_result_display(scores)
+  end
+
+  def move(player, scores)
+    player_move(player)
+    update_scoreboard(scores)
+    display_result
   end
 
   def match_display(scores)
@@ -102,9 +106,8 @@ class TTTGame
   end
 
   def computer_moves
-    square = nil
     square = comp_offense
-    
+
     if !square
       square = comp_defense
     end
@@ -153,7 +156,7 @@ class TTTGame
 
   def current_player_moves(player_one)
     if player_one == "human"
-      human_moves 
+      human_moves
       computer_moves unless board.someone_won? || board.full?
     else
       computer_moves
