@@ -115,6 +115,12 @@ class TTTGame
     end
 
     if !square
+      if board.unmarked_keys.include?(5)
+        square = 5
+      end
+    end
+
+    if !square
       square = board.unmarked_keys.sample
     end
 
