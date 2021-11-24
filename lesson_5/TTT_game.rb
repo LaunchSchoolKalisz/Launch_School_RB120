@@ -103,8 +103,15 @@ class TTTGame
   def computer_moves
     square = nil
     Board::WINNING_LINES.each do |line|
-      square = board.find_at_risk_square(line, board)
+      square = board.find_at_risk_square(line, board, TTTGame::HUMAN_MARKER)
       break if square
+    end
+
+    if !square
+      Board::WINNING_LINES.each do |line|
+        square = board.find_at_risk_square(line, board, TTTGame::COMPUTER_MARKER)
+        break if square
+      end
     end
 
     if !square
@@ -290,31 +297,33 @@ class Board
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 
-  def find_at_risk_square(line, board)
+  def find_at_risk_square(line, board, marker)
     sqrs = @squares.values_at(*line)
     markers = sqrs.select(&:marked?).collect(&:marker)
-    if two_markers?(markers)
-      sq = square_to_mark(markers)
+    if two_markers?(markers, marker)
+      sq = square_to_mark(markers, marker)
       idx = markers.index(sq.join)
       return @squares.key(sqrs[idx])
     end
     nil
   end
 
-  def square_to_mark(markers)
+  def square_to_mark(markers, marker)
     markers.select do |square|
-      if markers.count(TTTGame::COMPUTER_MARKER) == 2
-        square != TTTGame::COMPUTER_MARKER
-      elsif markers.count(TTTGame::HUMAN_MARKER) == 2
-        square != TTTGame::HUMAN_MARKER
+      if markers.count(marker) == 2
+        square != marker
       end
     end
   end
 
-  def two_markers?(markers)
-    if markers.count(TTTGame::COMPUTER_MARKER) == 2 && (markers.include?(TTTGame::HUMAN_MARKER) == false)
-      return true
-    elsif markers.count(TTTGame::HUMAN_MARKER) == 2 && (markers.include?(TTTGame::COMPUTER_MARKER) == false)
+  def two_markers?(markers, marker)
+    if marker == TTTGame::COMPUTER_MARKER
+      other_marker = TTTGame::HUMAN_MARKER
+    else
+      other_marker = TTTGame::COMPUTER_MARKER
+    end
+
+    if markers.count(marker) == 2 && (markers.include?(other_marker) == false)
       return true
     else
       return false
