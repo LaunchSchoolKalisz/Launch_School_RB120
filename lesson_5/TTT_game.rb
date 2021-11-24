@@ -175,7 +175,6 @@ class TTTGame
     else
       computer_moves
       match_display_and_clear(scores)
-      #clear_screen_and_display_board
       human_moves unless board.someone_won? || board.full?
     end
   end
