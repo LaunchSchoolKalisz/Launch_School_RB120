@@ -141,10 +141,10 @@ class TTTGame
 
   def current_player_moves(player_one)
     if player_one == "human"
-      human_moves #if player_one_turn?
+      human_moves 
       computer_moves unless board.someone_won? || board.full?
     else
-      computer_moves #if player_one_turn?
+      computer_moves
       clear_screen_and_display_board
       human_moves unless board.someone_won? || board.full?
     end
@@ -153,19 +153,10 @@ class TTTGame
   def player_move(player_one)
     loop do
       current_player_moves(player_one)
-      #clear_screen_and_display_board
       break if board.someone_won? || board.full?
-      clear_screen_and_display_board #if player_one_turn?
+      clear_screen_and_display_board
     end
   end
-
-  # def player_one_turn?
-  #   ary = (1..9).to_a
-  #   if board.count_human_marker(ary) == board.count_computer_marker(ary)
-  #     return true
-  #   end
-  #   false
-  # end
 
   def display_result
     clear_screen_and_display_board
