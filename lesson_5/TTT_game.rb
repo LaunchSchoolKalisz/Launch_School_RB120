@@ -113,13 +113,7 @@ class TTTGame
     end
 
     if !square
-      if board.unmarked_keys.include?(5)
-        square = 5
-      end
-    end
-
-    if !square
-      square = board.unmarked_keys.sample
+      square = comp_choose_square
     end
 
     board[square] = computer.marker
@@ -141,6 +135,14 @@ class TTTGame
       break if square
     end
     square
+  end
+
+  def comp_choose_square
+    if board.unmarked_keys.include?(5)
+      5
+    else
+      board.unmarked_keys.sample
+    end
   end
 
   def choose_player_one
