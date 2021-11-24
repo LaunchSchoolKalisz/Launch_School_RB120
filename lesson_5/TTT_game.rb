@@ -317,16 +317,20 @@ class Board
   end
 
   def two_markers?(markers, marker)
-    if marker == TTTGame::COMPUTER_MARKER
-      other_marker = TTTGame::HUMAN_MARKER
-    else
-      other_marker = TTTGame::COMPUTER_MARKER
-    end
+    other_marker = set_other_marker(marker)
 
     if markers.count(marker) == 2 && (markers.include?(other_marker) == false)
       return true
     else
       return false
+    end
+  end
+
+  def set_other_marker(marker)
+    if marker == TTTGame::COMPUTER_MARKER
+      TTTGame::HUMAN_MARKER
+    else
+      TTTGame::COMPUTER_MARKER
     end
   end
 
