@@ -303,18 +303,18 @@ class Board
 
   def square_to_mark(markers)
     markers.select do |square|
-      if markers.count(TTTGame::HUMAN_MARKER) == 2
-        square != TTTGame::HUMAN_MARKER  
-      elsif markers.count(TTTGame::COMPUTER_MARKER) == 2
-        square != TTTGame::COMPUTER_MARKER 
+      if markers.count(TTTGame::COMPUTER_MARKER) == 2
+        square != TTTGame::COMPUTER_MARKER
+      elsif markers.count(TTTGame::HUMAN_MARKER) == 2
+        square != TTTGame::HUMAN_MARKER
       end
     end
   end
 
   def two_markers?(markers)
-    if markers.count(TTTGame::HUMAN_MARKER) == 2 && (markers.include?(TTTGame::COMPUTER_MARKER) == false)
+    if markers.count(TTTGame::COMPUTER_MARKER) == 2 && (markers.include?(TTTGame::HUMAN_MARKER) == false)
       return true
-    elsif markers.count(TTTGame::COMPUTER_MARKER) == 2 && (markers.include?(TTTGame::HUMAN_MARKER) == false)
+    elsif markers.count(TTTGame::HUMAN_MARKER) == 2 && (markers.include?(TTTGame::COMPUTER_MARKER) == false)
       return true
     else
       return false
