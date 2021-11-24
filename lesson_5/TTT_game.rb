@@ -27,9 +27,10 @@ class TTTGame
 
   def match_sequence
     scores = { human: 0, computer: 0 }
+    chooser = who_chooses_who_goes_first
     loop do
-      match_display(scores)
-      player = choose_player_one
+      player = choose_player_one(chooser)
+      match_display_and_clear(scores)
       move(player, scores)
       reset
       break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
@@ -38,12 +39,19 @@ class TTTGame
   end
 
   def move(player, scores)
-    player_move(player)
+    player_move(player, scores)
     update_scoreboard(scores)
-    display_result
+    clear_screen_and_display_board
   end
 
   def match_display(scores)
+    display_instructions
+    display_scoreboard(scores)
+    display_board
+  end
+
+  def match_display_and_clear(scores)
+    system_clear
     display_instructions
     display_scoreboard(scores)
     display_board
@@ -145,31 +153,36 @@ class TTTGame
     end
   end
 
-  def choose_player_one
-    puts "Who should go first: human or computer?"
-    player_one = nil
-    loop do
-      player_one = gets.chomp.downcase
-      break if player_one == "human" || player_one == "computer"
-      puts "Please enter a valid response: human or computer"
+  def choose_player_one(chooser)      
+    if chooser == 'human'
+      puts "Who should go first: human or computer?"
+      player_one = nil
+      loop do
+        player_one = gets.chomp.downcase
+        break if player_one == "human" || player_one == "computer"
+        puts "Please enter a valid response: human or computer"
+      end
+    else
+      player_one = ['human', 'computer'].sample
     end
     player_one
   end
 
-  def current_player_moves(player_one)
+  def current_player_moves(player_one, scores)
     if player_one == "human"
       human_moves
       computer_moves unless board.someone_won? || board.full?
     else
       computer_moves
-      clear_screen_and_display_board
+      match_display_and_clear(scores)
+      #clear_screen_and_display_board
       human_moves unless board.someone_won? || board.full?
     end
   end
 
-  def player_move(player_one)
+  def player_move(player_one, scores)
     loop do
-      current_player_moves(player_one)
+      current_player_moves(player_one, scores)
       break if board.someone_won? || board.full?
       clear_screen_and_display_board
     end
@@ -243,6 +256,17 @@ class TTTGame
       puts "Sorry, the computer won the match. Better luck next time!"
     end
     puts ""
+  end
+
+  def who_chooses_who_goes_first
+    puts "Who should choose who goes first: human or computer?"
+    chooser = nil
+    loop do
+      chooser = gets.chomp.downcase
+      break if chooser == "human" || chooser == "computer"
+      puts "Please enter a valid response: human or computer"
+    end
+    chooser
   end
 end
 
