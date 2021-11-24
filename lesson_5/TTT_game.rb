@@ -132,7 +132,7 @@ class TTTGame
     puts "Who should go first: human or computer?"
     player_one = nil
     loop do
-      player_one = gets.chomp
+      player_one = gets.chomp.downcase
       break if player_one == "human" || player_one == "computer"
       puts "Please enter a valid response: human or computer"
     end
