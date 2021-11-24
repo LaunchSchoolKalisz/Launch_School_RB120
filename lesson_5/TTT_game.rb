@@ -29,7 +29,8 @@ class TTTGame
     scores = { human: 0, computer: 0 }
     loop do
       match_display(scores)
-      player_move
+      player_one = choose_player_one
+      player_move(player_one)
       update_scoreboard(scores)
       display_result
       reset
@@ -127,26 +128,44 @@ class TTTGame
     board[square] = computer.marker
   end
 
-  def current_player_moves
-    human_moves if human_turn?
-    computer_moves unless board.someone_won? || board.full?
-  end
-
-  def player_move
+  def choose_player_one
+    puts "Who should go first: human or computer?"
+    player_one = nil
     loop do
-      current_player_moves
-      break if board.someone_won? || board.full?
-      clear_screen_and_display_board if human_turn?
+      player_one = gets.chomp
+      break if player_one == "human" || player_one == "computer"
+      puts "Please enter a valid response: human or computer"
+    end
+    player_one
+  end
+
+  def current_player_moves(player_one)
+    if player_one == "human"
+      human_moves #if player_one_turn?
+      computer_moves unless board.someone_won? || board.full?
+    else
+      computer_moves #if player_one_turn?
+      clear_screen_and_display_board
+      human_moves unless board.someone_won? || board.full?
     end
   end
 
-  def human_turn?
-    ary = (1..9).to_a
-    if board.count_human_marker(ary) == board.count_computer_marker(ary)
-      return true
+  def player_move(player_one)
+    loop do
+      current_player_moves(player_one)
+      #clear_screen_and_display_board
+      break if board.someone_won? || board.full?
+      clear_screen_and_display_board #if player_one_turn?
     end
-    false
   end
+
+  # def player_one_turn?
+  #   ary = (1..9).to_a
+  #   if board.count_human_marker(ary) == board.count_computer_marker(ary)
+  #     return true
+  #   end
+  #   false
+  # end
 
   def display_result
     clear_screen_and_display_board
