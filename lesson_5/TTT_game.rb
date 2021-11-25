@@ -60,7 +60,7 @@ module Displayable
   end
 
   def display_instructions
-    puts "The first player to #{NUMBER_OF_WINS_TO_WIN} wins, wins the game!"
+    puts "The first player to #{TTTGame::NUMBER_OF_WINS_TO_WIN} wins, wins the game!"
   end
 
   def update_scoreboard(scores)
@@ -89,6 +89,24 @@ module Displayable
     end
     puts ""
   end
+
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  def draw
+    puts "       |       |"
+    puts "  #{@squares[1]}  |  #{@squares[2]}  |  #{@squares[3]}"
+    puts "       |       |"
+    puts "-------+-------+-------"
+    puts "       |       |"
+    puts "  #{@squares[4]}  |  #{@squares[5]}  |  #{@squares[6]}"
+    puts "       |       |"
+    puts "-------+-------+-------"
+    puts "       |       |"
+    puts "  #{@squares[7]}  |  #{@squares[8]}  |  #{@squares[9]}"
+    puts "       |       |"
+  end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 end
 
 class TTTGame
@@ -258,7 +276,7 @@ class TTTGame
     end
     chooser
   end
-  
+
   def system_clear
     system 'clear'
   end
@@ -270,6 +288,8 @@ class TTTGame
 end
 
 class Board
+  include Displayable
+
   WINNING_LINES =
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
     [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # columns
@@ -331,28 +351,6 @@ class Board
     markers.min == markers.max
   end
 
-  def reset
-    (1..9).each { |key| @squares[key] = Square.new("[#{key}]") }
-  end
-
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
-  def draw
-    puts "       |       |"
-    puts "  #{@squares[1]}  |  #{@squares[2]}  |  #{@squares[3]}"
-    puts "       |       |"
-    puts "-------+-------+-------"
-    puts "       |       |"
-    puts "  #{@squares[4]}  |  #{@squares[5]}  |  #{@squares[6]}"
-    puts "       |       |"
-    puts "-------+-------+-------"
-    puts "       |       |"
-    puts "  #{@squares[7]}  |  #{@squares[8]}  |  #{@squares[9]}"
-    puts "       |       |"
-  end
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
-
   def find_at_risk_square(line, marker)
     sqrs = @squares.values_at(*line)
     markers = sqrs.select(&:marked?).collect(&:marker)
@@ -388,6 +386,10 @@ class Board
     else
       TTTGame::COMPUTER_MARKER
     end
+  end
+
+  def reset
+    (1..9).each { |key| @squares[key] = Square.new("[#{key}]") }
   end
 end
 
