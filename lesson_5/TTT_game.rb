@@ -53,7 +53,6 @@ module Displayable
     end
   end
 
-
   def display_play_again_message
     puts "Let's play again!"
     puts ""
@@ -345,15 +344,19 @@ class Board
     nil
   end
 
+  def gather_markers(squares)
+    squares.select(&:marked?).collect(&:marker)
+  end
+
   def three_identical_markers?(squares)
-    markers = squares.select(&:marked?).collect(&:marker)
+    markers = gather_markers(squares)
     return false if markers.size != 3
     markers.min == markers.max
   end
 
   def find_at_risk_square(line, marker)
     sqrs = @squares.values_at(*line)
-    markers = sqrs.select(&:marked?).collect(&:marker)
+    markers = gather_markers(sqrs)
     if two_markers?(markers, marker)
       sq = square_to_mark(markers, marker)
       idx = markers.index(sq.join)
@@ -372,7 +375,6 @@ class Board
 
   def two_markers?(markers, marker)
     other_marker = other_marker(marker)
-
     if markers.count(marker) == 2 && markers.include?(other_marker) == false
       true
     else
