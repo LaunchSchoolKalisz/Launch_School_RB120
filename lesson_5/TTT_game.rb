@@ -208,13 +208,13 @@ class TTTGame
 
   def choose_player_one(chooser)
     if chooser == 'human'
-      human_chooses_player
+      human_chooses_player_one
     else
       ['human', 'computer'].sample
     end
   end
 
-  def human_chooses_player
+  def human_chooses_player_one
     puts ""
     puts "Who should go first: human or computer?"
     player_one = nil
@@ -248,15 +248,6 @@ class TTTGame
     answer == 'y'
   end
 
-  def system_clear
-    system 'clear'
-  end
-
-  def reset
-    board.reset
-    system_clear
-  end
-
   def who_chooses_who_goes_first
     puts "Who should choose who goes first: human or computer?"
     chooser = nil
@@ -266,6 +257,15 @@ class TTTGame
       puts "Please enter a valid response: human or computer"
     end
     chooser
+  end
+  
+  def system_clear
+    system 'clear'
+  end
+
+  def reset
+    board.reset
+    system_clear
   end
 end
 
