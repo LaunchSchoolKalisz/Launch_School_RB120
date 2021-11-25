@@ -16,6 +16,12 @@ class TTTGame
 
   private
 
+  def initialize
+    @board = Board.new
+    @human = Player.new(HUMAN_MARKER)
+    @computer = Player.new(COMPUTER_MARKER)
+  end
+
   def main_game
     loop do
       match_sequence
@@ -34,6 +40,7 @@ class TTTGame
       move(player, scores)
       reset
       break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
+      display_scoreboard(scores)
     end
     match_result_display(scores)
   end
@@ -60,12 +67,6 @@ class TTTGame
   def match_result_display(scores)
     display_scoreboard(scores)
     display_match_winner(scores)
-  end
-
-  def initialize
-    @board = Board.new
-    @human = Player.new(HUMAN_MARKER)
-    @computer = Player.new(COMPUTER_MARKER)
   end
 
   def display_welcome_message
@@ -114,10 +115,10 @@ class TTTGame
   end
 
   def computer_moves
-    square = comp_offense
+    square = comp_move(TTTGame::COMPUTER_MARKER)
 
     if !square
-      square = comp_defense
+      square = comp_move(TTTGame::HUMAN_MARKER)
     end
 
     if !square
@@ -127,19 +128,10 @@ class TTTGame
     board[square] = computer.marker
   end
 
-  def comp_offense
+  def comp_move(marker)
     square = nil
     Board::WINNING_LINES.each do |line|
-      square = board.find_at_risk_square(line, TTTGame::COMPUTER_MARKER)
-      break if square
-    end
-    square
-  end
-
-  def comp_defense
-    square = nil
-    Board::WINNING_LINES.each do |line|
-      square = board.find_at_risk_square(line, TTTGame::HUMAN_MARKER)
+      square = board.find_at_risk_square(line, marker)
       break if square
     end
     square
@@ -162,6 +154,7 @@ class TTTGame
   end
 
   def human_chooses_player
+    puts ""
     puts "Who should go first: human or computer?"
     player_one = nil
     loop do
