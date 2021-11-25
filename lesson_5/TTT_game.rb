@@ -39,6 +39,56 @@ module Displayable
     board.draw
     puts ""
   end
+
+  def display_result
+    clear_screen_and_display_board
+
+    case board.winning_marker
+    when human.marker
+      puts "You won!"
+    when computer.marker
+      puts "Computer won!"
+    else
+      puts "It's a tie!"
+    end
+  end
+
+
+  def display_play_again_message
+    puts "Let's play again!"
+    puts ""
+  end
+
+  def display_instructions
+    puts "The first player to #{NUMBER_OF_WINS_TO_WIN} wins, wins the game!"
+  end
+
+  def update_scoreboard(scores)
+    case board.winning_marker
+    when human.marker
+      scores[:human] += 1
+    when computer.marker
+      scores[:computer] += 1
+    end
+    scores
+  end
+
+  def display_scoreboard(scores)
+    puts ""
+    puts "------SCOREBOARD------"
+    puts "You have #{scores[:human]} points."
+    puts "Computer has #{scores[:computer]} points."
+  end
+
+  def display_match_winner(scores)
+    puts ""
+    if scores[:human] > scores[:computer]
+      puts "Congrats! You won the match!"
+    else
+      puts "Sorry, the computer won the match. Better luck next time!"
+    end
+    puts ""
+  end
 end
 
 class TTTGame
@@ -187,19 +237,6 @@ class TTTGame
     end
   end
 
-  def display_result
-    clear_screen_and_display_board
-
-    case board.winning_marker
-    when human.marker
-      puts "You won!"
-    when computer.marker
-      puts "Computer won!"
-    else
-      puts "It's a tie!"
-    end
-  end
-
   def play_again?
     answer = nil
     loop do
@@ -208,7 +245,6 @@ class TTTGame
       break if ['y', 'n'].include? answer
       puts "Sorry, your response must be y or n"
     end
-
     answer == 'y'
   end
 
@@ -219,42 +255,6 @@ class TTTGame
   def reset
     board.reset
     system_clear
-  end
-
-  def display_play_again_message
-    puts "Let's play again!"
-    puts ""
-  end
-
-  def display_instructions
-    puts "The first player to #{NUMBER_OF_WINS_TO_WIN} wins, wins the game!"
-  end
-
-  def update_scoreboard(scores)
-    case board.winning_marker
-    when human.marker
-      scores[:human] += 1
-    when computer.marker
-      scores[:computer] += 1
-    end
-    scores
-  end
-
-  def display_scoreboard(scores)
-    puts ""
-    puts "------SCOREBOARD------"
-    puts "You have #{scores[:human]} points."
-    puts "Computer has #{scores[:computer]} points."
-  end
-
-  def display_match_winner(scores)
-    puts ""
-    if scores[:human] > scores[:computer]
-      puts "Congrats! You won the match!"
-    else
-      puts "Sorry, the computer won the match. Better luck next time!"
-    end
-    puts ""
   end
 
   def who_chooses_who_goes_first
