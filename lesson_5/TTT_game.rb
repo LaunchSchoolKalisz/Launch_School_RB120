@@ -1,6 +1,49 @@
 require 'pry'
 
+module Displayable
+  def match_display(scores)
+    display_instructions
+    display_scoreboard(scores)
+    display_board
+  end
+
+  def match_display_and_clear(scores)
+    system_clear
+    display_instructions
+    display_scoreboard(scores)
+    display_board
+  end
+
+  def match_result_display(scores)
+    display_scoreboard(scores)
+    display_match_winner(scores)
+  end
+
+  def display_welcome_message
+    puts "Welcome to Tic Tac Toe!"
+    puts ""
+  end
+
+  def display_goodbye_message
+    puts "Thanks for playing Tic Tac Toe! Goodbye!"
+  end
+
+  def clear_screen_and_display_board
+    system_clear
+    display_board
+  end
+
+  def display_board
+    puts ""
+    puts "You are#{human.marker}. Computer is#{computer.marker}."
+    board.draw
+    puts ""
+  end
+end
+
 class TTTGame
+  include Displayable
+
   HUMAN_MARKER = " X "
   COMPUTER_MARKER = " O "
   NUMBER_OF_WINS_TO_WIN = 2
@@ -49,45 +92,6 @@ class TTTGame
     player_move(player, scores)
     update_scoreboard(scores)
     clear_screen_and_display_board
-  end
-
-  def match_display(scores)
-    display_instructions
-    display_scoreboard(scores)
-    display_board
-  end
-
-  def match_display_and_clear(scores)
-    system_clear
-    display_instructions
-    display_scoreboard(scores)
-    display_board
-  end
-
-  def match_result_display(scores)
-    display_scoreboard(scores)
-    display_match_winner(scores)
-  end
-
-  def display_welcome_message
-    puts "Welcome to Tic Tac Toe!"
-    puts ""
-  end
-
-  def display_goodbye_message
-    puts "Thanks for playing Tic Tac Toe! Goodbye!"
-  end
-
-  def clear_screen_and_display_board
-    system_clear
-    display_board
-  end
-
-  def display_board
-    puts ""
-    puts "You are#{human.marker}. Computer is#{computer.marker}."
-    board.draw
-    puts ""
   end
 
   def joinor(nums, punctuation = ", ", conjunction = "or")
