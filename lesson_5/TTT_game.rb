@@ -50,6 +50,12 @@ class TTTGame
 
   attr_reader :board, :human, :computer
 
+  def initialize
+    @board = Board.new
+    @human = Player.new(HUMAN_MARKER)
+    @computer = Player.new(COMPUTER_MARKER)
+  end
+
   def play
     system_clear
     display_welcome_message
@@ -59,23 +65,16 @@ class TTTGame
 
   private
 
-  def initialize
-    @board = Board.new
-    @human = Player.new(HUMAN_MARKER)
-    @computer = Player.new(COMPUTER_MARKER)
-  end
-
   def main_game
     loop do
-      match_sequence
+      match_sequence(scores)
       break unless play_again?
       reset
       display_play_again_message
     end
   end
 
-  def match_sequence
-    scores = { human: 0, computer: 0 }
+  def match_sequence(scores)
     chooser = who_chooses_who_goes_first
     loop do
       player = choose_player_one(chooser)
@@ -92,6 +91,18 @@ class TTTGame
     player_move(player, scores)
     update_scoreboard(scores)
     clear_screen_and_display_board
+  end
+
+  def player_move(player_one, scores)
+    loop do
+      current_player_moves(player_one, scores)
+      break if board.someone_won? || board.full?
+      clear_screen_and_display_board
+    end
+  end
+
+  def scores
+    scores = { human: 0, computer: 0 }
   end
 
   def joinor(nums, punctuation = ", ", conjunction = "or")
@@ -114,21 +125,17 @@ class TTTGame
       break if board.unmarked_keys.include?(square)
       puts "Sorry, that's not a valid choice. Try again!"
     end
-
     board[square] = human.marker
   end
 
   def computer_moves
     square = comp_move(TTTGame::COMPUTER_MARKER)
-
     if !square
       square = comp_move(TTTGame::HUMAN_MARKER)
     end
-
     if !square
       square = comp_choose_square
     end
-
     board[square] = computer.marker
   end
 
@@ -177,14 +184,6 @@ class TTTGame
       computer_moves
       match_display_and_clear(scores)
       human_moves unless board.someone_won? || board.full?
-    end
-  end
-
-  def player_move(player_one, scores)
-    loop do
-      current_player_moves(player_one, scores)
-      break if board.someone_won? || board.full?
-      clear_screen_and_display_board
     end
   end
 
