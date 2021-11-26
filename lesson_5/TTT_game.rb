@@ -141,6 +141,16 @@ module ValidateUserInput
     board[square] = human.marker
   end
 
+  def valid_y_or_n
+    answer = nil
+    loop do
+      puts "Would you like to play again? (y/n)"
+      answer = gets.chomp.downcase
+      break if ['y', 'n'].include? answer
+      puts "Sorry, your response must be y or n"
+    end
+    answer == 'y'
+  end
 end
 
 class TTTGame
@@ -267,7 +277,7 @@ class TTTGame
   end
 
   def play_again?
-    valid_y_or_n
+    answer = valid_y_or_n
   end
 
   def who_chooses_who_goes_first
