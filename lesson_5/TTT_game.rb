@@ -1,22 +1,11 @@
 require 'pry'
 
 module Displayable
-  def match_display(scores)
-    display_instructions
-    display_scoreboard(scores)
-    display_board
-  end
-
   def match_display_and_clear(scores)
     system_clear
     display_instructions
     display_scoreboard(scores)
     display_board
-  end
-
-  def match_result_display(scores)
-    display_scoreboard(scores)
-    display_match_winner(scores)
   end
 
   def display_welcome_message
@@ -41,8 +30,6 @@ module Displayable
   end
 
   def display_result
-    #clear_screen_and_display_board
-    puts board.winning_marker
     case board.winning_marker
     when human.marker
       puts "You won!"
@@ -68,7 +55,7 @@ module Displayable
   end
 
   def display_instructions
-    puts "The first player to #{TTTGame::NUMBER_OF_WINS_TO_WIN} wins, wins the game!"
+    puts "The first player to #{TTTGame::NUMBER_OF_WINS} wins, wins the game!"
   end
 
   def update_scoreboard(scores)
@@ -179,7 +166,7 @@ class TTTGame
 
   HUMAN_MARKER = " X "
   COMPUTER_MARKER = " O "
-  NUMBER_OF_WINS_TO_WIN = 2
+  NUMBER_OF_WINS = 2
 
   attr_reader :board, :human, :computer
 
@@ -219,13 +206,11 @@ class TTTGame
       player = choose_player_one(chooser)
       match_display_and_clear(scores)
       move(player, scores)
-      break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
-      display_result
-      cont_next_round
-      reset
-      display_scoreboard(scores)
+      break if scores.values.include?(NUMBER_OF_WINS)
+      match_end
     end
-    match_result_display(scores)
+    display_scoreboard(scores)
+    display_match_winner(scores)
   end
 
   def move(player, scores)
@@ -243,7 +228,7 @@ class TTTGame
   end
 
   def scores
-    scores = { human: 0, computer: 0 }
+    { human: 0, computer: 0 }
   end
 
   def human_moves
@@ -290,7 +275,7 @@ class TTTGame
   def human_chooses_player_one
     puts ""
     puts "Who should go first: #{human.name} or #{computer.name}?"
-    player_one = validate_player.capitalize
+    validate_player.capitalize
   end
 
   def current_player_moves(player_one, scores)
@@ -305,12 +290,19 @@ class TTTGame
   end
 
   def play_again?
-    answer = valid_y_or_n
+    valid_y_or_n
   end
 
   def who_chooses_who_goes_first
     puts "Who should choose who goes first: #{human.name} or #{computer.name}?"
-    chooser = validate_player.capitalize
+    validate_player.capitalize
+  end
+
+  def match_end
+    display_result
+    cont_next_round
+    reset
+    display_scoreboard(scores)
   end
 
   def system_clear
@@ -478,12 +470,13 @@ class Human < Player
 end
 
 class Computer < Player
-  COMPUTER_NAMES = ["Odin", "Frigg", "Thor", "Loki", "Balder", "Hod", "Heimdall", "Tyr"]
-  
+  COMPUTER_NAMES = ["Odin", "Frigg", "Thor", "Loki"] +
+                   ["Balder", "Hod", "Heimdall", "Tyr"]
+
   def initialize(marker)
     super
   end
-  
+
   def set_name
     @name = COMPUTER_NAMES.sample
   end
