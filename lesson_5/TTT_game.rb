@@ -42,7 +42,7 @@ module Displayable
 
   def display_result
     #clear_screen_and_display_board
-    p board.winning_marker
+    puts board.winning_marker
     case board.winning_marker
     when human.marker
       puts "You won!"
@@ -219,10 +219,10 @@ class TTTGame
       player = choose_player_one(chooser)
       match_display_and_clear(scores)
       move(player, scores)
-      reset
       break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
-      #display_result
-      #cont_next_round
+      display_result
+      cont_next_round
+      reset
       display_scoreboard(scores)
     end
     match_result_display(scores)
