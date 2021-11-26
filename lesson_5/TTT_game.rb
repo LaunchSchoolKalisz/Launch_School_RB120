@@ -121,10 +121,20 @@ module Displayable
 end
 
 module ValidateUserInput
+  def validate_player
+    player_one = nil
+    loop do
+      player_one = gets.chomp.downcase
+      break if player_one == "human" || player_one == "computer"
+      puts "Please enter a valid response: human or computer"
+    end
+    player_one
+  end
 end
 
 class TTTGame
   include Displayable
+  include ValidateUserInput
 
   HUMAN_MARKER = " X "
   COMPUTER_MARKER = " O "
@@ -237,13 +247,7 @@ class TTTGame
   def human_chooses_player_one
     puts ""
     puts "Who should go first: human or computer?"
-    player_one = nil
-    loop do
-      player_one = gets.chomp.downcase
-      break if player_one == "human" || player_one == "computer"
-      puts "Please enter a valid response: human or computer"
-    end
-    player_one
+    validate_player
   end
 
   def current_player_moves(player_one, scores)
