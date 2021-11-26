@@ -122,13 +122,13 @@ end
 
 module ValidateUserInput
   def validate_player
-    player_one = nil
+    player = nil
     loop do
-      player_one = gets.chomp.downcase
-      break if player_one == "human" || player_one == "computer"
+      player = gets.chomp.downcase
+      break if player == "human" || player == "computer"
       puts "Please enter a valid response: human or computer"
     end
-    player_one
+    player
   end
 
   def valid_square
@@ -140,6 +140,7 @@ module ValidateUserInput
     end
     board[square] = human.marker
   end
+
 end
 
 class TTTGame
@@ -251,7 +252,7 @@ class TTTGame
   def human_chooses_player_one
     puts ""
     puts "Who should go first: human or computer?"
-    validate_player
+    player_one = validate_player
   end
 
   def current_player_moves(player_one, scores)
@@ -266,25 +267,12 @@ class TTTGame
   end
 
   def play_again?
-    answer = nil
-    loop do
-      puts "Would you like to play again? (y/n)"
-      answer = gets.chomp.downcase
-      break if ['y', 'n'].include? answer
-      puts "Sorry, your response must be y or n"
-    end
-    answer == 'y'
+    valid_y_or_n
   end
 
   def who_chooses_who_goes_first
     puts "Who should choose who goes first: human or computer?"
-    chooser = nil
-    loop do
-      chooser = gets.chomp.downcase
-      break if chooser == "human" || chooser == "computer"
-      puts "Please enter a valid response: human or computer"
-    end
-    chooser
+    chooser = validate_player
   end
 
   def system_clear
