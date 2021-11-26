@@ -35,7 +35,7 @@ module Displayable
 
   def display_board
     puts ""
-    puts "You are#{human.marker}. Computer is#{computer.marker}."
+    puts "You are#{human.marker}. #{computer.name} is#{computer.marker}."
     board.draw
     puts ""
   end
@@ -47,7 +47,7 @@ module Displayable
     when human.marker
       puts "You won!"
     when computer.marker
-      puts "Computer won!"
+      puts "#{computer.name} won!"
     else
       puts "It's a tie!"
     end
@@ -75,8 +75,8 @@ module Displayable
   def display_scoreboard(scores)
     puts ""
     puts "------SCOREBOARD------"
-    puts "You have #{scores[:human]} points."
-    puts "Computer has #{scores[:computer]} points."
+    puts "#{human.name} has #{scores[:human]} points."
+    puts "#{computer.name} has #{scores[:computer]} points."
   end
 
   def display_match_winner(scores)
@@ -84,7 +84,7 @@ module Displayable
     if scores[:human] > scores[:computer]
       puts "Congrats! You won the match!"
     else
-      puts "Sorry, the computer won the match. Better luck next time!"
+      puts "Sorry, #{computer.name} won the match. Better luck next time!"
     end
     puts ""
   end
@@ -151,6 +151,17 @@ module ValidateUserInput
     end
     answer == 'y'
   end
+
+  def valid_name
+    answer = nil
+    loop do
+      puts "What is your name?"
+      answer = gets.chomp.strip.capitalize
+      break unless answer.empty? || Computer::COMPUTER_NAMES.include?(answer)
+      puts "Sorry that's not a valid choice."
+    end
+    answer
+  end
 end
 
 class TTTGame
@@ -165,13 +176,19 @@ class TTTGame
 
   def initialize
     @board = Board.new
-    @human = Player.new(HUMAN_MARKER)
-    @computer = Player.new(COMPUTER_MARKER)
+    @human = Human.new(HUMAN_MARKER)
+    @computer = Computer.new(COMPUTER_MARKER)
+  end
+
+  def setup
+    @human.set_name
+    @computer.set_name
   end
 
   def play
     system_clear
     display_welcome_message
+    setup
     main_game
     display_goodbye_message
   end
@@ -429,10 +446,35 @@ class Square
 end
 
 class Player
-  attr_reader :marker
+  attr_accessor :name, :marker
+
+  include ValidateUserInput
+  include Displayable
 
   def initialize(marker)
     @marker = marker
+  end
+end
+
+class Human < Player
+  def initialize(marker)
+    super
+  end
+
+  def set_name
+    @name = valid_name
+  end
+end
+
+class Computer < Player
+  def initialize(marker)
+    super
+  end
+
+  COMPUTER_NAMES = ["Odin", "Frigg", "Thor", "Loki", "Balder", "Hod", "Heimdall", "Tyr"]
+  
+  def set_name
+    @name = COMPUTER_NAMES.sample
   end
 end
 
