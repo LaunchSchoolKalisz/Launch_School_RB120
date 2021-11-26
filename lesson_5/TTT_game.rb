@@ -89,6 +89,18 @@ module Displayable
     puts ""
   end
 
+  def joinor(nums, punctuation = ", ", conjunction = "or")
+    case nums.count
+    when 1
+      nums.join(punctuation.to_s)
+    when 2
+      "#{nums[0]} #{conjunction} #{nums[1]}"
+    else
+      last_num = nums.pop
+      nums.join(punctuation.to_s) + "#{punctuation}#{conjunction} #{last_num}"
+    end
+  end
+
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def draw
@@ -106,6 +118,9 @@ module Displayable
   end
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+end
+
+module ValidateUserInput
 end
 
 class TTTGame
@@ -170,18 +185,6 @@ class TTTGame
 
   def scores
     scores = { human: 0, computer: 0 }
-  end
-
-  def joinor(nums, punctuation = ", ", conjunction = "or")
-    case nums.count
-    when 1
-      nums.join(punctuation.to_s)
-    when 2
-      "#{nums[0]} #{conjunction} #{nums[1]}"
-    else
-      last_num = nums.pop
-      nums.join(punctuation.to_s) + "#{punctuation}#{conjunction} #{last_num}"
-    end
   end
 
   def human_moves
