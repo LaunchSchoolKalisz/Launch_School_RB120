@@ -478,11 +478,11 @@ class Human < Player
 end
 
 class Computer < Player
+  COMPUTER_NAMES = ["Odin", "Frigg", "Thor", "Loki", "Balder", "Hod", "Heimdall", "Tyr"]
+  
   def initialize(marker)
     super
   end
-
-  COMPUTER_NAMES = ["Odin", "Frigg", "Thor", "Loki", "Balder", "Hod", "Heimdall", "Tyr"]
   
   def set_name
     @name = COMPUTER_NAMES.sample
