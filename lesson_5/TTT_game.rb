@@ -130,6 +130,16 @@ module ValidateUserInput
     end
     player_one
   end
+
+  def valid_square
+    square = nil
+    loop do
+      square = gets.chomp.to_i
+      break if board.unmarked_keys.include?(square)
+      puts "Sorry, that's not a valid choice. Try again!"
+    end
+    board[square] = human.marker
+  end
 end
 
 class TTTGame
@@ -199,13 +209,7 @@ class TTTGame
 
   def human_moves
     puts "Choose an empty square (#{joinor(board.unmarked_keys)}): "
-    square = nil
-    loop do
-      square = gets.chomp.to_i
-      break if board.unmarked_keys.include?(square)
-      puts "Sorry, that's not a valid choice. Try again!"
-    end
-    board[square] = human.marker
+    valid_square
   end
 
   def computer_moves
