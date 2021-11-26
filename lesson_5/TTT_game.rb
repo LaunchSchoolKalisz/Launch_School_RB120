@@ -41,8 +41,8 @@ module Displayable
   end
 
   def display_result
-    clear_screen_and_display_board
-
+    #clear_screen_and_display_board
+    p board.winning_marker
     case board.winning_marker
     when human.marker
       puts "You won!"
@@ -50,6 +50,15 @@ module Displayable
       puts "#{computer.name} won!"
     else
       puts "It's a tie!"
+    end
+  end
+
+  def cont_next_round
+    loop do
+      puts ""
+      puts "Press any key to start the next round."
+      answer = STDIN.gets
+      break unless answer.nil?
     end
   end
 
@@ -124,9 +133,9 @@ module ValidateUserInput
   def validate_player
     player = nil
     loop do
-      player = gets.chomp.downcase
-      break if player == "human" || player == "computer"
-      puts "Please enter a valid response: human or computer"
+      player = gets.chomp.capitalize
+      break if player == human.name || player == computer.name
+      puts "Please enter a valid response: #{human.name} or #{computer.name}"
     end
     player
   end
@@ -212,6 +221,8 @@ class TTTGame
       move(player, scores)
       reset
       break if scores.values.include?(NUMBER_OF_WINS_TO_WIN)
+      #display_result
+      #cont_next_round
       display_scoreboard(scores)
     end
     match_result_display(scores)
@@ -269,21 +280,21 @@ class TTTGame
   end
 
   def choose_player_one(chooser)
-    if chooser == 'human'
+    if chooser == human.name
       human_chooses_player_one
     else
-      ['human', 'computer'].sample
+      [human.name, computer.name].sample
     end
   end
 
   def human_chooses_player_one
     puts ""
-    puts "Who should go first: human or computer?"
-    player_one = validate_player
+    puts "Who should go first: #{human.name} or #{computer.name}?"
+    player_one = validate_player.capitalize
   end
 
   def current_player_moves(player_one, scores)
-    if player_one == "human"
+    if player_one == human.name
       human_moves
       computer_moves unless board.someone_won? || board.full?
     else
@@ -298,8 +309,8 @@ class TTTGame
   end
 
   def who_chooses_who_goes_first
-    puts "Who should choose who goes first: human or computer?"
-    chooser = validate_player
+    puts "Who should choose who goes first: #{human.name} or #{computer.name}?"
+    chooser = validate_player.capitalize
   end
 
   def system_clear
