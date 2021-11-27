@@ -158,27 +158,40 @@ module ValidateUserInput
     end
     answer
   end
+
+  def valid_marker
+    answer = nil
+    loop do
+      puts "What would you like the marker for #{self.name} to be?"
+      answer = gets.chomp.strip.capitalize
+      break unless answer.empty?
+      puts "Sorry that's not a valid choice."
+    end
+    answer
+  end
 end
 
 class TTTGame
   include Displayable
   include ValidateUserInput
 
-  HUMAN_MARKER = " X "
-  COMPUTER_MARKER = " O "
+  # HUMAN_MARKER = " X "
+  # COMPUTER_MARKER = " O "
   NUMBER_OF_WINS = 2
 
   attr_reader :board, :human, :computer
 
   def initialize
     @board = Board.new
-    @human = Human.new(HUMAN_MARKER)
-    @computer = Computer.new(COMPUTER_MARKER)
+    @human = Human.new
+    @computer = Computer.new
   end
 
   def setup
     @human.set_name
     @computer.set_name
+    @human.set_marker
+    @computer.set_marker
   end
 
   def play
@@ -454,26 +467,30 @@ class Player
   include ValidateUserInput
   include Displayable
 
-  def initialize(marker)
-    @marker = marker
+  def initialize
+  end
+  
+  def set_marker
+    @marker = valid_marker
   end
 end
 
 class Human < Player
-  def initialize(marker)
+  def initialize
     super
   end
 
   def set_name
     @name = valid_name
   end
+
 end
 
 class Computer < Player
   COMPUTER_NAMES = ["Odin", "Frigg", "Thor", "Loki"] +
                    ["Balder", "Hod", "Heimdall", "Tyr"]
 
-  def initialize(marker)
+  def initialize
     super
   end
 
