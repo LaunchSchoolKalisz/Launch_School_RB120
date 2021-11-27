@@ -117,6 +117,10 @@ module Displayable
 end
 
 module ValidateUserInput
+  def valid_integer?(number)
+    number % 1 == 0
+  end
+
   def validate_player
     player = nil
     loop do
@@ -130,11 +134,11 @@ module ValidateUserInput
   def valid_square
     square = nil
     loop do
-      square = gets.chomp.to_i
-      break if board.unmarked_keys.include?(square)
+      square = gets.chomp.to_f
+      break if board.unmarked_keys.include?(square) && valid_integer?(square)
       puts "Sorry, that's not a valid choice. Try again!"
     end
-    board[square] = human.marker
+    board[square.to_i] = human.marker
   end
 
   def valid_y_or_n
@@ -163,10 +167,9 @@ module ValidateUserInput
     answer = nil
     loop do
       puts "What would you like the marker for #{self.name} to be?"
-      puts "A marker must be one character, please."
       answer = gets.chomp.strip.capitalize
       break if answer.chars.count == 1
-      puts "Sorry that's not a valid choice."
+      puts "Sorry that's not a valid choice. A marker must be one character, please."
     end
     answer = " #{answer} "
   end
@@ -181,18 +184,23 @@ class TTTGame
   NUMBER_OF_WINS = 2
 
   attr_reader :board, :human, :computer
+  attr_accessor :player_marker, :comp_marker, :current_player
 
   def initialize
-    @board = Board.new
     @human = Human.new
     @computer = Computer.new
+    @@player_marker = player_marker
+    @@comp_marker = comp_marker
+    @board = Board.new
+    @@current_player = current_player
   end
 
   def setup
     @human.set_name
     @computer.set_name
-    @human.set_marker
-    @computer.set_marker
+    @@player_marker = @human.set_marker
+    @@comp_marker = @computer.set_marker
+    @@current_player = human.name
   end
 
   def play
@@ -216,8 +224,8 @@ class TTTGame
 
   def match_sequence(scores)
     chooser = who_chooses_who_goes_first
+    player = choose_player_one(chooser)
     loop do
-      player = choose_player_one(chooser)
       match_display_and_clear(scores)
       move(player, scores)
       break if scores.values.include?(NUMBER_OF_WINS)
@@ -233,9 +241,9 @@ class TTTGame
     clear_screen_and_display_board
   end
 
-  def player_move(player_one, scores)
+  def player_move(player, scores)
     loop do
-      current_player_moves(player_one, scores)
+      current_player_moves(player, scores)
       break if board.someone_won? || board.full?
       clear_screen_and_display_board
     end
@@ -251,9 +259,9 @@ class TTTGame
   end
 
   def computer_moves
-    square = comp_move(TTTGame::COMPUTER_MARKER)
+    square = comp_move(@@comp_marker)
     if !square
-      square = comp_move(TTTGame::HUMAN_MARKER)
+      square = comp_move(@@player_marker)
     end
     if !square
       square = comp_choose_square
@@ -281,8 +289,9 @@ class TTTGame
   def choose_player_one(chooser)
     if chooser == human.name
       human_chooses_player_one
+      @@current_player = human.name
     else
-      [human.name, computer.name].sample
+      @@current_player = [human.name, computer.name].sample
     end
   end
 
@@ -291,15 +300,21 @@ class TTTGame
     validate_player.capitalize
   end
 
-  def current_player_moves(player_one, scores)
-    if player_one == human.name
+  def current_player_moves(player, scores)
+    if human_turn?
       human_moves
-      computer_moves unless board.someone_won? || board.full?
+      @@current_player = computer.name unless board.someone_won? || board.full?
+      #binding.pry
     else
       computer_moves
-      match_display_and_clear(scores)
-      human_moves unless board.someone_won? || board.full?
+      #match_display_and_clear(scores)
+      @@current_player = human.name unless board.someone_won? || board.full?
     end
+  end
+
+  def human_turn?
+    return true if @@current_player == human.name
+    false
   end
 
   def play_again?
@@ -324,12 +339,14 @@ class TTTGame
 
   def reset
     board.reset
+    @@current_player = human.marker
     system_clear
   end
 end
 
-class Board
+class Board < TTTGame
   include Displayable
+  include ValidateUserInput
 
   WINNING_LINES =
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
@@ -350,11 +367,12 @@ class Board
   end
 
   def unmarked_keys
+   #binding.pry
     human_marked_keys = @squares.keys.select do |key|
-      @squares[key].human_marked?
+      @squares[key].marker == @@player_marker
     end
     computer_marked_keys = @squares.keys.select do |key|
-      @squares[key].computer_marked?
+      @squares[key].marker == @@comp_marker
     end
     @squares.keys - human_marked_keys - computer_marked_keys
   end
@@ -368,11 +386,11 @@ class Board
   end
 
   def count_human_marker(squares)
-    squares.collect.count(TTTGame::HUMAN_MARKER)
+    squares.collect.count(@@player_marker)
   end
 
   def count_computer_marker(squares)
-    squares.collect.count(TTTGame::COMPUTER_MARKER)
+    squares.collect.count(@@comp_marker)
   end
 
   # return winning marker or nil
@@ -425,10 +443,10 @@ class Board
   end
 
   def other_marker(marker)
-    if marker == TTTGame::COMPUTER_MARKER
-      TTTGame::HUMAN_MARKER
+    if marker == @@comp_marker
+      @@player_marker
     else
-      TTTGame::COMPUTER_MARKER
+      @@player_marker
     end
   end
 
@@ -437,11 +455,14 @@ class Board
   end
 end
 
-class Square
+class Square < Board
+  include Displayable
   attr_accessor :marker
 
   def initialize(marker)
     @marker = marker
+    #@human_marker = Human.marker
+    #@comp_marker = Computer.marker
   end
 
   def to_s
@@ -449,11 +470,12 @@ class Square
   end
 
   def human_marked?
-    marker == TTTGame::HUMAN_MARKER
+    #@current_plyer = human.marker
+    marker == @@player_marker
   end
 
   def computer_marked?
-    marker == TTTGame::COMPUTER_MARKER
+    marker == @@comp_marker
   end
 
   def marked?
@@ -468,11 +490,9 @@ class Player
   include Displayable
 
   def initialize
+    #@marker = marker
   end
-  
-  def set_marker
-    @marker = valid_marker
-  end
+
 end
 
 class Human < Player
@@ -484,6 +504,9 @@ class Human < Player
     @name = valid_name
   end
 
+  def set_marker
+    @marker = valid_marker
+  end
 end
 
 class Computer < Player
@@ -496,6 +519,10 @@ class Computer < Player
 
   def set_name
     @name = COMPUTER_NAMES.sample
+  end
+
+  def set_marker
+    @marker = valid_marker
   end
 end
 
