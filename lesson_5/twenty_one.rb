@@ -83,13 +83,23 @@ class Dealer
 end
 
 class Deck
+  attr_accessor :cards
   def initialize
-    # obviously, we need some data structure to keep track of cards
-    # array, hash, something else?
+    @cards = []
+    Card::SUITS.each do |suit|
+      Card::FACES.each do |face|
+        @cards << Card.new(suit, face)
+      end
+    end
+    scramble!
   end
 
-  def deal
-    # does the dealer or the deck deal?
+  def scramble!
+    cards.shuffle!
+  end
+
+  def deal_one
+    cards.pop
   end
 end
 
