@@ -163,8 +163,9 @@ module ValidateUserInput
     answer = nil
     loop do
       puts "What would you like the marker for #{self.name} to be?"
+      puts "A marker must be one character, please."
       answer = gets.chomp.strip.capitalize
-      break unless answer.empty?
+      break if answer.chars.count == 1
       puts "Sorry that's not a valid choice."
     end
     answer
