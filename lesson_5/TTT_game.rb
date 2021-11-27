@@ -286,7 +286,6 @@ class TTTGame
   end
 
   def human_chooses_player_one
-    puts ""
     puts "Who should go first: #{human.name} or #{computer.name}?"
     validate_player.capitalize
   end
