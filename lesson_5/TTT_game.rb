@@ -21,8 +21,10 @@ module Displayable
   end
 
   def display_board
+    hmk = human.marker.strip
+    cmk = computer.marker.strip
     puts ""
-    puts "You are #{human.marker.strip}. #{computer.name} is #{computer.marker.strip}."
+    puts "You are #{hmk}. #{computer.name} is #{cmk}."
     board.draw
     puts ""
   end
@@ -164,10 +166,10 @@ module ValidateUserInput
   def valid_marker
     answer = nil
     loop do
-      puts "What would you like the marker for #{self.name} to be?"
+      puts "What would you like the marker for #{name} to be?"
       answer = gets.chomp.strip.capitalize
       break if answer.chars.count == 1
-      puts "Sorry that's not a valid choice. A marker must be one character, please."
+      puts "Sorry, invalid choice. Markers must be 1 character, please."
     end
     answer = " #{answer} "
   end
@@ -220,10 +222,10 @@ class TTTGame
 
   def match_sequence(scores)
     chooser = who_chooses_who_goes_first
-    player = choose_player_one(chooser)
+    choose_player_one(chooser)
     loop do
       match_display_and_clear(scores)
-      move(player, scores)
+      move(scores)
       break if scores.values.include?(NUMBER_OF_WINS)
       match_end(chooser)
     end
@@ -231,13 +233,13 @@ class TTTGame
     display_match_winner(scores)
   end
 
-  def move(player, scores)
-    player_move(player, scores)
+  def move(scores)
+    player_move
     update_scoreboard(scores)
     clear_screen_and_display_board
   end
 
-  def player_move(player, scores)
+  def player_move
     loop do
       current_player_moves
       break if board.someone_won? || board.full?
@@ -283,11 +285,8 @@ class TTTGame
   end
 
   def choose_player_one(chooser)
-    if chooser == human.name
-      @@current_player = human_chooses_player_one
-    else
-      @@current_player = [human.name, computer.name].sample
-    end
+    return @@current_player = human_chooses_player_one if chooser == human.name
+    @@current_player = [human.name, computer.name].sample
   end
 
   def human_chooses_player_one
@@ -478,8 +477,6 @@ class Player
 
   include ValidateUserInput
   include Displayable
-
-  #def initialize end
 end
 
 class Human < Player
