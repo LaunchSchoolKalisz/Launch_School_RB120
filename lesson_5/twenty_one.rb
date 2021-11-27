@@ -42,7 +42,11 @@ Game
 - Start
 =end
 
+module Hand
+end
+
 class Player
+  include Hand
   def initialize
     # what would the "data" or "states" of a Player object entail?
     # maybe cards? a name?
@@ -63,6 +67,7 @@ class Player
 end
 
 class Dealer
+  include Hand
   def hit
   end
 
@@ -96,7 +101,11 @@ end
 
 class Game
   def start
-    # what's the sequence of steps to execute the game play?
+    deal_cards
+    show_initial_cards
+    player_turn
+    dealer_turn
+    show_result
   end
 end
 
