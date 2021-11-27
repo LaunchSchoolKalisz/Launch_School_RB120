@@ -1,5 +1,3 @@
-require 'pry'
-
 module Displayable
   def match_display_and_clear(scores)
     system_clear
@@ -179,8 +177,6 @@ class TTTGame
   include Displayable
   include ValidateUserInput
 
-  # HUMAN_MARKER = " X "
-  # COMPUTER_MARKER = " O "
   NUMBER_OF_WINS = 2
 
   attr_reader :board, :human, :computer
@@ -303,10 +299,8 @@ class TTTGame
     if human_turn?
       human_moves
       @@current_player = computer.name unless board.someone_won? || board.full?
-      #binding.pry
     else
       computer_moves
-      #match_display_and_clear(scores)
       @@current_player = human.name unless board.someone_won? || board.full?
     end
   end
@@ -338,7 +332,6 @@ class TTTGame
 
   def reset
     board.reset
-    #@@current_player = human.marker
     system_clear
   end
 end
@@ -366,7 +359,6 @@ class Board < TTTGame
   end
 
   def unmarked_keys
-   #binding.pry
     human_marked_keys = @squares.keys.select do |key|
       @squares[key].marker == @@player_marker
     end
@@ -416,11 +408,9 @@ class Board < TTTGame
   def find_at_risk_square(line, marker)
     sqrs = @squares.values_at(*line)
     markers = gather_markers(sqrs)
-    #binding.pry
     if two_markers?(markers, marker)
       sq = square_to_mark(markers, marker)
       idx = markers.index(sq.join)
-      #binding.pry
       return @squares.key(sqrs[idx])
     end
     nil
@@ -436,7 +426,6 @@ class Board < TTTGame
 
   def two_markers?(markers, marker)
     other_marker = other_marker(marker)
-    #binding.pry
     if (markers.count(marker)) == 2 && (markers.include?(other_marker) == false)
       true
     else
@@ -463,8 +452,6 @@ class Square < Board
 
   def initialize(marker)
     @marker = marker
-    #@human_marker = Human.marker
-    #@comp_marker = Computer.marker
   end
 
   def to_s
@@ -472,7 +459,6 @@ class Square < Board
   end
 
   def human_marked?
-    #@current_plyer = human.marker
     marker == @@player_marker
   end
 
@@ -492,7 +478,6 @@ class Player
   include Displayable
 
   def initialize
-    #@marker = marker
   end
 
 end
