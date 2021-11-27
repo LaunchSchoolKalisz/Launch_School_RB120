@@ -338,7 +338,7 @@ class TTTGame
 
   def reset
     board.reset
-    @@current_player = human.marker
+    #@@current_player = human.marker
     system_clear
   end
 end
