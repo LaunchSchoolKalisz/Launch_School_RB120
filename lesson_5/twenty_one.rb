@@ -18,4 +18,26 @@ Major Nouns and Verbs
 Nouns: deck, card, player, dealer, total, deck, game
 Verbs: hit, stay, win, lose, busts
 
+Organize 
+
+Player
+- Hit
+- Stay
+- Total 
+- Busted?
+
+Dealer
+- Hit
+- Stay
+- Total 
+- Busted?
+
+Deck
+- Deal
+
+Card
+- Value
+
+Game
+- Start
 =end
