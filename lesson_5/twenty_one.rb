@@ -13,4 +13,9 @@ Overview
 - If dealer busts, the player wins. 
 - If both player and dealer stays, then the highest total wins.
 - If both totals are equal, then it's a tie, and nobody wins.
+
+Major Nouns and Verbs
+Nouns: deck, card, player, dealer, total, deck, game
+Verbs: hit, stay, win, lose, busts
+
 =end
