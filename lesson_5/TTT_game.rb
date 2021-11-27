@@ -477,19 +477,15 @@ class Player
 
   include ValidateUserInput
   include Displayable
-end
-
-class Human < Player
-  def initialize
-    super
-  end
-
-  def set_name
-    @name = valid_name
-  end
 
   def set_marker
     @marker = valid_marker
+  end
+end
+
+class Human < Player
+  def set_name
+    @name = valid_name
   end
 end
 
@@ -497,16 +493,8 @@ class Computer < Player
   COMPUTER_NAMES = ["Odin", "Frigg", "Thor", "Loki"] +
                    ["Balder", "Hod", "Heimdall", "Tyr"]
 
-  def initialize
-    super
-  end
-
   def set_name
     @name = COMPUTER_NAMES.sample
-  end
-
-  def set_marker
-    @marker = valid_marker
   end
 end
 
