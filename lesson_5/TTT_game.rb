@@ -288,11 +288,11 @@ class TTTGame
 
   def choose_player_one(chooser)
     if chooser == human.name
-      human_chooses_player_one
-      @@current_player = human.name
+      @@current_player = human_chooses_player_one
     else
       @@current_player = [human.name, computer.name].sample
     end
+    binding.pry
   end
 
   def human_chooses_player_one
