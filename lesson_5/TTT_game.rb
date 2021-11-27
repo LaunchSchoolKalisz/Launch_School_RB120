@@ -225,7 +225,7 @@ class TTTGame
       match_display_and_clear(scores)
       move(player, scores)
       break if scores.values.include?(NUMBER_OF_WINS)
-      match_end
+      match_end(chooser)
     end
     display_scoreboard(scores)
     display_match_winner(scores)
@@ -239,7 +239,7 @@ class TTTGame
 
   def player_move(player, scores)
     loop do
-      current_player_moves(player, scores)
+      current_player_moves
       break if board.someone_won? || board.full?
       clear_screen_and_display_board
     end
@@ -295,7 +295,7 @@ class TTTGame
     validate_player.capitalize
   end
 
-  def current_player_moves(player, scores)
+  def current_player_moves
     if human_turn?
       human_moves
       @@current_player = computer.name unless board.someone_won? || board.full?
@@ -319,9 +319,11 @@ class TTTGame
     validate_player.capitalize
   end
 
-  def match_end
+  def match_end(chooser)
     display_result
     cont_next_round
+    system_clear
+    choose_player_one(chooser)
     reset
     display_scoreboard(scores)
   end
@@ -477,9 +479,7 @@ class Player
   include ValidateUserInput
   include Displayable
 
-  def initialize
-  end
-
+  #def initialize end
 end
 
 class Human < Player
