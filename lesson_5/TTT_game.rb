@@ -292,7 +292,6 @@ class TTTGame
     else
       @@current_player = [human.name, computer.name].sample
     end
-    binding.pry
   end
 
   def human_chooses_player_one
@@ -417,9 +416,11 @@ class Board < TTTGame
   def find_at_risk_square(line, marker)
     sqrs = @squares.values_at(*line)
     markers = gather_markers(sqrs)
+    #binding.pry
     if two_markers?(markers, marker)
       sq = square_to_mark(markers, marker)
       idx = markers.index(sq.join)
+      #binding.pry
       return @squares.key(sqrs[idx])
     end
     nil
@@ -435,7 +436,8 @@ class Board < TTTGame
 
   def two_markers?(markers, marker)
     other_marker = other_marker(marker)
-    if markers.count(marker) == 2 && markers.include?(other_marker) == false
+    #binding.pry
+    if (markers.count(marker)) == 2 && (markers.include?(other_marker) == false)
       true
     else
       false
@@ -446,7 +448,7 @@ class Board < TTTGame
     if marker == @@comp_marker
       @@player_marker
     else
-      @@player_marker
+      @@comp_marker
     end
   end
 
