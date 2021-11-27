@@ -24,7 +24,7 @@ module Displayable
 
   def display_board
     puts ""
-    puts "You are#{human.marker}. #{computer.name} is#{computer.marker}."
+    puts "You are #{human.marker.strip}. #{computer.name} is #{computer.marker.strip}."
     board.draw
     puts ""
   end
@@ -168,7 +168,7 @@ module ValidateUserInput
       break if answer.chars.count == 1
       puts "Sorry that's not a valid choice."
     end
-    answer
+    answer = " #{answer} "
   end
 end
 
