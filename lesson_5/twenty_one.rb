@@ -43,6 +43,14 @@ Game
 =end
 
 module Hand
+  def show_hand
+    puts "---- #{name}'s Hand ----"
+    cards.each do |card|
+      puts "=> #{card}"
+    end
+    puts "=> Total: #{total}"
+    puts ""
+  end
 end
 
 class Player
