@@ -69,8 +69,23 @@ class Player
   def busted?
   end
 
-  def total 
-    # need info about cards
+  def total
+    total = 0
+    cards.each do |card|
+      if card.ace?
+        total += 11
+      elsif card.jack? || card.queen? || card.king?
+        total += 10
+      else 
+        total += card.face.to_i
+      end
+    end
+
+    cards.select.(&:ace?).count.times do
+      breaak if total <= 21
+      total -=10
+    end
+    total
   end
 end
 
