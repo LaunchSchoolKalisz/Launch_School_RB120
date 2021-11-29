@@ -51,6 +51,16 @@ module Displayable
     puts "The first player to #{TTTGame::NUMBER_OF_WINS} wins, wins the game!"
   end
 
+  def display_match_winner(scores)
+    puts ""
+    if scores[:human] > scores[:computer]
+      puts "Congrats! You won the match!"
+    else
+      puts "Sorry, #{computer.name} won the match. Better luck next time!"
+    end
+    puts ""
+  end
+
   def joinor(nums, punctuation = ", ", conjunction = "or")
     case nums.count
     when 1
@@ -156,7 +166,7 @@ class TTTGame
     @@player_marker = player_marker
     @@comp_marker = comp_marker
     @board = Board.new
-    @current_player = current_player
+    @@current_player = current_player
   end
 
   def setup
@@ -164,7 +174,7 @@ class TTTGame
     @computer.set_name
     @@player_marker = @human.set_marker
     @@comp_marker = @computer.set_marker
-    @current_player = human.name
+    @@current_player = human.name
   end
 
   def play
@@ -251,8 +261,8 @@ class TTTGame
   end
 
   def choose_player_one(chooser)
-    return @current_player = human_chooses_player_one if chooser == human.name
-    @current_player = [human.name, computer.name].sample
+    return @@current_player = human_chooses_player_one if chooser == human.name
+    @@current_player = [human.name, computer.name].sample
   end
 
   def human_chooses_player_one
@@ -263,15 +273,15 @@ class TTTGame
   def current_player_moves
     if human_turn?
       human_moves
-      @current_player = computer.name unless board.someone_won? || board.full?
+      @@current_player = computer.name unless board.someone_won? || board.full?
     else
       computer_moves
-      @current_player = human.name unless board.someone_won? || board.full?
+      @@current_player = human.name unless board.someone_won? || board.full?
     end
   end
 
   def human_turn?
-    return true if @current_player == human.name
+    return true if @@current_player == human.name
     false
   end
 
@@ -324,16 +334,6 @@ class TTTGame
     display_instructions
     display_scoreboard(scores)
     display_board
-  end
-
-  def display_match_winner(scores)
-    puts ""
-    if scores[:human] > scores[:computer]
-      puts "Congrats! You won the match!"
-    else
-      puts "Sorry, #{computer.name} won the match. Better luck next time!"
-    end
-    puts ""
   end
 end
 
