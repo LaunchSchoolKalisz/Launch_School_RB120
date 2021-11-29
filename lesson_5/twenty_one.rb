@@ -51,23 +51,6 @@ module Hand
     puts "=> Total: #{total}"
     puts ""
   end
-end
-
-class Player
-  include Hand
-  def initialize
-    # what would the "data" or "states" of a Player object entail?
-    # maybe cards? a name?
-  end
-
-  def hit
-  end
-
-  def stay
-  end
-
-  def busted?
-  end
 
   def total
     total = 0
@@ -86,6 +69,41 @@ class Player
       total -=10
     end
     total
+  end
+
+  def add_card(new_card)
+    card << new_card
+  end
+
+  def busted?
+    total >21
+  end
+end
+
+class Player < Participant
+  include Hand
+  def initialize
+    # what would the "data" or "states" of a Player object entail?
+    # maybe cards? a name?
+  end
+
+  def hit
+  end
+
+  def stay
+  end
+
+  def busted?
+  end
+end
+
+def Participant
+  include Hand
+
+  attr_accessor :name, :cards
+  def initialize
+    @cards = []
+    set_name
   end
 end
 
