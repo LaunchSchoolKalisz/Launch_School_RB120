@@ -1,3 +1,5 @@
+require 'pry'
+
 module Displayable
   def display_welcome_message
     puts "Welcome to Tic Tac Toe!"
@@ -149,13 +151,6 @@ module ValidateUserInput
     end
     answer = " #{answer} "
   end
-
-  # def different_markers
-  #   loop do
-  #     break unless @@player_marker == @@comp_marker
-  #       puts "Please enter a different marker than what was chosen for the player."
-  #   end
-  # end
 end
 
 class TTTGame
@@ -170,8 +165,8 @@ class TTTGame
   def initialize
     @human = Human.new
     @computer = Computer.new
-    @@player_marker = player_marker
-    @@comp_marker = comp_marker
+    @player_marker = player_marker
+    @comp_marker = comp_marker
     @board = Board.new
     @current_player = current_player
   end
@@ -179,9 +174,11 @@ class TTTGame
   def setup
     @human.set_name
     @computer.set_name
-    @@player_marker = @human.set_marker
-    @@comp_marker = @computer.set_marker
+    @player_marker = @human.set_marker
+    @comp_marker = @computer.set_marker
     @current_player = human.name
+    board.player_marker = @player_marker
+    board.comp_marker = @comp_marker
   end
 
   def play
@@ -240,9 +237,9 @@ class TTTGame
   end
 
   def computer_moves
-    square = comp_move(@@comp_marker)
+    square = comp_move(comp_marker)
     if !square
-      square = comp_move(@@player_marker)
+      square = comp_move(player_marker)
     end
     if !square
       square = comp_choose_square
@@ -344,9 +341,11 @@ class TTTGame
   end
 end
 
-class Board < TTTGame
+class Board
   include Displayable
   include ValidateUserInput
+
+  attr_accessor :player_marker, :comp_marker
 
   WINNING_LINES =
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
@@ -368,10 +367,10 @@ class Board < TTTGame
 
   def unmarked_keys
     human_marked_keys = @squares.keys.select do |key|
-      @squares[key].marker == @@player_marker
+      @squares[key].marker == player_marker
     end
     computer_marked_keys = @squares.keys.select do |key|
-      @squares[key].marker == @@comp_marker
+      @squares[key].marker == comp_marker
     end
     @squares.keys - human_marked_keys - computer_marked_keys
   end
@@ -382,14 +381,6 @@ class Board < TTTGame
 
   def someone_won?
     !!winning_marker
-  end
-
-  def count_human_marker(squares)
-    squares.collect.count(@@player_marker)
-  end
-
-  def count_computer_marker(squares)
-    squares.collect.count(@@comp_marker)
   end
 
   # return winning marker or nil
@@ -442,21 +433,26 @@ class Board < TTTGame
   end
 
   def other_marker(marker)
-    if marker == @@comp_marker
-      @@player_marker
+    if marker == comp_marker
+      player_marker
     else
-      @@comp_marker
+      comp_marker
     end
   end
 
   def reset
-    (1..9).each { |key| @squares[key] = Square.new("[#{key}]") }
+    (1..9).each do |key| 
+      square = Square.new("[#{key}]")
+      @squares[key] = square 
+      square.player_marker = player_marker
+      square.comp_marker = comp_marker
+    end
   end
 end
 
-class Square < Board
+class Square 
   include Displayable
-  attr_accessor :marker
+  attr_accessor :marker, :player_marker, :comp_marker
 
   def initialize(marker)
     @marker = marker
@@ -467,11 +463,11 @@ class Square < Board
   end
 
   def human_marked?
-    marker == @@player_marker
+    marker == player_marker
   end
 
   def computer_marked?
-    marker == @@comp_marker
+    marker == comp_marker
   end
 
   def marked?
@@ -503,11 +499,6 @@ class Computer < Player
   def set_name
     @name = COMPUTER_NAMES.sample
   end
-
-  # def set_marker
-  #   super 
-  #   different_markers
-  # end
 end
 
 game = TTTGame.new
