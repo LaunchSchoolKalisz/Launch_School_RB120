@@ -156,7 +156,7 @@ class TTTGame
     @@player_marker = player_marker
     @@comp_marker = comp_marker
     @board = Board.new
-    @@current_player = current_player
+    @current_player = current_player
   end
 
   def setup
@@ -164,7 +164,7 @@ class TTTGame
     @computer.set_name
     @@player_marker = @human.set_marker
     @@comp_marker = @computer.set_marker
-    @@current_player = human.name
+    @current_player = human.name
   end
 
   def play
@@ -251,8 +251,8 @@ class TTTGame
   end
 
   def choose_player_one(chooser)
-    return @@current_player = human_chooses_player_one if chooser == human.name
-    @@current_player = [human.name, computer.name].sample
+    return @current_player = human_chooses_player_one if chooser == human.name
+    @current_player = [human.name, computer.name].sample
   end
 
   def human_chooses_player_one
@@ -263,15 +263,15 @@ class TTTGame
   def current_player_moves
     if human_turn?
       human_moves
-      @@current_player = computer.name unless board.someone_won? || board.full?
+      @current_player = computer.name unless board.someone_won? || board.full?
     else
       computer_moves
-      @@current_player = human.name unless board.someone_won? || board.full?
+      @current_player = human.name unless board.someone_won? || board.full?
     end
   end
 
   def human_turn?
-    return true if @@current_player == human.name
+    return true if @current_player == human.name
     false
   end
 
