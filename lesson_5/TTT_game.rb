@@ -1,11 +1,4 @@
 module Displayable
-  def match_display_and_clear(scores)
-    system_clear
-    display_instructions
-    display_scoreboard(scores)
-    display_board
-  end
-
   def display_welcome_message
     puts "Welcome to Tic Tac Toe!"
     puts ""
@@ -56,33 +49,6 @@ module Displayable
 
   def display_instructions
     puts "The first player to #{TTTGame::NUMBER_OF_WINS} wins, wins the game!"
-  end
-
-  def update_scoreboard(scores)
-    case board.winning_marker
-    when human.marker
-      scores[:human] += 1
-    when computer.marker
-      scores[:computer] += 1
-    end
-    scores
-  end
-
-  def display_scoreboard(scores)
-    puts ""
-    puts "------SCOREBOARD------"
-    puts "#{human.name} has #{scores[:human]} points."
-    puts "#{computer.name} has #{scores[:computer]} points."
-  end
-
-  def display_match_winner(scores)
-    puts ""
-    if scores[:human] > scores[:computer]
-      puts "Congrats! You won the match!"
-    else
-      puts "Sorry, #{computer.name} won the match. Better luck next time!"
-    end
-    puts ""
   end
 
   def joinor(nums, punctuation = ", ", conjunction = "or")
@@ -335,6 +301,40 @@ class TTTGame
     board.reset
     system_clear
   end
+
+  def update_scoreboard(scores)
+    case board.winning_marker
+    when human.marker
+      scores[:human] += 1
+    when computer.marker
+      scores[:computer] += 1
+    end
+    scores
+  end
+
+  def display_scoreboard(scores)
+    puts ""
+    puts "------SCOREBOARD------"
+    puts "#{human.name} has #{scores[:human]} points."
+    puts "#{computer.name} has #{scores[:computer]} points."
+  end
+
+  def match_display_and_clear(scores)
+    system_clear
+    display_instructions
+    display_scoreboard(scores)
+    display_board
+  end
+
+  def display_match_winner(scores)
+    puts ""
+    if scores[:human] > scores[:computer]
+      puts "Congrats! You won the match!"
+    else
+      puts "Sorry, #{computer.name} won the match. Better luck next time!"
+    end
+    puts ""
+  end
 end
 
 class Board < TTTGame
@@ -496,6 +496,11 @@ class Computer < Player
   def set_name
     @name = COMPUTER_NAMES.sample
   end
+
+  # def set_marker
+  #   super 
+  #   different_markers
+  # end
 end
 
 game = TTTGame.new
