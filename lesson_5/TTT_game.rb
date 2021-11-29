@@ -175,7 +175,11 @@ class TTTGame
     @human.set_name
     @computer.set_name
     @player_marker = @human.set_marker
-    @comp_marker = @computer.set_marker
+    loop do
+      @comp_marker = @computer.set_marker
+      break unless @player_marker == comp_marker
+      puts "Please enter a marker which is different than the player's!"
+    end
     @current_player = human.name
     board.player_marker = @player_marker
     board.comp_marker = @comp_marker
