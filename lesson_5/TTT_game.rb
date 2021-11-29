@@ -181,8 +181,7 @@ class TTTGame
       puts "Please enter a marker which is different than the player's!"
     end
     @current_player = human.name
-    board.player_marker = @player_marker
-    board.comp_marker = @comp_marker
+    set_board_markers
   end
 
   def play
@@ -343,6 +342,11 @@ class TTTGame
     display_scoreboard(scores)
     display_board
   end
+
+  def set_board_markers
+    board.player_marker = @player_marker
+    board.comp_marker = @comp_marker
+  end
 end
 
 class Board
@@ -445,16 +449,16 @@ class Board
   end
 
   def reset
-    (1..9).each do |key| 
+    (1..9).each do |key|
       square = Square.new("[#{key}]")
-      @squares[key] = square 
+      @squares[key] = square
       square.player_marker = player_marker
       square.comp_marker = comp_marker
     end
   end
 end
 
-class Square 
+class Square
   include Displayable
   attr_accessor :marker, :player_marker, :comp_marker
 
