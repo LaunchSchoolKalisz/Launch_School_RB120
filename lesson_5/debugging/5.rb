@@ -9,6 +9,7 @@ What is the problem and what are possible ways to fix it?
 =end
 
 class File
+  FORMAT = nil
   attr_accessor :name, :byte_content
 
   def initialize(name)
