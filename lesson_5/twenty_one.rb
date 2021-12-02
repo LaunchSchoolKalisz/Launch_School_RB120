@@ -279,6 +279,11 @@ class TwentyOne
       puts "#{dealer.name} busted! #{player.name} wins!"
     end
   end
+
+  def show_cards
+    player.show_hand
+    dealer.show_hand
+  end
 end
 
 Game.new.starts
