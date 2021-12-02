@@ -80,6 +80,16 @@ module Hand
   end
 end
 
+class Participant
+  include Hand
+
+  attr_accessor :name, :cards
+  def initialize
+    @cards = []
+    set_name
+  end
+end
+
 class Player < Participant
   def set_name
     name = ''
@@ -94,16 +104,6 @@ class Player < Participant
 
   def show_flop
     show_hand
-  end
-end
-
-class Participant
-  include Hand
-
-  attr_accessor :name, :cards
-  def initialize
-    @cards = []
-    set_name
   end
 end
 
