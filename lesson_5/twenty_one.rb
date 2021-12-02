@@ -108,7 +108,7 @@ class Player < Participant
 end
 
 class Dealer < Participant
-  ROBOTS = [Darcy, Bennet, Wickham, Bingley]
+  ROBOTS = ["Darcy", "Bennet", "Wickham", "Bingley"]
 
   def set_name
     self.name = ROBOTS.sample
