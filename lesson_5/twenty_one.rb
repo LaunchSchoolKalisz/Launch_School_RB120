@@ -64,7 +64,7 @@ module Hand
       end
     end
 
-    cards.select.(&:ace?).count.times do
+    cards.select(&:ace?).count.times do
       break if total <= 21
       total -=10
     end
