@@ -65,14 +65,14 @@ module Hand
     end
 
     cards.select.(&:ace?).count.times do
-      breaak if total <= 21
+      break if total <= 21
       total -=10
     end
     total
   end
 
   def add_card(new_card)
-    card << new_card
+    cards << new_card
   end
 
   def busted?
