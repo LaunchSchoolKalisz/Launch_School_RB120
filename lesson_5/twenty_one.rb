@@ -271,7 +271,14 @@ class TwentyOne
       end
     end
   end
-  
+
+  def show_busted
+    if player.busted?
+      puts "#{player.name} busted! #{dealer.name} wins!"
+    elsif dealer.busted?
+      puts "#{dealer.name} busted! #{player.name} wins!"
+    end
+  end
 end
 
 Game.new.starts
