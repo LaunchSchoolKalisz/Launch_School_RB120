@@ -157,7 +157,7 @@ class Card
   end
 
   def face
-    case face
+    case @face
     when 'J' then "Jack"
     when 'Q' then "Queen"
     when 'K' then "King"
