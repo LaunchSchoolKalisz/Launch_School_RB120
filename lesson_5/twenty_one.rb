@@ -294,6 +294,17 @@ class TwentyOne
       puts "It's a tie!"
     end
   end
+
+  def play_again?
+    answer = nil
+    loop do
+      puts "Would you like to play again? (y/n)"
+      answer = gets.chomp.downcase
+      break if ['y', 'n'].include? answer
+      puts "Sorry, your must respond with y or n."
+    end
+    answer == 'y'
+  end
 end
 
 Game.new.starts
