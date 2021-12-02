@@ -230,23 +230,19 @@ class TwentyOne
     puts "#{player.name}'s turn..."
 
     loop do
-      puts "Would you like to (h)it or (s)tay?"
-      answer = hit_or_stay
-
-      if answer == 's'
+      if hit_or_stay == 's'
         puts "#{player.name} stays!"
         break
-      elsif player.busted?
-        break
       else
-        show_hit(player)
-        player.show_hand
+        show_player_move
         break if player.busted?
       end
     end
   end
 
   def hit_or_stay
+    puts "Would you like to (h)it or (s)tay?"
+
     answer = nil
     loop do
       answer = gets.chomp.downcase
@@ -301,6 +297,11 @@ class TwentyOne
     else
       puts "It's a tie!"
     end
+  end
+
+  def show_player_move
+    show_hit(player)
+    player.show_hand
   end
 
   def play_again?
