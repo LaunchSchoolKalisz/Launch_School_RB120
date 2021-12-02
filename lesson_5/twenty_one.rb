@@ -76,12 +76,11 @@ module Hand
   end
 
   def busted?
-    total >21
+    total > 21
   end
 end
 
 class Player < Participant
-  include Hand
   def initialize
     # what would the "data" or "states" of a Player object entail?
     # maybe cards? a name?
@@ -97,7 +96,7 @@ class Player < Participant
   end
 end
 
-def Participant
+class Participant
   include Hand
 
   attr_accessor :name, :cards
