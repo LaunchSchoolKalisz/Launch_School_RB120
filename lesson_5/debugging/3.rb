@@ -30,6 +30,7 @@ class GeoLocation
   def to_s
     "(#{latitude}, #{longitude})"
   end
+
 end
 
 # Example
@@ -44,5 +45,5 @@ ada.teleport_to(-33.89, 151.277)
 
 puts ada.location                   # (-33.89, 151.277)
 puts grace.location                 # (-33.89, 151.277)
-puts ada.location == grace.location # expected: true
+puts ada.location.to_s == grace.location.to_s # expected: true
                                     # actual: false
