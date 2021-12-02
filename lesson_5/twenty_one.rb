@@ -225,6 +225,10 @@ class TwentyOne
     end
   end
 
+  def show_flop
+    player.show_flop
+    dealer.show_flop
+  end
   
 end
 
