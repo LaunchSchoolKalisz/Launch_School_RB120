@@ -1,16 +1,16 @@
 =begin
 21 Game
 
-Discription: 21 is a card game. Consists of a dealer and a player. 
+Discription: 21 is a card game. Consists of a dealer and a player.
 Each player's goal is to reach as close to 21 as possible without going over.
 
 Overview
 - Start with a 52-card deck
-- Each player gets 2 cards 
+- Each player gets 2 cards
 - The player goes first: can hit or stay
 - If the player busts, they lose the game. If they stay, it is the dealer's turn
 - The dealer must hit until his cards add up to at least 17.
-- If dealer busts, the player wins. 
+- If dealer busts, the player wins.
 - If both player and dealer stays, then the highest total wins.
 - If both totals are equal, then it's a tie, and nobody wins.
 
@@ -18,18 +18,18 @@ Major Nouns and Verbs
 Nouns: deck, card, player, dealer, total, deck, game
 Verbs: hit, stay, win, lose, busts
 
-Organize 
+Organize
 
 Player
 - Hit
 - Stay
-- Total 
+- Total
 - Busted?
 
 Dealer
 - Hit
 - Stay
-- Total 
+- Total
 - Busted?
 
 Deck
@@ -59,14 +59,14 @@ module Hand
         total += 11
       elsif card.jack? || card.queen? || card.king?
         total += 10
-      else 
+      else
         total += card.face.to_i
       end
     end
 
     cards.select(&:ace?).count.times do
       break if total <= 21
-      total -=10
+      total -= 10
     end
     total
   end
@@ -84,6 +84,7 @@ class Participant
   include Hand
 
   attr_accessor :name, :cards
+
   def initialize
     @cards = []
     set_name
@@ -116,7 +117,7 @@ class Dealer < Participant
 
   def show_flop
     puts "---- #{name}'s Hand ----"
-    puts "#{cards.first}"
+    puts cards.first.to_s
     puts " ?? "
     puts ""
   end
@@ -124,6 +125,7 @@ end
 
 class Deck
   attr_accessor :cards
+
   def initialize
     @cards = []
     Card::SUITS.each do |suit|
@@ -209,7 +211,7 @@ class TwentyOne
   end
 
   def deal_cards
-    2.times do 
+    2.times do
       player.add_card(deck.deal_one)
       dealer.add_card(deck.deal_one)
     end
@@ -280,7 +282,7 @@ class TwentyOne
       puts "#{player.name} wins!"
     elsif player.total < dealer.total
       puts "#{dealer.name} wins!"
-    else 
+    else
       puts "It's a tie!"
     end
   end
