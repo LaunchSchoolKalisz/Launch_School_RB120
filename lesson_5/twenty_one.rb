@@ -153,7 +153,7 @@ class Card
   end
 
   def to_s
-    "The #{suit} of #{face}}"
+    "The #{face} of #{suit}"
   end
 
   def face
