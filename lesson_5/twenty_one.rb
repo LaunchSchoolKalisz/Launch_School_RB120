@@ -81,18 +81,19 @@ module Hand
 end
 
 class Player < Participant
-  def initialize
-    # what would the "data" or "states" of a Player object entail?
-    # maybe cards? a name?
+  def set_name
+    name = ''
+    loop do
+      puts "What's your name?"
+      name = gets.chomp
+      break unless name.empty?
+      puts "Sorry, you must enter a value."
+    end
+    self.name = name
   end
 
-  def hit
-  end
-
-  def stay
-  end
-
-  def busted?
+  def show_flop
+    show_hand
   end
 end
 
