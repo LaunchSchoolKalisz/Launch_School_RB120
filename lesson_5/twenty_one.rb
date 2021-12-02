@@ -315,22 +315,20 @@ class TwentyOne
     answer == 'y'
   end
 
+  def sequence
+    system 'clear'
+    deal_cards
+    show_flop
+
+    player_turn
+    dealer_turn
+  end
+
   def start
     loop do
-      system 'clear'
-      deal_cards
-      show_flop
+      sequence
 
-      player_turn
-      if player.busted?
-        show_busted
-        break unless play_again?
-        reset
-        next
-      end
-
-      dealer_turn
-      if dealer.busted?
+      if player.busted? || dealer.busted?
         show_busted
         break unless play_again?
         reset
