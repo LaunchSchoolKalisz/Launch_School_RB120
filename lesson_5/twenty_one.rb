@@ -290,6 +290,7 @@ class TwentyOne
   end
 
   def show_result
+    show_cards
     if player.total > dealer.total
       puts "#{player.name} wins!"
     elsif player.total < dealer.total
@@ -315,19 +316,23 @@ class TwentyOne
     answer == 'y'
   end
 
+  def goodbye
+    puts "Thank you for playing Twenty-One. Goodbye!"
+  end
+
   def sequence
     system 'clear'
     deal_cards
     show_flop
 
     player_turn
-    dealer_turn
+    dealer_turn unless player.busted?
   end
 
   def start
     loop do
       sequence
-
+      
       if player.busted? || dealer.busted?
         show_busted
         break unless play_again?
@@ -335,13 +340,12 @@ class TwentyOne
         next
       end
 
-      show_cards
       show_result
       play_again? ? reset : break
     end
-    puts "Thank you for playing Twenty-One. Goodbye!"
   end
 end
 
 game = TwentyOne.new
 game.start
+game.goodbye
