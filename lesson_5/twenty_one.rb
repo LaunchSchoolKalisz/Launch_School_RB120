@@ -217,6 +217,15 @@ class TwentyOne
     player.cards = []
     dealer.cards = []
   end
+
+  def deal_cards
+    2.times do 
+      player.add_card(deck.deal_one)
+      dealer.add_card(deck.deal_one)
+    end
+  end
+
+  
 end
 
 Game.new.starts
