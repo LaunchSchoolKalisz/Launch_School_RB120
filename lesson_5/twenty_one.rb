@@ -190,16 +190,6 @@ class Card
 
   def jack?
     face == 'Jack'
-  ends
-end
-
-class Game
-  def start
-    deal_cards
-    show_initial_cards
-    player_turn
-    dealer_turn
-    show_result
   end
 end
 
@@ -342,4 +332,5 @@ class TwentyOne
   end
 end
 
-Game.new.starts
+game = TwentyOne.new
+game.start
