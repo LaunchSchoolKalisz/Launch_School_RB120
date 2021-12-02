@@ -26,8 +26,9 @@ class BankAccount
   end
 
   def withdraw(amount)
-    if amount > 0
-      success = (self.balance -= amount)
+    success = (self.balance -= amount)
+    if success > 0
+      success
     else
       success = false
     end
