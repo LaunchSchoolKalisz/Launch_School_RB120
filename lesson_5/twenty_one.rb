@@ -204,6 +204,13 @@ class Game
 end
 
 class TwentyOne
+  attr_accessor :deck, :player, :dealer
+
+  def initialize
+    @deck = Deck.new
+    @player = Player.new
+    @dealer = Dealer.new
+  end
 end
 
 Game.new.starts
