@@ -69,7 +69,7 @@ class Employee
     "Serial No: #{abbreviated_serial_number}"
   end
 
-  private
+  protected
 
   attr_reader :serial_number
 
