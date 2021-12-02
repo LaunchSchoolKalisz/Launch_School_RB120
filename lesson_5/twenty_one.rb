@@ -227,12 +227,7 @@ class TwentyOne
 
     loop do
       puts "Would you like to (h)it or (s)tay?"
-      answer = nil
-      loop do
-        answer = gets.chomp.downcase
-        break if ['h', 's'].include?(answer)
-        puts "Sorry, must enter 'h' or 's'."
-      end
+      answer = hit_or_stay
 
       if answer == 's'
         puts "#{player.name} stays!"
@@ -240,11 +235,19 @@ class TwentyOne
       elsif player.busted?
         break
       else
-        player.add_card(deck.deal_one)
-        puts "#{player.name} hits!"
+        show_hit(player)
         player.show_hand
         break if player.busted?
       end
+    end
+  end
+
+  def hit_or_stay
+    answer = nil
+    loop do
+      answer = gets.chomp.downcase
+      break if ['h', 's'].include?(answer)
+      puts "Sorry, must enter 'h' or 's'."
     end
   end
 
@@ -258,10 +261,14 @@ class TwentyOne
       elsif dealer.busted?
         break
       else
-        puts "#{dealer.name} hits!"
-        dealer.add_card(deck.deal_one)
+        show_hit(dealer)
       end
     end
+  end
+
+  def show_hit(user)
+    user.add_card(deck.deal_one)
+    puts "#{user.name} hits!"
   end
 
   def show_busted
