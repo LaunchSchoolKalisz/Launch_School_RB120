@@ -55,13 +55,7 @@ module Hand
   def total
     total = 0
     cards.each do |card|
-      if card.ace?
-        total += 11
-      elsif card.jack? || card.queen? || card.king?
-        total += 10
-      else
-        total += card.face.to_i
-      end
+      total += assign_points(card)
     end
 
     cards.select(&:ace?).count.times do
@@ -69,6 +63,16 @@ module Hand
       total -= 10
     end
     total
+  end
+
+  def assign_points(card)
+    if card.ace?
+      11
+    elsif card.jack? || card.queen? || card.king?
+      10
+    else
+      card.face.to_i
+    end
   end
 
   def add_card(new_card)
@@ -249,11 +253,16 @@ class TwentyOne
       break if ['h', 's'].include?(answer)
       puts "Sorry, must enter 'h' or 's'."
     end
+    answer
   end
 
   def dealer_turn
     puts "#{dealer.name}'s turn..."
 
+    dealer_options
+  end
+
+  def dealer_options
     loop do
       if dealer.total >= 17 && !dealer.busted?
         puts "#{dealer.name} stays!"
