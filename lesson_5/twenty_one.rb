@@ -211,6 +211,12 @@ class TwentyOne
     @player = Player.new
     @dealer = Dealer.new
   end
+
+  def reset
+    self.deck = Deck.new
+    player.cards = []
+    dealer.cards = []
+  end
 end
 
 Game.new.starts
