@@ -107,19 +107,18 @@ class Participant
   end
 end
 
-class Dealer
-  include Hand
-  def hit
+class Dealer < Participant
+  ROBOTS = [Darcy, Bennet, Wickham, Bingley]
+
+  def set_name
+    self.name = ROBOTS.sample
   end
 
-  def stay
-  end
-
-  def busted?
-  end
-
-  def total 
-    # need info about cards
+  def show_flop
+    puts "---- #{name}'s Hand ----"
+    puts "#{cards.first}"
+    puts " ?? "
+    puts ""
   end
 end
 
