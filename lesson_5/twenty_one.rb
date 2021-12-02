@@ -307,23 +307,17 @@ class TwentyOne
       player_turn
       if player.busted?
         show_busted
-        if play_again?
-          reset
-          next
-        else
-          break
-        end
+        break unless play_again?
+        reset
+        next
       end
 
       dealer_turn
       if dealer.busted?
         show_busted
-        if play_again?
-          reset
-          next
-        else
-          break
-        end
+        break unless play_again?
+        reset
+        next
       end
 
       show_cards
