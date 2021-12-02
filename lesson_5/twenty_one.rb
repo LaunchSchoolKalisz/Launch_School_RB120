@@ -203,4 +203,7 @@ class Game
   end
 end
 
+class TwentyOne
+end
+
 Game.new.starts
