@@ -94,3 +94,48 @@ miller_contracting.remove(raul) # => Employee deleted.
 miller_contracting.add(natasha) # => Employee added.
 
 miller_contracting.display_all_employees
+
+=begin
+LS Solution
+
+class Employee
+  attr_reader :name
+
+  def initialize(name, serial_number)
+    @name = name
+    @serial_number = serial_number
+  end
+
+  def ==(other)
+    serial_number == other.serial_number
+  end
+
+  def to_s
+    "Name: #{name}\n" +
+    "Serial No: #{abbreviated_serial_number}"
+  end
+
+  protected
+
+  attr_reader :serial_number
+
+  private
+
+  def abbreviated_serial_number
+    serial_number[-4..-1]
+  end
+end
+
+Discussion
+Private methods cannot be invoked with an explicit caller, even inside of their own 
+class. But on line 56, in Employee#==, we do invoke serial_number with an explicit 
+caller (other).
+
+In order to make this work, we can make serial_number a protected method. Recall that 
+from outside the class, protected methods work just like private methods. From inside 
+the class, however, protected methods are accessible and may be invoked with an 
+explicit caller.
+
+You may wish to review the relevant chapter of Launch School's Object Oriented 
+Programming book.
+=end
