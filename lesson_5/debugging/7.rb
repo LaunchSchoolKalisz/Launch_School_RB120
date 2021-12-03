@@ -65,3 +65,46 @@ p account.balance         # => 50
 p account.withdraw(80)    # => Invalid. Enter positive amount less than or equal to current balance ($50).
                           # Actual output: $80 withdrawn. Total balance is $50.
 p account.balance         # => 50
+
+=begin
+LS Solution
+
+class BankAccount
+   # code omitted
+
+  def withdraw(amount)
+    if amount > 0 && valid_transaction?(balance - amount)
+      self.balance -= amount
+      "$#{amount} withdrawn. Total balance is $#{balance}."
+    else
+      "Invalid. Enter positive amount less than or equal to current balance ($#{balance})."
+    end
+  end
+
+  def balance=(new_balance)
+    @balance = new_balance
+  end
+
+  # code omitted
+end
+
+Discussion
+In Ruby, setter methods always return the argument that was passed in, even when you 
+add an explicit return statement. Our balance= method will therefore always return 
+its argument, irrespective of whether or not the instance variable @balance is 
+re-assigned.
+
+Because of this behavior, the invocation of balance= on line 21 of the original code 
+will have a truthy return value even when our setter method does not re-assign 
+@balance; it will never return false.
+
+A better solution is to check the validity of the transaction by calling 
+valid_transaction? in withdraw instead of balance=. If the transaction is deemed 
+valid, we then invoke balance=, otherwise we don't. This way we don't attempt to use 
+the setter for its return value, but instead let it do its one job: assigning a value 
+to @balance.
+
+Further Exploration
+What will the return value of a setter method be if you mutate its argument in the 
+method body?
+=end
