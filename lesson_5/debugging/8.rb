@@ -81,3 +81,47 @@ valentinas_tasks.complete_task('read OOP book')
 
 valentinas_tasks.display_all_tasks
 valentinas_tasks.display_high_priority_tasks
+
+=begin
+LS Solution
+
+class TaskManager
+  # code omitted
+
+  def display_high_priority_tasks
+    high_priority_tasks = tasks.select do |task|
+      task.priority == :high
+    end
+
+    display(high_priority_tasks)
+  end
+end
+
+Discussion
+When attempting to invoke the tasks getter method on line 35 in the code tasks.select, 
+we are unintentionally referencing a local variable tasks. Since it has not yet been 
+assigned a value, its value is nil, as reflected by the error message.
+
+In more detail, what happens is the following. On line 35, Ruby first has to 
+disambiguate the tasks name on the left-hand side of the assignment operator. It could 
+in principle be either local variable assignment, or an invocation of the setter method. 
+In this case, Ruby interprets it as local variable assignment. Recall that if we 
+intended to invoke the tasks= setter method, we would need to use self to disambiguate 
+from local variable assignment (self.tasks=). Next, Ruby must disambiguate the 
+reference to tasks on the right-hand side of the assignment operator, seen in the code 
+tasks.select. At this point, the getter method tasks is shadowed by the local variable 
+that was just initialized on the left side of the assignment operator. You can see this 
+shadowing at work also in the private display method, where tasks in the method body 
+refers to the method parameter, not the getter method.
+
+As a result, both references to tasks on line 35 are interpreted as a local variable. 
+This means that we initialize a local variable, and on the same line reference it via 
+tasks.select, before it has been assigned a value. Invoking the select method on nil 
+caused the error we see.
+
+In order to disambiguate this code so that Ruby will execute it as we intend, we best 
+give our local variable a unique name, such as high_priority_tasks. This way it does 
+not shadow the getter method. This is also in line with the Ruby style guide, which 
+advises to "avoid shadowing methods with local variables unless they are both 
+equivalent."
+=end
