@@ -39,11 +39,11 @@ class TaskManager
   end
 
   def display_high_priority_tasks
-    tasks = tasks.select do |task|
+    high_priotity_tasks = tasks.select do |task|
       task.priority == :high
     end
 
-    display(tasks)
+    display(high_priotity_tasks)
   end
 
   private
