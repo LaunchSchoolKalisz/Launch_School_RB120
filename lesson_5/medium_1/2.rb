@@ -6,11 +6,39 @@ support the following code:
 The below code should output true 16 times.
 =end
 
+class IndexError < StandardError; end
+
+class FixedArray
+  attr_accessor :fixed_array
+
+  def initialize(num)
+    @fixed_array = Array.new(num)
+  end
+
+  def to_a
+    fixed_array
+  end
+
+  def [](idx)
+   fixed_array[idx]
+  end
+
+  def []=(idx, obj)
+    fixed_array[idx] = obj
+  end
+
+  def to_s
+    fixed_array.to_s
+  end
+
+end
+
 fixed_array = FixedArray.new(5)
 puts fixed_array[3] == nil
 puts fixed_array.to_a == [nil] * 5
 
 fixed_array[3] = 'a'
+#puts fixed_array
 puts fixed_array[3] == 'a'
 puts fixed_array.to_a == [nil, nil, nil, 'a', nil]
 
