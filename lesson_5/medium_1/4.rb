@@ -12,20 +12,20 @@ longest is discarded and replaced by the new object.
 Assuming we have a circular queue with room for 3 objects, the circular queue looks and acts like this:
 
 P1	P2	P3	Comments
-All positions are initially empty
-1			Add 1 to the queue
-1	2		Add 2 to the queue
-2		Remove oldest item from the queue (1)
-2	3	Add 3 to the queue
-4	2	3	Add 4 to the queue, queue is now full
-4		3	Remove oldest item from the queue (2)
-4	5	3	Add 5 to the queue, queue is full again
-4	5	6	Add 6 to the queue, replaces oldest element (3)
-7	5	6	Add 7 to the queue, replaces oldest element (4)
-7		6	Remove oldest item from the queue (5)
-7			Remove oldest item from the queue (6)
-Remove oldest item from the queue (7)
-Remove non-existent item from the queue (nil)
+            All positions are initially empty
+1			      Add 1 to the queue
+1	  2		    Add 2 to the queue
+2		        Remove oldest item from the queue (1)
+2	  3	      Add 3 to the queue
+4	  2	  3	  Add 4 to the queue, queue is now full
+4		3	      Remove oldest item from the queue (2)
+4	  5	  3	  Add 5 to the queue, queue is full again
+4	  5	  6	  Add 6 to the queue, replaces oldest element (3)
+7	  5	  6	  Add 7 to the queue, replaces oldest element (4)
+7		6	      Remove oldest item from the queue (5)
+7			      Remove oldest item from the queue (6)
+            Remove oldest item from the queue (7)
+            Remove non-existent item from the queue (nil)
 
 Your task is to write a CircularQueue class that implements a circular queue for arbitrary objects. The class should 
 obtain the buffer size with an argument provided to CircularQueue::new, and should provide the following methods:
@@ -79,6 +79,36 @@ puts queue.dequeue == nil
 
 The above code should display true 15 times.
 =end
+
+class CircularQueue
+  def initialize(size)
+    @queue = Array.new(size)
+  end
+
+  def dequeue
+    return_value = @queue.shift
+    @queue.push(nil)
+    return_value
+  end
+
+  def enqueue(addition)
+    @queue.each_with_index do |spot, idx|
+      if @queue.include?(nil) 
+        if spot == nil
+          @queue[idx] = addition
+          break
+        end
+      else
+        @queue.shift
+        @queue.push(addition)
+        break
+      end
+    end
+    @queue
+  end
+
+end
+
 
 queue = CircularQueue.new(3)
 puts queue.dequeue == nil
