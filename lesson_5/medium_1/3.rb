@@ -18,15 +18,16 @@ class Student
   end
 end
 
-class Graduate
+class Graduate < Student
   def initialize(name, year, parking)
     super(name, year)
     @parking = parking
   end
 end
 
-class Undergraduate
+class Undergraduate < Student
   def initialize(name, year)
     super
   end
 end
+
