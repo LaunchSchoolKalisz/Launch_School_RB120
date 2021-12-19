@@ -143,6 +143,30 @@ Minilang.new('5 PUSH POP POP PRINT').eval
 # # (nothing printed; no PRINT commands)
 
 =begin
+LS Hint
+
+For error handling, you will likely need exceptions. See the Ruby documentation for handling exceptions and for the 
+Exception class. You may also find this blog article on Getting Started With Ruby Exceptions helpful.
+
+Custom exceptions are usually derived from the StandardError exception class, like so:
+
+class MyCustomError < StandardError; end
+
+You may also find Object#send to be useful when evaluating the Minilang code.
+
+If you have a variable str that points to a string, and you want to determine if it is a number, you can use a 
+regular expression in an if statement, like this:
+
+if str =~ /\A[-+]?\d+\z/
+  puts "It's a number!"
+else
+  puts "It's not a number."
+end
+
+Regular expressions (regex) are very useful for string operations, but we don't cover them in any detail until 
+RB130. If you haven't already read our book, Introduction to Regular Expressions, you may do so now, but it isn't 
+necessary - this hint is all you need to know about regex for this problem.
+
 LS Solution
 
 require 'set'
