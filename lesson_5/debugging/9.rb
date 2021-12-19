@@ -96,3 +96,49 @@ ellens_postal_service = PostalService.new('Ellen', '860 Blackbird Ln.')
 
 puts johns_postal_service.send(ellens_postal_service.street_address, Postcard.new('Greetings from Silicon Valley!'))
 # => undefined method `860 Blackbird Ln.' for #<PostalService:0x00005571b4aaebe8> (NoMethodError)
+
+=begin
+LS Solution
+
+module Mailing
+  def receive(mail, sender)
+    mailbox << mail unless reject?(sender)
+  end
+
+  # Change if there are sources you want to block.
+  def reject?(sender)
+    false
+  end
+
+  def send_mail(destination, mail)
+    "Sending #{mail} from #{name} to: #{destination}"
+    # Omitting the actual sending.
+  end
+end
+
+class PostalService < CommunicationsProvider
+  include Mailing
+
+  # code omitted
+end
+
+puts johns_postal_service.send_mail(ellens_postal_service.street_address, Postcard.new('Greetings from Silicon Valley!'))
+#=> Sending Postcard from John to: 860 Blackbird Ln.
+
+Discussion
+This is a case of accidental method overriding.
+
+On line 91, we intended to call Mailing#send, but since we forgot to include Mailing in PostalService, this does not 
+happen. Why does Ruby not complain that there is no method send? First it looks for send on the method lookup path, 
+and it actually finds a method with this name in the Object class. So it calls Object#send, which expects a method 
+name as the first argument. Since the first argument we provide, '860 Blackbird Ln.', is not the name of any method, 
+we get an error.
+
+In order to avoid overriding Object#send, we should rename our Mailing#send method to something unique, as seen in 
+the solution above.
+
+You may wish to review the chapter on Accidental Method Overriding in Launch School's Object Oriented Programming 
+book. Note that you don't need to memorize the Object#send method, or try to keep in mind all other methods that 
+Object implements. Just be aware that you may encounter code like this in the wild and take caution not to 
+accidentally override built-in methods.
+=end
