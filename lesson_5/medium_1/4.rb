@@ -148,3 +148,69 @@ puts queue.dequeue == 5
 puts queue.dequeue == 6
 puts queue.dequeue == 7
 puts queue.dequeue == nil
+
+=begin
+LS Solution
+
+class CircularQueue
+  def initialize(size)
+    @buffer = [nil] * size
+    @next_position = 0
+    @oldest_position = 0
+  end
+
+  def enqueue(object)
+    unless @buffer[@next_position].nil?
+      @oldest_position = increment(@next_position)
+    end
+
+    @buffer[@next_position] = object
+    @next_position = increment(@next_position)
+  end
+
+  def dequeue
+    value = @buffer[@oldest_position]
+    @buffer[@oldest_position] = nil
+    @oldest_position = increment(@oldest_position) unless value.nil?
+    value
+  end
+
+  private
+
+  def increment(position)
+    (position + 1) % @buffer.size
+  end
+end
+
+Discussion
+If you read the Wiki page on circular queues, it's likely that your solution resembles ours in terms of mechanics: 
+we have a buffer with room for N objects, a pointer to the oldest object currently in the buffer, and a pointer to 
+the next spot where a new object will be inserted. We also use nils to indicate empty buffer positions. All 3 of 
+these items are initialized in #initialize.
+
+With this type of structure, our two pointers need to "wrap around" from the final position to position 0. This is 
+accomplished with our private #increment method which simply increments the position pointer, and wraps around to 
+0 when necessary.
+
+The #enqueue method first checks whether it will be adding the object to an empty buffer position or replacing an 
+object in an occupied position. If the position is occupied, we need to update the @oldest_position pointer since 
+we will be replacing the oldest object. Finally, we store the object in the appropriate position, and increment the 
+@next_position pointer.
+
+Note that #enqueue needs to test for nil, not just falseness. This is because the queue may contain boolean values, 
+so testing for falseness would catch false values.
+
+#dequeue starts by extracting the oldest object, and replacing it with nil to indicate that the position is no 
+longer occupied. Then we update the @oldest_position pointer, and return the value that was originally in that 
+position.
+
+The use of unless value.nil? in #dequeue is necessary to prevent problems with calling #dequeue on an empty queue, 
+and subsequently adding objects to that queue. If you don't check for the nil value, the two pointers get out of 
+sync and cause problems.
+
+Further Exploration
+Phew. That's a lot of work, but it's a perfectly acceptable solution to this exercise. However, there is a simpler 
+solution that uses an Array, and the #push and #shift methods. See if you can find a solution that does this. And 
+no, you're not allowed to monkey-patch the Array class, though doing so may help you determine what needs to be 
+done.
+=end
