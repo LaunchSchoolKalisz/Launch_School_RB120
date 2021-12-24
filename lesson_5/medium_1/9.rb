@@ -66,3 +66,45 @@ drawn = []
 52.times { drawn << deck.draw }
 drawn.count { |card| card.rank == 5 } == 4
 drawn.count { |card| card.suit == 'Hearts' } == 13
+
+=begin
+Solution
+
+# insert Card class from previous exercise here
+
+class Deck
+  RANKS = ((2..10).to_a + %w(Jack Queen King Ace)).freeze
+  SUITS = %w(Hearts Clubs Diamonds Spades).freeze
+
+  def initialize
+    reset
+  end
+
+  def draw
+    reset if @deck.empty?
+    @deck.pop
+  end
+
+  private
+
+  def reset
+    @deck = RANKS.product(SUITS).map do |rank, suit|
+      Card.new(rank, suit)
+    end
+
+    @deck.shuffle!
+  end
+end
+
+Discussion
+The initialization code for our Deck is in the #reset method of our class. We put it here and not in #initialize 
+since we need to periodically create a new set of cards, and it's easier to do that in a separate method. Since the 
+method is not intended for public use (it could be though), we make it private.
+
+The #reset method works by combining the RANKS and SUITS Arrays with Array#product, which produces an Array of 
+nested 2-element Arrays. We convert that to an Array of Card objects using #map.
+
+The #draw method is relatively straightforward: we just call reset if there are no more cards remaining, then we 
+remove the topmost card from the deck.
+
+=end
