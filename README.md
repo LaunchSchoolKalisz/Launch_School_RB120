@@ -5,3 +5,4 @@
 ## Projects
 
 - [Tic Tac Toe Game](https://github.com/mskalisz/Launch_School_RB120/blob/main/lesson_5/TTT_game.rb)
+- [Twenty-One Game](https://github.com/mskalisz/Launch_School_RB120/blob/main/lesson_5/twenty_one.rb)
