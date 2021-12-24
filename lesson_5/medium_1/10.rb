@@ -205,9 +205,12 @@ playing a game of Poker, it isn't necessary to know how to play.
 
 class PokerHand
   def initialize(deck)
+    @hand = []
+    5.times {|_| @hand << deck.draw}
   end
 
   def print
+    @hand.each {|card| puts card.to_s}
   end
 
   def evaluate
@@ -228,6 +231,8 @@ class PokerHand
   private
 
   def royal_flush?
+    return true if @hand.all? {|rank| rank == @rank}
+    false
   end
 
   def straight_flush?
@@ -413,3 +418,7 @@ hand = PokerHand.new([
   Card.new(3,      'Diamonds')
 ])
 puts hand.evaluate == 'High card'
+
+=begin
+
+=end
