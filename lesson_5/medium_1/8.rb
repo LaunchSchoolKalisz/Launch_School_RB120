@@ -72,6 +72,8 @@ true
 =end
 
 class Card
+  ORDER = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
+
   attr_reader :rank, :suit
 
   def initialize(rank, suit)
@@ -79,9 +81,9 @@ class Card
     @suit = suit
   end
 
-  def new
+  def to_s
+    "#{@rank} of #{@suit}"
   end
-
 end
 
 cards = [Card.new(2, 'Hearts'),
@@ -89,7 +91,7 @@ cards = [Card.new(2, 'Hearts'),
          Card.new('Ace', 'Clubs')]
 
 puts cards
-# puts cards.min == Card.new(2, 'Hearts')
+puts cards.min #== Card.new(2, 'Hearts')
 # puts cards.max == Card.new('Ace', 'Clubs')
 
 # cards = [Card.new(5, 'Hearts')]
@@ -113,3 +115,51 @@ puts cards
 #          Card.new(8, 'Spades')]
 # puts cards.min.rank == 8
 # puts cards.max.rank == 8
+
+=begin
+LS Solution
+
+class Card
+  include Comparable
+  attr_reader :rank, :suit
+
+  VALUES = { 'Jack' => 11, 'Queen' => 12, 'King' => 13, 'Ace' => 14 }
+
+  def initialize(rank, suit)
+    @rank = rank
+    @suit = suit
+  end
+
+  def to_s
+    "#{rank} of #{suit}"
+  end
+
+  def value
+    VALUES.fetch(rank, rank)
+  end
+
+  def <=>(other_card)
+    value <=> other_card.value
+  end
+end
+
+Discussion
+Enumerable#min and Enumerable#max work with objects whose classes mix-in the Comparable module, which means the class
+must provide a #<=> method.
+
+Our solution does that: it includes the Comparable module, and implements #<=>. The method obtains the values of each 
+card with #value, and then compares them using Integer#<=>.
+
+#value uses Hash#fetch to convert named ranks (Jack, Queen, King, Ace) to appropriate values, and uses the numeric 
+value for numbered cards (2-10) as the value.
+
+Further Exploration
+You will need the original exercise solution for the next two exercises. If you work on this Further Exploration, 
+keep a copy of your original solution so you can reuse it.
+
+Assume you're playing a game in which cards of the same rank are unequal. In such a game, each suit also has a r
+anking. Suppose that, in this game, a 4 of Spades outranks a 4 of Hearts which outranks a 4 of Clubs which outranks 
+a 4 of Diamonds. A 5 of Diamonds, though, outranks a 4 of Spades since we compare ranks first. Update the Card class 
+so that #min and #max pick the card of the appropriate suit if two or more cards of the same rank are present in the 
+Array.
+=end
