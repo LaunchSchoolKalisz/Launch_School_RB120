@@ -90,6 +90,90 @@ end
 
 Person.class_method # invoking the class method
 ```
+## Setter and Getter methods
+### Getter methods
+Getter methods are read-only methods which are used to access the value referenced by the instance variable.
+
+```
+class Person
+  def initialize(name)
+    @name = name
+  end
+
+  # getter method
+  def	name
+    @name
+  end
+end
+
+marts = Person.new("Martha")
+p marts.name
+```
+
+### Setter Method
+Setter methods are write-only methods which are used to set or update the value referenced by the instance variable.
+
+```
+class Person
+  def initialize(name)
+    @name = name
+  end
+
+  # getter method
+  def	name
+    @name
+  end
+
+  # setter method
+  def name=(input)
+    @name = input
+  end
+end
+
+marts = Person.new("Martha")
+p marts.name # => "Martha"
+
+marts.name = "Another name"
+p marts.name # => "Another name"
+```
+Note: good practice  to reassign the instance variables using the setter method. This is because the getter/setter methods are much easier to reference if we ever need to retrieve or modify the state of the object as we can make changes in just one place. If you try to access an uninitialized instance variable it always returns nil.
+
+### Getter method for privacy
+It is safer to invoke a setter method than to explicitly call an instance variable because we can expose sensitve data or might accidentaly modify the value it references.
+
+```
+class Student
+
+  def initialize(name, score)
+    @name = name
+    @score = score
+  end
+
+  def get_grades
+    puts "#{name} has the grade #{finding_rank}"
+  end
+
+  private
+  attr_reader :name, :score
+
+  def finding_rank
+    answer = case score
+              when 85..100 then "Merit"
+              when 80..84 then "Distinction"
+              when 59..79 then "Pass"
+              else
+                "Fail"
+             end
+    answer            
+  end
+
+end
+
+bob = Student.new("Bob", 85)
+bob.get_grades
+```
+here we are encapsulating the score attained by the student and instead we are just showing the desired output
+
 
 ## Use attr_* to create setter and getter methods
 ## How to call setters and getters
