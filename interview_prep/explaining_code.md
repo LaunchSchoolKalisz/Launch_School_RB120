@@ -174,11 +174,68 @@ bob.get_grades
 ```
 here we are encapsulating the score attained by the student and instead we are just showing the desired output
 
+### Using attr_*
+The accessor methods are used to access and set the state of the object to read, set and update the values referenced by the instance variables.
 
-## Use attr_* to create setter and getter methods
-## How to call setters and getters
-## Instance methods vs. class methods
-## Method Access Control
+The accessor methods takes symbols as arguments which it uses to create getter and setter methods.
+
+attr_reader are getter methods which are read-only which is used to access and expose the value referenced by the instance variables.
+
+attr_writer methods are used to define setter methods without having to define a setter method. These are write only methods used to set or update the state of the object.
+
+attr_accessor methods are used as a short-hand to write both the getter and the setter methods. They are used to access and set the state of the object to read, set and update the values referenced by the instance variables.
+
+## Fake Operators
+Many operators in Ruby are actually methods inherited from another class. Due to this we can override these methods and have our own implementation within the inheriting sub classes. As a general rule of thumb the methods in this case the fake operators should behave in a way simillar to the original methods in order to avoid unexpected/undesired results.
+
+## Method access Control
+In Ruby the method access control is implemented by the use of public, private and the protected access modifiers.
+
+### Public Methods
+By default all the instance methods within the class are public methods apart from the constructor method initialize which is a private method. Public methods can be accessed from within the class and also from outside of the class. If one knows the class name or the object name then we can access these methods.
+
+### Private Methods
+Private methods are methods that are accessible within the class but is not available outside of the class to the rest of the program. They are available to one instance of the class at any given time.
+
+```
+class Person
+  def money_available
+    "You have £#{account_balance} in your account"
+  end
+
+  private
+
+  def account_balance
+    5000
+  end
+end
+
+Person.new.money_available
+```
+### Protected Methods
+Protected methods are available within the class and all of its subclasses. They act as public methods when called within the class and as private methods outside of the class hiearchy. They can be used to compare two objects.
+```
+class Student
+  def initialize(grade)
+    @grade = grade
+  end
+
+  def >(other)
+    grade > other.grade
+  end
+
+  protected
+
+  attr_reader :grade
+end
+
+bob = Student.new(80)
+john = Student.new(90)
+
+p bob > john # => false
+p john > bob # => true
+```
+
 ## Referencing and setting instance variables vs. using getters and setters
 ## Class inheritance, encapsulation, and polymorphism
 ## Modules
