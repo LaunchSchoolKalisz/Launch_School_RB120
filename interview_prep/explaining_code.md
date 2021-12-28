@@ -236,6 +236,46 @@ p bob > john # => false
 p john > bob # => true
 ```
 
+## Inheritance - Class and Modules
+### Class Inheritance
+Inheritance reduces dependencies and increases code resusability. We can use inheritance to extract common behaviours to a superclass. This helps us to keep the logic in one place. All the methods inherited from a superclass is available to its subclass. This is a great way to model concepts that are naturally hiearchical.
+
+class vs interface(mix-in) inheritance:
+- If multiple inheritance is needed, use Interface inheritance as subclasses inherit from only one superclass.
+- Modules cannot inherit. Modules cannot create objects. So, in order to create objects we use class inheritance
+- Modules have a "has-a" relationship: used for namespacing and grouping commom behaviours to be shared.
+- Classes have a "is-a" relationship: it is useful for creating objects.
+
+A subclass inherits the behaviours from a superclass. The subclass is the derived class and the super class is the base class. The superclass has a larger reusability and the subclass has an extended or refined implementation. This reduces complexity of the code and makes it reusable. Class Inheritance displays Is - A relationship.
+```
+class Mammal # superclass
+end
+
+class Dog < Mammal # subclass
+end
+```
+
+### Interface Inheritance - modules
+In Ruby multiple inheritance is acheived by mixin modules. The inheritance achieved through mixing in modules are known as Interface Inheritance. We mix in a behaviour from a module using the include method and passing in the name of the module as an argument to it. Modules are used as containers for grouping common methods and namespacing. Grouping simillar or related classes within a module is known as namespacing. Interface inheritance have a "has - a" relationship. Eg. The Dog has a behaviour(.i.e, a method). Modules are useful for grouping common methods from classes that are not related hierarchially.
+```
+module Swimmable
+  def swim
+    "I can swim!!!"
+  end
+end
+
+class Human
+  include Swimmable
+end
+
+class Dog
+  include Swimmable
+end
+
+puts Human.new.swim
+puts Dog.new.swim
+```
+
 ## Referencing and setting instance variables vs. using getters and setters
 ## Class inheritance, encapsulation, and polymorphism
 ## Modules
