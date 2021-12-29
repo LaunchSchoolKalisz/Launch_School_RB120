@@ -47,3 +47,37 @@ Answer re-do
 In Ruby uninitialized instance variables always return `nil` when we try to access them through a getter method. When we try to access an uninitialised local variable it will raise an error.
 
 In `line 40` a local variable `teddy` is instantiated to a new object by calling the `::new class` method on the class `Dog`. There are no instance variables defined within `Dog` and so `line 41` outputs `nil` when we attempt to invoke `swim` on the variable `teddy`, even with the `Swimmable` module mixed in. This is because we are trying to access an uninitialized instance variable.
+
+## Example 3
+
+What is output and why? What does this demonstrate about constant scope? What does self refer to in each of the 3 methods above?
+
+```
+module Describable
+  def describe_shape
+    "I am a #{self.class} and have #{self.class::SIDES} sides."
+  end
+end
+
+class Shape
+  include Describable
+
+  def self.sides
+    self::SIDES
+  end
+
+  def sides
+    self.class::SIDES
+  end
+end
+
+class Quadrilateral < Shape
+  SIDES = 4
+end
+
+class Square < Quadrilateral; end
+
+p Square.sides # 4
+p Square.new.sides # 4
+p Square.new.describe_shape # 4
+```
