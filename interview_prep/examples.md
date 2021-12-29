@@ -81,3 +81,8 @@ p Square.sides # 4
 p Square.new.sides # 4
 p Square.new.describe_shape # 4
 ```
+This code outputs `4`, then `4`, then `"I am a Square and I have 4 sides"`. 
+
+This demonstrate that constants have a lexical scope. When Ruby looks for a constant, it first looks for the constant in the class which references it and then looks up the inheritance hierarchy when it cannot find it. 
+
+On `line 58` `self` refers to whatever class is discribed
