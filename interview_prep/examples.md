@@ -95,3 +95,47 @@ On `line 80` we are invoking the class method `sides` on the class `Square` this
 On `line 81` the `sides` instance method is called on the new instance of the `Square` which, again, outputs the integer `4`. Ruby looks for the method in the method lookup path and finds the `sides` instance method in the `Shape` class. The last expression within the method is `self.class::SIDES` which equates to `Square.new.class::SIDES`. As before the value referenced by `SIDES` is 4.
 
 On `line 82`, we invoke the `describe_shape` instance method on a new `Square` object. Since the `SIDES` constant is referenced within this method without a qualifying namespace, Ruby checks the method lookup path, to see if it defines the constant. Since it finds it, in the superclass `Quadrilateral` Ruby outputs "I am a Square and I have 4 sides".
+
+## Example 4
+What is output? Is this what we would expect when using AnimalClass#+? If not, how could we adjust the implementation of AnimalClass#+ to be more in line with what we'd expect the method to return?
+
+```
+class AnimalClass
+  attr_accessor :name, :animals
+
+  def initialize(name)
+    @name = name
+    @animals = []
+  end
+
+  def <<(animal)
+    animals << animal
+  end
+
+  def +(other_class)
+    animals + other_class.animals
+  end
+end
+
+class Animal
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+end
+
+mammals = AnimalClass.new('Mammals')
+mammals << Animal.new('Human')
+mammals << Animal.new('Dog')
+mammals << Animal.new('Cat')
+
+birds = AnimalClass.new('Birds')
+birds << Animal.new('Eagle')
+birds << Animal.new('Blue Jay')
+birds << Animal.new('Penguin')
+
+some_animal_classes = mammals + birds
+
+p some_animal_classes
+```
