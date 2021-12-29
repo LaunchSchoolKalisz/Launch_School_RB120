@@ -275,14 +275,62 @@ end
 puts Human.new.swim
 puts Dog.new.swim
 ```
+## Method Lookup Path
+The order in which Ruby inspects different classes and modules when a method is invoked is known as the method lookup path. Ruby looks for the method in the inheritance hierarchy up untill it finds the first instance of the method and then invokes it. If no method is found then it will raise a `NoMethodError`. This can be determined by calling the `::ancestors` class method on the class under question.
+```
+module Speakable
+  def speak(sound)
+    "I am a #{self.class} and I can say #{sound}!!"
+  end
+end
 
-## Referencing and setting instance variables vs. using getters and setters
-## Class inheritance, encapsulation, and polymorphism
-## Modules
-## Method lookup path
-## self
-  ### Calling methods with self
-  ### More about self
+class Animal
+  include Speakable
+end
+
+class Human < Animal
+end
+
+puts Human.new.speak("Hello")
+# => "I am a Human and I can say Hello!!"
+p Human.ancestors
+# => [Human, Animal, Speakable, Object, Kernel, BasicObject] ---> "method lookup path"
+```
+### Super
+A keyword used by Ruby to invoke a method with the same name within the method lookup path. When we invoke a method which has a super keyword, Ruby looks in the method lookup path to find another method with the same name. Ruby invokes the method when it finds it.
+
+The super keywords can also take arguments. But by default it will pass all the arguments passed into the calling method to the other method with the same name. In order to avoid this we can call the super keyword with a parenthesis such as super().
+
+### Self
+The `self` keyword is an explicit caller. The `self` keyword represents the class or the object of a class depending upon the scope where it is used.
+
+In `line xxx - xxx` we are using the `self` keyword while defining a method. In `line xxx` the `self` in the expression `self.xxxx` represents the class `ClassName`. Hence this is a class method. Within the class method the `self` keyword also represents the class `xxxx`.
+
+In `line xxx - xxx` the `self` keyword is used within the setter instance method `xxxx`. Within an instance method, the `self` keyword is the calling object and hence in `line xxx` it represents the `object xxx`, which is an instance of the `xxx class`.
+
+### Constants
+How can we access constants from outside of the class?
+In order to access the constants from outside of the class where it is defined we will have to use the namespace resolution operator. This is in the format `Class::CONSTANT`. The namespace resolution operator is used between the class name and the constant.
+
+#### Lexical scope
+When Ruby looks for a constant it first looks for the constant in the class which references it and then looks up the inheritance hierarchy when it cannot find it. This is because the constants in Ruby have a lexical scope.
+
+### Polymorphism
+Polymorphism occurs when objects of different types respond to the method invocation with the same name. It helps in reducing dependencies.
+
+Polymorphism are broadly classed into two types
+
+- Polymorphism through inheritance
+- Polymorphism through Duck Typing
+
+When the subclass inherits behavior from one of its superclass because it could not find the method in the subclass then polymorphism occurs. This type of polymorphism is known as Polymorphism through Inheritance as we are inhering the behaviours. Since method overriding is also a type of inheritance this is also Polymorphism through Inheritance .
+
+When object of unrelated classes respond to the invocation of the instance method with the same name then this is known as Polymorphism through Duck Typing.
+
+### Encapsulation
+Ruby creates objects and exposes the interfaces to interact with those objects. Due to this it is possible that the data could be unintentionally modified. Also this can also increase the dependencies between different objects. Ruby enables us to hide the behaviour and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code. This is known as Encapsulation and this is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. In Ruby all the instance methods are public by default unless we implement method access control. The exception being the constructor method initialize which is always private. All instance variables are encapsulated by default and we use the instance method to expose them.
+
+
 ## Reading OO code
 ## Fake operators and equality
 ## Truthiness
