@@ -139,3 +139,4 @@ some_animal_classes = mammals + birds
 
 p some_animal_classes
 ```
+This code outputs an one array of Animal objects.
