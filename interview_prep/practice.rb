@@ -1,27 +1,44 @@
-module Describable
-  def describe_shape
-    "I am a #{self.class} and have #{self.class::SIDES} sides."
+class AnimalClass
+  attr_accessor :name, :animals
+
+  def initialize(name)
+    @name = name
+    @animals = []
+  end
+
+  def <<(animal)
+    animals << animal
+  end
+
+  # def +(other_class)
+  #   animals + other_class.animals
+  # end
+
+  def +(other_class)
+    my_own = AnimalClass.new("My animals")
+    my_own.animals = animals + my_own.animals
+    my_own
   end
 end
 
-class Shape
-  include Describable
+class Animal
+  attr_reader :name
 
-  def self.sides
-    self::SIDES
-  end
-
-  def sides
-    self.class::SIDES
+  def initialize(name)
+    @name = name
   end
 end
 
-class Quadrilateral < Shape
-  SIDES = 4
-end
+mammals = AnimalClass.new('Mammals')
+mammals << Animal.new('Human')
+mammals << Animal.new('Dog')
+mammals << Animal.new('Cat')
 
-class Square < Quadrilateral; end
+birds = AnimalClass.new('Birds')
+birds << Animal.new('Eagle')
+birds << Animal.new('Blue Jay')
+birds << Animal.new('Penguin')
 
-p Square.sides # 4
-p Square.new.sides # 4
-p Square.new.describe_shape # 4
+some_animal_classes = mammals + birds
+
+p some_animal_classes

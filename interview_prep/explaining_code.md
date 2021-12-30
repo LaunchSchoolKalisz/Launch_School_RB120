@@ -287,7 +287,7 @@ puts Human.new.swim
 puts Dog.new.swim
 ```
 ## Method Lookup Path
-The order in which Ruby inspects different classes and modules when a method is invoked is known as the method lookup path. Ruby looks for the method in the inheritance hierarchy up untill it finds the first instance of the method and then invokes it. If no method is found then it will raise a `NoMethodError`. This can be determined by calling the `::ancestors` class method on the class under question.
+The order in which Ruby inspects different classes and modules when a method is invoked is known as the method lookup path. Ruby looks for the method in the inheritance hierarchy up untill it finds the first instance of the method and then invokes it. If no method is found then it will raise a `NoMethodError` or  `NameError`. This can be determined by calling the `::ancestors` class method on the class under question.
 ```
 module Speakable
   def speak(sound)
@@ -307,10 +307,45 @@ puts Human.new.speak("Hello")
 p Human.ancestors
 # => [Human, Animal, Speakable, Object, Kernel, BasicObject] ---> "method lookup path"
 ```
+Ruby will first check the closest class to the class or object that invokes the method. Next, it will check any modules that are included into that class. If more than one module is included, it will check the last included module first. This means that we can override methods from earlier included modules, just as we can override methods from a superclass.
+
+Next, it will check the superclass, and any modules included in the superclass, which are also inherited by the subclass. It will keep moving up along the chain in this outward order until it reaches BasicObject, the last superclass for all objects in Ruby
+
 ### Super
 A keyword used by Ruby to invoke a method with the same name within the method lookup path. When we invoke a method which has a super keyword, Ruby looks in the method lookup path to find another method with the same name. Ruby invokes the method when it finds it.
 
 The super keywords can also take arguments. But by default it will pass all the arguments passed into the calling method to the other method with the same name. In order to avoid this we can call the super keyword with a parenthesis such as super().
+
+```
+# passing along only some arguments
+class Pet
+  def initialize(name)
+    @name = name
+  end
+end
+
+# this will not work
+class Cat < Pet
+  def initialize(name, personality)
+    super     # passes two arguments Pet#initialize expects only one
+    @personality = personality
+  end
+end
+
+felix = Cat.new('Felix', 'playful')
+# => ArgumentError (wrong number of arguments (given 2, expected 1))
+
+# this will work
+class Cat < Pet
+  def initialize(name, personality)
+    super(name) # passes only the `name` argument to Pet#initialize
+    @personality = personality
+  end
+end
+
+felix = Cat.new('Felix', 'playful')
+# => #<Cat:0x000055e2ac7e4908 @name="Felix", @personality="playful">
+```
 
 Since the `xxx` constant is referenced within this method without a qualifying namespace, Ruby checks the up the method lookup path to see if it defines the constant. Since it doesn't find it, Ruby raises a NameError error.
 
