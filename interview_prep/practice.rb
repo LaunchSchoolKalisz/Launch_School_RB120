@@ -15,9 +15,9 @@ class AnimalClass
   # end
 
   def +(other_class)
-    my_own = AnimalClass.new("My animals")
-    my_own.animals = animals + my_own.animals
-    my_own
+    combined = AnimalClass.new("Combined Animals")
+    combined.animals =  animals + other_class.animals
+    combined
   end
 end
 

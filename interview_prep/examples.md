@@ -139,9 +139,11 @@ some_animal_classes = mammals + birds
 
 p some_animal_classes
 ```
-This code outputs an one array of Animal objects, when the expected output would be a new animal class with an animals array as an instance variable. We could adjust the code as such:
-
+This code outputs an one array of Animal objects, when the expected output would be an animal class with an animals array as an instance variable. We could adjust the code as such:
+```
   def +(other_class)
     combined = AnimalClass.new("Combined Animals")
     combined.animals =  animals + other_class.animals
   end
+```
+By doing this we are initializing a local variable `combined` to the return value of intantiating an instance of `AnimalClass`. We are invoke the `AnimalClass#animal=(name)` setter method on the object to the set the value of `@animals` instance variable to the return value of the expression `animals + combined.animals` . Since `combined` is the last evaluated expression within the method, the object referenced by `combined` is returned when the `AnimalClass#+` method is invoked.
