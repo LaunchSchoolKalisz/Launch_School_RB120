@@ -191,3 +191,14 @@ def change_info(n, h, w)
   self.weight = w  
 end
 ```
+
+Answer re-do
+Within the `change_info` method definition we are not calling the setter methods `name=, height= and weight=` instead we are initializing the local variables `name, height and weight` and setting them to the arguments passed in during the `change_info` method invocation. So, the value referenced by the instance variables are not reassigned. Inorder to fix the issue we will have to call the setter methods using the `self` keyword which represents the current object. This is done as follows.
+
+def change_info(n, h, w)
+  self.name = n
+  self.height = h
+  self.weight = w
+end
+
+Here the `self` keyword references the calling object. Hence the setter methods are invoked with the required parameters are passed in as arguments. `Line 178` now outputs "Spartacus weighs 45 lbs and is 24 inches tall."
