@@ -177,3 +177,17 @@ sparky.change_info('Spartacus', '24 inches', '45 lbs')
 puts sparky.info
 # => Spartacus weighs 10 lbs and is 12 inches tall.
 ```
+
+In the above code, we define an instance method `change_info` that tries to use the `name=`, `height=`, and `weight=` setter methods to reassign the values of each respective variable. However, because we are not using the keyword `self` within the instance method, Ruby assumes that we are instead initializing a local variable name, to which we assign the string object passed as argument.
+
+When we call `change_info` on the GoodDog object `sparky` and pass the strings as arguments, these strings are assigned to local variables within the method and the instance variables remains pointing to their respective strings (ie `name` `height` and `weight` remain pointed to `'Spartacus'`, `'12 inches'`, and `'10 lbs'`). 
+
+We need to use `self` to explicitly call the `name=` setter method in the `change_info` method as below:
+
+```
+def change_info(n, h, w)
+  self.name = n
+  self.height = h
+  self.weight = w  
+end
+```
