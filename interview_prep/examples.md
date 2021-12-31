@@ -147,3 +147,33 @@ This code outputs an one array of Animal objects, when the expected output would
   end
 ```
 By doing this we are initializing a local variable `combined` to the return value of intantiating an instance of `AnimalClass`. We are invoke the `AnimalClass#animal=(name)` setter method on the object to the set the value of `@animals` instance variable to the return value of the expression `animals + combined.animals` . Since `combined` is the last evaluated expression within the method, the object referenced by `combined` is returned when the `AnimalClass#+` method is invoked.
+
+## Example 5
+We expect the code above to output ”Spartacus weighs 45 lbs and is 24 inches tall.” Why does our change_info method not work as expected?
+```
+class GoodDog
+  attr_accessor :name, :height, :weight
+
+  def initialize(n, h, w)
+    @name = n
+    @height = h
+    @weight = w
+  end
+
+  def change_info(n, h, w)
+    name = n
+    height = h
+    weight = w
+  end
+
+  def info
+    "#{name} weighs #{weight} and is #{height} tall."
+  end
+end
+
+
+sparky = GoodDog.new('Spartacus', '12 inches', '10 lbs')
+sparky.change_info('Spartacus', '24 inches', '45 lbs')
+puts sparky.info
+# => Spartacus weighs 10 lbs and is 12 inches tall.
+```
