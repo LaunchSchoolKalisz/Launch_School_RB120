@@ -27,7 +27,7 @@ class Animal
   def initialize(name)
     @name = name
   end
-end
+end 
 
 mammals = AnimalClass.new('Mammals')
 mammals << Animal.new('Human')
