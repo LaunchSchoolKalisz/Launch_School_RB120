@@ -76,7 +76,7 @@ To define a class method, prepend the method name with the keyword `self`. In th
 ### Class variables
 Defined by @@
 
-Class variables are accessible from within the instance methods and class methods. Scoped at the class level. Class variables are defined at the class level and is available to all the instances of the class. Just one copy of the class variable exists for the Class and all of its instances. Reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program irreversibly. This means that if a subclass changes the class variable then the value referenced would have changed to the new value when we try to access the class variable through a superclass. Due to this reason utilizing class variables can cause unexpected behavior and due to this Rubyists tend to stay away from it.
+Class variables are accessible from within the instance methods and class methods. Available to all subclasses via inheritance. Scoped at the class level. Class variables are defined at the class level and is available to all the instances of the class. Just one copy of the class variable exists for the Class and all of its instances. Reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program irreversibly. This means that if a subclass changes the class variable then the value referenced would have changed to the new value when we try to access the class variable through a superclass. Due to this reason utilizing class variables can cause unexpected behavior and due to this Rubyists tend to stay away from it.
 
 #### Instance methods vs class methods
 Instance methods are called on the instances of the class (individual object, must be instantiated). Instance methods are the behaviors or functionality available to the objects. Define a single behavior. They are encapsulated in the Classes from which the objects are derived from. Instance variables can be accessed by the instance methods. Example:
@@ -224,7 +224,10 @@ end
 Person.new.money_available
 ```
 ### Protected Methods
-Protected methods are available within the class and all of its subclasses. They act as public methods when called within the class and as private methods outside of the class hiearchy. They can be used to compare two objects.
+Protected methods are available within the class and all of its subclasses. They act as public methods when called within the class and as private methods outside of the class hiearchy. 
+
+For practical purposes, this means that they can be invoked by all objects within a certain class, but only from within the class. This differs from private methods in that a private method can only be called by the singular instance within the class. They can be used to compare two objects.
+
 ```
 class Student
   def initialize(grade)
@@ -286,6 +289,117 @@ end
 puts Human.new.swim
 puts Dog.new.swim
 ```
+
+When should we use a mix in module?
+- Ask what the relationship is:
+  - If there's an is-a relationship (as in "A Cat is an Animal") use class inheritance.
+  - If there's a has-a relationship (as in "A Person has the ability to speak") use a mixin module.
+- Use mixin modules to group methods together that multiple unrelated classes will have to access.
+- Do not use a module for anything that needs to be instantiated.
+
+## Namespacing
+Consists of organizing similar classes under a module, or using a module to group related classes. Doing so makes it easier to recognize related classes and reduces the likelihood of classes colliding with other similarly names classes in our codebase.
+
+To work with classes and objects that are namespaced in a module, we have to call the classes in the module with the following syntax ModuleName::ClassName.new.
+
+```
+module Animal
+  class Fish
+    attr_reader :fins, :gills
+
+    def initialize
+      @fins = true
+      @gills = true
+    end
+  end
+
+  class Mammal
+    attr_reader :warm_blooded, :fur
+
+    def initialize
+      @warm_blooded = true
+      @fur = true
+    end
+  end
+
+  class Reptile
+    attr_reader :cold_blooded, :scales
+
+    def initialize
+      @cold_blooded = true
+      @scales = true
+    end
+  end
+end
+
+salmon = Animal::Fish.new
+bear = Animal::Mammal.new
+snake = Animal::Reptile.new
+
+p salmon.fins             # => true
+p bear.fur                # => true
+p snake.cold_blooded      # => true
+```
+
+In the above code example, we use the Animals module to categorize the related classes Fish, Mammal, and Reptile. We can still instantiate new objects by access the classes through the module by using the namespace resolution operator ::. Each class defines it's own distinctive attributes, which we can still access on the object level, that is, through the created instance of each given class.
+
+Namespacing also makes it possible for us to repeat more common class names without interfering with the rest of our codebase. This is done by implementing a hierarchal structure within our namespace, by using a combination of class definitions and lower level namespacing within the overall namespace.
+```
+# main overall namespace
+module RegionalFauna
+
+  # lower level namespace module
+  module SouthAmerica
+    # repeated class name
+    class Monkey
+      attr_reader :prehensile_tail
+      
+      def initialize
+        @prehensile_tail = true
+      end
+    end
+  end
+  
+  # lower level namespace module
+  module Africa
+    # repeated class name
+    class Monkey
+      attr_reader :prehensile_tail
+      
+      def initialize
+        @prehensile_tail = false
+      end
+    end
+  end
+end
+
+spider_monkey = RegionalFauna::SouthAmerica::Monkey.new
+baboon = RegionalFauna::Africa::Monkey.new
+
+p spider_monkey.prehensile_tail       # => true
+p baboon.prehensile_tail              # => false
+```
+
+In the above code, we are able to define two classes both named Monkey due to using hierarchal namespacing. The instances of each class can exhibit distinct attributes appropriate to the class. For example, here the Monkey instance which is defined in the SouthAmerica lower level namespace will return true when we call the getter method prehensile_tail. However, the Monkey instance which is defined in the Africa lower level namespace will return false when we call the getter method prehensile_tail.
+
+## Module Methods
+We can define module methods that can be called directly on the module similarly to the way we define class methods. When defining the method within the module, we add the keyword self to the front of the method name, which functions as a placeholder to represent the calling module.
+
+These kinds of methods are particularly useful when you have methods that seem out of place or don't really fit nicely anywhere in your code.
+
+We call module methods directly from the module, similarly to the way we would call a class method.
+
+```
+# namespace module example 1 from above, code omitted for brevity
+module Animal
+  def self.out_of_place_method(num)
+    num ** 2
+  end
+end
+
+Animal.out_of_place_method(4)     # => 16
+```
+
 ## Method Lookup Path
 The order in which Ruby inspects different classes and modules when a method is invoked is known as the method lookup path. Ruby looks for the method in the inheritance hierarchy up untill it finds the first instance of the method and then invokes it. If no method is found then it will raise a `NoMethodError` or  `NameError`. This can be determined by calling the `::ancestors` class method on the class under question.
 ```
@@ -371,12 +485,275 @@ Polymorphism are broadly classed into two types
 - Polymorphism through inheritance
 - Polymorphism through Duck Typing
 
-When the subclass inherits behavior from one of its superclass because it could not find the method in the subclass then polymorphism occurs. This type of polymorphism is known as Polymorphism through Inheritance as we are inhering the behaviours. Since method overriding is also a type of inheritance this is also Polymorphism through Inheritance .
+#### Polymorphism through Inheritance
 
-When object of unrelated classes respond to the invocation of the instance method with the same name then this is known as Polymorphism through Duck Typing.
+When the subclass inherits behavior from one of its superclass because it could not find the method in the subclass then polymorphism occurs. This type of polymorphism is known as Polymorphism through Inheritance as we are inhering the behaviours. Since method overriding is also a type of inheritance this is also Polymorphism through Inheritance.
+
+Can work in 2 ways:
+1. A specific instance of a subclass inherits a more generic method implementation from a superclass.
+2. A subclass overrides a more generic method implementation from a superclass with a different more specific behavior by implementing a method of the same name.
+```
+class Animal
+  def eats
+    puts "feeds on other living things"
+  end
+end
+
+class Carnivore < Animal
+  def eats
+    puts "feeds on meat"
+  end
+end
+
+class Herbivore < Animal
+  def eats
+    puts "feeds on plants"
+  end
+end
+
+class Omnivore < Animal; end
+
+lion = Carnivore.new
+rabbit = Herbivore.new
+person = Omnivore.new
+
+animals = [lion, rabbit, person]
+animals.each { |animal| animal.eats }
+  # => feeds on meat
+  # => feeds on plants
+  # => feeds on other living things
+```
+
+In the code above, we define a more general eats method in the superclass Animal that is available to to all Animal objects. In the Carnivore subclass, we override this method to implement a process that's more specific to the Carnivore type. Similarly, in the Herbivore subclass, we override Animal#eats for a more specific implementation. However, in the Omnivore subclass, no more specific implementation is needed, so we allow it to inherit the generic implementation from Animal.
+
+Because we have defined more specific types of eats, we can work with all the different types of objects in the same way, even though the implementations may be different. This is shown when we create three objects, lion from the Carnivore class, rabbit from the Herbivore class, and person from the Omnivore class, and place them together in an array. We are able to iterate over each object in the array and invoke the eats method on all of them despite the fact that they are all objects of a different type.
+
+This example of is the essence of accessing different implementations through a common interface (in this case, the client code eats). When we call eats on lion, the Carnivore#eats method is invoked, and we see the appropriate output 'feeds on meat'. When we call eats on rabbit the Herbivore#eats method is invoked, and again we see the appropriate output 'feeds on plants'. Finally, we invoke eats on person and the inherited Animal#eats method is called, which gives us the more generic output of 'feeds on other living things'.
+
+The above code works because the block animal.eats only really cares that each element in the array has an eats method that is called with no arguments, which is the case here. The interface (eats) is the same for all the objects, despite their different implementations.
+
+Polymorphism can also be exhibited when mixing in a module. When we mix a module into a class using include, all the behaviors declared in the module are available to the class and its objects. This is known as interface inheritance. Two distinct classes that include the same module can also be said to exhibit polymorphism, as both instances can access the same interface (defined by the module).
+```
+module Swimmable
+  def swim
+    "I'm swimming"
+  end
+end
+
+class Dog
+  include Swimmable
+end
+
+class Fish
+  include Swimmable
+end
+
+class Cat; end
+
+fido = Dog.new
+felix = Cat.new
+nemo = Fish.new
+
+# both the Dog and Fish object can access the included `swim` method (polymorphism)
+fido.swim           # => "I'm swimming"
+nemo.swim           # => "I'm swimming"
+
+# but the Cat object cannot (it's not included)
+felix.swim          # => NoMethodError
+```
+
+#### Polymorphism through Duck Typing
+Duck typing occurs when different unrelated types of objects both respond to the same method name. Here, we want to see that an object has a particular behavior rather than if it is a certain class/type. Polymorphism through duck typing means that different types of objects can have different methods of various implementations, all with the same interface (name + arguments), despite not inheriting these methods.
+
+We can tell when duck typing is in play because it deals with a number of objects that share a common interface, even though they have no relationship via class or module. Duck typing focuses on what an object can do rather than what an object is.
+
+Think of a webpage, which has an assortment of unrelated clickable elements. A link, a button, a checkbox, an image, or a text input field. All these things might have a method that defines the various implementation for each when clicked by the mouse. However, they are not formally types together as they might be through class inheritance. They simply all exhibit the same behavior.
+
+Example 1 (from LS material):
+```
+class Wedding
+  attr_reader :guests, :flowers, :songs
+  
+  def initialize(guests, flowers, songs)
+    @guests = guests
+    @flowers = flowers
+    @songs = songs
+  end
+  
+  def prepare(preparers)
+    preparers.each do |preparer|
+      preparer.prepare_wedding(self)
+    end
+  end
+end
+
+class Chef
+  def prepare_wedding(wedding)
+    prepare_food(wedding.guests)
+  end
+  
+  def prepare_food(guests)
+    guests.each { |guest| puts "Dinner for #{guest}" }
+  end
+end
+
+class Decorator
+  def prepare_wedding(wedding)
+    decorate_venue(wedding.flowers)
+  end
+  
+  def decorate_venue(flowers)
+    puts "Some #{flowers} here and some #{flowers} there, #{flowers} everywhere!"
+  end
+end
+
+class Musician
+  def prepare_wedding(wedding)
+    prepare_performance(wedding.songs)
+  end
+  
+  def prepare_performance(songs)
+    songs.each { |song| puts "I'm playing #{song}" }
+  end
+end
+
+wedding = Wedding.new(['bride', 'groom'], 'lillies', ["I can't help falling in love with you"])
+
+wedding.prepare([Chef.new, Decorator.new, Musician.new])
+  # => Dinner for bride
+  # => Dinner for groom
+  # => Some lillies here and some lillies there, lillies everywhere!
+  # => I'm playing I can't help falling in love with you
+```
+
+Demonstrates polymorphism through duck typing because although there is no inheritance, we have a selection of preparer type classes (Chef, Decorator, and Musician) which all provide a prepare_wedding method that takes 1 argument. Since each different object responds to the same method call, we can say this is polymorphism.
+
+First we define our Wedding class with instance variables such that we can pass along the specific data that each preparer type object needs to implement their version of prepare_wedding. We pass the Wedding#prepare instance method one argument, an array of these duck typed "preparer" objects. Within Wedding#prepare we invoke prepare_wedding on each preparer object and pass it the calling Wedding object (represented by self) as an argument.
+
+When defining each "preparer" type class, we implement a prepare_wedding method that takes one argument (presumable, a Wedding object). Within this method, we call a different instance method that executes the specific implementation for that particular preparer-type object. For example, the Chef#prepare_wedding method invokes the Chef#prepare_food method.
+
+Further, when we invoke the specific implementation for that particular preparer-type object, we use a Wedding instance variable getter method to get the specific data required for the specific implementation. The Chef#prepare_food instance method accesses the @guests Wedding attribute, the Decorator#decorate_venue instance method access the @flowers Wedding attribute, etc.
+
+This ensures that we will have the appropriate implmentation for each distinct preparer-type object despite the fact that they all share the same interface, prepare_wedding(wedding). This is shown when we call prepare on a Wedding instance, which outputs the result of each preparer-type's prepare_wedding implementation as we'd expect.
+
+Example 2:
+```
+class SportsGame
+  def play(attendees)
+    attendees.each do |attendee|
+      attendee.participate
+    end
+  end
+end
+
+class Player
+  def participate
+    play_game
+  end
+  
+  def play_game
+    puts "He shoots... HE SCORES!!"
+  end
+end
+
+class Coach
+  def participate
+    coach_players
+  end
+  
+  def coach_players
+    puts "Hustle! Hustle! Hustle!"
+  end
+end
+
+class Referee
+  def participate
+    make_calls
+  end
+  
+  def make_calls
+    puts "Foul! Safe! Foul!"
+  end
+end
+
+class Cheerleader
+  def participate
+    cheer_on_team
+  end
+  
+  def cheer_on_team
+    puts "Go team go!"
+  end
+end
+
+the_game = SportsGame.new
+
+the_game.play([Player.new, Coach.new, Referee.new, Cheerleader.new])
+  # => He shoots... HE SCORES!! (result of Player#participate)
+  # => Hustle! Hustle! Hustle!  (result of Coach#participate)
+  # => Foul! Safe! Foul!        (result of Referee#participate)
+  # => Go team go!              (result of Cheerleader#participate)
+```
+The above example also shows polymorphism through duck typing. The various classes have no inheritance (either through class or interface) and yet we can see a distinct "participant" type that all exhibit the behavior participate, which takes one argument.
 
 ### Encapsulation
-Ruby creates objects and exposes the interfaces to interact with those objects. Due to this it is possible that the data could be unintentionally modified. Also this can also increase the dependencies between different objects. Ruby enables us to hide the behaviour and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code. This is known as Encapsulation and this is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. In Ruby all the instance methods are public by default unless we implement method access control. The exception being the constructor method initialize which is always private. All instance variables are encapsulated by default and we use the instance method to expose them.
+Ruby creates objects and exposes the interfaces to interact with those objects, so it is possible that the data could be unintentionally modified. This can also increase the dependencies between different objects. Ruby enables us to hide the behaviour and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code. This is known as Encapsulation and this is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. In Ruby all the instance methods are public by default unless we implement method access control. The exception being the constructor method initialize which is always private. All instance variables are encapsulated by default and we use the instance method to expose them.
+
+Encapsulation describes how we can separate and hide away different pieces of functionality, making them unavailable to the rest of the code base. It is essentially a form of data protection that defines boundaries within a given application.
+
+In Ruby, encapsulation is achieved through creating objects and exposing certain methods to interact with them. That is, Ruby allows us to create objects that separate out the interface (methods you call on them) from the implementation (what code the methods actually execute). This allows us as programmers to think on a new level of abstraction.
+
+We know that everything in Ruby is an object. Let's take a built in object type, like String, for example. String objects have a number of methods that we can call on them. We know that the reverse method will return a new string with the order of characters reversed. We know that the upcase method will return a new string of all uppercase characters. We know that these methods achieve these things, but we don't really care about how they do the things they do (the implementation). We are interested only in the interface (the methods you can call on the object). This is the essence of encapsulation.
+
+```
+'hello world'.reverse     # => "dlrow olleh"
+'hello world'.upcase      # => "HELLO WORLD"
+# we don't care about the implementation of the above methods
+# which are defined in the String class
+```
+Not only does encapsulation let us hide the internal representation of an object from the outside, we want to make sure we only expose the methods and properties that users of the object need. Method access control is employed to ensure that we expose only these necessary properties and methods through the public interface of a class. Anything else that deals only with the internal implementation can be hidden as a private method.
+```
+class Person
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+  
+  def has_a_birthday
+    # call private setter method to increment @age within the class
+    self.age += 1
+  end
+  
+  def how_old
+    # call private getter method for desired output / protect sensitive information
+    puts "I am #{age - 3} years old"
+  end
+  
+  def introduce
+    # call private getter method to format @name correctly
+    puts "Hi my name is #{name.capitalize}"
+  end
+  
+  private
+  attr_reader :name
+  attr_accessor :age
+end
+
+sally = Person.new('sally', 65)
+
+sally.introduce           # => Hi, my name is Sally
+sally.has_a_birthday      # => increments @age
+sally.how_old             # => I am 63 years old
+```
+In the above example, we can call the method #has_a_birthday which increments the @age of a Person object appropriately. The setter for age is private so that this data is not changed in a way that doesn't make sense for a Person object.
+
+Further, we can use the public introduce method to ensure that we have the correct formatting for the @name attribute. This calls the private getter method name and formats the return value in the way we want.
+
+We can protect sensitive information by ensuring that it remains within the class. Here, when we call how_old on a Person object, it will tell a little white lie that the object in question is slightly younger than the reality. But it doesn't matter in the public interface, all we care about is that we are getting data that looks like it pertains to @age.
+
+The point of encapsulation is that we get the results we expect from the public interface. As long as this is the case, implementation details don't matter and they can stay encapsulated within the class.
+
+It's good practice to keep as few methods as possible public. This makes working with a given class much more simple, and protects its data from undesired changes.
 
 ## Collaborator Objects
 
