@@ -139,4 +139,9 @@ some_animal_classes = mammals + birds
 
 p some_animal_classes
 ```
-This code outputs an one array of Animal objects.
+This code outputs an one array of Animal objects, when the expected output would be a new animal class with an animals array as an instance variable. We could adjust the code as such:
+
+  def +(other_class)
+    combined = AnimalClass.new("Combined Animals")
+    combined.animals =  animals + other_class.animals
+  end
