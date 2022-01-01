@@ -521,7 +521,10 @@ Uninitialized instance variables always return `nil` when we try to access them 
 In the above example within the `Dog` class there is a constructor method initialize which overrides the constructor method from the `Animal` class. Within the method definiton of the initialize method in `line 501` there are no instance variables defined. Uninitialized instance variables always return `nil` when we try to access them. In `line 509` the `dog_name` instance method is called on the object referenced by the local variable `teddy`. Within the method definition of `dog_name` from `line 503 - 505` we are trying to interpolate an uninitialised instance variable `@name` this will evaluate to an empty string `""` as `nil` evaluates to an empty string when interpolated. Due to this the expression in `line 509` outputs `"bark! bark!  bark! bark!"`
 
 ## Example 14
-In the code above, we want to compare whether the two objects have the same name. Line 11 currently returns false. How could we return true on line 11? # Further, since al.name == alex.name returns true, does this mean the String objects referenced by al and alex's @name instance variables are the same object? How could we prove our case?
+In the code above, we want to compare whether the two objects have the same name. Line 11 currently returns false. How could we return true on line 11? 
+
+Further, since al.name == alex.name returns true, does this mean the String objects referenced by al and alex's @name instance variables are the same object? How could we prove our case?
+
 ```
 class Person
   attr_reader :name
@@ -535,3 +538,8 @@ al = Person.new('Alexander')
 alex = Person.new('Alexander')
 p al == alex # => true
 ```
+`line 539` currently returns false because we are comparing the two objects themselves, not their names. In order to compare the names have have `line 539` return true, we can change the code to the following:
+`al.name == alex.name`
+However, the String objects referenced by al and alex's @name instance variables are not the same object, as demonstrated if we use the `#object_id` method to compare the two strings:
+p al.name.object_id # returns 60
+p alex.name.object_id # returns 80
