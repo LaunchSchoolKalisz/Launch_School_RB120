@@ -280,3 +280,25 @@ Hence we get the following output
 `line 15` will output the integer `2` because in `line 12` the class variable `@@wheels` is reassigned to the integer `2`
 
 the same copy of the class variables remains for the rest of the program hence `lines 15, 16, 20, 21, 22` all output the integer `2`
+
+## Example 8
+What is output and why? What does this demonstrate about super?
+```
+class Animal
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+  end
+end
+
+class GoodDog < Animal
+  def initialize(color)
+    super
+    @color = color
+  end
+end
+
+bruno = GoodDog.new("brown")       
+p bruno
+```
