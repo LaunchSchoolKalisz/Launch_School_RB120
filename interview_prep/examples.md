@@ -602,3 +602,12 @@ BOB
 ```
 On `line 592`, we assign local variable `bob` to the object created by calling the `::new` class method on the `Person` class. The `#initialize` method initializes a new `Person` object, which it does by assigning the instance variable `@name` to the person's name specified by the argument.
 `line 593` outputs the instance variable assigned to local variable `bob`, hence printing `"Bob"`. On the next line, `line 594`, `puts` works by calling `#to_s` to convert the code to a string so that it can output the code, and so the `to_s` method is called on the person object that was created on `line 192` which returns the string `"My name is #{name.upcase!}."`. The `upcase!` method modifies the string that it is called on, and so the string assigned to the instance variable `name` is modified to `BOB`, hence the output. On `line 595`, we output instance variable assigned to local variable `bob`, hence printing the manipulated `"BOB"`.
+
+Answer re-do
+On `line 13` a local variable `bob` is initialized to the instance of the `Person` object by calling the `::new` class method on it. The `::new` method takes an argument String `"Bob"`. This is then assigned to the instance variable `@name`.On `lines 8 - 10` a custom `to_s` instance method is defined and within the method definition we have an expression `name.upcase!`. Here we are invoking the getter method `name` and calling a destructive method `upcase!` on it which will permanently modify the object referenced by `@name`. Also `puts` method invocation by default invokes the `to_s` method on the arguments passed to it. Hence on `line 15` the `to_s` custom instance method is invoked and it prints out `"My name is BOB."`. Now the value refereneced by `@name` is modified permanently. Hence `line 16` prints `"BOB"`. If we dont want this behaviour then we can call a non destructive method as follows
+
+```
+def to_s
+  "My name is #{name.upcase}."
+end
+```
