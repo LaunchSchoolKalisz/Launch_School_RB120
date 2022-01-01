@@ -438,3 +438,12 @@ This demonstrates polymorphism through inheritance. We define a more general eat
 This example of is the essence of accessing different implementations through a common interface (in this case, the client code `eats`). When we call `eats` on an instance of the `Animal` class, the `Animal#eats `method is invoked, and we see the appropriate output `'I eat'`. When we call `eats` on an instance of the `Fish` class, the `Fish#eats `method is invoked, and we see the appropriate output `'I eat plankton'`. Finally, we invoke `eats` on an instance of the `Dog` class, the `Dog#eats `method is invoked, and we see the appropriate output `'I eat kibble'`.
 
 The above code works because the block `animal.eats` only really cares that each element in the array has an `eats` method that is called with no arguments, which is the case here. The interface (`eats`) is the same for all the objects, despite their different implementations.
+
+Answer re-do
+This code outputs, `"I eat"`, `"I eat plankton."`, and `"I eat kibble."`
+
+This is an example of polymporhism through inheritance in which objects of different types can respond to the same method invocation simply by overriding a method from the superclass.
+
+In this example we define a `Animal` class with a `eat` method. We also define a `Fish` class and `Dog` class that both subclass from `Animal` where they override the `eat` method that they inherit, and implement their own specialized verson of this method.
+
+Even though every object in the `array_of_animals` array is a different object type, each with their own implementation of the `eat` method, the client code only cares that the objects can respond to the same `eat` method invocation.
