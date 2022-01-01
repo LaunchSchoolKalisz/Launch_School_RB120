@@ -508,3 +508,9 @@ end
 teddy = Dog.new("Teddy")
 puts teddy.dog_name
 ```
+The output from `line 509` is `"bark! bark!  bark! bark!"`. This is because of the `Dog`'s class `initialize` method on line `501`. The `Dog` class inherits from the superclass `Animal` but then overrides `Animal`'s intitialize method with its own, however `Dog`'s initialize method does not instantiate any intstance variables and therefore returns nil, which is why we see the output above. We can either delete the `initialize` method from the `Dog` class, allowing `Dog` to inherit the `initialize` method from its superclass `Animal`, or, we can use the keyword super:
+```
+def initialize(name) 
+  super
+end
+```
