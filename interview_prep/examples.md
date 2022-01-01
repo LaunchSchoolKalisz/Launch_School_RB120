@@ -269,3 +269,14 @@ p Car.wheels
 ```
 
 `line 255` outputs 4, and then the rest of the code outputs `2`. This is because on `line 248` we initialize a class variable `@@wheels` and assign it to the integer `4`. On `line 258` we reassign the class variable `@@wheels` to the integer `2`. Just one copy of the class variable exists for the Class and all of its instances. Reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program, and so by reassigning `@@wheels` on `line 258` we also change its value in the superclass `Vehicle` on `line 248`. This behavior is unexpected, and because of this we should avoid working with class variables when working with inheritance.
+
+Answer re-do
+Class variables are accessible from within the instance methods. Class variable are defined at the class level and is available to all the instances of the class . Just one copy of the class variable exists for the Class and all of its instances. Hence reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program irreversibly. Due to this reason utilizing class variables can cause unexpected behaviour and due to this Rubyists tend to stay away from it.
+
+Hence we get the following output
+
+`line 9` will output the integer `4` because in `line 2` the class variable `@@wheels` is intialized to the integer `4`
+
+`line 15` will output the integer `2` because in `line 12` the class variable `@@wheels` is reassigned to the integer `2`
+
+the same copy of the class variables remains for the rest of the program hence `lines 15, 16, 20, 21, 22` all output the integer `2`
