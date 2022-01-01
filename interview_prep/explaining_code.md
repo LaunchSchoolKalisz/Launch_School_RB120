@@ -27,6 +27,8 @@ The `#say_hello` instance method prints a message that includes the person's nam
 `marts` is the object created by calling the `::new` class method on the `Person` class
 `marts` has a state `@name = 'Martha'`
 
+`line xxx` outputs the object referenced by the local variable `xxxxxxx` which is an instance of the `xxxxx` class instantiated on `line xxxx`. The state of the object has #### instance variables `@xxxxx` and `@xxxxx`.
+
 ### Object Instantiation
 A object/instance is instantiated by calling the `::new` class method on the class. This triggers the constructor method initialize which defines the behavior we want to execute when a new object is initialized. The Object may or may not take arguments. If aguments are taken, the arguments are passed in while creating a new object. Objects are assigned to the parameter available in the constructor class.
 ```
