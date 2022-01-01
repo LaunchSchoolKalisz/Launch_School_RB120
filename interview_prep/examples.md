@@ -399,3 +399,5 @@ end
 
 good_dog = GoodAnimals::GoodDog.new
 p good_dog.walk
+
+The method lookup path is: [GoodAnimals::GoodDog, Danceable, Swimmable, Animal, Walkable]
