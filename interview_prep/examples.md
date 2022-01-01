@@ -487,3 +487,24 @@ On `line 28` the `pets` getter method returns an `Array` object with elements as
 
 `bob.pets.each {|pet| pet.jump}`
 now the code executes properly and outputs `"I'm jumping!"` and `"I'm jumping!"` on two seperate lines.
+
+## Example 13
+What is output and why?
+```
+class Animal
+  def initialize(name)
+    @name = name
+  end
+end
+
+class Dog < Animal
+  def initialize(name); end
+
+  def dog_name
+    "bark! bark! #{@name} bark! bark!"
+  end
+end
+
+teddy = Dog.new("Teddy")
+puts teddy.dog_name
+```
