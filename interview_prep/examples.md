@@ -231,3 +231,12 @@ def change_name
 end
 
 Here the `self` keyword references the calling object and the setter method is invoked. `Line 224` now outputs "BOB"
+
+Answer re-do
+In `line 224` we are invoking the instance method `name` on the instance of the class `Person`. This raises an error. This is because within the method `change_name`, we have the experssion `name = name.upcase` where we are initialializing a new local variable name instead of calling the setter method `#name=`. In order to fix this code we have to call the setter method `name=(argument)` by invoking the setter method on the `self` keyword as `self.name = name.upcase`. This reassign the instance variable `@name` to `"BOB"`.
+```
+def change_name
+  self.name = name.upcase
+end
+```
+After the above modification the `line 16` will output `"BOB"`.
