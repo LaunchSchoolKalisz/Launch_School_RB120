@@ -312,3 +312,21 @@ This example demponstrates the following about the `super` keyword:
 `Super` is a keyword used by Ruby to invoke a method with the same name within the method lookup path. When we invoke a method which has a `super` keyword, Ruby looks in the method lookup path to find another method with the same name. Ruby invokes the method when it finds it.
 
 The `super` keywords can also take arguments. But by default it will pass all the arguments passed into the calling method to the other method with the same name. In order to avoid this we can call the `super` keyword with a parenthesis such as `super()`.
+
+## Example 9
+What is output and why? What does this demonstrate about super?
+```
+class Animal
+  def initialize
+  end
+end
+
+class Bear < Animal
+  def initialize(color)
+    super
+    @color = color
+  end
+end
+
+bear = Bear.new("black")
+```
