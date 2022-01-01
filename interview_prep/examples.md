@@ -480,3 +480,4 @@ bob.pets << bud
 
 bob.pets.jump
 ```
+This code raises a `NoMethodError` because we are attempting to call `jump` on an array of objects. On `line 473` we initialize a `Person` object referenced by the local variable `bob` whose state has 2 instance variables `@name` and `@pets`. On `line 475` and `line 476` we initialize a `Cat` and `Bulldog` object respectively, referenced by the local variables `kitty` and `bud`. Both `Cat` and `Bulldog` inherit from the superclass `Pet`. On `line 478` and `line 478` we use the shovel operator to add the `kitty` and `bud` objects into the `@pets` instance variable. So, when we attempt to call `jump` on `bob.pets` on line `481`, we are attempting to call `jump` on an instance of the `Person` class, however `jump` is a method of the `Pet` class, hence the `NoMethodError`.
