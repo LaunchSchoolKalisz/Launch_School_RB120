@@ -432,3 +432,9 @@ array_of_animals.each do |animal|
   feed_animal(animal)
 end
 ```
+This code outputs: `I eat. I eat plankton. I eat kibble.`
+This demonstrates polymorphism through inheritance. We define a more general eats method in the superclass Animal that is available to to all Animal objects. In the `Fish` subclass, we override this method to implement a process that's more specific to the `Fish` type. Similarly, in the `Dog` subclass, we override `Animal#eats` for a more specific implementation. Because we have defined more specific types of eats, we can work with all the different types of objects in the same way, even though the implementations may be different. This is shown when we create three objects one from the `Animal`class, the `Fish`class, and the `Dog` class, and place them together in an array. We are able to iterate over each object in the array and pass them into the `feed_animal` method, eventually invoking the `eats` method on all of them despite the fact that they are all objects of a different type.
+
+This example of is the essence of accessing different implementations through a common interface (in this case, the client code `eats`). When we call `eats` on an instance of the `Animal` class, the `Animal#eats `method is invoked, and we see the appropriate output `'I eat'`. When we call `eats` on an instance of the `Fish` class, the `Fish#eats `method is invoked, and we see the appropriate output `'I eat plankton'`. Finally, we invoke `eats` on an instance of the `Dog` class, the `Dog#eats `method is invoked, and we see the appropriate output `'I eat kibble'`.
+
+The above code works because the block `animal.eats` only really cares that each element in the array has an `eats` method that is called with no arguments, which is the case here. The interface (`eats`) is the same for all the objects, despite their different implementations.
