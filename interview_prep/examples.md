@@ -447,3 +447,36 @@ This is an example of polymporhism through inheritance in which objects of diffe
 In this example we define a `Animal` class with a `eat` method. We also define a `Fish` class and `Dog` class that both subclass from `Animal` where they override the `eat` method that they inherit, and implement their own specialized verson of this method.
 
 Even though every object in the `array_of_animals` array is a different object type, each with their own implementation of the `eat` method, the client code only cares that the objects can respond to the same `eat` method invocation.
+
+## Example 12
+We raise an error in the code above. Why? What do kitty and bud represent in relation to our Person object?
+```
+class Person
+  attr_accessor :name, :pets
+
+  def initialize(name)
+    @name = name
+    @pets = []
+  end
+end
+
+class Pet
+  def jump
+    puts "I'm jumping!"
+  end
+end
+
+class Cat < Pet; end
+
+class Bulldog < Pet; end
+
+bob = Person.new("Robert")
+
+kitty = Cat.new
+bud = Bulldog.new
+
+bob.pets << kitty
+bob.pets << bud                     
+
+bob.pets.jump
+```
