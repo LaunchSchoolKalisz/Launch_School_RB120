@@ -202,3 +202,32 @@ def change_info(n, h, w)
 end
 
 Here the `self` keyword references the calling object. Hence the setter methods are invoked with the required parameters are passed in as arguments. `Line 178` now outputs "Spartacus weighs 45 lbs and is 24 inches tall."
+
+## Example 6
+In the code above, we hope to output 'BOB' on line 224. Instead, we raise an error. Why? How could we adjust this code to output 'BOB'?
+```
+class Person
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def change_name
+    name = name.upcase
+  end
+end
+
+bob = Person.new('Bob')
+p bob.name
+bob.change_name
+p bob.name
+```
+
+`line 224` raises an error because within the `change_name` method definition we are not calling the setter method `name=`. Instead, we are initializing the local variable `name` and setting it to the return value of `name.upcase`, which is `nil`. So, the value referenced by the instance variable `@name` is not reassigned. In order to fix this, we will have to call the setter methods using the `self` keyword which represents the current object. This is done as follows.
+
+def change_name
+  self.name = name.upcase
+end
+
+Here the `self` keyword references the calling object and the setter method is invoked. `Line 224` now outputs "BOB"
