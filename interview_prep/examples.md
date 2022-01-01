@@ -508,9 +508,14 @@ end
 teddy = Dog.new("Teddy")
 puts teddy.dog_name
 ```
-The output from `line 509` is `"bark! bark!  bark! bark!"`. This is because of the `Dog`'s class `initialize` method on line `501`. The `Dog` class inherits from the superclass `Animal` but then overrides `Animal`'s intitialize method with its own, however `Dog`'s initialize method does not instantiate any intstance variables and therefore returns nil, which is why we see the output above. We can either delete the `initialize` method from the `Dog` class, allowing `Dog` to inherit the `initialize` method from its superclass `Animal`, or, we can use the keyword super:
+The output from `line 509` is `"bark! bark!  bark! bark!"`. This is because of the `Dog`'s class `initialize` method on line `501`. The `Dog` class inherits from the superclass `Animal` but then overrides `Animal`'s intitialize method with its own. However, `Dog`'s initialize method does not instantiate any intstance variables and therefore returns nil, which is why we see the output above. Uninitialized instance variables always return `nil` when we try to access them through a getter method. We can either delete the `initialize` method from the `Dog` class, allowing `Dog` to inherit the `initialize` method from its superclass `Animal`, or, we can use the keyword super:
 ```
 def initialize(name) 
   super
 end
 ```
+
+Answer re-do
+Uninitialized instance variables always return `nil` when we try to access them through a getter method.
+
+In the above example within the `Dog` class there is a constructor method initialize which overrides the constructor method from the `Animal` class. Within the method definiton of the initialize method in `line 501` there are no instance variables defined. Uninitialized instance variables always return `nil` when we try to access them. In `line 509` the `dog_name` instance method is called on the object referenced by the local variable `teddy`. Within the method definition of `dog_name` from `line 503 - 505` we are trying to interpolate an uninitialised instance variable `@name` this will evaluate to an empty string `""` as `nil` evaluates to an empty string when interpolated. Due to this the expression in `line 509` outputs `"bark! bark!  bark! bark!"`
