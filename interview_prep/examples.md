@@ -538,8 +538,38 @@ al = Person.new('Alexander')
 alex = Person.new('Alexander')
 p al == alex # => true
 ```
-`line 539` currently returns false because we are comparing the two objects themselves, not their names. In order to compare the names have have `line 539` return true, we can change the code to the following:
+`line 539` currently returns `false` because we are comparing the two objects themselves, not their names. In order to compare the names have have `line 539` return true, we can change the code to the following:
 `al.name == alex.name`
 However, the String objects referenced by al and alex's @name instance variables are not the same object, as demonstrated if we use the `#object_id` method to compare the two strings:
 p al.name.object_id # returns 60
 p alex.name.object_id # returns 80
+
+Answer re-do
+The `line 11` currently outputs `false` because it is comparing two objects of the same class. Each objects are unique though they may have the same state.
+
+In order to make `line 11` output `true` we can modify the code as follows by providing a custom `#==` instance method as follows:
+```
+class Person
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def ==(other)
+    name == other.name
+  end
+end
+
+al = Person.new('Alexander')
+alex = Person.new('Alexander')
+p al == alex # => true
+```
+Now in line 15 we are comparing the states of the two objects which have the same value and hence it returns true.
+
+since `al.name == alex.name` returns true, This does not mean the String objects referenced by al and alex's `@name` instance variables are the same object. Though they are objects of the same class they are two different objects in memory space. This can be proved by calling the `object_id` method on them as follows
+```
+p al.name.object_id
+p alex.name.object_id
+```
+we notice that they both have different object id's.
