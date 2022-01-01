@@ -573,3 +573,30 @@ p al.name.object_id
 p alex.name.object_id
 ```
 we notice that they both have different object id's.
+
+## Example 15
+What is output on `lines 593, 594, and 595` and why?
+```
+class Person
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def to_s
+    "My name is #{name.upcase!}."
+  end
+end
+
+bob = Person.new('Bob')
+puts bob.name
+puts bob
+puts bob.name
+```
+The output of the code from `lines 593-595` is: 
+```
+Bob
+My name is BOB.
+BOB
+```
