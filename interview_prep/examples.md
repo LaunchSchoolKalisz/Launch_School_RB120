@@ -1223,3 +1223,6 @@ end
 
 puts Human.new.swim
 puts Dog.new.swim
+
+## Example 27
+How does encapsulation relate to the public interface of a class?
