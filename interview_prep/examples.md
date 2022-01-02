@@ -1275,3 +1275,10 @@ end
 sparky = GoodDog.new("Sparky", 4)
 puts sparky
 ```
+This code outputs a `GoodDog` object because local variable `sparky` is assigned to the object created by calling the `::new` class method on the `GoodDog` class. In order to output a message, we could implement a `to_s` method:
+
+```
+  def to_s
+    "Woof! My name is #{self.name} and I am #{self.age} in doggo years!"
+  end
+```
