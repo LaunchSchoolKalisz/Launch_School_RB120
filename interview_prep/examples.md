@@ -950,3 +950,60 @@ hand.each { |card| puts card }
   # (cards are randomly selected, output may differ)
 ```
 In the above code, we define our Deck class to work with the collaborator object Card. When a new Deck instance is initialized, the Deck class relies on the Card class constants SUITS and VALUES to generate a new 52 card deck.
+
+Answer re-do
+Collaborator objects are usually custom objects that are assigned to the state of another object. This way we can form associations between the two objects. Thereby making the methods of the collaborator object available to the other object. Collaborator objects are objects that are stored as state within another object. For example:
+```
+class Person
+  attr_reader :name, :pets
+
+  def initialize(name)
+    @name = name
+    @pets = []
+  end
+
+  def add_pet(obj)
+    pets << obj
+  end
+
+  def display_owner_with_pets
+    puts "#{name} pets are:"
+    puts pets
+  end
+end
+
+class Pet
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def to_s
+    name
+  end
+end
+
+bob = Person.new("Bob")
+kitty = Pet.new("Kitty")
+doggy = Pet.new("Doggy")
+
+# p bob
+
+bob.add_pet(kitty)
+bob.add_pet(doggy)
+
+# p bob
+
+puts bob.display_owner_with_pets
+```
+Resources:
+https://launchschool.com/lessons/dfff5f6b/assignments/4228f149
+
+Objects that are stored as state within another object are also called "collaborator objects". We call such objects collaborators because they work in conjunction (or in collaboration) with the class they are associated with. For instance, bob has a collaborator object stored in the @pet variable. When we need that BullDog object to perform some action (i.e. we want to access some behavior of @pet), then we can iterate through bob and call the method on the object stored in @pet, such as speak or fetch.
+
+When we work with collaborator objects, they are usually custom objects (e.g. defined by the programmer and not inherited from the Ruby core library); @pet is an example of a custom object. Yet, collaborator objects aren't strictly custom objects. Even the string object stored in @name within bob in the code above is technically a collaborator object.
+
+Collaborator objects play an important role in object oriented design, since they also represent the connections between various actors in your program.
+
+When working on an object oriented program be sure to consider what collaborators your classes will have and if those associations make sense, both from a technical standpoint and in terms of modeling the problem your program aims to solve.
