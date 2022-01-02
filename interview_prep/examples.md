@@ -707,3 +707,20 @@ end
 marts = Person.new("Martha")
 marts.name
 ```
+
+Answer re-do
+Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
+```
+class Student
+  def initialize(name)
+    @name = name
+  end
+
+  def name
+    puts "Hi my name is #{@name.capitalize}"
+  end
+end
+
+Student.new("martha").name
+```
+Creating a getter method using the attr_reader can be an easier way of defining setter methods. How ever if you want to manipulate the return value of the getter method or influence what it does then we will have to define a custom getter method. This will give us the added flexibility required. In the above example calling the getter method name will output "Hi my name is Martha".
