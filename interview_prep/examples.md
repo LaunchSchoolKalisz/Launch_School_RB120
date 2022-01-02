@@ -1257,3 +1257,21 @@ p bob.student_age  # => 19
 p bob.age          # => NoMethodError
 ```
 The above example we have hidden the implementation details of the instance method age from being accessed from outside of the class. This was acheive by the use of the private method which is an access modifier. Hence the instance method age can only accessed from the within the Student class.
+
+## Example 28
+What is output and why? How could we output a message of our choice instead?
+```
+class GoodDog
+  DOG_YEARS = 7
+
+  attr_accessor :name, :age
+
+  def initialize(n, a)
+    self.name = n
+    self.age  = a * DOG_YEARS
+  end
+end
+
+sparky = GoodDog.new("Sparky", 4)
+puts sparky
+```
