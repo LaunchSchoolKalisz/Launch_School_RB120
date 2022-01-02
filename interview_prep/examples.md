@@ -1187,3 +1187,39 @@ On `line 1176` the object `bob` has a state `@name = 'bob'` and on `line 1177` t
 
 ## Example 26
 How do class inheritance and mixing in modules affect instance variable scope? Give an example.
+Instance variables are scoped at the object level, and keep track of the state of an object.  A typical class inheritance is where a subclass inherits its behaviors from a superclass. The subclass is the derived class and the superclass is the base class. The superclass has a larger reusability and the subclass has an extended or refined implementation. This reduces complexity of the code and makes it reusable. Class inheritance exhibits an "Is - A" relationship. Eg. The Dog is a mammal. Subclasses can inherit instance variables from superclasses
+```
+class Pet
+  def initialize(name)
+    @name = name
+  end
+end
+
+class Cat < Pet
+  def initialize(name, personality)
+    super(name) 
+    @personality = personality
+  end
+end
+
+felix = Cat.new('Felix', 'playful')
+# => #<Cat:0x000055e2ac7e4908 @name="Felix", @personality="playful">
+```
+Multiple inheritance is acheived by mixin in modules. The inheritance achieved through mixing in modules are known as Interface Inheritance. The behaviors from one or more modules are mixed in using the include method and passing in the name of the module as an argument to it. The modules group common methods and classes within them. This is known as namespacing. Interface inheritance exhibit a "has - a" relationship. Eg. The Dog has a behaviour(.i.e, a method). Instance variables can be inherited via mixin modules, however modules cannot inherit, nor can they create or instantiate objects. So, in order to create objects we use class inheritance
+
+module Swimmable
+  def swim
+    "I can swim!!!"
+  end
+end
+
+class Human
+  include Swimmable
+end
+
+class Dog
+  include Swimmable
+end
+
+puts Human.new.swim
+puts Dog.new.swim
