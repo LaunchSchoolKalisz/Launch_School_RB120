@@ -842,3 +842,25 @@ In the above example we able to access and change the state of the object from o
 ## Example 20
 What is the difference between states and behaviors?
 Behaviors are defined by methods. States are defined by instance variables
+
+Answer re-do
+Objects encapsulate the state. Classes define the attributes of the behavior of the objects. The instance variables track the state of the object. The state of the Object is unique to the object. The behaviors or the methods are what the objects can do. The instance methods can access the instance variable
+
+Classes are basic oulines of what an object is made of. Classes define the attributes and the behaviors of its objects. Common behaviors are grouped within a class.
+```
+class Person
+  def initialize(name)
+    @name = name
+  end
+
+  def name
+    @name
+  end
+end
+
+bob = Person.name("Bob")
+bob.name
+```
+In the above example the object refenced by bob encapsulates the state `@name = "Bob"`
+
+The state of the object is exposed by the instance method/behavior name when it is called on the object in `line 12`
