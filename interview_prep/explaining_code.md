@@ -357,9 +357,6 @@ bob.get_grades
 ```
 here we are encapsulating the score attained by the student and instead we are just showing the desired output
 
-## Fake Operators
-Many operators in Ruby are actually methods inherited from another class. Due to this we can override these methods and have our own implementation within the inheriting sub classes. As a general rule of thumb the methods in this case the fake operators should behave in a way simillar to the original methods in order to avoid unexpected/undesired results.
-
 ## Method access Control
 In Ruby the method access control is implemented by the use of public, private and the protected access modifiers.
 
@@ -1301,7 +1298,7 @@ joe_2 = Student.new('Joe', 12345)
 
 joe_1 == joe_2                          # => true
 ```
-In the above code, In the above code, we define the class Student such that it's instances exhibit the attributes name and id. Then we initialize two Student objects and assign identical values to both attributes. However, Student also has a custom == method defined which overrides the inherited behavior from BasicObject. In this case, we are using Integer#== to compare the id values from two instances of Student. joe_1 and joe_2 have identical id values, so the Student#== method will return true.
+In the above code, we define the class Student such that it's instances exhibit the attributes name and id. Then we initialize two Student objects and assign identical values to both attributes. However, Student also has a custom == method defined which overrides the inherited behavior from BasicObject. In this case, we are using Integer#== to compare the id values from two instances of Student. joe_1 and joe_2 have identical id values, so the Student#== method will return true.
 
 We can define our custom == methods in whatever way makes the most sense for the object in question. In this case, we choose to compare id numbers as two students of the same name may not be the same student. However, a unique id number is assigned to each student enrolled so that is what we choose to asses for finding equivalence.
 
