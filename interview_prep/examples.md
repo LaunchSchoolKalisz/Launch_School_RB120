@@ -757,3 +757,8 @@ Triangle.new.sides
 ```
 
 Executing `Triangle.sides` returns `nil`. Executing `Triangle.new.sides` returns the integer `3`. This demonstrates  that class variables are available to all subclasses via inheritance and are scoped at the class level. Class variables are defined at the class level and is available to all the instances of the class. Just one copy of the class variable exists for the Class and all of its instances. Reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program irreversibly. This means that if a subclass changes the class variable then the value referenced would have changed to the new value when we try to access the class variable through a superclass. 
+
+Answer re-do
+`line 25` returns `nil` and `line 26` returns the integer `3`.
+
+On `line 25` when we invoke the `sides` class method on the object `Triangle`, Ruby looks in the method lookup path for any class method with the name `sides`. It finds it in the `Shape` class. At this point the value referenced by the class variable `@@sides` within the `Shape` class is `nil`. Ruby resolves `@@sides` to be `nil` and so `line 25` returns `nil`. On `line 26` the `sides` instance method is called on the object of the `Triangle` class. Within the object the `@@sides` instance variable is referencing the integer `3`. When Ruby looks for another method within the method lookup path it finds sides in the `Shape` class and returns integer `3`.
