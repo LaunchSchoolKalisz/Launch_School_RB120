@@ -1322,3 +1322,4 @@ end
 sparky = GoodDog.new("Sparky", 4)
 p sparky
 ```
+The object assigned to local variable `sparky` in the first example consists of the object encoding id and the class name. We access the `name` and `age` instance variables via the `attr_accessor`. In the second example, the object assigned to the local variable `sparky` consists of the object encoding id, the class name, ans instance variables `@name` and `@age` with their respective assigned values, becuase they are instantiated in the `initialize` method.
