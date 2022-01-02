@@ -1066,7 +1066,7 @@ class Person
     @name = name
   end
 
-  def self.scientific_name        # explicit self, self is the class
+  def self.scientific_name        # explicit self, self represents the class, making this a class method
     'homo sapiens'
   end
 
@@ -1077,16 +1077,6 @@ end
 ```
 
 Inside of an instance method, `self` points to the object that calls the method. Therefore, we can assume that within an instance method `self` will always reference an object that is an instance of that particular class.
-```
-class Thing
-  def calling_object
-    self
-  end
-end
-
-whatever = Thing.new
-whatever.calling_object     # => #<Thing:0x0000559c470aa800>
-```
 
 ```
 class Person
