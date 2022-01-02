@@ -869,3 +869,27 @@ The state of the object is exposed by the instance method/behavior name when it 
 What is the difference between instance methods and class methods?
 
 Instance methods are the behaviors or functionality available to all instances of that class. They are defined within the classes from which the objects are derived from. Instance variables can be accessed and exposed by the instance methods. Class methods are called on the class itself. Scoped at the class level, are not available to any instances of the class. We do not have to instantiate any objects to invoke a class method, since they pertain to the class as a whole. They cannot access instance variables. They are used when we need behaviours/methods that are not related to any objects.
+
+Answer re-do
+
+Instance methods are called on the instances of the class. Instance methods are the behaviours or functionality available to the objects. They are encapsulated in the Classes from which the objects are derived from. Instance variables can be accessed by the instance methods.They are defined as follows
+```
+class Person
+  def	instance_method
+    "From the instance method"
+  end
+end
+
+p Person.new.instance_method
+# => "From the instance method"
+```
+Class methods are methods which are called on the class itself. They scoped at the class level and are not available to any instances of the class. They cannot access instance variables. While defining the class methods we chain the method name to the self keyword as shown in the example below.
+```
+class Person
+  def self.class_method
+    "I am from within the class method"
+  end
+end
+
+Person.class_method # invoking the class method
+```
