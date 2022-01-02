@@ -1650,3 +1650,56 @@ the_game.play([Player.new, Coach.new, Referee.new, Cheerleader.new])
 Demonstrates polymorphism through duck typing because although there is no inheritance, we have a selection of participant type classes (`Player`, `Coach`, `Referee`, `Cheerleader`) which all provide a `participate` method that takes 0 arguments. Since each different object responds to the same method call, we can say this is polymorphism.
 
 First we define our `SportsGame` class with instance variables such that we can pass along the specific data that each participant type object needs to implement their version of `participate`. We pass the `SportsGame#play` instance method one argument, an array of these duck typed "participant" objects. Within `SportsGame#play` we invoke `participate` on each participant object, leading to the appropriate output for each participant.
+
+Answer re-do
+Polymorphism occurs when objects of different types respond to the method invocation with the same name. It helps in reducing dependencies. Polymorphism are broadly classed into two types:
+Polymorphism through inheritance
+Polymorphism through Duck Typing
+When the subclass inherits behaviour from one of its superclass because it could not find the method in the subclass then polymorphism occurs. This type of polymorphism is known as Polymorphism through Inheritance as we are inhering the behaviors.
+```
+class Vehicle
+  def accelerate
+    puts "Increase speed by 5 miles an hour!"
+  end
+end
+
+class Car < Vehicle
+end
+
+class Motorbike < Vehicle
+  def accelerate
+    puts "Increase speed by 10 miles an hour!"
+  end
+end
+
+car = Car.new
+car.accelerate # Polymorphism through inheritance from the superclass
+
+bike = Motorbike.new
+bike.accelerate # Polymorphism through inheritance due to method overriding
+```
+In the above example we can see that the classes `Car` and `Motorbike` both inherit from the class `Vehicle`. In `line 16` and `line 20` we are instantiating two objects from their respective classes referenced by the local variable `car` and `bike`. In `line 16` the `accelerate` instance method is invoked on the object referenced by `car`. This outputs "Increase speed by 5 miles an hour!". This is because Ruby looks for the method with the same name in the method lookup path and it finds it in the `Vehicle` class and invokes it.
+
+In `line 20` the `accelerate` instance method is invoked on the object referenced by `bike`. This outputs "Increase speed by 10 miles an hour!". The `accelerate` method in the `Motorbike` class overrides the one in the `Vehicle` class. Since method overriding is a form of inheritance this phenomenon is also known as Polymorphism by inheritance.
+
+When object of unrelated classes respond to the invocation of the instance method with the same name then this is known as Polymorphism through Duck Typing.
+```
+class Car
+  def accelerate
+    puts "Increase speed by 5 miles an hour!"
+  end
+end
+
+class Motorbike
+  def accelerate
+    puts "Increase speed by 10 miles an hour!"
+  end
+end
+
+vehicle = [Car.new, Motorbike.new]
+vehicle.each { |object| object.accelerate }
+# Output
+# => Increase speed by 5 miles an hour!
+# => Increase speed by 10 miles an hour!
+```
+In the above example the `Car` and `Motorbike` are two unrelated classes. Both of them have their own implementation of the instance method `accelerate`. Hence in `line 14` when the objects created from both the classes are passed in as arguments to the each method invocation. They both respond to the `accelerate` instance method invocation with their own implementation. This is an example of Polymorphism through Duck Typing.
