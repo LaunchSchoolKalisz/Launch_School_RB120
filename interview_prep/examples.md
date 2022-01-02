@@ -841,3 +841,4 @@ In the above example we able to access and change the state of the object from o
 
 ## Example 20
 What is the difference between states and behaviors?
+Behaviors are defined by methods. States are defined by instance variables
