@@ -1862,3 +1862,6 @@ end
 marts = Person.new("Martha")
 ```
 On `line 7` we are instantiating a new object of the `Person` class and it encapsulates the state `@name = "Martha"`
+
+## Example 37
+When should we use class inheritance vs. interface inheritance?
