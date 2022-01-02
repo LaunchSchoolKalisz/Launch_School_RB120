@@ -1865,3 +1865,10 @@ On `line 7` we are instantiating a new object of the `Person` class and it encap
 
 ## Example 37
 When should we use class inheritance vs. interface inheritance?
+Inheritance reduces dependencies and increases code resusability. We can use inheritance to extract common behaviors to a superclass. This helps us to keep the logic in one place. All the methods inherited from a superclass is available to its subclass. This is a great way to model concepts that are naturally hiearchical. A subclass inherits the behaviors from a superclass. The subclass is the derived class and the super class is the base class. The superclass has a larger reusability and the subclass has an extended or refined implementation. This reduces complexity of the code and makes it reusable. Class Inheritance displays "is - a" relationship. This is in conrast to interface inheritance, which has a "has - a" relationship. multiple inheritance is acheived by mixin modules. The inheritance achieved through mixing in modules are known as Interface Inheritance. We mix in a behavior from a module using the include method and passing in the name of the module as an argument to it. Modules are used as containers for grouping common methods and namespacing. Grouping simillar or related classes within a module is known as namespacing. Modules are useful for grouping common methods from classes that are not related hierarchially.
+
+class vs interface(mix-in) inheritance:
+- If multiple inheritance is needed, use Interface inheritance as subclasses inherit from only one superclass.
+- Modules cannot inherit. Modules cannot create objects. So, in order to create objects we use class inheritance
+- Modules have a "has-a" relationship: used for namespacing and grouping commom behaviors to be shared.
+- Classes have a "is-a" relationship: it is useful for creating objects.
