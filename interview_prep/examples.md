@@ -1837,3 +1837,6 @@ It makes sense to use a module `Walkable` to mixin the instance method `walk` in
 ## Example 35
 What is Object Oriented Programming, and why was it created? What are the benefits of OOP, and examples of problems it solves?
 OOP was created to reduce dependencies. Programmers wanted to created a way to section of certain areas of code and to work and manipulate them without affecting the rest of the code. This helps us to think in a more abstract fasion about the code currently written. It was created to keep the code DRY (Don't Repeat Yourself). That is it helps in preventing duplication of the code. We are able to build applications at a faster pace due to large code reusability from pre-written code. OOP also makes it easier to manage the complexity of the software and easier to conceptualize objects as real life objects.
+
+## Example 36
+What is the relationship between classes and objects in Ruby?
