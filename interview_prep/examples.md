@@ -1227,3 +1227,33 @@ puts Dog.new.swim
 ## Example 27
 How does encapsulation relate to the public interface of a class?
 Ruby enables us to hide the behavior and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code through encapsulation. Encapsulation describes how we can separate and hide away different pieces of functionality, making them unavailable to the rest of the code base. It is essentially a form of data protection that defines boundaries within a given application.  It is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. In Ruby all the instance methods are public by default unless we implement method access control.
+
+Answer re-do
+Ruby creates objects and exposes the interfaces to interact with those objects. Due to this it is possible that the data could be unintentionally modified. Also this can also increase the dependencies between different objects. Ruby enables us to hide the behavior and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code. This is known as Encapsulation and this is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. I ruby all the instance methods are public by default unless we implement method access control. The exception being the constructor method initialize which is always private.
+
+Example
+```
+class Student
+  attr_reader :name
+
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+
+  def student_age
+    age
+  end
+
+  private
+
+  attr_reader :age
+end
+
+bob = Student.new("Bob", 19)
+
+p bob.name         # => "Bob"
+p bob.student_age  # => 19
+p bob.age          # => NoMethodError
+```
+The above example we have hidden the implementation details of the instance method age from being accessed from outside of the class. This was acheive by the use of the private method which is an access modifier. Hence the instance method age can only accessed from the within the Student class.
