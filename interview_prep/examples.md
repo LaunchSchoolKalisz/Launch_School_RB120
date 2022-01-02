@@ -634,3 +634,23 @@ riaz = Student.new("Riaz", 90)
 p riaz > bob # => true
 p riaz.grade # => NoMethodError
 ```
+It is better to invoke a setter method because the getter/setter methods are much easier to reference if we ever need to retrieve or modify the state of the object as we can make changes in just one place. In addition, it will be easier to make the methods private or protected if necessary and encapsulate the code
+
+```
+class Person
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+  end
+  
+  def change_name
+    self.name = name.upcase
+  end
+end
+
+bob = Person.new('Bob')
+p bob.name 
+bob.change_name
+p bob.name
+```
