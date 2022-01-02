@@ -839,3 +839,5 @@ p student.age  # 50
 ```
 In the above example we able to access and change the state of the object from outside of the class.
 
+## Example 20
+What is the difference between states and behaviors?
