@@ -64,7 +64,7 @@ end
 ```
 
 ### Class Methods
-Methods which are called on the class itself. Scoped at the class level, are not available to any instances of the class. We do not have to instantiate any objects to invoke a class method, since they pertain to the class as a whole.They cannot access instance variables. They are used when we need behaviours/methods that are not related to any objects. 
+Methods which are called on the class itself. Scoped at the class level, are not available to any instances of the class. We do not have to instantiate any objects to invoke a class method, since they pertain to the class as a whole.They cannot access instance variables. They are used when we need behaviors/methods that are not related to any objects. 
 
 ```
 class Person
@@ -410,15 +410,15 @@ p john > bob # => true
 
 ## Inheritance - Class and Modules
 ### Class Inheritance
-Inheritance reduces dependencies and increases code resusability. We can use inheritance to extract common behaviours to a superclass. This helps us to keep the logic in one place. All the methods inherited from a superclass is available to its subclass. This is a great way to model concepts that are naturally hiearchical.
+Inheritance reduces dependencies and increases code resusability. We can use inheritance to extract common behaviors to a superclass. This helps us to keep the logic in one place. All the methods inherited from a superclass is available to its subclass. This is a great way to model concepts that are naturally hiearchical.
 
 class vs interface(mix-in) inheritance:
 - If multiple inheritance is needed, use Interface inheritance as subclasses inherit from only one superclass.
 - Modules cannot inherit. Modules cannot create objects. So, in order to create objects we use class inheritance
-- Modules have a "has-a" relationship: used for namespacing and grouping commom behaviours to be shared.
+- Modules have a "has-a" relationship: used for namespacing and grouping commom behaviors to be shared.
 - Classes have a "is-a" relationship: it is useful for creating objects.
 
-A subclass inherits the behaviours from a superclass. The subclass is the derived class and the super class is the base class. The superclass has a larger reusability and the subclass has an extended or refined implementation. This reduces complexity of the code and makes it reusable. Class Inheritance displays Is - A relationship.
+A subclass inherits the behaviors from a superclass. The subclass is the derived class and the super class is the base class. The superclass has a larger reusability and the subclass has an extended or refined implementation. This reduces complexity of the code and makes it reusable. Class Inheritance displays Is - A relationship.
 ```
 class Mammal # superclass
 end
@@ -428,7 +428,7 @@ end
 ```
 
 ### Interface Inheritance - modules
-In Ruby multiple inheritance is acheived by mixin modules. The inheritance achieved through mixing in modules are known as Interface Inheritance. We mix in a behaviour from a module using the include method and passing in the name of the module as an argument to it. Modules are used as containers for grouping common methods and namespacing. Grouping simillar or related classes within a module is known as namespacing. Interface inheritance have a "has - a" relationship. Eg. The Dog has a behaviour(.i.e, a method). Modules are useful for grouping common methods from classes that are not related hierarchially.
+In Ruby multiple inheritance is acheived by mixin modules. The inheritance achieved through mixing in modules are known as Interface Inheritance. We mix in a behavior from a module using the include method and passing in the name of the module as an argument to it. Modules are used as containers for grouping common methods and namespacing. Grouping simillar or related classes within a module is known as namespacing. Interface inheritance have a "has - a" relationship. Eg. The Dog has a behavior(.i.e, a method). Modules are useful for grouping common methods from classes that are not related hierarchially.
 ```
 module Swimmable
   def swim
@@ -821,7 +821,7 @@ Polymorphism are broadly classed into two types
 
 #### Polymorphism through Inheritance
 
-When the subclass inherits behavior from one of its superclass because it could not find the method in the subclass then polymorphism occurs. This type of polymorphism is known as Polymorphism through Inheritance as we are inhering the behaviours. Since method overriding is also a type of inheritance this is also Polymorphism through Inheritance.
+When the subclass inherits behavior from one of its superclass because it could not find the method in the subclass then polymorphism occurs. This type of polymorphism is known as Polymorphism through Inheritance as we are inhering the behaviors. Since method overriding is also a type of inheritance this is also Polymorphism through Inheritance.
 
 Can work in 2 ways:
 1. A specific instance of a subclass inherits a more generic method implementation from a superclass.
@@ -1031,7 +1031,7 @@ the_game.play([Player.new, Coach.new, Referee.new, Cheerleader.new])
 The above example also shows polymorphism through duck typing. The various classes have no inheritance (either through class or interface) and yet we can see a distinct "participant" type that all exhibit the behavior participate, which takes one argument.
 
 ### Encapsulation
-Ruby creates objects and exposes the interfaces to interact with those objects, so it is possible that the data could be unintentionally modified. This can also increase the dependencies between different objects. Ruby enables us to hide the behaviour and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code. This is known as Encapsulation and this is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. In Ruby all the instance methods are public by default unless we implement method access control. The exception being the constructor method initialize which is always private. All instance variables are encapsulated by default and we use the instance method to expose them.
+Ruby creates objects and exposes the interfaces to interact with those objects, so it is possible that the data could be unintentionally modified. This can also increase the dependencies between different objects. Ruby enables us to hide the behavior and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code. This is known as Encapsulation and this is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. In Ruby all the instance methods are public by default unless we implement method access control. The exception being the constructor method initialize which is always private. All instance variables are encapsulated by default and we use the instance method to expose them.
 
 Encapsulation describes how we can separate and hide away different pieces of functionality, making them unavailable to the rest of the code base. It is essentially a form of data protection that defines boundaries within a given application.
 
@@ -1240,6 +1240,8 @@ Because the Card objects are assigned to one of the Deck attributes (the instanc
 
 ## Fake Operators and Equality
 Lots of operators in Ruby are really method calls using the disguise of Ruby's syntactical sugar to utilize a more visually appealing syntax. Because they are really methods, we can define our own implementations of them within our custom classes. Doing so overrides the fake operators with our own implementation, so it's important to follow the conventions established for each within the Ruby standard library.
+
+In Ruby, custom classes inherit from the `Object` class, which has many built in methods as part of the Ruby language. All of the methods that are available to the class `Object` are available to all the custom classes as they subclass from the `Object` class. All subclasses can create it own custom implementation for any of the methods provided by the `Object` class through method overriding by inheritance. As a general rule of thumb the return value of these fake instance methods should behave in a simillar way to the original instance methods. When we accidentally define an instance method in our custom class with the same name as that of the methods in the Object class accidental method overriding occurs.
 
 ### Equivalence
 Equivalence is the idea of equality. Because == in Ruby is in fact a method and not an operator, we can define custom ideas of equality for our custom objects.
