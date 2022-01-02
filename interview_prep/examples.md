@@ -1506,3 +1506,147 @@ Dog.new.swim
 
 ## Example 32
 What is polymorphism and how can we implement polymorphism in Ruby? Provide examples.
+
+Polymorphism occurs when objects of different types respond to the method invocation with the same name. It helps in reducing dependencies.
+
+Polymorphism through Inheritance
+When the subclass inherits behavior from one of its superclass because it could not find the method in the subclass then polymorphism occurs. This type of polymorphism is known as Polymorphism through Inheritance as we are inhering the behaviors. Since method overriding is also a type of inheritance this is also Polymorphism through Inheritance.
+
+Can work in 2 ways:
+1. A specific instance of a subclass inherits a more generic method implementation from a superclass.
+2. A subclass overrides a more generic method implementation from a superclass with a different more specific behavior by implementing a method of the same name.
+```
+class Animal
+  def eats
+    puts "feeds on other living things"
+  end
+end
+
+class Carnivore < Animal
+  def eats
+    puts "feeds on meat"
+  end
+end
+
+class Herbivore < Animal
+  def eats
+    puts "feeds on plants"
+  end
+end
+
+class Omnivore < Animal; end
+
+lion = Carnivore.new
+rabbit = Herbivore.new
+person = Omnivore.new
+
+animals = [lion, rabbit, person]
+animals.each { |animal| animal.eats }
+  # => feeds on meat
+  # => feeds on plants
+  # => feeds on other living things
+```
+
+In the code above, we define a more general `eats` method in the superclass `Animal` that is available to to all `Animal`objects. In the `Carnivore` subclass, we override this method to implement a process that's more specific to the `Carnivore` type. Similarly, in the `Herbivore` subclass, we override `Animal#eats` for a more specific implementation. However, in the `Omnivore` subclass, no more specific implementation is needed, so we allow it to inherit the generic implementation from `Animal`.
+
+Because we have defined more specific types of `eats`, we can work with all the different types of objects in the same way, even though the implementations may be different. This is shown when we create three objects, `lion` from the `Carnivore` class, `rabbit` from the `Herbivore` class, and `person` from the `Omnivore` class, and place them together in an array. We are able to iterate over each object in the array and invoke the `eats` method on all of them despite the fact that they are all objects of a different type.
+
+This example of is the essence of accessing different implementations through a common interface (in this case, the client code eats). When we call eats on lion, the Carnivore#eats method is invoked, and we see the appropriate output 'feeds on meat'. When we call eats on rabbit the Herbivore#eats method is invoked, and again we see the appropriate output 'feeds on plants'. Finally, we invoke eats on person and the inherited Animal#eats method is called, which gives us the more generic output of 'feeds on other living things'.
+
+The above code works because the block `animal.eats` only really cares that each element in the array has an `eats` method that is called with no arguments, which is the case here. The interface (`eats`) is the same for all the objects, despite their different implementations.
+
+Polymorphism can also be exhibited when mixing in a module. When we mix a module into a class using `include`, all the behaviors declared in the module are available to the class and its objects. This is known as interface inheritance. Two distinct classes that include the same module can also be said to exhibit polymorphism, as both instances can access the same interface (defined by the module).
+```
+module Swimmable
+  def swim
+    "I'm swimming"
+  end
+end
+
+class Dog
+  include Swimmable
+end
+
+class Fish
+  include Swimmable
+end
+
+class Cat; end
+
+fido = Dog.new
+felix = Cat.new
+nemo = Fish.new
+
+# both the Dog and Fish object can access the included `swim` method (polymorphism)
+fido.swim           # => "I'm swimming"
+nemo.swim           # => "I'm swimming"
+
+# but the Cat object cannot (it's not included)
+felix.swim          # => NoMethodError
+```
+
+Polymorphism through Duck Typing
+Duck typing occurs when different unrelated types of objects both respond to the same method name. Here, we want to see that an object has a particular behavior rather than if it is a certain class/type. Polymorphism through duck typing means that different types of objects can have different methods of various implementations, all with the same interface (name + arguments), despite not inheriting these methods.
+
+We can tell when duck typing is in play because it deals with a number of objects that share a common interface, even though they have no relationship via class or module. Duck typing focuses on what an object can do rather than what an object is.
+
+```
+class SportsGame
+  def play(attendees)
+    attendees.each do |attendee|
+      attendee.participate
+    end
+  end
+end
+
+class Player
+  def participate
+    play_game
+  end
+  
+  def play_game
+    puts "He shoots... HE SCORES!!"
+  end
+end
+
+class Coach
+  def participate
+    coach_players
+  end
+  
+  def coach_players
+    puts "Hustle! Hustle! Hustle!"
+  end
+end
+
+class Referee
+  def participate
+    make_calls
+  end
+  
+  def make_calls
+    puts "Foul! Safe! Foul!"
+  end
+end
+
+class Cheerleader
+  def participate
+    cheer_on_team
+  end
+  
+  def cheer_on_team
+    puts "Go team go!"
+  end
+end
+
+the_game = SportsGame.new
+
+the_game.play([Player.new, Coach.new, Referee.new, Cheerleader.new])
+  # => He shoots... HE SCORES!! (result of Player#participate)
+  # => Hustle! Hustle! Hustle!  (result of Coach#participate)
+  # => Foul! Safe! Foul!        (result of Referee#participate)
+  # => Go team go!              (result of Cheerleader#participate)
+```
+Demonstrates polymorphism through duck typing because although there is no inheritance, we have a selection of participant type classes (`Player`, `Coach`, `Referee`, `Cheerleader`) which all provide a `participate` method that takes 0 arguments. Since each different object responds to the same method call, we can say this is polymorphism.
+
+First we define our `SportsGame` class with instance variables such that we can pass along the specific data that each participant type object needs to implement their version of `participate`. We pass the `SportsGame#play` instance method one argument, an array of these duck typed "participant" objects. Within `SportsGame#play` we invoke `participate` on each participant object, leading to the appropriate output for each participant.
