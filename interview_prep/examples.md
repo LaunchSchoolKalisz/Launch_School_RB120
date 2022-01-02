@@ -893,3 +893,6 @@ end
 
 Person.class_method # invoking the class method
 ```
+
+## Example 22 
+What are collaborator objects, and what is the purpose of using them in OOP? Give an example of how we would work with one.
