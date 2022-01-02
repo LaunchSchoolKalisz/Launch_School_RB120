@@ -1393,3 +1393,65 @@ john = Student.new(90)
 p bob > john # => false
 p john > bob # => true
 ```
+
+Answer re-do
+In Ruby the method access control is implemented by the use of public, private and the protected access modifiers. Encapsulation is acheived by using the method access modifiers.
+
+public methods:
+By default all the instance methods within the class are public methods, apart from the constructor method initialize which is a private method. Public methods can be accessed from within the class and also from outside of the class. If one knows the object name and the getter method name then we can access these methods.
+```
+class Person
+  def say_hello
+    puts "Hello!"
+  end
+end
+
+Person.new.say_hello # => "Hello!"
+```
+In the above example the instance method `say_hello` is defined within the class `Person`. Since this is a public method it can be visible from outside of the class. Therefore `line 7` prints `"Hello!"`.
+
+private methods
+Private methods are methods that are accessible within the class but is not available outside of the class to the rest of the program. They are available to one instance of the class at any given time. Private methods are used to hide the implementation details of methods and facilitating encapsulation.
+```
+class Person
+  def money_available
+    puts "You have £#{account_balance} in your account"
+  end
+
+  private
+
+  def account_balance
+    5000
+  end
+end
+
+bob = Person.new
+bob.money_available # => "You have £5000 in your account"
+bob.account_balance # => NoMethodError
+```
+The instance method `account_balance` is made private by calling the private method in `line 6` . Unless otherwise stated anything that comes after this line within the class is a private method. `Line 15` raises an error because the private instance method `account_balance` is not available outside of the class `Person`.
+
+protected methods
+The protected methods are available within the class and all of its subclasses. They act as public methods when called within the class and as private methods outside of the class hiearchy. They can be used to compare two objects.
+```
+class Student
+  def initialize(grade)
+    @grade = grade
+  end
+
+  def >(other)
+    grade > other.grade
+  end
+
+  protected
+
+  attr_reader :grade
+end
+
+bob = Student.new(80)
+john = Student.new(90)
+
+p bob > john # => false
+p john > bob # => true
+```
+In the above example the protected method `grade` acts as a private method outside of the class hierarchy and acts as a public method. Due to this they are available to multiple instance of the same class.
