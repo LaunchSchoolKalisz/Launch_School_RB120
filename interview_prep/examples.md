@@ -1706,3 +1706,44 @@ In the above example the `Car` and `Motorbike` are two unrelated classes. Both o
 
 ## Example 33 
 What is encapsulation and why is it important in Ruby? Give an example
+Encapsulation describes how we can separate and hide away different pieces of functionality, making them unavailable to the rest of the code base. It is essentially a form of data protection that defines boundaries within a given application.
+In Ruby, encapsulation is achieved through creating objects and exposing certain methods to interact with them. That is, Ruby allows us to create objects that separate out the interface (methods you call on them) from the implementation (what code the methods actually execute). This allows us as programmers to think on a new level of abstraction.
+Not only does encapsulation let us hide the internal representation of an object from the outside, we want to make sure we only expose the methods and properties that users of the object need. Method access control is employed to ensure that we expose only these necessary properties and methods through the public interface of a class. Anything else that deals only with the internal implementation can be hidden as a private method.
+```
+class Person
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+  
+  def has_a_birthday
+    # call private setter method to increment @age within the class
+    self.age += 1
+  end
+  
+  def how_old
+    # call private getter method for desired output / protect sensitive information
+    puts "I am #{age - 3} years old"
+  end
+  
+  def introduce
+    # call private getter method to format @name correctly
+    puts "Hi my name is #{name.capitalize}"
+  end
+  
+  private
+  attr_reader :name
+  attr_accessor :age
+end
+
+sally = Person.new('sally', 65)
+
+sally.introduce           # => Hi, my name is Sally
+sally.has_a_birthday      # => increments @age
+sally.how_old             # => I am 63 years old
+```
+In the above example, we can call the method `#has_a_birthday` which increments the `@age` of a `Person` object appropriately. The setter for `age` is private so that this data is not changed in a way that doesn't make sense for a `Person` object. Further, we can use the public `introduce` method to ensure that we have the correct formatting for the `@name` attribute. This calls the private getter method `name` and formats the return value in the way we want.
+
+We can protect sensitive information by ensuring that it remains within the class. Here, when we call `how_old` on a `Person` object, it will tell a little white lie, however we are getting data that looks like it pertains to `@age`.
+
+The point of encapsulation is that we get the results we expect from the public interface. As long as this is the case, implementation details don't matter and they can stay encapsulated within the class.
