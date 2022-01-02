@@ -1503,3 +1503,6 @@ end
 Human.new.swim
 Dog.new.swim
 ```
+
+## Example 32
+What is polymorphism and how can we implement polymorphism in Ruby? Provide examples.
