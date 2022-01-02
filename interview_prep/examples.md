@@ -1010,3 +1010,25 @@ When working on an object oriented program be sure to consider what collaborator
 
 ## Example 23 
 How and why would we implement a fake operator in a custom class? Give an example.
+We can use fake operators in custom classes to define them for our custom classes to change their default behavior
+```
+# custom defined == method
+class Student
+  attr_reader :name, :id
+
+  def initialize(name, id)
+    @name = name
+    @id = id
+  end
+
+  def ==(other_student)
+    id == other_student.id
+  end
+end
+
+joe_1 = Student.new('Joe', 12345)
+joe_2 = Student.new('Joe', 12345)
+
+joe_1 == joe_2                          # => true
+```
+In the above code, we define the class Student such that it's instances exhibit the attributes name and id. Then we initialize two Student objects and assign identical values to both attributes. However, Student also has a custom == method defined which overrides the inherited behavior from BasicObject. In this case, we are using Integer#== to compare the id values from two instances of Student. joe_1 and joe_2 have identical id values, so the Student#== method will return true.
