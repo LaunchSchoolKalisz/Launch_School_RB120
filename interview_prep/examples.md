@@ -692,3 +692,18 @@ here we are encapsulating the score attained by the student and instead we are j
 ## Example 17 - custom setter method
 Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
 
+It would make sense to manually write a custom getter method if you want a getter method to say something specific.
+```
+class Person
+  def initialize(name)
+    @name = name
+  end
+
+  def name
+    puts "Hi, my name is #{@name}"
+  end
+end
+
+marts = Person.new("Martha")
+marts.name
+```
