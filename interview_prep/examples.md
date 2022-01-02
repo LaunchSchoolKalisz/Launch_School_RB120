@@ -806,3 +806,36 @@ john.age                            # => 30
 john.have_a_birthday
 john.age                            # => 31
 ```
+
+Answer re-do
+The accessor methods are used to access and set the state of the object to read, set and update the values referenced by the instance variables.
+
+The accessor methods takes symbols as arguments which it uses to create getter and setter methods.
+
+`attr_reader` are getter methods which are read-only which is used to access and expose the value referenced by the instance variables.
+
+`attr_writer` methods are used to define setter methods without having to define a setter method. These are write only methods used to set or update the state of the object.
+
+Adding the `attr_accessor` method to every instance variable in the class will make the data referenced by the instance variable to be accessed from outside of the class. Hence we will be able to acess the value referenced by the instance variables and also and modify them permanently
+```
+class Student
+  attr_accessor :name, :age
+
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+end
+
+student = Student.new("Bob", 30)
+p student.name # "Bob"
+p student.age  # 30
+
+student.name = "Mike"
+student.age = 50
+
+p student.name # "Mike"
+p student.age  # 50
+```
+In the above example we able to access and change the state of the object from outside of the class.
+
