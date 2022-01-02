@@ -1053,3 +1053,6 @@ p oscar == marts # => false
 ```
 
 Many operators in Ruby are originally methods. Because of Ruby's syntactical sugar we are able to read them in a more natural way. Since these are methods we can override their implementation in our custom class. In the above example defining the `==` intance method in the custom class `Person` overriddes the implementation of the method `==` given by Ruby. This makes it a fake operator. Hence in `line 15` we are comparing the value referenced by the instance variable `@name` in the objects `oscar` and `marts`. `Line 15` can also be re-written as `oscar.==(marts)`. This will return and print false.
+
+## Example 24 
+What are the use cases for self in Ruby, and how does self change based on the scope it is used in? Provide examples.
