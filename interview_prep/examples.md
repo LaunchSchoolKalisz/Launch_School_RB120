@@ -1872,3 +1872,36 @@ class vs interface(mix-in) inheritance:
 - Modules cannot inherit. Modules cannot create objects. So, in order to create objects we use class inheritance
 - Modules have a "has-a" relationship: used for namespacing and grouping commom behaviors to be shared.
 - Classes have a "is-a" relationship: it is useful for creating objects.
+
+### Answer re-do
+- If we need multiple inheritance then we use Interface inheritance as subclasses inherit from only one superclass.
+- Modules cannot inherit and also modules cannot create objects so in order to create objects we need to use class inheritance.
+- modules have a has-a relationship and they are used for namespacing and grouping commom behaviors to be shared.
+- Classes have a is-a relationship hence it is useful for creating objects.
+A subclass inherits the behaviours from a superclass. The subclass is the derived class and the super class is the base class. The superclass has a larger reusability and the subclass has an extended or refined implementation. This reduces complexity of the code and makes it reusable. Class Inheritance displays is - a relationship.
+```
+class Mammal # superclass
+end
+
+class Dog < Mammal # subclass
+end
+```
+In Ruby multiple inheritance is acheived by mixin modules. The inheritance achieved through mixing in modules are known as Interface Inheritance. The behaviour from a module is mixed in using the include method and passing in the name of the module as an argument to it. The modules group common methods and classes within. This is known as namespacing. Interface inheritance have a has - a relationship. Eg. The Dog has a behaviour(.i.e, a method).
+```
+module Swimmable
+  def swim
+    "I can swim!!!"
+  end
+end
+
+class Human
+  include Swimmable
+end
+
+class Dog
+  include Swimmable
+end
+
+puts Human.new.swim
+puts Dog.new.swim
+```
