@@ -867,3 +867,5 @@ The state of the object is exposed by the instance method/behavior name when it 
 
 ## Example 21
 What is the difference between instance methods and class methods?
+
+Instance methods are the behaviors or functionality available to all instances of that class. They are defined within the classes from which the objects are derived from. Instance variables can be accessed and exposed by the instance methods. Class methods are called on the class itself. Scoped at the class level, are not available to any instances of the class. We do not have to instantiate any objects to invoke a class method, since they pertain to the class as a whole. They cannot access instance variables. They are used when we need behaviours/methods that are not related to any objects.
