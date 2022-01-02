@@ -16,7 +16,7 @@ What is output and why? What does this demonstrate about instance variables that
 
 This code outputs `nil`. This is because the instance variable name is not initialized correctly. `attr_reader` is read only. `set_name` could be a writer method, but would be called by `bob.set_name`, and so when we try to access it with `bob.name` it is still considered uninitialized. Uninitialized instance variables always return `nil` when we try to access them through the getter method. When we try to access an uninitialised local variable it will raise an error.
 
-Answer re-do
+### Answer re-do
 This code outputs `nil`. On `line 11` a new object `bob` is initialized by calling the `::new` method on the class `Person`. Within the method we have getter method `name` initialized by the method accessor `attr_reader` and an instance method `set_name`. There are no instance variables defined within `Person` and so `line 12` outputs `nil` when we attempt to invoke `name` on the variable `bob`. This is because we are trying to access an uninitialized instance variable. Uninitialized instance variables always return `nil` when we try to access them through a getter method while an uninitialized local variable would raise an error. The state of the object is encapsulated by the instance variables. The state of an object is the colllection of all of its instance variables and the values it references. Instance methods can access instance variables. Instance variables exists as long as the object exists. Once the Object is destroyed then the instance variable perishes along with it.
 
 ## Example 2
@@ -43,7 +43,7 @@ p teddy.swim
 
 This code outputs `nil`. On `line 40` a local variable `teddy` is instantiated to a new object by calling the `::new` class method on the class `Dog`. There are no instance variables defined within `Dog` and so `line 41` outputs `nil` when we attempt to invoke `swim` on the variable `teddy`, even with the `Swimmable` module mixed in. This is because we are trying to access an uninitialized instance variable. Uninitialized instance variables always return `nil` when we try to access them through a getter method while an uninitialized local variable would raise an error. The state of the object is encapsulated by the instance variables. The state of an object is the colllection of all of its instance variables and the values it references. Instance methods can access instance variables. Instance variables exists as long as the object exists. Once the Object is destroyed then the instance variable perishes along with it.
 
-Answer re-do
+### Answer re-do
 In Ruby uninitialized instance variables always return `nil` when we try to access them through a getter method. When we try to access an uninitialised local variable it will raise an error.
 
 In `line 40` a local variable `teddy` is instantiated to a new object by calling the `::new class` method on the class `Dog`. There are no instance variables defined within `Dog` and so `line 41` outputs `nil` when we attempt to invoke `swim` on the variable `teddy`, even with the `Swimmable` module mixed in. This is because we are trying to access an uninitialized instance variable.
@@ -87,7 +87,7 @@ This demonstrate that constants have a lexical scope. When Ruby looks for a cons
 
 On `line 58` `self` refers to whatever class is discribed
 
-Answer re-do
+### Answer re-do
 When Ruby looks for a constant it first looks for the constant in the class which references it and then looks up the inheritance hierarchy when it cannot find it. This is because the constants in Ruby have a lexical scope.
 
 On `line 80` we are invoking the class method `sides` on the class `Square` this will print the integer `4`. This is because Ruby first looks for the class method in the method lookup path of the `Square` class eventually finding it in the `Shape` class and then resolves the expression `self::SIDES` which is the same as `Square::SIDES`. Ruby looks for `SIDES` in the method lookup path and finds it in the `Quadilateral` class.
@@ -192,7 +192,7 @@ def change_info(n, h, w)
 end
 ```
 
-Answer re-do
+### Answer re-do
 Within the `change_info` method definition we are not calling the setter methods `name=, height= and weight=` instead we are initializing the local variables `name, height and weight` and setting them to the arguments passed in during the `change_info` method invocation. So, the value referenced by the instance variables are not reassigned. Inorder to fix the issue we will have to call the setter methods using the `self` keyword which represents the current object. This is done as follows.
 
 def change_info(n, h, w)
@@ -232,7 +232,7 @@ end
 
 Here the `self` keyword references the calling object and the setter method is invoked. `Line 224` now outputs "BOB"
 
-Answer re-do
+### Answer re-do
 In `line 224` we are invoking the instance method `name` on the instance of the class `Person`. This raises an error. This is because within the method `change_name`, we have the experssion `name = name.upcase` where we are initialializing a new local variable name instead of calling the setter method `#name=`. In order to fix this code we have to call the setter method `name=(argument)` by invoking the setter method on the `self` keyword as `self.name = name.upcase`. This reassign the instance variable `@name` to `"BOB"`.
 ```
 def change_name
@@ -270,7 +270,7 @@ p Car.wheels
 
 `line 255` outputs 4, and then the rest of the code outputs `2`. This is because on `line 248` we initialize a class variable `@@wheels` and assign it to the integer `4`. On `line 258` we reassign the class variable `@@wheels` to the integer `2`. Just one copy of the class variable exists for the Class and all of its instances. Reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program, and so by reassigning `@@wheels` on `line 258` we also change its value in the superclass `Vehicle` on `line 248`. This behavior is unexpected, and because of this we should avoid working with class variables when working with inheritance.
 
-Answer re-do
+### Answer re-do
 Class variables are accessible from within the instance methods. Class variable are defined at the class level and is available to all the instances of the class . Just one copy of the class variable exists for the Class and all of its instances. Hence reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program irreversibly. Due to this reason utilizing class variables can cause unexpected behaviour and due to this Rubyists tend to stay away from it.
 
 Hence we get the following output
@@ -304,7 +304,7 @@ p bruno
 ```
 `line 303` outputs a GoodDog object, with instance variables `@name="brown"` and `@color="brown"`. `super` is a keyword used in Ruby to invoke a method with the same name within the method lookup path. When we invoke a method which has a `super` keyword, Ruby looks in the method lookup path to find another method with the same name. Ruby invokes the method when it finds it. By default `super` will pass all the arguments passed into the calling method to the other method with the same name, which is why both `@name` and `@color` are assigned to the string `"brown"` in this example. The `super` keyword can also take arguments so if we want to avoid `super` passing all of the arguments passed into the calling method, we can call the `super` keyword with a parenthesis such as `super()`
 
-Answer re-do
+### Answer re-do
 `line 17` outputs the object referenced by the local variable `bruno` which is an instance of the `GoodDog` class instantiated on `line 16`. The state of the object has two instance variables `@name` and `@color`. This is because within the constructor method initialize within the `GoodDog` class we have the `super` keyword which looks for the first occurance of the method with the same in the superclasses and invokes it. In this case it invokes the `initialize` method from the `Animal` class and passes all the arguments passed in to the constructor method in the `GoodDog` class. Thereby two instance variables `@name = brown` and `@color = brown` are initialized.
 
 This example demponstrates the following about the `super` keyword:
@@ -332,7 +332,7 @@ bear = Bear.new("black")
 ```
 This code raises an `ArgumentError` because it expecting 0 arguments to `initialize` on `line 320`. When we invoke a method which has a `super` keyword, Ruby looks in the method lookup path to find another method with the same name. Ruby invokes the method when it finds it. By default it will pass all the arguments passed into the calling method to the other method with the same name, and so when we use `super` on `line 326`, Ruby attempts to pass `color` as an argument, resulting in the `ArgumentError`. In order to avoid this we can call the `super` keyword with a parenthesis such as `super()`.
 
-Answer re-do
+### Answer re-do
 `Line 13` raises an `ArgumentError` this is because during the instantiation of a new instance of the class `Bear` we are passing in an argument `"black"`. Within the constructor method in the `Bear` class we have a `super` keyword at `line 8`. `Super` keyword looks for a method with the same name in the method lookup path and then invokes it. When `super` keyword is used without parentheses it will pass all the arguments passed to the enclosing method to the method it was looking for. Here the `super` keyword finds a similar method in the `Animal` class which does not take any arguments. Hence when super passes an argument to it an `ArgumentError` is raised. This can be fixed by calling the `super` keyword with a parantheses as follows.
 ```
 class Animal
@@ -439,7 +439,7 @@ This example of is the essence of accessing different implementations through a 
 
 The above code works because the block `animal.eats` only really cares that each element in the array has an `eats` method that is called with no arguments, which is the case here. The interface (`eats`) is the same for all the objects, despite their different implementations.
 
-Answer re-do
+### Answer re-do
 This code outputs, `"I eat"`, `"I eat plankton."`, and `"I eat kibble."`
 
 This is an example of polymporhism through inheritance in which objects of different types can respond to the same method invocation simply by overriding a method from the superclass.
@@ -482,7 +482,7 @@ bob.pets.jump
 ```
 This code raises a `NoMethodError` because we are attempting to call `jump` on an array of objects. On `line 473` we initialize a `Person` object referenced by the local variable `bob` whose state has 2 instance variables `@name` and `@pets`. On `line 475` and `line 476` we initialize a `Cat` and `Bulldog` object respectively, referenced by the local variables `kitty` and `bud`. Both `Cat` and `Bulldog` inherit from the superclass `Pet`. On `line 478` and `line 478` we use the shovel operator to add the `kitty` and `bud` objects into the `@pets` instance variable. So, when we attempt to call `jump` on `bob.pets` on line `481`, we are attempting to call `jump` on an instance of the `Person` class, however `jump` is a method of the `Pet` class, hence the `NoMethodError`.
 
-Answer re-do
+### Answer re-do
 On `line 28` the `pets` getter method returns an `Array` object with elements as the objects of the `Cat` and `Bulldog` class. Since `Array` class does not have a `jump` instance method defined we get an error when we call the `jump` method on the return value of the `pets` getter method being called on the object referenced by `bob`. In order to fix this issue we will have to call the `jump` instance method on each if the elements of the array as follows
 
 `bob.pets.each {|pet| pet.jump}`
@@ -515,7 +515,7 @@ def initialize(name)
 end
 ```
 
-Answer re-do
+### Answer re-do
 Uninitialized instance variables always return `nil` when we try to access them through a getter method.
 
 In the above example within the `Dog` class there is a constructor method initialize which overrides the constructor method from the `Animal` class. Within the method definiton of the initialize method in `line 501` there are no instance variables defined. Uninitialized instance variables always return `nil` when we try to access them. In `line 509` the `dog_name` instance method is called on the object referenced by the local variable `teddy`. Within the method definition of `dog_name` from `line 503 - 505` we are trying to interpolate an uninitialised instance variable `@name` this will evaluate to an empty string `""` as `nil` evaluates to an empty string when interpolated. Due to this the expression in `line 509` outputs `"bark! bark!  bark! bark!"`
@@ -544,7 +544,7 @@ However, the String objects referenced by al and alex's @name instance variables
 p al.name.object_id # returns 60
 p alex.name.object_id # returns 80
 
-Answer re-do
+### Answer re-do
 The `line 11` currently outputs `false` because it is comparing two objects of the same class. Each objects are unique though they may have the same state.
 
 In order to make `line 11` output `true` we can modify the code as follows by providing a custom `#==` instance method as follows:
@@ -603,7 +603,7 @@ BOB
 On `line 592`, we assign local variable `bob` to the object created by calling the `::new` class method on the `Person` class. The `#initialize` method initializes a new `Person` object, which it does by assigning the instance variable `@name` to the person's name specified by the argument.
 `line 593` outputs the instance variable assigned to local variable `bob`, hence printing `"Bob"`. On the next line, `line 594`, `puts` works by calling `#to_s` to convert the code to a string so that it can output the code, and so the `to_s` method is called on the person object that was created on `line 192` which returns the string `"My name is #{name.upcase!}."`. The `upcase!` method modifies the string that it is called on, and so the string assigned to the instance variable `name` is modified to `BOB`, hence the output. On `line 595`, we output instance variable assigned to local variable `bob`, hence printing the manipulated `"BOB"`.
 
-Answer re-do
+### Answer re-do
 On `line 13` a local variable `bob` is initialized to the instance of the `Person` object by calling the `::new` class method on it. The `::new` method takes an argument String `"Bob"`. This is then assigned to the instance variable `@name`.On `lines 8 - 10` a custom `to_s` instance method is defined and within the method definition we have an expression `name.upcase!`. Here we are invoking the getter method `name` and calling a destructive method `upcase!` on it which will permanently modify the object referenced by `@name`. Also `puts` method invocation by default invokes the `to_s` method on the arguments passed to it. Hence on `line 15` the `to_s` custom instance method is invoked and it prints out `"My name is BOB."`. Now the value refereneced by `@name` is modified permanently. Hence `line 16` prints `"BOB"`. If we dont want this behaviour then we can call a non destructive method as follows
 
 ```
@@ -708,7 +708,7 @@ marts = Person.new("Martha")
 marts.name
 ```
 
-Answer re-do
+### Answer re-do
 Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
 ```
 class Student
@@ -758,7 +758,7 @@ Triangle.new.sides
 
 Executing `Triangle.sides` returns `nil`. Executing `Triangle.new.sides` returns the integer `3`. This demonstrates  that class variables are available to all subclasses via inheritance and are scoped at the class level. Class variables are defined at the class level and is available to all the instances of the class. Just one copy of the class variable exists for the Class and all of its instances. Reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program irreversibly. This means that if a subclass changes the class variable then the value referenced would have changed to the new value when we try to access the class variable through a superclass. 
 
-Answer re-do
+### Answer re-do
 `line 25` returns `nil` and `line 26` returns the integer `3`.
 
 On `line 25` when we invoke the `sides` class method on the object `Triangle`, Ruby looks in the method lookup path for any class method with the name `sides`. It finds it in the `Shape` class. At this point the value referenced by the class variable `@@sides` within the `Shape` class is `nil`. Ruby resolves `@@sides` to be `nil` and so `line 25` returns `nil`. On `line 26` the `sides` instance method is called on the object of the `Triangle` class. Within the object the `@@sides` instance variable is referencing the integer `3`. When Ruby looks for another method within the method lookup path it finds sides in the `Shape` class and returns integer `3`.
@@ -807,7 +807,7 @@ john.have_a_birthday
 john.age                            # => 31
 ```
 
-Answer re-do
+### Answer re-do
 The accessor methods are used to access and set the state of the object to read, set and update the values referenced by the instance variables.
 
 The accessor methods takes symbols as arguments which it uses to create getter and setter methods.
@@ -843,7 +843,7 @@ In the above example we able to access and change the state of the object from o
 What is the difference between states and behaviors?
 Behaviors are defined by methods. States are defined by instance variables
 
-Answer re-do
+### Answer re-do
 Objects encapsulate the state. Classes define the attributes of the behavior of the objects. The instance variables track the state of the object. The state of the Object is unique to the object. The behaviors or the methods are what the objects can do. The instance methods can access the instance variable
 
 Classes are basic oulines of what an object is made of. Classes define the attributes and the behaviors of its objects. Common behaviors are grouped within a class.
@@ -870,7 +870,7 @@ What is the difference between instance methods and class methods?
 
 Instance methods are the behaviors or functionality available to all instances of that class. They are defined within the classes from which the objects are derived from. Instance variables can be accessed and exposed by the instance methods. Class methods are called on the class itself. Scoped at the class level, are not available to any instances of the class. We do not have to instantiate any objects to invoke a class method, since they pertain to the class as a whole. They cannot access instance variables. They are used when we need behaviours/methods that are not related to any objects.
 
-Answer re-do
+### Answer re-do
 
 Instance methods are called on the instances of the class. Instance methods are the behaviours or functionality available to the objects. They are encapsulated in the Classes from which the objects are derived from. Instance variables can be accessed by the instance methods.They are defined as follows
 ```
@@ -951,7 +951,7 @@ hand.each { |card| puts card }
 ```
 In the above code, we define our Deck class to work with the collaborator object Card. When a new Deck instance is initialized, the Deck class relies on the Card class constants SUITS and VALUES to generate a new 52 card deck.
 
-Answer re-do
+### Answer re-do
 Collaborator objects are usually custom objects that are assigned to the state of another object. This way we can form associations between the two objects. Thereby making the methods of the collaborator object available to the other object. Collaborator objects are objects that are stored as state within another object. For example:
 ```
 class Person
@@ -1033,7 +1033,7 @@ joe_1 == joe_2                          # => true
 ```
 In the above code, we define the class Student such that it's instances exhibit the attributes name and id. Then we initialize two Student objects and assign identical values to both attributes. However, Student also has a custom == method defined which overrides the inherited behavior from BasicObject. In this case, we are using Integer#== to compare the id values from two instances of Student. joe_1 and joe_2 have identical id values, so the Student#== method will return true.
 
-Answer re-do
+### Answer re-do
 ```
 class Person
   attr_reader :name
@@ -1180,7 +1180,7 @@ p bob.get_name # => "bob"
 ```
 This demonstrates that instance variables are scoped at the object level. They are available throughout the instance of the object. This basically means that for any given object, you can access an instance variable within an instance method without passing it in, even if it was initialized outside of that particular instance method.
 
-Answer re-do
+### Answer re-do
 Instance variables are variables which start with the @ (example: @instance_variable) and are scoped at the object level. The instance variables keep track of the state of the object. The state of an object is the collection of all of its instance variables and the values it references. Instance methods can access instance variables, that is it exposes the value referenced by the instance variable. Instance variables exists as long as the object exists. Once the Object is destroyed then the instance variable perishes along with it.
 
 On `line 1176` the object `bob` has a state `@name = 'bob'` and on `line 1177` the object `joe` has the state `@name = "joe"`. This demonstrates that though both the objects are created from the same class `Person` their states are unique to the respective objects.
@@ -1228,7 +1228,7 @@ puts Dog.new.swim
 How does encapsulation relate to the public interface of a class?
 Ruby enables us to hide the behavior and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code through encapsulation. Encapsulation describes how we can separate and hide away different pieces of functionality, making them unavailable to the rest of the code base. It is essentially a form of data protection that defines boundaries within a given application.  It is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. In Ruby all the instance methods are public by default unless we implement method access control.
 
-Answer re-do
+### Answer re-do
 Ruby creates objects and exposes the interfaces to interact with those objects. Due to this it is possible that the data could be unintentionally modified. Also this can also increase the dependencies between different objects. Ruby enables us to hide the behavior and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code. This is known as Encapsulation and this is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. I ruby all the instance methods are public by default unless we implement method access control. The exception being the constructor method initialize which is always private.
 
 Example
@@ -1282,7 +1282,7 @@ This code outputs a `GoodDog` object because local variable `sparky` is assigned
     "Woof! My name is #{self.name} and I am #{self.age} in doggo years!"
   end
 ```
-Answer re-do
+### Answer re-do
 
 `Line 13` outputs the object referenced by the local variable `sparky` initialized in `line 12`. The object output consists of the object encoding id and the class name. This is output because when the object is passed as an argument to the puts method it automatically calls the default to_s instance method on the argument and prints it. In order to override the default output we can define our own custom implementation of the to_s method as shown below.
 ```
@@ -1324,7 +1324,7 @@ p sparky
 ```
 The object assigned to local variable `sparky` in the first example consists of the object encoding id and the class name. We access the `name` and `age` instance variables via the `attr_accessor`. In the second example, the object assigned to the local variable `sparky` consists of the object encoding id, the class name, ans instance variables `@name` and `@age` with their respective assigned values, becuase they are instantiated in the `initialize` method.
 
-Answer re-do
+### Answer re-do
 In this code the instance variables `@name` and `@age` are initialized within the constructor method `initialize`. Whereas previously the `attr_accessor` methods initialized them. The values referenced by the instance variables `@name `and `@age` are set directly to them. Whereas before they are assigned to the instance variables using the getter methods `name` and `age`.
 
 ## Example 29
@@ -1394,7 +1394,7 @@ p bob > john # => false
 p john > bob # => true
 ```
 
-Answer re-do
+### Answer re-do
 In Ruby the method access control is implemented by the use of public, private and the protected access modifiers. Encapsulation is acheived by using the method access modifiers.
 
 public methods:
@@ -1651,7 +1651,7 @@ Demonstrates polymorphism through duck typing because although there is no inher
 
 First we define our `SportsGame` class with instance variables such that we can pass along the specific data that each participant type object needs to implement their version of `participate`. We pass the `SportsGame#play` instance method one argument, an array of these duck typed "participant" objects. Within `SportsGame#play` we invoke `participate` on each participant object, leading to the appropriate output for each participant.
 
-Answer re-do
+### Answer re-do
 Polymorphism occurs when objects of different types respond to the method invocation with the same name. It helps in reducing dependencies. Polymorphism are broadly classed into two types:
 Polymorphism through inheritance
 Polymorphism through Duck Typing
@@ -1748,7 +1748,7 @@ We can protect sensitive information by ensuring that it remains within the clas
 
 The point of encapsulation is that we get the results we expect from the public interface. As long as this is the case, implementation details don't matter and they can stay encapsulated within the class.
 
-Answer re-do
+### Answer re-do
 Ruby creates objects and exposes the interfaces to interact with those objects and so it is possible that the data could be unintentionally modified. Also this can also increase the dependencies between different objects. Ruby enables us to hide the behaviour and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code. This is known as Encapsulation and this is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. All public instance methods are accessible from outside of the class if the method name is known. In ruby all the instance methods are public by default unless we implement method access control. The exception being the constructor method initialize which is always private.
 
 note: All the attributes within the class are encapsulated by default. In order to overcome this the getter methods are defined to access them.
