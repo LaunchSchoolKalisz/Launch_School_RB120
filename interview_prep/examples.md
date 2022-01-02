@@ -1305,3 +1305,20 @@ sparky = GoodDog.new("Sparky", 4)
 puts sparky
 ```
 Now `line 17` outputs `"I am Sparky and I am 28 years old."`
+
+How is the output above different than the output of the code below, and why?
+```
+class GoodDog
+  DOG_YEARS = 7
+
+  attr_accessor :name, :age
+
+  def initialize(n, a)
+    @name = n
+    @age  = a * DOG_YEARS
+  end
+end
+
+sparky = GoodDog.new("Sparky", 4)
+p sparky
+```
