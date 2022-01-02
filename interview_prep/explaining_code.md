@@ -24,7 +24,7 @@ marts = Person.new("Martha")
 ```
 The `#initialize` method initializes a new Person object, which it does by assigning the instance variable @name to the person's name specified by the argument.
 The `#say_hello` instance method prints a message that includes the person's name in place of `#{@name}`. `say_hello` returns `nil`.
-`marts` is the object created by calling the `::new` class method on the `Person` class
+Local variable `marts` is assigned to the object created by calling the `::new` class method on the `Person` class
 `marts` has a state `@name = 'Martha'`
 
 `line xxx` outputs the object referenced by the local variable `xxxxxxx` which is an instance of the `xxxxx` class instantiated on `line xxxx`. The state of the object has #### instance variables `@xxxxx` and `@xxxxx`.
