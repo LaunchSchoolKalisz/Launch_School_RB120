@@ -727,7 +727,7 @@ Creating a getter method using the attr_reader can be an easier way of defining 
 
 ## Example 18
 What can executing Triangle.sides return? What can executing Triangle.new.sides return? What does this demonstrate about class variables
-
+```
 class Shape
   @@sides = nil
 
@@ -754,3 +754,6 @@ end
 
 Triangle.sides
 Triangle.new.sides
+```
+
+Executing `Triangle.sides` returns `nil`. Executing `Triangle.new.sides` returns the integer `3`. This demonstrates  that class variables are available to all subclasses via inheritance and are scoped at the class level. Class variables are defined at the class level and is available to all the instances of the class. Just one copy of the class variable exists for the Class and all of its instances. Reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program irreversibly. This means that if a subclass changes the class variable then the value referenced would have changed to the new value when we try to access the class variable through a superclass. 
