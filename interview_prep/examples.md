@@ -864,3 +864,6 @@ bob.name
 In the above example the object refenced by bob encapsulates the state `@name = "Bob"`
 
 The state of the object is exposed by the instance method/behavior name when it is called on the object in `line 12`
+
+## Example 21
+What is the difference between instance methods and class methods?
