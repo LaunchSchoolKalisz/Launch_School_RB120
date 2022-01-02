@@ -896,3 +896,57 @@ Person.class_method # invoking the class method
 
 ## Example 22 
 What are collaborator objects, and what is the purpose of using them in OOP? Give an example of how we would work with one.
+
+A collaborator object is an object that is stored as a state (i.e. within an instance variable) within another object. The are called collaborators because they work in conjunction with the class they are associated with. Collaborator objects are usually custom objects (i.e. defined by programmer and not built into Ruby). Collaborator objects represent the connections between various actors in the program.
+For example, a Deck is a class representing a collection of Card objects
+```
+class Deck
+  attr_accessor :cards
+  
+  def initialize
+    @cards = []
+    Card::SUITS.each do |suit|
+      Card::VALUES.each do |value|
+        cards << Card.new(suit, value)
+      end
+    end
+    
+    cards.shuffle!
+  end
+  
+  def deal_one_card
+    cards.pop
+  end
+end
+
+class Card
+  SUITS = %w(Hearts Clubs Diamonds Spades)
+  VALUES = %w(2 3 4 5 6 7 8 9 10 Jack Queen King Ace)
+  
+  attr_accessor :suit, :value
+  
+  def initialize(suit, value)
+    @suit = suit
+    @value = value
+  end
+  
+  def to_s
+    "The #{value} of #{suit}"
+  end
+end
+
+deck = Deck.new
+
+hand = []
+
+5.times { hand << deck.deal_one_card }
+  
+hand.each { |card| puts card }
+  # => The 10 of Diamonds
+  # => The Queen of Clubs
+  # => The 10 of Spades
+  # => The Jack of Clubs
+  # => The 8 of Diamonds
+  # (cards are randomly selected, output may differ)
+```
+In the above code, we define our Deck class to work with the collaborator object Card. When a new Deck instance is initialized, the Deck class relies on the Card class constants SUITS and VALUES to generate a new 52 card deck.
