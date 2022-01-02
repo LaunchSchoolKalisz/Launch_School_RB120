@@ -1226,3 +1226,4 @@ puts Dog.new.swim
 
 ## Example 27
 How does encapsulation relate to the public interface of a class?
+Ruby enables us to hide the behavior and its implementation by making it not visible to the rest of the code in order to reduce dependencies and to prevent the data from being exposed to unwanted parts of the code through encapsulation. Encapsulation describes how we can separate and hide away different pieces of functionality, making them unavailable to the rest of the code base. It is essentially a form of data protection that defines boundaries within a given application.  It is acheived through the use of Method Access Control or access modifiers which determines if the methods are public, private or protected. In Ruby all the instance methods are public by default unless we implement method access control.
