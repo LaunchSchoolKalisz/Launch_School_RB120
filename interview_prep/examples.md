@@ -1184,3 +1184,6 @@ Answer re-do
 Instance variables are variables which start with the @ (example: @instance_variable) and are scoped at the object level. The instance variables keep track of the state of the object. The state of an object is the collection of all of its instance variables and the values it references. Instance methods can access instance variables, that is it exposes the value referenced by the instance variable. Instance variables exists as long as the object exists. Once the Object is destroyed then the instance variable perishes along with it.
 
 On `line 1176` the object `bob` has a state `@name = 'bob'` and on `line 1177` the object `joe` has the state `@name = "joe"`. This demonstrates that though both the objects are created from the same class `Person` their states are unique to the respective objects.
+
+## Example 26
+How do class inheritance and mixing in modules affect instance variable scope? Give an example.
