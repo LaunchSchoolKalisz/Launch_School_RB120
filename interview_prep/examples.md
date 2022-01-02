@@ -1326,3 +1326,6 @@ The object assigned to local variable `sparky` in the first example consists of 
 
 Answer re-do
 In this code the instance variables `@name` and `@age` are initialized within the constructor method `initialize`. Whereas previously the `attr_accessor` methods initialized them. The values referenced by the instance variables `@name `and `@age` are set directly to them. Whereas before they are assigned to the instance variables using the getter methods `name` and `age`.
+
+## Example 29
+When does accidental method overriding occur, and why? Give an example.
