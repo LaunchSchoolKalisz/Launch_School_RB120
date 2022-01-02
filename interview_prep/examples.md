@@ -1703,3 +1703,6 @@ vehicle.each { |object| object.accelerate }
 # => Increase speed by 10 miles an hour!
 ```
 In the above example the `Car` and `Motorbike` are two unrelated classes. Both of them have their own implementation of the instance method `accelerate`. Hence in `line 14` when the objects created from both the classes are passed in as arguments to the each method invocation. They both respond to the `accelerate` instance method invocation with their own implementation. This is an example of Polymorphism through Duck Typing.
+
+## Example 33 
+What is encapsulation and why is it important in Ruby? Give an example
