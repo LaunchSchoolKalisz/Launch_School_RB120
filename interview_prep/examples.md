@@ -1329,3 +1329,19 @@ In this code the instance variables `@name` and `@age` are initialized within th
 
 ## Example 29
 When does accidental method overriding occur, and why? Give an example.
+
+Accidental method overriding may occur when subclass overrides a more generic method implementation from a superclass with a different more specific behavior by implementing a method of the same name.
+
+In Ruby, custom classes inherit from the `Object` class, which has many built in methods as part of the Ruby language. All of the methods that are available to the class `Object` are available to all the custom classes as they subclass from the `Object` class. All subclasses can create it own custom implementation for any of the methods provided by the `Object` class through method overriding by inheritance. As a general rule of thumb the return value of these fake instance methods should behave in a simillar way to the original instance methods. When we accidentally define an instance method in our custom class with the same name as that of the methods in the Object class accidental method overriding occurs.
+```
+class WhoAmI
+  def is_a?(object)
+    object
+  end
+end
+
+identify = WhoAmI.new
+answer = identify.is_a?(Integer) ? "true" : "false"
+puts answer # => true
+```
+In the above example within the `WhoAmI` class we have a custom implementation for the `is_a?` instance method returns the object that was passed in as an argument durring the method invocation. In `line 8` the expression `identify.is_a?(Integer)` evaluates to `true`. This is because the `is_a?` instance method from the `WhoAmI` class overrides the default `is_a?` in the `Object` class and so `line 9` outputs `true`.
