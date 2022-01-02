@@ -1282,3 +1282,26 @@ This code outputs a `GoodDog` object because local variable `sparky` is assigned
     "Woof! My name is #{self.name} and I am #{self.age} in doggo years!"
   end
 ```
+Answer re-do
+
+`Line 13` outputs the object referenced by the local variable `sparky` initialized in `line 12`. The object output consists of the object encoding id and the class name. This is output because when the object is passed as an argument to the puts method it automatically calls the default to_s instance method on the argument and prints it. In order to override the default output we can define our own custom implementation of the to_s method as shown below.
+```
+class GoodDog
+  DOG_YEARS = 7
+
+  attr_accessor :name, :age
+
+  def initialize(n, a)
+    self.name = n
+    self.age  = a * DOG_YEARS
+  end
+
+  def to_s
+    "I am #{name} and I am #{age} years old."
+  end
+end
+
+sparky = GoodDog.new("Sparky", 4)
+puts sparky
+```
+Now `line 17` outputs `"I am Sparky and I am 28 years old."`
