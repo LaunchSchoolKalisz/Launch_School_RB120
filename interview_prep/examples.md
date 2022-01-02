@@ -1348,3 +1348,48 @@ In the above example within the `WhoAmI` class we have a custom implementation f
 
 ## Example 30
 How is Method Access Control implemented in Ruby? Provide examples of when we would use public, protected, and private access modifiers.
+
+Public Methods
+By default all the instance methods within the class are public methods apart from the constructor method initialize which is a private method. Public methods can be accessed from within the class and also from outside of the class. If one knows the class name or the object name then we can access these methods.
+
+Private Methods
+Private methods are methods that are accessible within the class but is not available outside of the class to the rest of the program. They are available to one instance of the class at any given time.
+```
+class Person
+  def money_available
+    "You have £#{account_balance} in your account"
+  end
+
+  private
+
+  def account_balance
+    5000
+  end
+end
+
+Person.new.money_available
+```
+Protected Methods
+Protected methods are available within the class and all of its subclasses. They act as public methods when called within the class and as private methods outside of the class hiearchy. For practical purposes, this means that they can be invoked by all objects within a certain class, but only from within the class. This differs from private methods in that a private method can only be called by the singular instance within the class. They can be used to compare two objects.
+
+```
+class Student
+  def initialize(grade)
+    @grade = grade
+  end
+
+  def >(other)
+    grade > other.grade
+  end
+
+  protected
+
+  attr_reader :grade
+end
+
+bob = Student.new(80)
+john = Student.new(90)
+
+p bob > john # => false
+p john > bob # => true
+```
