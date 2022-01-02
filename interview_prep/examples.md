@@ -762,3 +762,6 @@ Answer re-do
 `line 25` returns `nil` and `line 26` returns the integer `3`.
 
 On `line 25` when we invoke the `sides` class method on the object `Triangle`, Ruby looks in the method lookup path for any class method with the name `sides`. It finds it in the `Shape` class. At this point the value referenced by the class variable `@@sides` within the `Shape` class is `nil`. Ruby resolves `@@sides` to be `nil` and so `line 25` returns `nil`. On `line 26` the `sides` instance method is called on the object of the `Triangle` class. Within the object the `@@sides` instance variable is referencing the integer `3`. When Ruby looks for another method within the method lookup path it finds sides in the `Shape` class and returns integer `3`.
+
+## Example 19 - attr_* for every instance variable
+What is the attr_accessor method, and why wouldn’t we want to just add attr_accessor methods for every instance variable in our class? Give an example.
