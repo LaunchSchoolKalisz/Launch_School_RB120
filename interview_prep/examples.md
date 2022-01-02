@@ -1032,3 +1032,24 @@ joe_2 = Student.new('Joe', 12345)
 joe_1 == joe_2                          # => true
 ```
 In the above code, we define the class Student such that it's instances exhibit the attributes name and id. Then we initialize two Student objects and assign identical values to both attributes. However, Student also has a custom == method defined which overrides the inherited behavior from BasicObject. In this case, we are using Integer#== to compare the id values from two instances of Student. joe_1 and joe_2 have identical id values, so the Student#== method will return true.
+
+Answer re-do
+```
+class Person
+  attr_reader :name
+  def initialize(name)
+    @name = name
+  end
+
+  def ==(other)
+    name == other.name
+  end
+end
+
+oscar = Person.new("Oscar")
+marts = Person.new("Martha")
+
+p oscar == marts # => false
+```
+
+Many operators in Ruby are originally methods. Because of Ruby's syntactical sugar we are able to read them in a more natural way. Since these are methods we can override their implementation in our custom class. In the above example defining the `==` intance method in the custom class `Person` overriddes the implementation of the method `==` given by Ruby. This makes it a fake operator. Hence in `line 15` we are comparing the value referenced by the instance variable `@name` in the objects `oscar` and `marts`. `Line 15` can also be re-written as `oscar.==(marts)`. This will return and print false.
