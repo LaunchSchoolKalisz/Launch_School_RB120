@@ -611,3 +611,26 @@ def to_s
   "My name is #{name.upcase}."
 end
 ```
+## Example 16
+Why is it generally safer to invoke a setter method (if available) vs. referencing the instance variable directly when trying to set an instance variable within the class? Give an example.
+```
+class Student
+  def initialize(name, grade)
+    @name = name
+    @grade = grade
+  end
+
+  def >(other)
+    grade > other.grade
+  end
+
+  protected
+
+  attr_reader :grade
+end
+
+bob = Student.new("Bob", 80)
+riaz = Student.new("Riaz", 90)
+p riaz > bob # => true
+p riaz.grade # => NoMethodError
+```
