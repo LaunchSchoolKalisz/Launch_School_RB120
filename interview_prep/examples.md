@@ -1841,3 +1841,24 @@ OOP was created to reduce dependencies. Programmers wanted to created a way to s
 ## Example 36
 What is the relationship between classes and objects in Ruby?
 Classes are basic oulines of what an object is made of. Classes define the attributes and the behaviors of its objects. Classes group common behaviors. Anything that has a value can be considered an object. Basically, things like numbers, strings, arrays, classes, and modules. Methods, blocks, and variables are not objects. Objects are instances of a class and they encapsulate the state of the object. Objects are created from classes (which are also another type of Object). Simply: Class = a blueprint Object = something built from that blueprint
+
+### Answer re-do
+Classes are basic oulines of what an object is made of. Classes define the attributes and the behaviors of its objects. Common behaviors are grouped within a class. A class can have many objects
+```
+class Person
+	def initialize(name)
+    @name = name
+  end
+end
+```
+Objects are instances of a class and they encapsulate the state of the object. Objects are instantiated by calling the `::new` class method on the class.
+```
+class Person
+  def initialize(name)
+    @name = name
+  end
+end
+
+marts = Person.new("Martha")
+```
+On `line 7` we are instantiating a new object of the `Person` class and it encapsulates the state `@name = "Martha"`
