@@ -654,3 +654,7 @@ p bob.name
 bob.change_name
 p bob.name
 ```
+
+## Example 17 - custom setter method
+Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
+
