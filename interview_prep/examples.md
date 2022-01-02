@@ -654,6 +654,40 @@ p bob.name
 bob.change_name
 p bob.name
 ```
+It is safer to invoke a setter method than to explicitly call an instance variable because we can expose sensitve data or might accidentaly modify the value it references.
+
+```
+class Student
+
+  def initialize(name, score)
+    @name = name
+    @score = score
+  end
+
+  def get_grades
+    puts "#{name} has the grade #{finding_rank}"
+  end
+
+  private
+  attr_reader :name, :score
+
+  def finding_rank
+    answer = case score
+              when 85..100 then "Merit"
+              when 80..84 then "Distinction"
+              when 59..79 then "Pass"
+              else
+                "Fail"
+             end
+    answer            
+  end
+
+end
+
+bob = Student.new("Bob", 85)
+bob.get_grades
+```
+here we are encapsulating the score attained by the student and instead we are just showing the desired output
 
 ## Example 17 - custom setter method
 Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
