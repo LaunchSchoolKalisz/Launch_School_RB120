@@ -1825,4 +1825,11 @@ p mike.walk
 kitty = Cat.new("Kitty")
 p kitty.walk
 ```
-This code outputs: `"Mike strolls forward"` on `line 1823` then `"Kitty saunters forward"` on `line 1826`. This code makes sense as a mixin module, as the classes have a "has-a" relationship with a walk, rather than an "is-a" relationship; it is a common behavior that can be shared amongst classes. 
+This code outputs and returns: `"Mike strolls forward"` on `line 1823` then `"Kitty saunters forward"` on `line 1826`. This code makes sense as a mixin module, as the classes have a "has-a" relationship with a walk, rather than an "is-a" relationship; it is a common behavior that can be shared amongst classes. 
+
+### Answer re-do
+On `line 40` the `walk` instance method is invoked on the local variable `mike` referencing the instance of the class `Person` it ouputs and returns `"Mike strolls forward"`
+
+On `line 43` the `walk` instance method is invoked on the local variable `kitty` referencing the instance of the class `Cat` it ouputs and returns `"Kitty saunters forward".`
+
+It makes sense to use a module `Walkable` to mixin the instance method `walk` in the both the classes. This is because both the classes have their own unique state with the `@name` instance variable referencing different values and they also have their own implementation of the private instance method `gait` which is interpolated in the string within the `walk` instance method. If we were to inherit `walk` from the superclass then we will not be able to manipulate the instance method in a simillar fashion.
