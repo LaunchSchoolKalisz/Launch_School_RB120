@@ -724,3 +724,33 @@ end
 Student.new("martha").name
 ```
 Creating a getter method using the attr_reader can be an easier way of defining setter methods. How ever if you want to manipulate the return value of the getter method or influence what it does then we will have to define a custom getter method. This will give us the added flexibility required. In the above example calling the getter method name will output "Hi my name is Martha".
+
+## Example 18
+What can executing Triangle.sides return? What can executing Triangle.new.sides return? What does this demonstrate about class variables
+
+class Shape
+  @@sides = nil
+
+  def self.sides
+    @@sides
+  end
+
+  def sides
+    @@sides
+  end
+end
+
+class Triangle < Shape
+  def initialize
+    @@sides = 3
+  end
+end
+
+class Quadrilateral < Shape
+  def initialize
+    @@sides = 4
+  end
+end
+
+Triangle.sides
+Triangle.new.sides
