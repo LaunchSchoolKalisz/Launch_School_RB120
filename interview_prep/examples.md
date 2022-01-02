@@ -1825,3 +1825,4 @@ p mike.walk
 kitty = Cat.new("Kitty")
 p kitty.walk
 ```
+This code outputs: `"Mike strolls forward"` on `line 1823` then `"Kitty saunters forward"` on `line 1826`. This code makes sense as a mixin module, as the classes have a "has-a" relationship with a walk, rather than an "is-a" relationship; it is a common behavior that can be shared amongst classes. 
