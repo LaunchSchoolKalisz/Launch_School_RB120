@@ -1007,3 +1007,6 @@ When we work with collaborator objects, they are usually custom objects (e.g. de
 Collaborator objects play an important role in object oriented design, since they also represent the connections between various actors in your program.
 
 When working on an object oriented program be sure to consider what collaborators your classes will have and if those associations make sense, both from a technical standpoint and in terms of modeling the problem your program aims to solve.
+
+## Example 23 
+How and why would we implement a fake operator in a custom class? Give an example.
