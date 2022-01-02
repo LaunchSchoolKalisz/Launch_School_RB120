@@ -1345,3 +1345,6 @@ answer = identify.is_a?(Integer) ? "true" : "false"
 puts answer # => true
 ```
 In the above example within the `WhoAmI` class we have a custom implementation for the `is_a?` instance method returns the object that was passed in as an argument durring the method invocation. In `line 8` the expression `identify.is_a?(Integer)` evaluates to `true`. This is because the `is_a?` instance method from the `WhoAmI` class overrides the default `is_a?` in the `Object` class and so `line 9` outputs `true`.
+
+## Example 30
+How is Method Access Control implemented in Ruby? Provide examples of when we would use public, protected, and private access modifiers.
