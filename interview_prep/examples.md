@@ -1156,3 +1156,26 @@ In the above code we define the method `calling_object` within the `Reflection` 
 Ruby still provides a reference for `self` if you utilize it outside the scope of any class. It points to `main`, which is an instance of `Object`.
 
 puts self.inspect     # => main
+
+## Example 25 
+What does the below code demonstrate about how instance variables are scoped?
+```
+class Person
+  def initialize(n)
+    @name = n
+  end
+
+  def get_name
+    @name
+  end
+end
+
+bob = Person.new('bob')
+joe = Person.new('joe')
+
+puts bob.inspect # => #<Person:0x000055e79be5dea8 @name="bob">
+puts joe.inspect # => #<Person:0x000055e79be5de58 @name="joe">
+
+p bob.get_name # => "bob"
+```
+This demonstrates that instance variables are scoped at the object level. They are available throughout the instance of the object. This basically means that for any given object, you can access an instance variable within an instance method without passing it in, even if it was initialized outside of that particular instance method.
