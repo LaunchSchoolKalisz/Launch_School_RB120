@@ -1455,3 +1455,51 @@ p bob > john # => false
 p john > bob # => true
 ```
 In the above example the protected method `grade` acts as a private method outside of the class hierarchy and acts as a public method. Due to this they are available to multiple instance of the same class.
+
+## Example 31
+Describe the distinction between modules and classes.
+
+Classes are basic oulines of what an object is made of. Classes define the attributes and the behaviours of its objects. Common behaviours are grouped within a class. All classes are part of a namespace in Ruby. Objects are created from a class.
+```
+class Person
+	def initialize(name)
+    @name = name
+  end
+
+  def speak
+    puts "Hi! How are you?"
+  end
+end
+
+bob = Person.new("Bob")
+bob.speak #=> "Hi! How are you?"
+```
+A subclass inherits the behaviours from a superclass. The subclass is the derived class and the super class is the base class. The superclass has a larger reusability and the subclass has an extended or refined implementation. This reduces complexity of the code and makes it reusable. Inheritance displays Is - A relationship.
+```
+class Mammal # superclass
+end
+
+class Dog < Mammal # subclass
+end
+```
+Modules are used as containers for housing methods that may be relevant to multiple classes. The collection of the methods within the module can be used in other classes through mixins. Unlike classes modules do not have any instances. Modules cannot inherit unlike the classes, and modules cannot create objects.
+
+In Ruby multiple inheritance is acheived by mixin modules. The inheritance achieved through mixing in modules are known as Interface Inheritance. The behaviour from a module is mixed in using the include method and passing in the name of the module as an argument to it. The modules group common methods, constants and classes within. This is known as namespacing. Interface inheritance have a has - a relationship. Eg. The Dog has a behaviour(.i.e, a method).
+```
+module Swimmable
+  def swim
+    puts "I can swim!!!"
+  end
+end
+
+class Human
+  include Swimmable
+end
+
+class Dog
+  include Swimmable
+end
+
+Human.new.swim
+Dog.new.swim
+```
