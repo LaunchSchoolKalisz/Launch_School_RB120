@@ -1777,3 +1777,6 @@ p bob.student_age  # => 19
 p bob.age          # => NoMethodError
 ```
 The above example we have hidden the implementation details of the instance method `age` from being accessed from outside of the class. This was acheived by the use of the private method which is an access modifier. Hence the instance method `age` can only accessed from the within the Student class.
+
+## Example 34
+What is returned/output in the code? Why did it make more sense to use a module as a mixin vs. defining a parent class and using class inheritance?
