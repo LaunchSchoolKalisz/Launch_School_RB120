@@ -1972,3 +1972,4 @@ end
 pingu = Penguin.new
 pingu.fly
 ```
+Ruby will use the following method lookup path: `[Penguin, Migratory, Aquatic, Bird, Animal, Object, Kernel, BasicObject]`. It will not find the method `fly` and so it will raise a `NoMethodError`. We can verify this by calling `#ancestors` on the `Penguin` class.
