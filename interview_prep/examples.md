@@ -1925,3 +1925,16 @@ In the above code, we define the class `Cat` and initialize 3 `Cat` objects on `
 
 ### Answer re-do
 `Lines 8 and 9` will return and output `false` because in each line we are comparing two objects from the same class which are unique and they have their own encoding id. This shows that in Ruby all the objects are unique and they have their own state even if they are created from the same class. Also we can infer from this that the `==` method compares the value and when the values are the same then it evaluates to `true` else it will return `false`.
+
+## Example 39
+Describe the inheritance structure in the code, and identify all the superclasses.
+```
+class Thing
+end
+
+class AnotherThing < Thing
+end
+
+class SomethingElse < AnotherThing
+end
+```
