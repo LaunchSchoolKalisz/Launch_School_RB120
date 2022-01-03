@@ -1942,3 +1942,33 @@ This is an example of class inheritance. `Thing` is the overarching superclass, 
 
 ### Answer re-do
 This is an example of class inheritance where the subclasses inherit from the superclass. The subclass `SomethingElse` inherits from the superclass `AnotherThing`. `AnotherThing` subclass inherits from the superclass `Thing`. `Thing` does not have any explicit superclass.
+
+## Example 40
+What is the method lookup path that Ruby will use as a result of the call to the fly method? Explain how we can verify this.
+```
+module Flight
+  def fly; end
+end
+
+module Aquatic
+  def swim; end
+end
+
+module Migratory
+  def migrate; end
+end
+
+class Animal
+end
+
+class Bird < Animal
+end
+
+class Penguin < Bird
+  include Aquatic
+  include Migratory
+end
+
+pingu = Penguin.new
+pingu.fly
+```
