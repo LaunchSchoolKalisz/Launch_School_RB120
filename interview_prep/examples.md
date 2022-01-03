@@ -2016,3 +2016,25 @@ This code outputs `"Daisy says moooooooooooo!"` and returns `nil`. On `line 2011
 ### Answer re-do
 
 On `line 22` the `speak` instance method is invoked on the object of the `Cow` class. This outputs `"Daisy says moooooooooooo!"`. Ruby looks in the method lookup path of the `Cow` class and finds `speak` in the `Animal` class. Within the method definition of `speak` we have the expression `puts sound`. Now Ruby looks for the `sound` instance method within the method lookup path of the `Cow` class and finds it. Within the method definition of sound we have the `super` keyword in `line 17`. `super` is a keyword used by Ruby to invoke a method with the same name within the method lookup path. When we invoke a method which has a `super` keyword, Ruby looks in the method lookup path to find another method with the same name. Ruby invokes the method when it finds it. Hence the expression `super + "moooooooooooo!"` resolves as `"#{@name} says " + "moooooooooooo!"` after the `super` finds sound in `lines 10 - 13` from the `Animal` class.
+
+## Example 42
+Do molly and max have the same states and behaviors in the code below? Explain why or why not, and what this demonstrates about objects in Ruby.
+```
+class Cat
+  def initialize(name, coloring)
+    @name = name
+    @coloring = coloring
+  end
+
+  def purr; end
+
+  def jump; end
+
+  def sleep; end
+
+  def eat; end
+end
+
+max = Cat.new("Max", "tabby")
+molly = Cat.new("Molly", "gray")
+```
