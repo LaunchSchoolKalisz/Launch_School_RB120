@@ -1939,3 +1939,6 @@ class SomethingElse < AnotherThing
 end
 ```
 This is an example of class inheritance. `Thing` is the overarching superclass, with `AnotherThing` as its subclass. All the methods inherited from a `Thing` are available to `AnotherThing`. Further, `AnotherThing` is a superclass to `SomethingElse`, so `SomethingElse` will inherit all methods from `AnotherThing`, and will therefore have access to all methods in `Thing` due to the hirearchy. Therefore, `Thing` would also be considered a superclass to `SomethingElse`.
+
+### Answer re-do
+This is an example of class inheritance where the subclasses inherit from the superclass. The subclass `SomethingElse` inherits from the superclass `AnotherThing`. `AnotherThing` subclass inherits from the superclass `Thing`. `Thing` does not have any explicit superclass.
