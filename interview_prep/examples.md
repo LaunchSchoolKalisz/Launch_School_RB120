@@ -1985,7 +1985,7 @@ p pingu.class.ancestors
 # => [Penguin, Migratory, Aquatic, Bird, Animal, Object, PP::ObjectMixin, Kernel, BasicObject]
 ```
 
-##Example 41
+## Example 41
 What does this code output and why?
 ```
 class Animal
