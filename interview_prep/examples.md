@@ -1908,7 +1908,7 @@ puts Dog.new.swim
 
 ## Example 38
 If we use == to compare the individual Cat objects in the code above, will the return value be true? Why or why not? What does this demonstrate about classes and objects in Ruby, as well as the == method?
-
+```
 class Cat
 end
 
@@ -1918,3 +1918,4 @@ paws = Cat.new
 
 p whiskers == ginger
 p paws == ginger
+```
