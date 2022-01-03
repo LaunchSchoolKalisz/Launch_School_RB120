@@ -1919,3 +1919,6 @@ paws = Cat.new
 p whiskers == ginger
 p paws == ginger
 ```
+`lines 1919 and 1920` return false. The `==` method has a special syntax to make it look like a normal operator that is part of Ruby's syntactical sugar. It is not, however, an operator, but an instance method. We can, therefore, assume that the value used for comparison of each calling instance is determined by its class. The original `==` is defined in `BasicObject`, from which all other class in Ruby descend. Therefore, all classes have a `==` method available to them. By default, the `==` method will check to see if the two objects being compared are the same object in memory. 
+
+In the above code, we define the class `Cat` and initialize 3 `Cat` objects on `lines 1915-1917` and assign local variables to the returned objects, each with their own object encoding id. When we invoke the `==` method on the object referenced by `whiskers` on `line 1919`, the implementation of `==` is still that of `BasicObject`. `==` is comparing the two objects to see if they are the same object in memory. `whiskers` and `ginger` reference two separate objects with different object encoding ids so `==` returns `false`.
