@@ -1984,3 +1984,30 @@ This can be verified by calling the ancestors mehtod on the object's class to ge
 p pingu.class.ancestors
 # => [Penguin, Migratory, Aquatic, Bird, Animal, Object, PP::ObjectMixin, Kernel, BasicObject]
 ```
+
+##Example 41
+What does this code output and why?
+```
+class Animal
+  def initialize(name)
+    @name = name
+  end
+
+  def speak
+    puts sound
+  end
+
+  def sound
+    "#{@name} says "
+  end
+end
+
+class Cow < Animal
+  def sound
+    super + "moooooooooooo!"
+  end
+end
+
+daisy = Cow.new("Daisy")
+daisy.speak
+```
