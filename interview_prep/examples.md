@@ -1973,3 +1973,14 @@ pingu = Penguin.new
 pingu.fly
 ```
 Ruby will use the following method lookup path: `[Penguin, Migratory, Aquatic, Bird, Animal, Object, Kernel, BasicObject]`. It will not find the method `fly` and so it will raise a `NoMethodError`. We can verify this by calling `#ancestors` on the `Penguin` class.
+
+### Answer re-do
+The order in which Ruby inspects different classes when a method is invoked is known as the method lookup path. This can be determined by calling the `#ancestors` method on the class under question.
+
+On `line 25` the instance method fly is invoked on the object referenced by `pingu` which is created from the `Penguin` class. Now Ruby will look for `fly` within the method lookup path of the class `Penguin` if it cannot find it within the `Penguin` class. It will first look in the mixed in modules in an ascending order i.e in `Migration` and then followed by `Aquatic`. Since it cant find `fly` in either of them and there are no more modules mixin taking place Ruby with look in the class inheritance hierarchy. Since `Penguin` inherits from the superclass `Bird` it will look inside of it and doesnt find it. Hence `line 25` will raise a `NoMethodError`.
+
+This can be verified by calling the ancestors mehtod on the object's class to get the method lookup path.
+```
+p pingu.class.ancestors
+# => [Penguin, Migratory, Aquatic, Bird, Animal, Object, PP::ObjectMixin, Kernel, BasicObject]
+```
