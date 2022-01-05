@@ -2038,3 +2038,4 @@ end
 max = Cat.new("Max", "tabby")
 molly = Cat.new("Molly", "gray")
 ```
+`max` and `molly` are both local variables which are assigned to 2 different objects which were created by calling the `::new` class method on the `Cat` class. 'max' as 2 sates `@name = Max` and `@coloring = tabby`. `molly` also has two states `@name = Molly` and `@coloring = gray`. As part of the `Cat` class, they bot have access to the behaviors defined by the methods `purr` `jump` `sleep` and `eat`.
