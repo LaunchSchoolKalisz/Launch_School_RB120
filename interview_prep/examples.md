@@ -2039,3 +2039,6 @@ max = Cat.new("Max", "tabby")
 molly = Cat.new("Molly", "gray")
 ```
 `max` and `molly` are both local variables which are assigned to 2 different objects which were created by calling the `::new` class method on the `Cat` class. 'max' as 2 sates `@name = Max` and `@coloring = tabby`. `molly` also has two states `@name = Molly` and `@coloring = gray`. As part of the `Cat` class, they bot have access to the behaviors defined by the methods `purr` `jump` `sleep` and `eat`.
+
+Answer re-do
+`max` has the state `@name="Max"`, `@coloring="tabby"` and `molly` has the state `@name="Molly"`, `@coloring="gray"`. Therefore we can see that both `molly` and `max` which are instances of the same object have different states. This is because in Ruby the objects, which are created from the class, encapsulate the state and the behaviors are defined by the classes. The objects are unique and their states are specific to them. However both the objects have the same behaviour as they are defined in the class they are created from.
