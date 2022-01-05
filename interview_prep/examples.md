@@ -2042,3 +2042,25 @@ molly = Cat.new("Molly", "gray")
 
 Answer re-do
 `max` has the state `@name="Max"`, `@coloring="tabby"` and `molly` has the state `@name="Molly"`, `@coloring="gray"`. Therefore we can see that both `molly` and `max` which are instances of the same object have different states. This is because in Ruby the objects, which are created from the class, encapsulate the state and the behaviors are defined by the classes. The objects are unique and their states are specific to them. However both the objects have the same behaviour as they are defined in the class they are created from.
+
+## Example 43
+```
+class Student
+  attr_accessor :name, :grade
+
+  def initialize(name)
+    @name = name
+    @grade = nil
+  end
+
+  def change_grade(new_grade)
+    grade = new_grade
+  end
+end
+
+priya = Student.new("Priya")
+priya.change_grade('A')
+priya.grade
+```
+
+In the above code snippet, we want to return ”A”. What is actually returned and why? How could we adjust the code to produce the desired result?
