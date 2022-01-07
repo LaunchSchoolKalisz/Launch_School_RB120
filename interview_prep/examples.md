@@ -2071,3 +2071,12 @@ In the code above, on `line 2063`, `priya.grade` returns `nil`. This is because 
     self.grade = new_grade
   end
 ```
+### Answer re-do
+
+On `line 16` when the instance method `grade` is invoked on the object referenced by `priya` it returns `nil`. This is because the argument `A` passed in to the setter method `change_grade` invocation in `line 15` does not reassign the value referenced by the `@grade` instance variable in `line 10`. Instead in `line 10` Ruby is initializing a local variable `grade` to the string `A`. Hence `@grade` is never reassigned and is always `nil`. In order to fix this we have to call the grade getter method on the `self` keyword in `line 10` as follows
+```
+def change_grade(new_grade)
+  self.grade = new_grade
+end
+```
+Now when `priya.grade` executes in `line 16` string `"A"` is returned.
