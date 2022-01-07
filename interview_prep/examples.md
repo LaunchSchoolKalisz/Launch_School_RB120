@@ -2186,3 +2186,35 @@ def speak
 end
 ```
 We are now accessing `@name` through the getter method, and so it refelcts the changes made in the `Kinght` class, which inherits from `Character`.
+
+## Example 47
+What is output and why?
+```
+class FarmAnimal
+  def speak
+    "#{self} says "
+  end
+end
+
+class Sheep < FarmAnimal
+  def speak
+    super + "baa!"
+  end
+end
+
+class Lamb < Sheep
+  def speak
+    super + "baaaaaaa!"
+  end
+end
+
+class Cow < FarmAnimal
+  def speak
+    super + "mooooooo!"
+  end
+end
+
+p Sheep.new.speak
+p Lamb.new.speak
+p Cow.new.speak
+```
