@@ -2080,3 +2080,21 @@ def change_grade(new_grade)
 end
 ```
 Now when `priya.grade` executes in `line 16` string `"A"` is returned.
+
+## Example 44
+What does each `self` refer to in the below code snippet?
+```
+class MeMyselfAndI
+  self
+
+  def self.me
+    self
+  end
+
+  def myself
+    self
+  end
+end
+
+i = MeMyselfAndI.new
+```
