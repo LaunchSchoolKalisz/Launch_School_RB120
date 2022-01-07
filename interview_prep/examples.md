@@ -2307,3 +2307,13 @@ end
 
 ### Answer re-do
 The constant `TITLES` initialized in the `line 2` is available throught the class and its subclasses. The class variable acts as one copy through out the class and its subclasses. The instance variable `@name` is available only within a instance of a class. Once the instance is destroyed then the instance variable perishes along with it. Instance variables are scoped within the instance of the class. The instance variable `@age` is not initialized and hence it is not available anywhere as always evaluates to `nil`.
+
+## Example 51 - Spike
+The following is a short description of an application that lets a customer place an order for a meal:
+
+A meal always has three meal items: a burger, a side, and drink.
+For each meal item, the customer must choose an option.
+The application must compute the total cost of the order.
+Identify the nouns and verbs we need in order to model our classes and methods.
+Create an outline in code (a spike) of the structure of this application.
+Place methods in the appropriate classes to correspond with various verbs.
