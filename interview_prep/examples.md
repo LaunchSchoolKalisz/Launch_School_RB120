@@ -2222,3 +2222,23 @@ p Cow.new.speak
 This code outputs the following: `"#<Sheep:0x00007fb6bd829288> says baa!" "#<Lamb:0x00007fb6bd828db0> says baa!baaaaaaa!" "#<Cow:0x00007fb6bd828108> says mooooooo!"`
 
 This is because in the `FarmAnimal` class in the `speak` method which each of the subclasses use, we use the keyword `self` as the animal name from inside of an instance method. Inside of an instance method, `self` points to the object that calls the method, which is why the object is returned. In order to fix this, we can create a new name instance, or, if we want the name of the class to be output rather than the object, we can simply change `line 2195` to read `"#{self.class} says "`.
+
+## Example 48
+```
+class Person
+  def initialize(name)
+    @name = name
+  end
+end
+
+class Cat
+  def initialize(name, owner)
+    @name = name
+    @owner = owner
+  end
+end
+
+sara = Person.new("Sara")
+fluffy = Cat.new("Fluffy", sara)
+```
+What are the collaborator objects in the above code snippet, and what makes them collaborator objects?
