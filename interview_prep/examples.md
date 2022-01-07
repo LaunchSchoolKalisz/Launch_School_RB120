@@ -2302,3 +2302,5 @@ class Person
   end
 end
 ```
+
+`TITLES` is a constant, and has lexical scope.  `@@total_people` is a class variable and has class scope. `@name` and `@age` are instance variables and have object scope.
