@@ -2281,3 +2281,6 @@ elsif number == 30
 elseif (40..49).include?(number)
   'third'
 end
+```
+### Answer re-do
+The case statement uses the === method explicitly. The calling object is treat as a group and checks if the argument is part of the group.
