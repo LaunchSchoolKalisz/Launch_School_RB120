@@ -2317,3 +2317,36 @@ The application must compute the total cost of the order.
 Identify the nouns and verbs we need in order to model our classes and methods.
 Create an outline in code (a spike) of the structure of this application.
 Place methods in the appropriate classes to correspond with various verbs.
+
+Nouns: meal = burger, side, drink; customer, option, application, cost
+Verbs: choose, compute
+
+class Meal(burger, side, drink)
+  def initalize
+    @burger = burger
+    @side = side
+    @drink = drink
+  end
+end
+
+class Customer
+  def choose_meal
+
+  end
+end
+
+class MenuOption
+  case menu_item
+  when burger
+    cost = "$5.00"
+  when side
+    cost = "$3.00"
+  when drink
+    cost = "$1.00"
+  end
+end
+
+class Application
+  def compute_cost
+  end
+end
