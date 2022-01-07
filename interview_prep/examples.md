@@ -2304,3 +2304,6 @@ end
 ```
 
 `TITLES` is a constant, and has lexical scope.  `@@total_people` is a class variable and has class scope. `@name` and `@age` are instance variables and have object scope.
+
+### Answer re-do
+The constant `TITLES` initialized in the `line 2` is available throught the class and its subclasses. The class variable acts as one copy through out the class and its subclasses. The instance variable `@name` is available only within a instance of a class. Once the instance is destroyed then the instance variable perishes along with it. Instance variables are scoped within the instance of the class. The instance variable `@age` is not initialized and hence it is not available anywhere as always evaluates to `nil`.
