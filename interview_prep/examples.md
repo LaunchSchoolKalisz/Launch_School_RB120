@@ -2112,3 +2112,18 @@ end
 within the scope of the class methods `self` always represents the class.
 
 In `line 8 - 10` `self` is used within the method definition if the instance method `myself`. Hence within the instance method `self` always represents the calling object `i` of the class `MeMyselfAndI`.
+
+## Example 45
+Running the following code will not produce the output shown on the last line. Why not? What would we need to change, and what does this demonstrate about instance variables?
+```
+class Student
+  attr_accessor :grade
+
+  def initialize(name, grade=nil)
+    @name = name
+  end
+end
+
+ade = Student.new('Adewale')
+p ade # => #<Student:0x00000002a88ef8 @grade=nil, @name="Adewale">
+```
