@@ -2065,7 +2065,7 @@ priya.grade
 
 In the above code snippet, we want to return ”A”. What is actually returned and why? How could we adjust the code to produce the desired result?
 
-In the code aboove, `priya.grade` returns `nil`. This is because in the `change_grade` method, we did not distinguish `grade` from local variable initialization, and so when we call `change_grade` a local variable `rade` is intialized, rather than reassigning the instance variable `@grade` as desired. By adding the `self` keyword, we are able to modify the desired value of the instance variable:
+In the code above, on `line 2063`, `priya.grade` returns `nil`. This is because in the `change_grade` method on `lines 2056-2058`, we did not distinguish `grade` on `line 2057` from local variable initialization, and so when we call `change_grade` a local variable `grade` is intialized, rather than reassigning the instance variable `@grade` with the setter method `grade=` as desired. By adding the `self` keyword, we are able to modify the desired value of the instance variable:
 ```
   def change_grade(new_grade)
     self.grade = new_grade
