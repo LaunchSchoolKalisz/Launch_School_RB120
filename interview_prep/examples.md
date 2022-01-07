@@ -2242,3 +2242,7 @@ sara = Person.new("Sara")
 fluffy = Cat.new("Fluffy", sara)
 ```
 What are the collaborator objects in the above code snippet, and what makes them collaborator objects?
+
+Collaborator objects are usually custom objects that are assigned to the state of another object. These help to form associations between the two objects and makes the methods of the collaborator object available to the other object.
+
+In this snippit, the `Person` object referenced by the local variable `sara` is a collaborator object, as it is passed in during the instantiation of the new `Cat` object on `line 2242` and assigned to the instance variable `@owner` on `line 2237`.
