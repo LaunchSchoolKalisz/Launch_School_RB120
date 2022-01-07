@@ -2099,3 +2099,16 @@ end
 i = MeMyselfAndI.new
 ```
 `self` on `line 2088` references the class that's in the process of being defined, so, in this case, `self` references `MeMyselfAndI`. On `line 2090` `self` references a class method, and so `self` again references the class `MeMyselfAndI`. On line `2091`, we call `self` within a class method, and so the calling object is the class itself, therefore `self` will reference the class that calls the method, `MeMyselfAndI`, rather than an instance of that class. However, on `line 2095` `self` we call self within an instance method and in this case `self` points to the object that calls the method, the new `MeMyselfAndI` object which is instantiated on `line 2099` and referenced by local variable `i`
+
+### Answer re-do
+The `self` keyword is an explicit caller. The `self` keyword represents the class or the object of a class depending upon the scope where it is used.
+
+In `line 2` `self` represents the class `MeMyselfAndI` as it is defined in the scope of the class. In `line 4` `self` is used while defining a class method `me`. Here `self` represents the class `MeMyselfAndI`. There for `line 4 - 5` can also be written as
+```
+def MeMyselfAndI.me
+  self
+end
+```
+within the scope of the class methods `self` always represents the class.
+
+In `line 8 - 10` `self` is used within the method definition if the instance method `myself`. Hence within the instance method `self` always represents the calling object `i` of the class `MeMyselfAndI`.
