@@ -2135,3 +2135,20 @@ Running this code will produce `#<Student:0x00007fae54965af0 @name="Adewale">`. 
     @name = name
   end
 ```
+
+### Answer re-do
+This is because within the constructor method `initialize` we have not defined the instance variable `@grade`. Therefore it is not included in the state during instantiation of the instance `ade`. In order to fix the code we will have to initialize the instance variable `@grade` as follows:
+```
+class Student
+  attr_accessor :grade
+
+  def initialize(name, grade=nil)
+    @grade = grade
+    @name = name
+  end
+end
+
+ade = Student.new('Adewale')
+p ade # => #<Student:0x00000002a88ef8 @grade=nil, @name="Adewale">
+```
+Now `line 11` will return the desired output. This demonstrates that the instance variables tracks the state of the object.
