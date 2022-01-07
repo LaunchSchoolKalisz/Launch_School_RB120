@@ -1,3 +1,6 @@
+# For each: How? What? Why? Along with own code example
+  # To focus on especially: Polymorphism, capsulation, collaborator objects
+
 # Classes and Objects
   # Objects
   # Classes
