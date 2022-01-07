@@ -2179,3 +2179,10 @@ sir_gallant = Knight.new("Gallant")
 p sir_gallant.name
 p sir_gallant.speak
 ```
+On `line 2179` this code outputs and returns `"Sir Gallant"` and on `line 2180` it outputs and returns `"Gallant is speaking."`. This is because the `speak` method on `lines 2167-2169` reference the instance variable `@name` which in the `Character` class is assinged to `"Gallant"`. If we change the code in the speak method as below:
+```
+def speak
+   "#{name} is speaking."
+end
+```
+We are now accessing `@name` through the getter method, and so it refelcts the changes made in the `Kinght` class, which inherits from `Character`.
