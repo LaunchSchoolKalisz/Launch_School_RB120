@@ -2265,3 +2265,19 @@ when 10, 20, 30 then 'second'
 when 40..49     then 'third'
 end
 ```
+
+This case statement uses the `==` method for equality to determine when the clause is executed. It could be rewritten:
+```
+number = 42
+
+if number == 1
+  'first'
+elsif number == 10
+  'second'
+elsif number == 20
+  'second'
+elsif number == 30
+  'second'
+elseif (40..49).include?(number)
+  'third'
+end
