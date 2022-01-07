@@ -2284,3 +2284,21 @@ end
 ```
 ### Answer re-do
 The case statement uses the === method explicitly. The calling object is treat as a group and checks if the argument is part of the group.
+
+## Example 50
+What are the scopes of each of the different variables in the above code?
+```
+class Person
+  TITLES = ['Mr', 'Mrs', 'Ms', 'Dr']
+
+  @@total_people = 0
+
+  def initialize(name)
+    @name = name
+  end
+
+  def age
+    @age
+  end
+end
+```
