@@ -2098,3 +2098,4 @@ end
 
 i = MeMyselfAndI.new
 ```
+`self` on `line 2088` references the class that's in the process of being defined, so, in this case, `self` references `MeMyselfAndI`. On `line 2090` `self` references a class method, and so `self` again references the class `MeMyselfAndI`. On line `2091`, we call `self` within a class method, and so the calling object is the class itself, therefore `self` will reference the class that calls the method, `MeMyselfAndI`, rather than an instance of that class. However, on `line 2095` `self` we call self within an instance method and in this case `self` points to the object that calls the method, the new `MeMyselfAndI` object which is instantiated on `line 2099` and referenced by local variable `i`
