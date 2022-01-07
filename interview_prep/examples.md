@@ -2253,3 +2253,15 @@ Collaborator objects are custom objects that are assigned to the state of anothe
 In the above code the object referenced by the local variable `sara` created from the `Person` class is stored as a state of the object `fluffy`. In `fluffy` the object `sara` is assigned to the instance variable `@owner` when the object referenced by the local variable `fluffy` is instantiated from the `Cat` class.
 
 Here the object referenced by `sara` is the collaborator object which makes it's behaviours availabe to the object `fluffy`.
+
+## Example 49
+What methods does this case statement use to determine which when clause is executed?
+```
+number = 42
+
+case number
+when 1          then 'first'
+when 10, 20, 30 then 'second'
+when 40..49     then 'third'
+end
+```
