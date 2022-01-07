@@ -2127,3 +2127,11 @@ end
 ade = Student.new('Adewale')
 p ade # => #<Student:0x00000002a88ef8 @grade=nil, @name="Adewale">
 ```
+
+Running this code will produce `#<Student:0x00007fae54965af0 @name="Adewale">`. This is because the instance varibale `@grade` is never initialized within the method body of `initialize` and so the instance variable is not instantiated as part of the new object referenced by `ade` when we call `::new` on the class `Student`. In order to achieve the desired output, we need to change the method `initialize` to include `@grade`, as below:
+```
+  def initialize(name, grade=nil)
+    @grade = grade
+    @name = name
+  end
+```
