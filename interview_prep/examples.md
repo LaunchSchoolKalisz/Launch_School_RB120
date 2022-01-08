@@ -2749,7 +2749,7 @@ bob.order_food
 ```
 
 ## Example 52
-In the make_one_year_older method we have used self. What is another way we could write this method so we don't have to use the self prefix? Which use case would be preferred according to best practices in Ruby, and why?
+In the `make_one_year_older` method we have used `self`. What is another way we could write this method so we don't have to use the `self` prefix? Which use case would be preferred according to best practices in Ruby, and why?
 ```
 class Cat
   attr_accessor :type, :age
@@ -2764,3 +2764,5 @@ class Cat
   end
 end
 ```
+
+Another way to write the method would be to change `line 2763` to read `@age += 1`. However, using the `self` keyword is preferable, as we are using the settter method rather than accessing the instance variable directly. Getter/setter methods are much easier to reference if we ever need to retrieve or modify the state of the object as we can make changes in just one place.
