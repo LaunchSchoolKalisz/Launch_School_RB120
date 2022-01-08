@@ -3,7 +3,7 @@
 	# Both general dentists and oral surgeons can pull teeth. Orthodontists cannot pull teeth.  Orthodontists straighten teeth.+
 	# All of these aforementioned specialties are dentists. All dentists graduated from dental school.  Oral surgeons place implants.+
 	# General dentists fill teeth+
-=end
+
 
 office = DentalOffice.new("Dental People Inc")
 dr_mark = Orthodentist.new("Dr. Mark")
@@ -18,7 +18,7 @@ office.ortho(dr_lisa)
 office.ortho(dr_mark)
 office.general(dr_newman)
 puts office
-
+=end
 =begin
 # nouns - dental_office(name is dental people inc)
 	#   dental office
@@ -193,4 +193,78 @@ I came up with my own spike if you want to try the following:
 	# Christopher is studying in the Civil engineering department.
 	# Ali is studying in the Civil engineering department.
 	# Clare is studying in the Civil engineering department.
-  =end
+=end
+
+=begin
+The following is a short description of an application that lets a customer place an order for a meal:
+
+A meal always has three meal items: a burger, a side, and drink.
+For each meal item, the customer must choose an option.
+The application must compute the total cost of the order.
+Identify the nouns and verbs we need in order to model our classes and methods.
+Create an outline in code (a spike) of the structure of this application.
+Place methods in the appropriate classes to correspond with various verbs.
+=end
+
+class Meal
+  attr_accessor :burger, :side, :drink, :cost
+
+  def initialize(burger, side, drink)
+    @burger = burger
+    @side = side
+    @drink = drink
+    @cost = Application.new.calculate_cost(burger, side, drink)
+  end
+
+  def to_s
+    "#{burger}, #{side}, and a #{drink}. Please pay $#{cost} at the window."
+  end
+end
+
+class Customer
+  attr_reader :name
+  attr_accessor :meal
+
+  def initialize(name)
+    @name = name
+    @meal = meal
+  end
+
+  def choose_meal(burger, side, drink)
+    self.meal = Meal.new(burger, side, drink)
+  end
+
+  def to_s
+    "#{name} ordered a #{meal.to_s} "
+  end
+end
+
+class Application
+  def calculate_cost(burger, side, drink)
+    cost = 0
+    if burger == 'hamburger'
+      cost += 4.00
+    elsif burger == 'cheeseburger'
+      cost += 5.00
+    else 
+      puts "Your choice in burger is not on the menu. Please choose again."
+    end
+    if side == 'fries'
+      cost += 2.50
+    elsif side == 'onion rings'
+      cost += 3.00 
+    end
+    if drink == 'soft drink'
+      cost += 1.00
+    elsif drink == 'milkshake'
+      cost += 3.00
+    end
+    cost
+  end
+end
+
+bob = Customer.new("Bob")
+meal = bob.choose_meal('cheeseburger', 'fries', 'milkshake')
+p bob
+puts bob
+p meal
