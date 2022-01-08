@@ -2782,4 +2782,21 @@ end
 bobs_car = Car.new
 bobs_car.drive
 ```
-This code raises a `NoMethodError` on  `line 2783` for undefined method `drive` for the `Car` object. This is because `drive` is defined as a class method, and we are attempting to call it on an object. Class methods are scoped at the class level, and are not available to any instances of the class. This demosntrates that methods should be defined in modules just as they would be in the class body, so that they can be used when they are mixed into the class. This method definition should read as `def drive` on  `line 2774`. 
+This code raises a `NoMethodError` on  `line 2783` for undefined method `drive` for the `Car` object. This is because `drive` is defined as a module method, and we are attempting to call it on an object. Class/Module methods are scoped at the class level, and are not available to any instances of the class. This demosntrates that methods should be defined in modules just as they would be in the class body, so that they can be used when they are mixed into the class. This method definition should read as `def drive` on  `line 2774`. 
+
+## Example 54
+```
+class House
+  attr_reader :price
+
+  def initialize(price)
+    @price = price
+  end
+end
+
+home1 = House.new(100_000)
+home2 = House.new(150_000)
+puts "Home 1 is cheaper" if home1 < home2 # => Home 1 is cheaper
+puts "Home 2 is more expensive" if home2 > home1 # => Home 2 is more expensive
+```
+What module/method could we add to the above code snippet to output the desired output on the last 2 lines, and why
