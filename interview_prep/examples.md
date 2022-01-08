@@ -2385,7 +2385,7 @@ puts bob
 p meal
 ```
 ### Answer re-do
-
+```
 class Order
   attr_reader :customer
 
@@ -2746,3 +2746,4 @@ bob.order_food
 # ====> Onion Rings: £1
 # ====> Spring Water: £1
 # The amount due now is £8
+```
