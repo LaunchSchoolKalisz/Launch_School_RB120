@@ -2782,3 +2782,4 @@ end
 bobs_car = Car.new
 bobs_car.drive
 ```
+This code raises a `NoMethodError` on  `line 2783` for undefined method `drive` for the `Car` object. This is because `drive` is defined as a class method, and we are attempting to call it on an object. Class methods are scoped at the class level, and are not available to any instances of the class. This demosntrates that methods should be defined in modules just as they would be in the class body, so that they can be used when they are mixed into the class. This method definition should read as `def drive` on  `line 2774`. 
