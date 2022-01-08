@@ -2320,33 +2320,429 @@ Place methods in the appropriate classes to correspond with various verbs.
 
 Nouns: meal = burger, side, drink; customer, option, application, cost
 Verbs: choose, compute
+```
+class Meal
+  attr_accessor :burger, :side, :drink, :cost
 
-class Meal(burger, side, drink)
-  def initalize
+  def initialize(burger, side, drink)
     @burger = burger
     @side = side
     @drink = drink
+    @cost = Application.new.calculate_cost(burger, side, drink)
+  end
+
+  def to_s
+    "#{burger}, #{side}, and a #{drink}. Please pay $#{cost} at the window."
   end
 end
 
 class Customer
-  def choose_meal
+  attr_reader :name
+  attr_accessor :meal
 
+  def initialize(name)
+    @name = name
+    @meal = meal
   end
-end
 
-class MenuOption
-  case menu_item
-  when burger
-    cost = "$5.00"
-  when side
-    cost = "$3.00"
-  when drink
-    cost = "$1.00"
+  def choose_meal(burger, side, drink)
+    self.meal = Meal.new(burger, side, drink)
+  end
+
+  def to_s
+    "#{name} ordered a #{meal.to_s} "
   end
 end
 
 class Application
-  def compute_cost
+  def calculate_cost(burger, side, drink)
+    cost = 0
+    if burger == 'hamburger'
+      cost += 4.00
+    elsif burger == 'cheeseburger'
+      cost += 5.00
+    else 
+      puts "Your choice in burger is not on the menu. Please choose again."
+    end
+    if side == 'fries'
+      cost += 2.50
+    elsif side == 'onion rings'
+      cost += 3.00 
+    end
+    if drink == 'soft drink'
+      cost += 1.00
+    elsif drink == 'milkshake'
+      cost += 3.00
+    end
+    cost
   end
 end
+
+bob = Customer.new("Bob")
+meal = bob.choose_meal('cheeseburger', 'fries', 'milkshake')
+p bob
+puts bob
+p meal
+```
+### Answer re-do
+
+class Order
+  attr_reader :customer
+
+  def initialize(customer)
+    @customer = customer
+  end
+
+  def to_s
+    puts "The total cost is £#{customer.order.sum} for the following items:"
+    puts customer.items
+    ""
+  end
+
+end
+
+class Meal
+  attr_reader :burger, :side, :drink
+
+  def initialize
+    @burger = 4.50
+    @side = 1.50
+    @drink = 3
+  end
+end
+
+class Customer
+  attr_reader :meal, :order, :items
+
+  def initialize
+    @order = []
+    @items = []
+    @meal = Meal.new
+  end
+
+  def items_ordered(item, select)
+    if item
+      order << select
+      items << item
+    end
+  end
+
+  def choose(burger=nil, side=nil, drink=nil)
+    items_ordered(burger, meal.burger)
+    items_ordered(side, meal.side)
+    items_ordered(drink, meal.drink)
+  end
+end
+
+bob = Customer.new
+bob.choose("burger", "side", "drink")
+total = Order.new(bob)
+puts total
+
+# The total cost is £9.0 for the following items:
+# burger
+# side
+# drink
+Another take on the code spike this time with a more detailed implementation
+
+# The following is a short description of an application that lets a customer place an order for a meal:
+
+# - A meal always has three meal items: a burger, a side, and drink.
+# - For each meal item, the customer must choose an option.
+# - The application must compute the total cost of the order.
+
+# 1. Identify the nouns and verbs we need in order to model our classes and methods.
+# 2. Create an outline in code (a spike) of the structure of this application.
+# 3. Place methods in the appropriate classes to correspond with various verbs.
+
+=begin
+  customer has orders
+  orders have meal
+  meals have cost
+=end
+
+module Display
+  def display_error
+    puts "Invalid selection! Please choose numbers 1, 2 or 3. Try again!"  
+  end
+
+  def list(food)
+    food.each do |num, item|
+      puts "#{num}. #{item.first}: £#{item.last}."
+    end
+  end
+end
+
+class Restaurant
+  attr_reader :customer
+
+  def initialize(customer)
+    @customer = customer
+  end
+
+  def total
+    customer.print_selection.map { |food| food.last }.sum
+  end
+
+  def final
+    puts "#{customer.name} has ordered a meal combo consisting of:"
+    customer.print_selection.each { |food| puts "#{food.first} for £#{food.last}." }
+    puts "The total amount due is £#{total}."
+  end
+end
+
+class Customer
+  include Display
+
+  attr_accessor :name, :order
+
+  def initialize(name)
+    @name = name
+    @order = Orders.new
+  end
+
+  def prompt(food)
+    choice = 0
+    loop do
+      puts "Please choose one of the option (1, 2, 3)"
+      list(food)
+      choice = gets.chomp.to_i
+      break if [1, 2, 3].include? choice
+      display_error
+    end
+
+    choice
+  end
+
+  def food_selected(food)
+    item = food
+    choice = prompt(food)
+    order.selection << item[choice]
+    puts
+  end
+
+  def order_food
+    food_selected(order.meal.burger)
+    food_selected(order.meal.sides)
+    food_selected(order.meal.drinks)
+  end
+
+  def print_selection
+    order.selection
+  end
+end
+
+class Orders
+  attr_reader :meal, :selection
+
+  def initialize
+    @meal = Meal.new
+    @selection = []
+  end
+end
+
+class Meal
+  attr_reader :burger, :sides, :drinks
+
+  def initialize
+    @burger = { 1 => ["Cheese Burger", 6], 2 => ["Chicken Burger", 4], 3 => ["Veggie Burger", 3] }
+    @sides = { 1 => ["Onion Rings", 2], 2 => ["Chicken Wings", 3], 3 => ["Potato Wedges", 1] }
+    @drinks = { 1 => ["Spring Water", 1], 2 => ["Coca Cola", 1], 3 => ["Fanta", 1] }
+  end
+end
+
+# bob = Customer.new("Bob")
+# grillz = Restaurant.new(bob)
+# bob.order_food
+# grillz.final
+
+# Please choose one of the option (1, 2, 3)
+# 1. Cheese Burger: £6.
+# 2. Chicken Burger: £4.
+# 3. Veggie Burger: £3.
+# 2
+
+# Please choose one of the option (1, 2, 3)
+# 1. Onion Rings: £2.
+# 2. Chicken Wings: £3.
+# 3. Potato Wedges: £1.
+# 1
+
+# Please choose one of the option (1, 2, 3)
+# 1. Spring Water: £1.
+# 2. Coca Cola: £1.
+# 3. Fanta: £1.
+# 3
+
+# Bob has ordered a meal combo consisting of:
+# Chicken Burger for £4.
+# Onion Rings for £2.
+# Fanta for £1.
+# The total amount due is £7.
+Take 3
+
+# The following is a short description of an application that lets a customer place an order for a meal:
+
+# - A meal always has three meal items: a burger, a side, and drink.
+# - For each meal item, the customer must choose an option.
+# - The application must compute the total cost of the order.
+
+# 1. Identify the nouns and verbs we need in order to model our classes and methods.
+# 2. Create an outline in code (a spike) of the structure of this application.
+# 3. Place methods in the appropriate classes to correspond with various verbs.
+
+# Nouns - meals, burger, side, drink, customer, application, order, cost
+# verbs - compute, chooses
+
+module Display
+  def prompt_select
+    puts "Please select from one of the following using 1, 2, 3."
+  end
+
+  def raise_warning
+    puts "Invalid selection!. Please try again (1, 2, or 3)."
+  end
+end
+
+class Order
+  attr_reader :customer_order, :cost
+
+  def initialize
+    @customer_order = {}
+    @cost = []
+  end
+
+  def customer_selection(food)
+    customer_order[food[0]] = food[1]
+  end
+
+  def total
+    customer_order.each do |_, price|
+      cost << price.chars.map(&:to_i).sum
+    end
+    cost.sum
+  end
+
+  def amount_due
+    puts
+    puts "The following was ordered:"
+    customer_order.each do |item, cost|
+      puts "====> #{item}: #{cost}"
+    end
+    puts "The amount due now is £#{total}"
+  end
+end
+
+class Meal
+  attr_reader :burger, :side, :drink
+
+  def initialize
+    @burger = [["Cheese Burger", "£7"], ["Chicken Burger", "£6"], ["Veggie Burger", "£4"]]
+    @side = [["Onion Rings", "£1"], ["Chicken Wings", "£2"], ["Potato Wedges", "£2"]]
+    @drink = [["Spring Water", "£1"], ["Fanta", "£1"], ["Sprite", "£1"]]
+  end
+
+  def list(food)
+    food.each_with_index do |(item, cost), idx|
+      puts "#{idx + 1}). #{item}: #{cost}"
+    end
+    puts
+  end
+
+  def display_menu
+    puts "Please have a look at out Meal menu."
+    list(burger)
+    list(side)
+    list(drink)
+  end
+end
+
+class Customer
+  include Display
+
+  attr_reader :meal, :order
+
+  def initialize
+    @meal = Meal.new
+    @order = Order.new
+  end
+
+  def choose(food)
+    choice = 0
+    loop do
+      prompt_select
+      meal.list(food)
+      choice = gets.chomp.to_i
+      break if [1, 2, 3].include? choice
+      raise_warning
+    end
+
+    choice - 1
+  end
+
+  def selects_food
+    meal.display_menu
+    [choose(meal.burger), choose(meal.side), choose(meal.drink)]
+  end
+
+  def order_food
+    food = [meal.burger, meal.side, meal.drink]
+    counter = 0
+    selects_food.each_with_index do |num, idx|
+      order.customer_selection((food[counter])[num[idx]])
+      counter += 1
+    end
+    order.amount_due
+  end
+end
+
+=begin
+order process
+  - customer orders food
+    - options provided
+    - customer has to choose a type from each meal item
+    - customer chooses a burger, side and a drink
+  - Order is captured
+    - the total cost is computed and the displayed
+=end
+bob = Customer.new
+bob.order_food
+
+# ============ exapected output ============
+#Please have a look at out Meal menu.
+# 1). Cheese Burger: £7
+# 2). Chicken Burger: £6
+# 3). Veggie Burger: £4
+
+# 1). Onion Rings: £1
+# 2). Chicken Wings: £2
+# 3). Potato Wedges: £2
+
+# 1). Spring Water: £1
+# 2). Fanta: £1
+# 3). Sprite: £1
+
+# Please select from one of the following using 1, 2, 3.
+# 1). Cheese Burger: £7
+# 2). Chicken Burger: £6
+# 3). Veggie Burger: £4
+
+# 2
+# Please select from one of the following using 1, 2, 3.
+# 1). Onion Rings: £1
+# 2). Chicken Wings: £2
+# 3). Potato Wedges: £2
+
+# 1
+# Please select from one of the following using 1, 2, 3.
+# 1). Spring Water: £1
+# 2). Fanta: £1
+# 3). Sprite: £1
+
+# 2
+
+# The following was ordered:
+# ====> Chicken Burger: £6
+# ====> Onion Rings: £1
+# ====> Spring Water: £1
+# The amount due now is £8
