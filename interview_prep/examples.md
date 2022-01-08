@@ -2820,3 +2820,29 @@ class House
   end
 end
 ```
+
+### Answer re-do
+`home1` and `home2` are two local variable referencinng the objects created from the `House` class on `line 9 and 10`. In line 11 the expression home1 < home2 raises an error. The above expression can also be written as `home1.<(home2)` this indicates that we are calling the `<` method which is looking to compare two `Integer` objects. Since we are dealing with two customs object Ruby raises an error. This is th same case in `line 12` for the expression `home1 > home2` where we use the `>` method instead. Inorder for this issue to be resolved we will have to override these methods by having a custom implementation within our class House. This is done as follows
+```
+class House
+  attr_reader :price
+
+  def initialize(price)
+    @price = price
+  end
+
+  def >(other)
+    price > other.price
+  end
+
+   def <(other)
+    price < other.price
+  end
+end
+
+home1 = House.new(100_000)
+home2 = House.new(150_000)
+puts "Home 1 is cheaper" if home1 < home2 # => Home 1 is cheaper
+puts "Home 2 is more expensive" if home2 > home1 # => Home 2 is more expensive
+```
+In `line 8 - 10` and in `line 12 - 15` we have defined the methods `<` and `>` which override the original methods and hence we get the desired output.
