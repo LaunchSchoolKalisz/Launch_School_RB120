@@ -2766,3 +2766,19 @@ end
 ```
 
 Another way to write the method would be to change `line 2763` to read `@age += 1`. However, using the `self` keyword is preferable, as we are using the settter method rather than accessing the instance variable directly. Getter/setter methods are much easier to reference if we ever need to retrieve or modify the state of the object as we can make changes in just one place.
+
+## Example 53
+What is output and why? What does this demonstrate about how methods need to be defined in modules, and why?
+```
+module Drivable
+  def self.drive
+  end
+end
+
+class Car
+  include Drivable
+end
+
+bobs_car = Car.new
+bobs_car.drive
+```
