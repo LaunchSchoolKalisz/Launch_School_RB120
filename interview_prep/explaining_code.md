@@ -13,11 +13,11 @@ Easier to manage the complexity of the software.
 Easier to conceptualize objects as real life objects.
 
 ## Classes 
-Basic oulines of what an object is made of. Classes define the attributes and the behaviors of its objects. Classes group common behaviors(methods).
+Basic outlines of what an object is made of. Classes define the attributes and the behaviors of its objects. Classes group common behaviors(methods).
 
 ```
 class Person
-	def initialize(name)
+  def initialize(name)
     @name = name
   end
 end
@@ -1769,5 +1769,3 @@ juniors[2]      # => #<Student:0x00005584601cbe40 @name="Arnold", @gpa=2.99>
 juniors[2] = Student.new('Bianca', 3.89)
 juniors[2]      # => #<Student:0x00005584601cbc88 @name="Bianca", @gpa=3.89>
 ```
-## Reading OO code
-## Truthiness
