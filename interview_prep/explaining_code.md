@@ -1,13 +1,38 @@
 # Study Guide
 
+Key words:
+constructor method
+
+## OOP
+OOP was created to reduce dependencies. Programmers wanted to created a way to section of certain areas of code and to work and manipulate them without affecting the rest of the code.
+Helps us to think in a more abstract fasion about the code currently written.
+
+It was created to keep the code DRY (Don't Repeat Yourself). That is it helps in preventing duplication of the code.
+We are able to build application at a faster pace due to large code reusability from pre-written code.
+Easier to manage the complexity of the software.
+Easier to conceptualize objects as real life objects.
+
 ## Classes 
- Basic oulines of what an object is made of. Classes define the attributes and the behaviors of its objects. Classes group common behaviors.
+Basic oulines of what an object is made of. Classes define the attributes and the behaviors of its objects. Classes group common behaviors(methods).
+
+```
+class Person
+	def initialize(name)
+    @name = name
+  end
+end
+```
 
 ## Objects
- Anything that has a value can be considered an object. Basically, things like numbers, strings, arrays, classes, and modules. Methods, blocks, and variables are not objects. Objects are instances of a class and they encapsulate the state of the object. Objects are instantiated by calling the `::new` class method on the class.
- Objects are created from classes (which are also another type of Object).
+Anything that has a value can be considered an object. Basically, things like numbers, strings, arrays, classes, and modules. Methods, blocks, and variables are not objects. Objects are instances of a class and they *encapsulate the state of the object*. 
+States are assigned to instance variables. 
+The state of the object consists of all instance variables and their values.
+Objects encapsulate the state and classes define the attributes of the behavior of the objects. The instance variables track the state of the object. The state of the Object is unique to the object. The behaviors or the methods are what the objects can do. The instance methods can access the instance variable
+Objects are instantiated by calling the `::new` class method on the class.
+Objects are created from classes (which are also another type of Object).
  
- Class = a blueprint Object = something built from that blueprint
+Class = a blueprint 
+Object = something built from that blueprint
 
  ```
  class Person
@@ -22,6 +47,7 @@ end
 
 marts = Person.new("Martha")
 ```
+
 The `#initialize` method initializes a new Person object, which it does by assigning the instance variable @name to the person's name specified by the argument.
 The `#say_hello` instance method prints a message that includes the person's name in place of `#{@name}`. `say_hello` returns `nil`.
 Local variable `marts` is assigned to the object created by calling the `::new` class method on the `Person` class
@@ -56,11 +82,32 @@ When we try to access an uninitialised local variable it will raise an error.
 ### Instance Methods
 Instance methods are the behaviors or functionality available to all instances of that class. They are defined within the classes from which the objects are derived from. Instance variables can be accessed and exposed by the instance methods. Instance variables exists as long as the instance of the class exists and it perishes if the object perishes.
 
-Good practice: Reassign the instance variables using the setter method. This is because the getter/setter methods are much easier to reference if we ever need to retrieve or modify the state of the object as we can make changes in just one place.
+Instance methods can only be accessed by the instance of the class. It cannot be referenced to the class itself.
+
+Good practice: Reassign the instance variables using the setter method. This is because the getter/setter methods are much easier to reference if we ever need to retrieve or modify the state of the object as we can make changes in just one place. If we do not want to expose all of the raw data that the instance variable references, then we can hide all or part of the data by using the method access controller. If you try to access an uninitialized instance variable it always returns nil.
 ```
 def instance_methods(data) # defining an instance method
   data * 2
 end
+```
+
+```
+class Student
+  attr_reader :name, :grade
+  def initialize(name, grade)
+    @name = name
+    @grade = grade
+  end
+
+  private
+
+  attr_writer :grade
+end
+
+bob = Student.new("Bob", 89)
+bob.grade
+bob.grade = 50
+Here trying to reassign the @grade instance variable raises an error. This is because the grade setter method is encapsulated by the private method access controller.
 ```
 
 ### Class Methods
@@ -81,6 +128,33 @@ To define a class method, prepend the method name with the keyword `self`. In th
 Defined by @@
 
 Class variables are accessible from within the instance methods and class methods. Available to all subclasses via inheritance. Scoped at the class level. Class variables are defined at the class level and is available to all the instances of the class. Just one copy of the class variable exists for the Class and all of its instances. Reassigning the class variable at any point in the class hierarchy will change the value referenced by the class variable for the rest of the program irreversibly. This means that if a subclass changes the class variable then the value referenced would have changed to the new value when we try to access the class variable through a superclass. Due to this reason utilizing class variables can cause unexpected behavior and due to this Rubyists tend to stay away from it.
+
+```
+class Person
+  TITLES = ['Mr', 'Mrs', 'Ms', 'Dr']
+
+  @@total_people = 0
+
+  def initialize(name)
+    @name = name
+    @@total_people += 1
+  end
+
+  def age
+    @age
+  end
+
+  def num_of_people
+    @@total_people
+  end
+end
+
+marts = Person.new("Martha")
+p marts
+p marts.num_of_people
+martha = Person.new("Martha")
+p marts.num_of_people
+```
 
 #### Instance methods vs class methods
 Instance methods are called on the instances of the class (individual object, must be instantiated). Instance methods are the behaviors or functionality available to the objects. Define a single behavior. They are encapsulated in the Classes from which the objects are derived from. Instance variables can be accessed by the instance methods. Example:
@@ -105,9 +179,6 @@ end
 
 Person.class_method # invoking the class method
 ```
-
-## Accessor Methods
-Accessor Methods are special methods used with instance variables that allow us to get or set the data contained within the state of an object.
 
 ### Getter Methods
 Outside of the class, we need a specially defined method to access the values stored within the instance variables associated with an object. We can define this method within the class, so that we can retrieve the value in question wherever the object is accessible. Getter methods are read-only methods which are used to access the value referenced by the instance variable.
@@ -239,10 +310,10 @@ jenny.number                    # => 555-5555
 jenny.change_number('867-5309')
 jenny.number                    # => 867-5309
 ```
-Note: good practice  to reassign the instance variables using the setter method. This is because the getter/setter methods are much easier to reference if we ever need to retrieve or modify the state of the object as we can make changes in just one place. If you try to access an uninitialized instance variable it always returns nil.
+Note: It is good practice to reassign the instance variables using the setter method. This is because the getter/setter methods are much easier to reference if we ever need to retrieve or modify the state of the object as we can make changes in just one place. If we do not want to expose all of the raw data that the instance variable references, then we can hide all or part of the data by using the method access controller. If you try to access an uninitialized instance variable it always returns nil.
 
 ### Using attr_*
-Because setter and getter methods are so commonplace, Ruby gives us a built-in short hand to create them: `attr_accessor`. This method takes a symbol as an argument, which is used to create the method name for both the getter and the setter methods. This is nice because we can now replace long and cumbersome method definitions with a single line.
+Accessor Methods are special methods used with instance variables that allow us to get or set the data contained within the state of an object. Because setter and getter methods are so commonplace, Ruby gives us a built-in short hand to create them: `attr_accessor`. This method takes a symbol as an argument, which is used to create the method name for both the getter and the setter methods. This is nice because we can now replace long and cumbersome method definitions with a single line.
 
 ```
 class Student
@@ -341,11 +412,13 @@ class Student
 
   def finding_rank
     answer = case score
-              when 85..100 then "Merit"
-              when 80..84 then "Distinction"
-              when 59..79 then "Pass"
+              when 90..100 then "Outstanding"
+              when 80..89 then "Exceeds Expectations"
+              when 70..79 then "Acceptable"
+              when 60..69 then "Poor"
+              when 50..59 then "Dreadful"
               else
-                "Fail"
+                "Troll"
              end
     answer            
   end
@@ -406,17 +479,12 @@ john = Student.new(90)
 
 p bob > john # => false
 p john > bob # => true
+puts john.grade # => Raises NoMethodError
 ```
 
-## Inheritance - Class and Modules
+## Inheritance
 ### Class Inheritance
 Inheritance reduces dependencies and increases code resusability. We can use inheritance to extract common behaviors to a superclass. This helps us to keep the logic in one place. All the methods inherited from a superclass is available to its subclass. This is a great way to model concepts that are naturally hiearchical.
-
-class vs interface(mix-in) inheritance:
-- If multiple inheritance is needed, use Interface inheritance as subclasses inherit from only one superclass.
-- Modules cannot inherit. Modules cannot create objects. So, in order to create objects we use class inheritance
-- Modules have a "has-a" relationship: used for namespacing and grouping commom behaviors to be shared.
-- Classes have a "is-a" relationship: it is useful for creating objects.
 
 A subclass inherits the behaviors from a superclass. The subclass is the derived class and the super class is the base class. The superclass has a larger reusability and the subclass has an extended or refined implementation. This reduces complexity of the code and makes it reusable. Class Inheritance displays Is - A relationship.
 ```
@@ -429,6 +497,9 @@ end
 
 ### Interface Inheritance - modules
 In Ruby multiple inheritance is acheived by mixin modules. The inheritance achieved through mixing in modules are known as Interface Inheritance. We mix in a behavior from a module using the include method and passing in the name of the module as an argument to it. Modules are used as containers for grouping common methods and namespacing. Grouping simillar or related classes within a module is known as namespacing. Interface inheritance have a "has - a" relationship. Eg. The Dog has a behavior(.i.e, a method). Modules are useful for grouping common methods from classes that are not related hierarchially.
+
+Common uses for modules: Storing and grouping common methods, namespacing, capturing unrelated methods
+
 ```
 module Swimmable
   def swim
@@ -454,6 +525,12 @@ When should we use a mix in module?
   - If there's a has-a relationship (as in "A Person has the ability to speak") use a mixin module.
 - Use mixin modules to group methods together that multiple unrelated classes will have to access.
 - Do not use a module for anything that needs to be instantiated.
+
+### Class vs Interface (mix-in) Inheritance:
+- If multiple inheritance is needed, use Interface inheritance as subclasses inherit from only one superclass.
+- Modules cannot inherit. Modules cannot create objects. So, in order to create objects we use class inheritance
+- Modules have a "has-a" relationship: used for namespacing and grouping commom behaviors to be shared.
+- Classes have a "is-a" relationship: it is useful for creating objects.
 
 ## Namespacing
 Consists of organizing similar classes under a module, or using a module to group related classes. Doing so makes it easier to recognize related classes and reduces the likelihood of classes colliding with other similarly names classes in our codebase.
@@ -972,7 +1049,7 @@ This ensures that we will have the appropriate implmentation for each distinct p
 
 Example 2:
 ```
-class SportsGame
+class Sport
   def play(attendees)
     attendees.each do |attendee|
       attendee.participate
@@ -1020,7 +1097,7 @@ class Cheerleader
   end
 end
 
-the_game = SportsGame.new
+the_game = Sport.new
 
 the_game.play([Player.new, Coach.new, Referee.new, Cheerleader.new])
   # => He shoots... HE SCORES!! (result of Player#participate)
@@ -1091,7 +1168,7 @@ It's good practice to keep as few methods as possible public. This makes working
 
 ## Collaborator Objects
 
-An object that is stored as a state (i.e. within an instance variable) within another object. The are called collaborators because they work in conjunction with the class they are associated with.
+A custom object that is stored as a state (i.e. within an instance variable) within another object. The are called collaborators because they work in conjunction with the class they are associated with.
 
 Collaborator objects are usually custom objects (i.e. defined by programmer and not built into Ruby). Technically, a string or other built in object type that's saves as a value in an instance variable would still be a collaborator object but we don't really tend to think of them that way.
 
@@ -1237,6 +1314,52 @@ In the above code, we define our Deck class to work with the collaborator object
 The Deck instance in this case is really a vehicle for manipulating and organizing Card objects. While it may utilize the Card attributes of suit and value, it isn't really concerned with them in the way that a Card object might be.
 
 Because the Card objects are assigned to one of the Deck attributes (the instance variable @cards) we say that the Card instances here are collaborator objects that work intrinsically with Deck.
+
+Example 3
+```
+class Person
+  attr_reader :name, :pets
+
+  def initialize(name)
+    @name = name
+    @pets = []
+  end
+
+  def add_pet(obj)
+    pets << obj
+  end
+
+  def display_owner_with_pets
+    puts "#{name} pets are:"
+    puts pets
+  end
+end
+
+class Pet
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def to_s
+    name
+  end
+end
+
+bob = Person.new("Bob")
+kitty = Pet.new("Kitty")
+doggy = Pet.new("Doggy")
+
+# p bob
+
+bob.add_pet(kitty)
+bob.add_pet(doggy)
+
+# p bob
+
+puts bob.display_owner_with_pets
+```
 
 ## Fake Operators and Equality
 Lots of operators in Ruby are really method calls using the disguise of Ruby's syntactical sugar to utilize a more visually appealing syntax. Because they are really methods, we can define our own implementations of them within our custom classes. Doing so overrides the fake operators with our own implementation, so it's important to follow the conventions established for each within the Ruby standard library.
