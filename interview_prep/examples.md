@@ -2799,4 +2799,24 @@ home2 = House.new(150_000)
 puts "Home 1 is cheaper" if home1 < home2 # => Home 1 is cheaper
 puts "Home 2 is more expensive" if home2 > home1 # => Home 2 is more expensive
 ```
-What module/method could we add to the above code snippet to output the desired output on the last 2 lines, and why
+What module/method could we add to the above code snippet to output the desired output on the last 2 lines, and why?
+
+In order to output the desired output, we must define `<` and `>` methods. By default, the comparison methods do not know how or what values to compare. We define them to tell them which values we want to compare, relying on the specific implementations for comparison methods within Ruby's built in classes. The code below will allow the desired output:
+
+```
+class House
+  attr_reader :price
+
+  def initialize(price)
+    @price = price
+  end
+
+  def <(other_house)
+    price < other_house.price
+  end
+
+  def >(other_house)
+    price > other_house.price
+  end
+end
+```
