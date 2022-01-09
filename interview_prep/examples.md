@@ -2295,6 +2295,7 @@ class Person
 
   def initialize(name)
     @name = name
+    @@total_people += 1
   end
 
   def age
