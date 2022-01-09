@@ -1,8 +1,4 @@
 # Study Guide
-
-Key words:
-constructor method
-
 ## OOP
 OOP was created to reduce dependencies. Programmers wanted to created a way to section of certain areas of code and to work and manipulate them without affecting the rest of the code.
 Helps us to think in a more abstract fasion about the code currently written.
