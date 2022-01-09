@@ -1708,9 +1708,9 @@ p upperclassmen
 # => #<GradeLevel:0x000055b7df29ec48 @name="New Group", @members=[#<Student:0x000055b7df29eea0 @name="Sophia", @gpa=3.75>, #<Student:0x000055b7df29ee50 @name="Jim", @gpa=3.04>, #<Student:0x000055b7df29ee00 @name="Arnold", @gpa=2.99>, #<Student:0x000055b7df29ed38 @name="Barbara", @gpa=3.88>, #<Student:0x000055b7df29ece8 @name="Margaret", @gpa=3.65>, #<Student:0x000055b7df29ec98 @name="Charles", @gpa=3.25>]>
 ```
 
-The code above relies on the same classes GradeLevel and Student from above. We further define a custom GradeLevel#+ method so that we can combine two GradeLevel instances according to the pattern set up by + in the Ruby docs. Our implementation of GradeLevel#+ initializes a new GradeLevel object to return, this will hold all the members of both the calling GradeLevel object, juniors and the argument passed, the GradeLevel object seniors.
+The code above relies on the same classes `GradeLevel` and `Student` from above. We further define a custom `GradeLevel#+` method so that we can combine two GradeLevel instances according to the pattern set up by `+` in the Ruby docs. Our implementation of `GradeLevel#+ `initializes a new `GradeLevel` object to return, this will hold all the members of both the calling `GradeLevel` object, juniors and the argument passed, the `GradeLevel` object seniors.
 
-We then utilize the members getter method to access the arrays of students that represent the members of each GradeLevel object, and use Array#+ to concatenate both. Returning the newly generated GradeLevel object allows us to complete implementation, and now when we call + on a GradeLevel instance, we will get a new GradeLevel value returned. This can be shown when we output the result of upperclassmen.inspect (with p), which prints a string representation of the new GradeLevel objects, whose instance variable @members now points to an array containing all the Student objects from the juniors GradeLevel object and the seniors GradeLevel object.
+We then utilize the members getter method to access the arrays of students that represent the members of each `GradeLevel` object, and use `Array#+` to concatenate both. Returning the newly generated `GradeLevel` object allows us to complete implementation, and now when we call `+` on a `GradeLevel` instance, we will get a new `GradeLevel` value returned. This can be shown when we output the result of `upperclassmen`.inspect (with `p`), which prints a string representation of the new `GradeLevel` objects, whose instance variable `@members` now points to an array containing all the `Student` objects from the juniors `GradeLevel` object and the seniors `GradeLevel` object.
 
 ### Element Setters and Getters
 If we are working with a class that represents a collection, we can also custom define element getter and setter methods. This allows us to take advantage of Ruby's syntactical sugar with regards to element reference and reassignment.
@@ -1720,7 +1720,7 @@ If we are working with a class that represents a collection, we can also custom 
 | array.[](2)	|array[2] |
 | array.[]=(4, 'fifth element')	| array[4] = 'fifth element' |
 
-In our GradeLevel example class, we have defined instance variable @members as an array of collaborating Student objects. Therefore, we can define custom element setter and getter methods for @members that allow us to modify the collection via Ruby's syntactical sugar. Our implementation will rely on Array#[] and Array#[]=.
+In our GradeLevel example class, we have defined instance variable `@members` as an array of collaborating `Student` objects. Therefore, we can define custom element setter and getter methods for @members that allow us to modify the collection via Ruby's syntactical sugar. Our implementation will rely on `Array#[]` and `Array#[]=`.
 
 ```ruby
 class GradeLevel
