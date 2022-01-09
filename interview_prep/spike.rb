@@ -205,7 +205,7 @@ Identify the nouns and verbs we need in order to model our classes and methods.
 Create an outline in code (a spike) of the structure of this application.
 Place methods in the appropriate classes to correspond with various verbs.
 =end
-=begin
+
 class Meal
   attr_accessor :burger, :side, :drink, :cost
 
@@ -246,8 +246,6 @@ class Application
       cost += 4.00
     elsif burger == 'cheeseburger'
       cost += 5.00
-    else 
-      puts "Your choice in burger is not on the menu. Please choose again."
     end
     if side == 'fries'
       cost += 2.50
@@ -268,7 +266,7 @@ meal = bob.choose_meal('cheeseburger', 'fries', 'milkshake')
 p bob
 puts bob
 p meal
-=end
+
 
 =begin
 There’s a dental office called Dental People Inc.  
@@ -309,6 +307,12 @@ class DentalOffice
   def general(doc)
     doctors << "General Dentist #{doc.name}"
   end
+
+	def to_s
+		puts "Welcome to #{office_name}. Our dentists are as follows:"
+		puts doctors
+		""
+	end
 end
 
 class Dentist
@@ -353,5 +357,4 @@ office.oral(dr_mona)
 office.ortho(dr_lisa)
 office.ortho(dr_mark)
 office.general(dr_newman)
-p office
 puts office
