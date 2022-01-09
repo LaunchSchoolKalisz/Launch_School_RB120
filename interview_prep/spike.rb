@@ -205,7 +205,7 @@ Identify the nouns and verbs we need in order to model our classes and methods.
 Create an outline in code (a spike) of the structure of this application.
 Place methods in the appropriate classes to correspond with various verbs.
 =end
-
+=begin
 class Meal
   attr_accessor :burger, :side, :drink, :cost
 
@@ -268,3 +268,90 @@ meal = bob.choose_meal('cheeseburger', 'fries', 'milkshake')
 p bob
 puts bob
 p meal
+=end
+
+=begin
+There’s a dental office called Dental People Inc.  
+Within this office, there’s 2 oral surgeons, 2 orthodontists, 1 general dentist.
+Both general dentists and oral surgeons can pull teeth. Orthodontists cannot pull teeth.  
+Orthodontists straighten teeth.
+All of these aforementioned specialties are dentists. 
+All dentists graduated from dental school.  
+Oral surgeons place implants.
+General dentists fill teeth
+
+Nouns: Office, Oral Surgeon, Orthodontist, General Dentist
+Verbs: Pull teeth, strighten teeth, graduated, place implants, fill teeth
+=end
+
+module Pullable
+  def pull_teeth
+    puts "Numb, numb... OUCH!"
+  end
+end
+
+class DentalOffice
+  attr_accessor :office_name, :doctors
+
+  def initialize(office_name)
+    @office_name = office_name
+    @doctors = []
+  end
+
+  def oral(doc)
+    doctors << "Oral surgeon #{doc.name}"
+  end
+
+  def ortho(doc)
+    doctors << "Orthodontist #{doc.name}"
+  end
+
+  def general(doc)
+    doctors << "General Dentist #{doc.name}"
+  end
+end
+
+class Dentist
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+  end
+end
+
+class OralSurgeon < Dentist
+  include Pullable
+
+  def place_implants
+    puts "Drill, drill... OUCH!"
+  end
+end
+
+class Orthodontist < Dentist
+  def straigten_teeth
+    puts "Move, shift... OUCH!"
+  end
+end
+
+class GeneralDentist < Dentist
+  include Pullable
+
+  def fill_teeth
+    puts "Drill, fill... OUCH!"
+  end
+end
+
+office = DentalOffice.new("Dental People Inc")
+dr_mark = Orthodontist.new("Dr. Mark")
+dr_lisa = Orthodontist.new("Dr. Lisa")
+dr_mona = OralSurgeon.new("Dr. Mona")
+dr_joel = OralSurgeon.new("Dr. Joel")
+dr_newman = GeneralDentist.new("Dr. Newman")
+
+office.oral(dr_joel)
+office.oral(dr_mona)
+office.ortho(dr_lisa)
+office.ortho(dr_mark)
+office.general(dr_newman)
+p office
+puts office
