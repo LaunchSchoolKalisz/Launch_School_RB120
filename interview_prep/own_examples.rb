@@ -127,9 +127,23 @@ p marts
         @name = name
       end
     end
-    
+
     marts = Person.new("Martha")
     p marts.name
+
+    # Setter method
+    class Person
+      attr_writer :name 
+
+      def initialize(name)
+        @name = name
+      end
+    end
+
+    marts = Person.new("Martha")
+    p marts 
+    marts.name = "Mart"
+    p marts
 
 # Method Access Control
   # Public
