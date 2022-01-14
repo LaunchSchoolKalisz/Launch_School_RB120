@@ -57,8 +57,35 @@ Person.number_of_people
 benj = Person.new("Jon Benjamin")
 Person.number_of_people
 
-  # Note on Terms
   # Instance Methods vs Class Methods
+=begin 
+Instance methods are called on the instances of the class (individual object, must be instantiated). Instance methods are the 
+behaviors or functionality available to the objects. Define a single behavior. They are encapsulated in the Classes from which the 
+objects are derived from. Instance variables can be accessed by the instance methods
+=end
+
+class Person
+  def	instance_method
+    "From the instance method"
+  end
+end
+
+p Person.new.instance_method
+
+=begin
+Class methods are methods which are called on the class itself. They scoped at the class level and are not available to any 
+instances of the class. They cannot access instance variables. Define a behavior of the class as a whole. While defining the class 
+methods we chain the method name to the self keyword as shown in the example below.
+=end
+
+class Person
+  def self.class_method
+    "I am from within the class method"
+  end
+end
+
+Person.class_method
+
 # Setter and Getter Methods
   # Getter Methods
   # Setter Methods
