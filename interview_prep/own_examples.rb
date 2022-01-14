@@ -5,6 +5,14 @@
   # Objects
   # Classes
   # Object Instantiation
+class Person
+  def initialize(name)
+    @name = name
+  end
+end
+
+marts = Person.new("Martha")
+p marts
   # Instance Variables
   # Instance Methods
   # Class Variables
