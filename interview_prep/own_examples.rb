@@ -5,6 +5,7 @@
   # Objects
   # Classes
   # Object Instantiation
+
 class Person
   def initialize(name)
     @name = name
@@ -13,8 +14,23 @@ end
 
 marts = Person.new("Martha")
 p marts
+
   # Instance Variables
   # Instance Methods
+
+class Person
+  def initialize(name)
+    @name = name
+  end
+
+  def introduce
+    puts "Hi, my name is #{@name}"
+  end
+end
+  
+marts = Person.new("Martha")
+marts.introduce
+
   # Class Variables
   # Class Methods
   # Note on Terms
