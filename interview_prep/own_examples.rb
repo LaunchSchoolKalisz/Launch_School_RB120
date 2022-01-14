@@ -33,6 +33,30 @@ marts.introduce
 
   # Class Variables
   # Class Methods
+
+class Person
+  @@total_people = 0
+
+  def initialize(name)
+    @name = name
+    @@total_people += 1
+  end
+
+  def introduce
+    puts "Hi, my name is #{@name}"
+  end
+
+  def self.number_of_people
+    puts "We have instantiated #{@@total_people} People Objects."
+  end
+end
+    
+marts = Person.new("Martha")
+marts.introduce
+Person.number_of_people
+benj = Person.new("Jon Benjamin")
+Person.number_of_people
+
   # Note on Terms
   # Instance Methods vs Class Methods
 # Setter and Getter Methods
