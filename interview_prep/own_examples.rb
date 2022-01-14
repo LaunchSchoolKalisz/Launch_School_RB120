@@ -119,6 +119,18 @@ marts.name = "Mart"
 p marts
 
   # Using attr_*
+    # Getter method
+    class Person
+      attr_reader :name 
+
+      def initialize(name)
+        @name = name
+      end
+    end
+    
+    marts = Person.new("Martha")
+    p marts.name
+
 # Method Access Control
   # Public
   # Private
