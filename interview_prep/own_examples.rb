@@ -144,6 +144,19 @@
 
     # Getter and Setter
 
+    class Person
+      attr_accessor :name
+
+      def initialize(name)
+        @name = name
+      end
+    end
+
+    marts = Person.new("Martha")
+    p marts.name
+    marts.name = "Mart"
+    p marts.name
+
 # Method Access Control
   # Public
   # Private
