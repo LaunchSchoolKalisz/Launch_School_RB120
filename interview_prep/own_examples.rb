@@ -88,7 +88,36 @@ Person.class_method
 
 # Setter and Getter Methods
   # Getter Methods
+
+class Person
+  def initialize(name)
+    @name = name
+  end
+
+  def name
+    @name
+  end
+end
+
+marts = Person.new("Martha")
+p marts.name
+
   # Setter Methods
+class Person
+  def initialize(name)
+    @name = name
+  end
+
+  def name=(name)
+    @name = name
+  end
+end
+  
+marts = Person.new("Martha")
+p marts 
+marts.name = "Mart"
+p marts
+
   # Using attr_*
 # Method Access Control
   # Public
