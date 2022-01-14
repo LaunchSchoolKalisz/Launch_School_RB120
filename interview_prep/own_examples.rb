@@ -5,118 +5,115 @@
   # Objects
   # Classes
   # Object Instantiation
-
-class Person
-  def initialize(name)
-    @name = name
+  class Person
+    def initialize(name)
+      @name = name
+    end
   end
-end
-
-marts = Person.new("Martha")
-p marts
-
+  
+  marts = Person.new("Martha")
+  p marts
+  
   # Instance Variables
   # Instance Methods
-
-class Person
-  def initialize(name)
-    @name = name
-  end
-
-  def introduce
-    puts "Hi, my name is #{@name}"
-  end
-end
+  class Person
+    def initialize(name)
+      @name = name
+    end
   
-marts = Person.new("Martha")
-marts.introduce
+    def introduce
+      puts "Hi, my name is #{@name}"
+    end
+  end
+    
+  marts = Person.new("Martha")
+  marts.introduce
 
   # Class Variables
   # Class Methods
-
-class Person
-  @@total_people = 0
-
-  def initialize(name)
-    @name = name
-    @@total_people += 1
+  class Person
+    @@total_people = 0
+  
+    def initialize(name)
+      @name = name
+      @@total_people += 1
+    end
+  
+    def introduce
+      puts "Hi, my name is #{@name}"
+    end
+  
+    def self.number_of_people
+      puts "We have instantiated #{@@total_people} People Objects."
+    end
   end
-
-  def introduce
-    puts "Hi, my name is #{@name}"
-  end
-
-  def self.number_of_people
-    puts "We have instantiated #{@@total_people} People Objects."
-  end
-end
-    
-marts = Person.new("Martha")
-marts.introduce
-Person.number_of_people
-benj = Person.new("Jon Benjamin")
-Person.number_of_people
-
-  # Instance Methods vs Class Methods
+      
+  marts = Person.new("Martha")
+  marts.introduce
+  Person.number_of_people
+  benj = Person.new("Jon Benjamin")
+  Person.number_of_people
+  
+    # Instance Methods vs Class Methods
 =begin 
-Instance methods are called on the instances of the class (individual object, must be instantiated). Instance methods are the 
-behaviors or functionality available to the objects. Define a single behavior. They are encapsulated in the Classes from which the 
-objects are derived from. Instance variables can be accessed by the instance methods
+  Instance methods are called on the instances of the class (individual object, must be instantiated). Instance methods are the 
+  behaviors or functionality available to the objects. Define a single behavior. They are encapsulated in the Classes from which the 
+  objects are derived from. Instance variables can be accessed by the instance methods
 =end
-
-class Person
-  def	instance_method
-    "From the instance method"
+  
+  class Person
+    def	instance_method
+      "From the instance method"
+    end
   end
-end
-
-p Person.new.instance_method
-
+  
+  p Person.new.instance_method
+  
 =begin
-Class methods are methods which are called on the class itself. They scoped at the class level and are not available to any 
-instances of the class. They cannot access instance variables. Define a behavior of the class as a whole. While defining the class 
-methods we chain the method name to the self keyword as shown in the example below.
+  Class methods are methods which are called on the class itself. They scoped at the class level and are not available to any 
+  instances of the class. They cannot access instance variables. Define a behavior of the class as a whole. While defining the class 
+  methods we chain the method name to the self keyword as shown in the example below.
 =end
-
-class Person
-  def self.class_method
-    "I am from within the class method"
+  
+  class Person
+    def self.class_method
+      "I am from within the class method"
+    end
   end
-end
-
-Person.class_method
+  
+  Person.class_method
 
 # Setter and Getter Methods
   # Getter Methods
-
-class Person
-  def initialize(name)
-    @name = name
+  class Person
+    def initialize(name)
+      @name = name
+    end
+  
+    def name
+      @name
+    end
   end
-
-  def name
-    @name
-  end
-end
-
-marts = Person.new("Martha")
-p marts.name
+  
+  marts = Person.new("Martha")
+  p marts.name
 
   # Setter Methods
-class Person
-  def initialize(name)
-    @name = name
-  end
-
-  def name=(name)
-    @name = name
-  end
-end
+  class Person
+    def initialize(name)
+      @name = name
+    end
   
-marts = Person.new("Martha")
-p marts 
-marts.name = "Mart"
-p marts
+    def name=(name)
+      @name = name
+    end
+  end
+    
+  marts = Person.new("Martha")
+  p marts 
+  marts.name = "Mart"
+  p marts
+
 
   # Using attr_*
     # Getter method
@@ -144,6 +141,8 @@ p marts
     p marts 
     marts.name = "Mart"
     p marts
+
+    # Getter and Setter
 
 # Method Access Control
   # Public
