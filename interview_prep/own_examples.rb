@@ -183,7 +183,6 @@ Team.class_method
   
   # Protected
   class Team
-
     def initialize(team_name, state)
       @team_name = team_name
       @state = state
@@ -211,9 +210,25 @@ Team.class_method
   puts bucks
   puts badgers == bucks
   badgers.state
-  
+
 # Inheritance
   # Class Inheritance
+  
+  class Team 
+    attr_accessor :team_name, :state
+
+    def initialize(team_name, state)
+      @team_name = team_name
+      @state = state
+    end
+  end
+
+  class Basketball < Team
+  end
+
+  badgers = Basketball.new("Badgers", "Wisconsin")
+  p badgers
+
   # Interface Inheritance
   # Method Lookup Path
   # Super
