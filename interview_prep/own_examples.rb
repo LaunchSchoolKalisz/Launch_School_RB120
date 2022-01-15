@@ -305,29 +305,31 @@ Team.class_method
   hawks = Professional.new("Blackhawks", "Chicago")
   p hawks
 
-
-
-  # Object Methods
-  # Variable Scope with Inheritance
 # Polymorphism & Encapsulation
   # Polymorphism
     # Polymorphism Through Inheritance
-    class Person
-      attr_reader :name
-      
-      def initialize(name)
-        @name = name
+
+    class Team
+      attr_reader :team_name, :home
+    
+      def initialize(team_name, home)
+        @team_name = team_name
+        @home = home
       end
-      
-      def nickname
-        "Mr. #{name}"
+    
+      def to_s
+        "We are the #{home} #{team_name}!"
       end
     end
     
-    class Adult < Person
-      def 
+    class Professional < Team
     end
     
+    class Collegiate < Team
+    end
+    
+    badgers = Collegiate.new("Badgers", "Wisconsin")
+    puts badgers
     
     # Polymorphism Through Duck Typing
 
