@@ -262,6 +262,24 @@ Team.class_method
   p basketball_team.can_travel
 
   # Method Lookup Path
+
+  module Travelable
+    def can_travel
+      true
+    end
+  end
+
+  class Team
+    include Travelable
+  end
+
+  class Hockey < Team
+  end
+
+  hawks = Hockey.new
+  p hawks.can_travel
+  p Hockey.ancestors
+  
   # Super
   # Object Methods
   # Variable Scope with Inheritance
