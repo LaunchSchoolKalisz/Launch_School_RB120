@@ -333,27 +333,27 @@ Team.class_method
     
     # Polymorphism Through Duck Typing
 
-class Dolphin
-  def sleep
-   puts "Half my brain sleeps at a time!" 
-  end
-  
-end
+    class Hockey
+      def play
+        puts "We skate and hit!"
+      end
+    end
 
-class Human
-  def sleep
-   puts "zzzzzzzzzzzzzzzz!" 
-  end
-end
+    class Basketball
+      def play
+        puts "We dribble and shoot!"
+      end
+    end
 
-class Robot
-  def sleep
-   puts "Turned off" 
-  end
-end
+    class Football
+      def play
+        puts "We block and tackle!"
+      end
+    end
 
-arr = [Dolphin.new, Human.new, Robot.new]
-arr.each {|obj| obj.sleep }
+    arr = [Hockey.new, Basketball.new, Football.new]
+    arr.each {|obj| obj.play}
+
   # Encapsulation
 # Modules
   # Mixin Modules
