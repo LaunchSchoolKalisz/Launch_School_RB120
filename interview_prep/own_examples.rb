@@ -83,18 +83,19 @@ Team.class_method
 
 # Setter and Getter Methods
   # Getter Methods
-  class Person
-    def initialize(name)
-      @name = name
+
+  class Team
+    def initialize(team_name)
+      @team_name = team_name
     end
-  
-    def name
-      @name
+
+    def team_name
+      @team_name
     end
   end
-  
-  marts = Person.new("Martha")
-  p marts.name
+
+  badgers = Team.new("Badgers")
+  puts badgers.team_name
 
   # Setter Methods
   class Person
