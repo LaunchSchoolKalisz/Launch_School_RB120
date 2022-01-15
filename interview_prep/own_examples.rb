@@ -159,7 +159,7 @@ Team.class_method
 # Method Access Control
   # Public
   # Private
-  
+
   class Team
     attr_accessor :team_name
     attr_reader :state
@@ -182,6 +182,36 @@ Team.class_method
   badgers.state = "Illinois"
   
   # Protected
+  class Team
+
+    def initialize(team_name, state)
+      @team_name = team_name
+      @state = state
+    end
+  
+    def to_s
+      "The #{state} #{team_name}!!!"
+    end
+  
+    def ==(other_team)
+      state == other_team.state
+    end
+  
+    private
+    attr_writer :state
+    attr_accessor :team_name
+  
+    protected
+    attr_reader :state
+  end
+  
+  badgers = Team.new("Badgers", "Wisconsin")
+  puts badgers
+  bucks = Team.new("Bucks", "Wisconsin")
+  puts bucks
+  puts badgers == bucks
+  badgers.state
+  
 # Inheritance
   # Class Inheritance
   # Interface Inheritance
