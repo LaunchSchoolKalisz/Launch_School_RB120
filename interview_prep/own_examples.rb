@@ -16,18 +16,20 @@
   
   # Instance Variables
   # Instance Methods
-  class Person
-    def initialize(name)
-      @name = name
+  class Team
+    attr_reader :team_name
+    
+    def initialize(team_name)
+      @team_name = team_name
     end
   
     def introduce
-      puts "Hi, my name is #{@name}"
+      puts "GoOoOoOo #{team_name}"
     end
   end
     
-  marts = Person.new("Martha")
-  marts.introduce
+  badgers = Team.new("Badgers")
+  badgers.introduce
 
   # Class Variables
   # Class Methods
