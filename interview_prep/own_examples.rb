@@ -279,8 +279,34 @@ Team.class_method
   hawks = Hockey.new
   p hawks.can_travel
   p Hockey.ancestors
-  
+
   # Super
+
+  class Team
+    def initialize(team_name)
+      @team_name = team_name
+    end
+  end
+  
+  class Professional < Team
+    def initialize(team_name, city)
+      super(team_name)
+      @city = city
+    end
+  end
+
+  class Collegiate < Team
+    def initialize(team_name, state)
+      super(team_name)
+      @city = state
+    end
+  end
+  
+  hawks = Professional.new("Blackhawks", "Chicago")
+  p hawks
+
+
+
   # Object Methods
   # Variable Scope with Inheritance
 # Polymorphism & Encapsulation
