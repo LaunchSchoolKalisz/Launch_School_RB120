@@ -98,21 +98,21 @@ Team.class_method
   puts badgers.team_name
 
   # Setter Methods
-  class Person
-    def initialize(name)
-      @name = name
+
+  class Team
+    def initialize(team_name)
+      @team_name = team_name
     end
-  
-    def name=(name)
-      @name = name
+
+    def team_name=(new_name)
+      @team_name = new_name
     end
   end
-    
-  marts = Person.new("Martha")
-  p marts 
-  marts.name = "Mart"
-  p marts
 
+  badgers = Team.new("Badgers")
+  p badgers
+  badgers.team_name = "GO Badgers"
+  p badgers
 
   # Using attr_*
     # Getter method
