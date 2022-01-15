@@ -33,7 +33,7 @@
 
   # Class Variables
   # Class Methods
-  
+
   class Team
     @@number_of_teams = 0
   
@@ -59,13 +59,13 @@
   objects are derived from. Instance variables can be accessed by the instance methods
 =end
   
-  class Person
+  class Team
     def	instance_method
       "From the instance method"
     end
   end
   
-  p Person.new.instance_method
+  p Team.new.instance_method
   
 =begin
   Class methods are methods which are called on the class itself. They scoped at the class level and are not available to any 
@@ -73,13 +73,13 @@
   methods we chain the method name to the self keyword as shown in the example below.
 =end
   
-  class Person
+  class Team
     def self.class_method
       "I am from within the class method"
     end
   end
   
-  Person.class_method
+Team.class_method
 
 # Setter and Getter Methods
   # Getter Methods
