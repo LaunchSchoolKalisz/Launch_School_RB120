@@ -159,25 +159,27 @@ Team.class_method
 # Method Access Control
   # Public
   # Private
-  class Person
-    attr_accessor :name
   
-    def initialize(name, account_number)
-      @name = name
-      @account_number = account_number
+  class Team
+    attr_accessor :team_name
+    attr_reader :state
+  
+    def initialize(team_name, state)
+      @team_name = team_name
+      @state = state
     end
   
-    def my_account
-      puts "We are keeping our account number safe: #{account_number}"
+    def to_s
+      "The #{state} #{team_name}!!!"
     end
   
     private
-    attr_reader :account_number
+    attr_writer :state
   end
   
-  marts = Person.new("Martha", 12345)
-  marts.my_account
-  marts.account_number
+  badgers = Team.new("Badgers", "Wisconsin")
+  puts badgers
+  badgers.state = "Illinois"
   
   # Protected
 # Inheritance
