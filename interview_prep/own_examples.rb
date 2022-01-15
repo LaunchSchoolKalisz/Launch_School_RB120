@@ -116,45 +116,45 @@ Team.class_method
 
   # Using attr_*
     # Getter method
-    class Person
-      attr_reader :name 
+    class Team
+      attr_reader :team_name 
 
-      def initialize(name)
-        @name = name
+      def initialize(team_name)
+        @team_name = team_name
       end
     end
 
-    marts = Person.new("Martha")
-    p marts.name
+    badgers = Team.new("Badgers")
+    p badgers.team_name
 
     # Setter method
-    class Person
-      attr_writer :name 
+    class Team
+      attr_writer :team_name
 
-      def initialize(name)
-        @name = name
+      def initialize(team_name)
+        @team_name = team_name
       end
     end
 
-    marts = Person.new("Martha")
-    p marts 
-    marts.name = "Mart"
-    p marts
+    badgers = Team.new("Badgers")
+    p badgers
+    badgers.team_name = ("GO Badgers")
+    p badgers
 
     # Getter and Setter
-
-    class Person
-      attr_accessor :name
-
-      def initialize(name)
-        @name = name
+    class Team
+      attr_accessor :team_name
+      
+      def initialize(team_name)
+        @team_name = team_name
       end
     end
 
-    marts = Person.new("Martha")
-    p marts.name
-    marts.name = "Mart"
-    p marts.name
+    badgers = Team.new("Badgers")
+    puts badgers.team_name
+    badgers.team_name = "GO Badgers"
+    puts badgers.team_name
+
 
 # Method Access Control
   # Public
