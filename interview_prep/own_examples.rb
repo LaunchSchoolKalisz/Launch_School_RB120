@@ -160,6 +160,26 @@
 # Method Access Control
   # Public
   # Private
+  class Person
+    attr_accessor :name
+  
+    def initialize(name, account_number)
+      @name = name
+      @account_number = account_number
+    end
+  
+    def my_account
+      puts "We are keeping our account number safe: #{account_number}"
+    end
+  
+    private
+    attr_reader :account_number
+  end
+  
+  marts = Person.new("Martha", 12345)
+  marts.my_account
+  marts.account_number
+  
   # Protected
 # Inheritance
   # Class Inheritance
@@ -171,7 +191,46 @@
 # Polymorphism & Encapsulation
   # Polymorphism
     # Polymorphism Through Inheritance
+    class Person
+      attr_reader :name
+      
+      def initialize(name)
+        @name = name
+      end
+      
+      def nickname
+        "Mr. #{name}"
+      end
+    end
+    
+    class Adult < Person
+      def 
+    end
+    
+    
     # Polymorphism Through Duck Typing
+
+class Dolphin
+  def sleep
+   puts "Half my brain sleeps at a time!" 
+  end
+  
+end
+
+class Human
+  def sleep
+   puts "zzzzzzzzzzzzzzzz!" 
+  end
+end
+
+class Robot
+  def sleep
+   puts "Turned off" 
+  end
+end
+
+arr = [Dolphin.new, Human.new, Robot.new]
+arr.each {|obj| obj.sleep }
   # Encapsulation
 # Modules
   # Mixin Modules
@@ -195,3 +254,4 @@
     # Plus
     # Element Setters and Getters
 # Collaborator Objects
+
