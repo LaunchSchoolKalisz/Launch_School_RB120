@@ -213,7 +213,7 @@ Team.class_method
 
 # Inheritance
   # Class Inheritance
-  
+
   class Team 
     attr_accessor :team_name, :state
 
@@ -230,6 +230,37 @@ Team.class_method
   p badgers
 
   # Interface Inheritance
+  
+  module Travelable
+    def can_travel
+      true
+    end
+  end
+
+  class Team
+    attr_accessor :state
+
+    def initialize(team_name, state)
+      @team_name = team_name
+      @state = state
+    end
+  end
+
+  class Hockey < Team
+    include Travelable
+  end
+
+  class Basketball < Team
+  end
+
+  hockey_team = Hockey.new("Blackhawks", "Illinois")
+  p hockey_team
+  p hockey_team.can_travel
+
+  basketball_team = Basketball.new("Bulls", "Illinois")
+  p basketball_team
+  p basketball_team.can_travel
+
   # Method Lookup Path
   # Super
   # Object Methods
