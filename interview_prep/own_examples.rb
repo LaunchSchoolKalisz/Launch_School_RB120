@@ -5,14 +5,14 @@
   # Objects
   # Classes
   # Object Instantiation
-  class Person
-    def initialize(name)
-      @name = name
+  class Team
+    def initialize(team_name)
+      @team_name = team_name
     end
   end
   
-  marts = Person.new("Martha")
-  p marts
+  badgers = Team.new("Badgers")
+  p badgers
   
   # Instance Variables
   # Instance Methods
