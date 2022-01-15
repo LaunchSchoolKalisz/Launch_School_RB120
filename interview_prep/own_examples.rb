@@ -18,7 +18,7 @@
   # Instance Methods
   class Team
     attr_reader :team_name
-    
+
     def initialize(team_name)
       @team_name = team_name
     end
@@ -33,28 +33,24 @@
 
   # Class Variables
   # Class Methods
-  class Person
-    @@total_people = 0
   
-    def initialize(name)
-      @name = name
-      @@total_people += 1
+  class Team
+    @@number_of_teams = 0
+  
+    def initialize(team_name)
+      @@number_of_teams += 1
+      @team_name = team_name
     end
   
-    def introduce
-      puts "Hi, my name is #{@name}"
-    end
-  
-    def self.number_of_people
-      puts "We have instantiated #{@@total_people} People Objects."
+    def self.print_number_of_teams
+      puts @@number_of_teams
     end
   end
-      
-  marts = Person.new("Martha")
-  marts.introduce
-  Person.number_of_people
-  benj = Person.new("Jon Benjamin")
-  Person.number_of_people
+  
+  badgers = Team.new("Badgers")
+  Team.print_number_of_teams
+  tarheels = Team.new("Tarheels")
+  Team.print_number_of_teams
   
     # Instance Methods vs Class Methods
 =begin 
