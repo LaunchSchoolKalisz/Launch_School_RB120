@@ -564,6 +564,8 @@ Team.class_method
 # Fake Operators and Equality
   # Equivalence
     # ==
+      # By default, the == method will check to see if the two objects being compared are the same object in memory
+      # We override this by making a custom == method
     class Team
       attr_accessor :name, :location
     
@@ -581,7 +583,7 @@ Team.class_method
     packers = Team.new("Packers", "Wisconsin")
     
     p badgers == packers
-    
+
     # equal? and object_id
     # ===
     # eql?
