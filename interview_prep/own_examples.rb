@@ -435,8 +435,32 @@ Team.class_method
     
     p Team::Professional::Football.new.can_be_paid?
     p Team::Collegiate::Football.new.can_be_paid?
-    
+
   # Module Methods
+    # Useful when you have methods that seem out of place or don't really fit nicely anywhere in your code.
+
+    module Team
+      def self.out_of_place(num)
+        2 * num
+      end
+    
+      class Professional
+        def can_be_paid?
+          true
+        end
+      end
+    
+      class Collegiate
+        def can_be_paid?
+          false
+        end
+      end
+    end
+    
+    p Team::Professional.new.can_be_paid?
+    p Team::Collegiate.new.can_be_paid?
+    p Team.out_of_place(5)
+    
 # Self
   # Inside Instance Methods
   # Inside Class Methods
