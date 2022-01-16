@@ -503,6 +503,28 @@ Team.class_method
     Professional.class_method
 
   # Inside Class Definitions
+    # References the class being defined
+    class Team
+      def initialize(name, location)
+        @name = name
+        @location = location
+      end
+    
+      def self.class_method # References the Team class
+        p self
+      end
+    end
+
+    class Professional < Team
+      def instance_method
+        p self
+      end
+    end
+
+    prof_team = Professional.new("Cubs", "Chicago")
+    prof_team.instance_method
+    Professional.class_method
+    
   # Inside Mixin Modules
   # Outside Any Class
 # Fake Operators and Equality
