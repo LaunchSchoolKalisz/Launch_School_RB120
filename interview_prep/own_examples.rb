@@ -308,6 +308,7 @@ Team.class_method
 # Polymorphism & Encapsulation
   # Polymorphism
     # Polymorphism Through Inheritance
+    # When we cannot find a method within the class that is is called on, but we find it in its superclass
 
     class Team
       attr_reader :team_name, :home
@@ -384,6 +385,7 @@ Team.class_method
 
 # Modules
   # Mixin Modules
+
   # Namespacing
   # Module Methods
 # Self
@@ -404,4 +406,5 @@ Team.class_method
     # Plus
     # Element Setters and Getters
 # Collaborator Objects
+  # When an object is stored as a state in another object
 
