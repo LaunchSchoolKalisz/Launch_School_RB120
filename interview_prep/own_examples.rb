@@ -524,8 +524,39 @@ Team.class_method
     prof_team = Professional.new("Cubs", "Chicago")
     prof_team.instance_method
     Professional.class_method
-    
+
   # Inside Mixin Modules
+    # References the instance that calls the method
+    module Payable
+      def can_be_paid?
+        p self
+      end
+    end
+    
+    class Team
+      include Payable
+    
+      def initialize(name, location)
+        @name = name
+        @location = location
+      end
+    
+      def self.class_method
+        p self
+      end
+    end
+    
+    class Professional < Team
+      def instance_method
+        p self
+      end
+    end
+    
+    prof_team = Professional.new("Cubs", "Chicago")
+    prof_team.instance_method
+    Professional.class_method
+    prof_team.can_be_paid?
+    
   # Outside Any Class
 # Fake Operators and Equality
   # Equivalence
