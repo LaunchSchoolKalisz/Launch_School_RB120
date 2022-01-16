@@ -412,8 +412,9 @@ Team.class_method
   puts badgers.can_be_paid?
   blackhawks = Professional.new
   puts blackhawks.can_be_paid?
-  
+
   # Namespacing
+    # Using a module to group related classes
   # Module Methods
 # Self
   # Inside Instance Methods
