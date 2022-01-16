@@ -356,6 +356,32 @@ Team.class_method
 
   # Encapsulation
 
+  class Team
+    attr_reader :team_name
+  
+    def initialize(team_name, location)
+      @team_name = team_name
+      @location = location
+    end
+
+    def introduce
+      puts "We are the #{location} #{team_name}"
+    end
+  
+    private
+    attr_accessor :location
+    
+  end
+  
+  badgers = Team.new("Badgers", "Wisconsin")
+  badgers.team_name = "Blackhawks"
+  p badgers
+
+  badgers = Team.new("Badgers", "Wisconsin")
+  badgers.introduce
+  p badgers.team_name
+  p badgers.location
+
 # Modules
   # Mixin Modules
   # Namespacing
