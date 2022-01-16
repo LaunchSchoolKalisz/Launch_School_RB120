@@ -599,10 +599,19 @@ Team.class_method
       p ary1.equal?(ary2)
 
       # #object_id returns a unique identifying number
-      # We can use #object_id to determine if objects are pointing to pointing to the same object, or if they merely hold identical values
+      # We can use #object_id to determine if objects are pointing to pointing to the same object, or if they merely hold identical 
+      # values
     # ===
-      # Used for comparison
+      # Used implicitely in case statements, checks to see, if the calling object is a group, does the argument belong in that group
+      1 === 1
+      # checking does 1 belong in [1]
+      String === 'words'
+      # checking if 'words' belongs in the String class
+      (1..9) === 5
+      # checking if 5 is in the range from 1..9
+      
     # eql?
+      # check to see if 2 things are of the same value AND in the same class. Used with hashes, not used often
   # Fake Operators
     # Comparison Methods
     # Right and Left Shift
