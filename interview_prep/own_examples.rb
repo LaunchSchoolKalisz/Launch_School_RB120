@@ -588,16 +588,20 @@ Team.class_method
       # equl? is used to determine if 2 variables reference the same object
       ary1 = [1, 2, 3, 4]
       ary2 = [1, 2, 3, 4]
-        
+
       p ary1 == ary2
       p ary1.equal?(ary2)
-        
+
       ary1 = [1, 2, 3, 4]
       ary2 = ary1
-        
+
       p ary1 == ary2
       p ary1.equal?(ary2)
+
+      # #object_id returns a unique identifying number
+      # We can use #object_id to determine if objects are pointing to pointing to the same object, or if they merely hold identical values
     # ===
+      # Used for comparison
     # eql?
   # Fake Operators
     # Comparison Methods
