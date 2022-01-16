@@ -385,7 +385,34 @@ Team.class_method
 
 # Modules
   # Mixin Modules
-
+  module Payable
+    def can_be_paid?
+      true
+    end
+  end
+  
+  module NotPayable
+    def can_be_paid?
+      false
+    end
+  end
+  
+  class Team
+  end
+  
+  class Professional < Team
+    include Payable
+  end
+  
+  class Collegiate < Team
+    include NotPayable
+  end
+  
+  badgers = Collegiate.new
+  puts badgers.can_be_paid?
+  blackhawks = Professional.new
+  puts blackhawks.can_be_paid?
+  
   # Namespacing
   # Module Methods
 # Self
