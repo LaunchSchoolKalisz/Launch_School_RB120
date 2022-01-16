@@ -556,8 +556,11 @@ Team.class_method
     prof_team.instance_method
     Professional.class_method
     prof_team.can_be_paid?
-    
+
   # Outside Any Class
+    # Refers to main, an instance of Object
+    puts self.inspect
+    
 # Fake Operators and Equality
   # Equivalence
     # ==
