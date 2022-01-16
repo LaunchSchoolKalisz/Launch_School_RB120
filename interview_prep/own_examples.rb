@@ -612,11 +612,40 @@ Team.class_method
       
     # eql?
       # check to see if 2 things are of the same value AND in the same class. Used with hashes, not used often
+
   # Fake Operators
     # Comparison Methods
     # Right and Left Shift
     # Plus
     # Element Setters and Getters
+
 # Collaborator Objects
   # When an object is stored as a state in another object
-
+  class Team
+    attr_accessor :team_name, :location, :players
+  
+    def initialize(team_name, location)
+      @team_name = team_name
+      @location = location
+      @players = []
+    end
+  end
+  
+  class Professional < Team
+  end
+  
+  class Collegiate < Team
+  end
+  
+  class Player
+    def initialize(name, number)
+      @name = name
+      @number = number
+    end
+  end
+  
+  packers = Professional.new("Packers", "Green Bay")
+  arod = Player.new("Aaron Rodgers", 12)
+  packers.players << arod
+  
+  p packers
