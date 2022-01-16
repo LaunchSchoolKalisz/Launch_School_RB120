@@ -460,10 +460,47 @@ Team.class_method
     p Team::Professional.new.can_be_paid?
     p Team::Collegiate.new.can_be_paid?
     p Team.out_of_place(5)
-    
+
 # Self
   # Inside Instance Methods
+    # Refers to the object
+    class Team
+      def initialize(name, location)
+        @name = name
+        @location = location
+      end
+    end
+    
+    class Professional < Team
+      def instance_method
+        p self
+      end
+    end
+    
+    prof_team = Professional.new("Cubs", "Chicago")
+    prof_team.instance_method
   # Inside Class Methods
+    class Team
+      def initialize(name, location)
+        @name = name
+        @location = location
+      end
+    
+      def self.class_method
+        "I am within the class"
+      end
+    end
+    
+    class Professional < Team
+      def instance_method
+        p self
+      end
+    end
+    
+    prof_team = Professional.new("Cubs", "Chicago")
+    prof_team.instance_method
+    p Professional.class_method
+
   # Inside Class Definitions
   # Inside Mixin Modules
   # Outside Any Class
