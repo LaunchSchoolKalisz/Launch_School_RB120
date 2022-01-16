@@ -415,6 +415,27 @@ Team.class_method
 
   # Namespacing
     # Using a module to group related classes
+    module Team
+      module Professional
+        class Football
+          def can_be_paid?
+            true
+          end
+        end
+      end
+    
+      module Collegiate
+        class Football
+          def can_be_paid?
+            false
+          end
+        end
+      end
+    end
+    
+    p Team::Professional::Football.new.can_be_paid?
+    p Team::Collegiate::Football.new.can_be_paid?
+    
   # Module Methods
 # Self
   # Inside Instance Methods
