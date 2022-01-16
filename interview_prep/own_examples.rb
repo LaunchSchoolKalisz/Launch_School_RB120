@@ -333,28 +333,29 @@ Team.class_method
     
     # Polymorphism Through Duck Typing
 
-    class Hockey
+    class HockeyTeam
       def play
         puts "We skate and hit!"
       end
     end
 
-    class Basketball
+    class Dog
       def play
-        puts "We dribble and shoot!"
+        puts "Woof woof! I can run all day"
       end
     end
 
-    class Football
+    class Child
       def play
-        puts "We block and tackle!"
+        puts "I want to go to the park!"
       end
     end
 
-    arr = [Hockey.new, Basketball.new, Football.new]
+    arr = [HockeyTeam.new, Dog.new, Child.new]
     arr.each {|obj| obj.play}
 
   # Encapsulation
+
 # Modules
   # Mixin Modules
   # Namespacing
