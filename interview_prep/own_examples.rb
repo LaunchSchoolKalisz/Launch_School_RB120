@@ -480,6 +480,7 @@ Team.class_method
     prof_team = Professional.new("Cubs", "Chicago")
     prof_team.instance_method
   # Inside Class Methods
+    # Refers to the class
     class Team
       def initialize(name, location)
         @name = name
@@ -487,19 +488,19 @@ Team.class_method
       end
     
       def self.class_method
-        "I am within the class"
+        p self
       end
     end
-    
+
     class Professional < Team
       def instance_method
         p self
       end
     end
-    
+
     prof_team = Professional.new("Cubs", "Chicago")
     prof_team.instance_method
-    p Professional.class_method
+    Professional.class_method
 
   # Inside Class Definitions
   # Inside Mixin Modules
