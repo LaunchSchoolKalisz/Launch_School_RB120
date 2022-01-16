@@ -560,10 +560,28 @@ Team.class_method
   # Outside Any Class
     # Refers to main, an instance of Object
     puts self.inspect
-    
+
 # Fake Operators and Equality
   # Equivalence
     # ==
+    class Team
+      attr_accessor :name, :location
+    
+      def initialize(name, location)
+        @name = name
+        @location = location
+      end
+    
+      def ==(other_team)
+        location == other_team.location
+      end
+    end
+    
+    badgers = Team.new("Badgers", "Wisconsin")
+    packers = Team.new("Packers", "Wisconsin")
+    
+    p badgers == packers
+    
     # equal? and object_id
     # ===
     # eql?
