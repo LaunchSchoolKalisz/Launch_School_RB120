@@ -715,3 +715,10 @@ Team.class_method
     # Element Setters and Getters
 
 # Collaborator Objects
+
+# TO DO
+# - Polymorphism
+# - Method Access Control
+# - Fake operators'
+# - Modules
+# - Collaborator objects
