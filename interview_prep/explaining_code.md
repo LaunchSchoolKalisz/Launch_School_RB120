@@ -108,7 +108,7 @@ Here trying to reassign the `@grade` instance variable raises an error. This is 
 
 
 ### Class Methods
-Methods which are called on the class itself. Scoped at the class level, are not available to any instances of the class. We do not have to instantiate any objects to invoke a class method, since they pertain to the class as a whole.They cannot access instance variables. They are used when we need behaviors/methods that are not related to any objects. 
+Methods which are called on the class itself. Scoped at the class level, are not available to any instances of the class. We do not have to instantiate any objects to invoke a class method, since they pertain to the class as a whole. They cannot access instance variables. They are used when we need behaviors/methods that are not related to any objects. 
 
 ```ruby
 class Person
