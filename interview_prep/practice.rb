@@ -1,12 +1,20 @@
-class Person
-  def initialize(name)
-    @name = name
+class Student
+  def initialize(grade)
+    @grade = grade
   end
 
-  def name
-    puts "Hi, my name is #{@name}"
+  def >(other)
+    grade > other.grade
   end
+
+  protected
+
+  attr_reader :grade
 end
 
-marts = Person.new("Martha")
-marts.name
+bob = Student.new(80)
+john = Student.new(90)
+
+p bob > john # => false
+p john > bob # => true
+puts john.grade 
