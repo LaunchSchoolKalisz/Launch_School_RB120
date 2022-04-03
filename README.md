@@ -1,6 +1,6 @@
 # Launch_School_RB120
 
-> RB120 is a course in Launch School's Mastery Based Curriculum. The course focuses on object-oriented programming with Ruby. This repo contains files dedicated to problem solving using an object oriented approach, as well as refactoring simple games from RB101 using an object oriented approach for more practice.
+> RB120 is a course in Launch School's Mastery Based Curriculum called Object Oriented Programming. The course focuses on object-oriented programming with Ruby. This repo contains files dedicated to problem solving using an object oriented approach, as well as refactoring simple games from RB101 using an object oriented approach for more practice.
 
 ## Projects
 
